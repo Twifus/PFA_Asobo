@@ -15,7 +15,14 @@ public class BasicPlaneController : MonoBehaviour {
 
     [Range(0f, 100f)]
     public float thrust_power;
-    
+
+    [Range(0f, 100f)]
+    public float Yaw_Intensity;
+
+    [Range(0f, 100f)]
+    public float Pitch_Intensity;
+
+
     public float thrust_coeff;
 
     private Rigidbody rb;
@@ -43,7 +50,18 @@ public class BasicPlaneController : MonoBehaviour {
         Vector3 drag = -0.5f * drag_coeff * air_density * Mathf.Pow(rb.velocity.x, 2) * rb.velocity.normalized;
         rb.AddForce(drag);
 
-        Vector3 thrust = new Vector3(thrust_power * thrust_coeff, 0, 0);
+        Vector3 thrust = thrust_power * thrust_coeff * this.transform.right;
         rb.AddForce(thrust);
-	}
+
+        if (Input.GetButton("Roll"))
+        {
+            this.transform.Rotate(Vector3.forward * Time.deltaTime* Yaw_Intensity * Input.GetAxis("Roll")); //On doit l'enlever à long terme
+            //this.transform.Rotate(Vector3.right * Time.deltaTime * Yaw_Intensity * -Input.GetAxis("Roll")); // C'est ça qui doit nous faire tourner à long terme
+        }
+
+        if (Input.GetButton("Pitch"))
+        {
+            this.transform.Rotate(Vector3.up * Time.deltaTime * Pitch_Intensity * Input.GetAxis("Pitch"));
+        }
+    }
 }
