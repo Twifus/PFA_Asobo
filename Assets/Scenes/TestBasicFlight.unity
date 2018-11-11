@@ -115,52 +115,9 @@ NavMeshSettings:
   m_NavMeshData: {fileID: 0}
 --- !u!1 &172887073 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: 91036eb0c0aec88469cdecdc4b1fce14,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 1308442333075798, guid: 9a6ae610f18cc69459adc76bf5908c63,
+    type: 2}
   m_PrefabInternal: {fileID: 2028208313}
---- !u!54 &172887074
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 172887073}
-  serializedVersion: 2
-  m_Mass: 10000
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &172887076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 172887073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22c8f6c8b5e263b44ad0b4d820ba5485, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wing_area: 5
-  lift_coeff: 10
-  drag_coeff: 20
-  thrust_power: 50
-  thrust_coeff: 10000
---- !u!65 &172887080
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 172887073}
-  m_Material: {fileID: 13400000, guid: c235d872e0775444cb5b8e3b90c73d24, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 12.978441, y: 10.587431, z: 4.0134153}
-  m_Center: {x: -3.0074503, y: 0.07464506, z: 0.8369842}
 --- !u!1 &454134823
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,7 +130,7 @@ GameObject:
   - component: {fileID: 454134826}
   - component: {fileID: 454134825}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -321,40 +278,40 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 400000, guid: 91036eb0c0aec88469cdecdc4b1fce14, type: 3}
+    - target: {fileID: 4497555575731316, guid: 9a6ae610f18cc69459adc76bf5908c63, type: 2}
       propertyPath: m_LocalPosition.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 91036eb0c0aec88469cdecdc4b1fce14, type: 3}
+    - target: {fileID: 4497555575731316, guid: 9a6ae610f18cc69459adc76bf5908c63, type: 2}
       propertyPath: m_LocalPosition.y
       value: 1.44
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 91036eb0c0aec88469cdecdc4b1fce14, type: 3}
+    - target: {fileID: 4497555575731316, guid: 9a6ae610f18cc69459adc76bf5908c63, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 91036eb0c0aec88469cdecdc4b1fce14, type: 3}
+    - target: {fileID: 4497555575731316, guid: 9a6ae610f18cc69459adc76bf5908c63, type: 2}
       propertyPath: m_LocalRotation.x
       value: -0.7071068
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 91036eb0c0aec88469cdecdc4b1fce14, type: 3}
+    - target: {fileID: 4497555575731316, guid: 9a6ae610f18cc69459adc76bf5908c63, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 91036eb0c0aec88469cdecdc4b1fce14, type: 3}
+    - target: {fileID: 4497555575731316, guid: 9a6ae610f18cc69459adc76bf5908c63, type: 2}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 91036eb0c0aec88469cdecdc4b1fce14, type: 3}
+    - target: {fileID: 4497555575731316, guid: 9a6ae610f18cc69459adc76bf5908c63, type: 2}
       propertyPath: m_LocalRotation.w
       value: 0.7071068
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 91036eb0c0aec88469cdecdc4b1fce14, type: 3}
+    - target: {fileID: 4497555575731316, guid: 9a6ae610f18cc69459adc76bf5908c63, type: 2}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 91036eb0c0aec88469cdecdc4b1fce14, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 9a6ae610f18cc69459adc76bf5908c63, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &2125136656
 GameObject:
