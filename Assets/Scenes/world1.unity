@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -126,7 +126,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4497555575731316, guid: 9a6ae610f18cc69459adc76bf5908c63, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.7
+      value: 1.29
       objectReference: {fileID: 0}
     - target: {fileID: 4497555575731316, guid: 9a6ae610f18cc69459adc76bf5908c63, type: 2}
       propertyPath: m_LocalPosition.z
@@ -160,40 +160,22 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -34.737003
       objectReference: {fileID: 0}
-    - target: {fileID: 114518597988477186, guid: 9a6ae610f18cc69459adc76bf5908c63,
-        type: 2}
-      propertyPath: thrust_power
-      value: 19
+    - target: {fileID: 4497555575731316, guid: 9a6ae610f18cc69459adc76bf5908c63, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4497555575731316, guid: 9a6ae610f18cc69459adc76bf5908c63, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4497555575731316, guid: 9a6ae610f18cc69459adc76bf5908c63, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 114518597988477186, guid: 9a6ae610f18cc69459adc76bf5908c63,
         type: 2}
-      propertyPath: lift_coeff
-      value: 81.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114518597988477186, guid: 9a6ae610f18cc69459adc76bf5908c63,
-        type: 2}
-      propertyPath: Yaw_Intensity
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 114518597988477186, guid: 9a6ae610f18cc69459adc76bf5908c63,
-        type: 2}
-      propertyPath: drag_coeff
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 114518597988477186, guid: 9a6ae610f18cc69459adc76bf5908c63,
-        type: 2}
-      propertyPath: wing_area
-      value: 20.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 54780258376239864, guid: 9a6ae610f18cc69459adc76bf5908c63,
-        type: 2}
-      propertyPath: m_Mass
-      value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 114518597988477186, guid: 9a6ae610f18cc69459adc76bf5908c63,
-        type: 2}
-      propertyPath: Pitch_Intensity
-      value: 50
+      propertyPath: liftCoeff
+      value: 35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a6ae610f18cc69459adc76bf5908c63, type: 2}

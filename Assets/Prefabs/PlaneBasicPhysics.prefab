@@ -147,8 +147,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22c8f6c8b5e263b44ad0b4d820ba5485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wing_area: 5
-  lift_coeff: 10
-  drag_coeff: 20
-  thrust_power: 50
-  thrust_coeff: 10000
+  wingArea: 5
+  liftCoeff: 10
+  dragCoeff: 20
+  thrustPower: 30
+  thrustCoeff: 10000
+  rollIntensity: 160
+  pitchIntensity: 160
