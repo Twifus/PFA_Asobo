@@ -5,12 +5,10 @@ using UnityEngine;
 public class BasicCameraController : MonoBehaviour {
 
     public GameObject target;
-    private Vector3 _offset;
     Transform TargetRotation;
 
     // Use this for initialization
     void Start () {
-		_offset = this.transform.position - target.transform.position;
     }
 	
 	// Update is called once per frame
