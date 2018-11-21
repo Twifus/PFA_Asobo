@@ -56,15 +56,12 @@ public class BasicPlaneControllerRotated : MonoBehaviour {
         _lift = 0.5f * dynamicLiftCoeff * _airDensity * _rb.velocity.sqrMagnitude * transform.up;
         _drag = -0.5f * DragCoeff * _airDensity * _rb.velocity.sqrMagnitude * _rb.velocity.normalized;
         _thrust = ThrustPower * ThrustCoeff * transform.right;
-
-        if (Input.GetButton("Roll"))
-            transform.Rotate(Vector3.right * Time.deltaTime * RollIntensity * -Input.GetAxis("Roll"));
-
-        if (Input.GetButton("Pitch"))
-            transform.Rotate(Vector3.forward * Time.deltaTime * PitchIntensity * Input.GetAxis("Pitch"));
         
-        if (Input.GetButton("Yaw"))
-            transform.Rotate(Vector3.up * Time.deltaTime * YawIntensity * Input.GetAxis("Yaw"));
+        transform.Rotate(Vector3.right * Time.deltaTime * RollIntensity * -Input.GetAxis("Roll"));
+        
+        transform.Rotate(Vector3.forward * Time.deltaTime * PitchIntensity * Input.GetAxis("Pitch"));
+
+        transform.Rotate(Vector3.up * Time.deltaTime * YawIntensity * Input.GetAxis("Yaw"));
         
         _thrust = _thrust * Input.GetAxis("Accelerate");
 

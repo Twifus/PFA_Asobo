@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/TestBasicFlight.unity
     guid: fe12bafc21eb3e24e8c1850713369063
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/world1.unity
     guid: 25005cf12647b7c4aad749b1a9535696
   m_configObjects: {}
