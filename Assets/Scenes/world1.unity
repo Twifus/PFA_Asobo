@@ -724,7 +724,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1306829432}
-  - component: {fileID: 1306829431}
   - component: {fileID: 1306829433}
   m_Layer: 0
   m_Name: GameSettings
@@ -733,17 +732,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1306829431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1306829430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48fcfc3b5d51f5443abf2b84de871fa0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1306829432
 Transform:
   m_ObjectHideFlags: 0
@@ -766,7 +754,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 68fbd80e71a89fb43b723cf36e54d978, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 98319ba2ac579384b8eec9acffef9740, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.341
   m_Pitch: 1
