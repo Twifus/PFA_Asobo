@@ -31,6 +31,10 @@ public class BasicPlaneControllerRotated : MonoBehaviour {
     private float _airDensity = 1.184f;
     private int _lastHeigth;
 
+    private Vector3 _thrust;
+    private Vector3 _lift;
+    private Vector3 _drag;
+
     // Use this for initialization
     void Start () {
         _rb = GetComponent<Rigidbody>();
@@ -46,27 +50,31 @@ public class BasicPlaneControllerRotated : MonoBehaviour {
             Debug.Log("Altitude : " + _lastHeigth);
         }
 
+        //float dynamicLiftCoeff = LiftCoeff * (2-Vector3.Dot(_rb.velocity.normalized, transform.right));
         float dynamicLiftCoeff = LiftCoeff * transform.up.y;
 
-        //Debug.Log(dynamicLiftCoeff);
-
-        Vector3 lift = 0.5f * dynamicLiftCoeff * _airDensity * _rb.velocity.sqrMagnitude * transform.up;
-        Vector3 drag = -0.5f * DragCoeff * _airDensity * _rb.velocity.sqrMagnitude * _rb.velocity.normalized;
-        Vector3 thrust = ThrustPower * ThrustCoeff * transform.right;
-
-        if (Input.GetButton("Roll"))
-            transform.Rotate(Vector3.right * Time.deltaTime * RollIntensity * -Input.GetAxis("Roll"));
-
-        if (Input.GetButton("Pitch"))
-            transform.Rotate(Vector3.forward * Time.deltaTime * PitchIntensity * Input.GetAxis("Pitch"));
+        _lift = 0.5f * dynamicLiftCoeff * _airDensity * _rb.velocity.sqrMagnitude * transform.up;
+        _drag = -0.5f * DragCoeff * _airDensity * _rb.velocity.sqrMagnitude * _rb.velocity.normalized;
+        _thrust = ThrustPower * ThrustCoeff * transform.right;
         
-        if (Input.GetButton("Yaw"))
-            transform.Rotate(Vector3.up * Time.deltaTime * YawIntensity * Input.GetAxis("Yaw"));
+        transform.Rotate(Vector3.right * Time.deltaTime * RollIntensity * -Input.GetAxis("Roll"));
         
-        thrust = thrust * Input.GetAxis("Accelerate");
+        transform.Rotate(Vector3.forward * Time.deltaTime * PitchIntensity * Input.GetAxis("Pitch"));
 
-        _rb.AddForce(lift);
-        _rb.AddForce(drag);
-        _rb.AddForce(thrust);
+        transform.Rotate(Vector3.up * Time.deltaTime * YawIntensity * Input.GetAxis("Yaw"));
+        
+        _thrust = _thrust * Input.GetAxis("Accelerate");
+
+        _rb.AddForce(_lift);
+        _rb.AddForce(_drag);
+        _rb.AddForce(_thrust);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Vector3 position = transform.position;
+        Gizmos.DrawLine(position, position + _thrust / 1000);
+        Gizmos.DrawLine(position, position + _lift / 1000);
+        Gizmos.DrawLine(position, position + _drag / 1000);
     }
 }
