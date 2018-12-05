@@ -1,31 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BasicPlaneControllerRotated : MonoBehaviour {
 
     [Range(0f, 100f)]
-    public float WingArea;
+    static public float WingArea;
 
     [Range(0f, 100f)]
-    public float LiftCoeff;
+    static public float LiftCoeff;
 
     [Range(0f, 100f)]
-    public float DragCoeff;
+    static public float DragCoeff;
 
     [Range(0f, 100f)]
-    public float ThrustPower;
+    static public float ThrustPower;
 
     public float ThrustCoeff;
 
     [Range(0f, 360f)]
-    public float RollIntensity;
+    static public float RollIntensity;
 
     [Range(0f, 360f)]
-    public float PitchIntensity;
+    static public float PitchIntensity;
 
     [Range(0f, 360f)]
-    public float YawIntensity;
+    static public float YawIntensity;
 
     private Rigidbody _rb;
     private float _airDensity = 1.184f;
@@ -43,6 +44,11 @@ public class BasicPlaneControllerRotated : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("SettingsUI");
+        }
 
         if (transform.position.y >= _lastHeigth + 100)
         {
