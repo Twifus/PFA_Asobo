@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 79945752}
   - component: {fileID: 79945751}
   - component: {fileID: 79945754}
+  - component: {fileID: 79945755}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -208,6 +209,25 @@ MonoBehaviour:
   DragWindow: 0
   levelToLoadWhenClickedPlay: world1
   AboutTextLines: []
+--- !u!114 &79945755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 79945750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 527653ea3043dc242be85ab92b3bc59c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WingArea: 0
+  LiftCoeff: 0
+  DragCoeff: 0
+  ThrustPower: 0
+  ThrustCoeff: 0
+  RollIntensity: 0
+  PitchIntensity: 0
+  YawIntensity: 0
 --- !u!1 &151702454
 GameObject:
   m_ObjectHideFlags: 0
