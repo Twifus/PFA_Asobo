@@ -1387,6 +1387,31 @@ Prefab:
       propertyPath: m_UseGravity
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114350750180225696, guid: 3bcb4e92dc4ec494b83bbdd20e349261,
+        type: 2}
+      propertyPath: WingArea
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114350750180225696, guid: 3bcb4e92dc4ec494b83bbdd20e349261,
+        type: 2}
+      propertyPath: LiftCoeff
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114350750180225696, guid: 3bcb4e92dc4ec494b83bbdd20e349261,
+        type: 2}
+      propertyPath: RollIntensity
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114350750180225696, guid: 3bcb4e92dc4ec494b83bbdd20e349261,
+        type: 2}
+      propertyPath: PitchIntensity
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114350750180225696, guid: 3bcb4e92dc4ec494b83bbdd20e349261,
+        type: 2}
+      propertyPath: YawIntensity
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bcb4e92dc4ec494b83bbdd20e349261, type: 2}
   m_IsPrefabAsset: 0

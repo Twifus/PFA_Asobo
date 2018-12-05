@@ -20,9 +20,11 @@ public class SettingsUI : MonoBehaviour
     private float UserRollIntensity = 30.0f;
     private float UserPitchIntensity = 30.0f;
     private float UserYawIntensity = 30.0f;
+    private BasicPlaneControllerRotated PlaneController;
 
     private void Start()
     {
+        PlaneController = GetComponent<BasicPlaneControllerRotated>();
         for (int x = 0; x < AboutTextLines.Length; x++)
         {
             MessageDisplayOnAbout += AboutTextLines[x] + " \n ";
@@ -81,25 +83,25 @@ public class SettingsUI : MonoBehaviour
         AudioListener.volume = volume;
         GUILayout.Box("WingArea");
         UserWingArea = GUILayout.HorizontalSlider(UserWingArea, 0.0f, 100.0f);
-        BasicPlaneControllerRotated.WingArea = UserWingArea;
+        PlaneController.WingArea = UserWingArea;
         GUILayout.Box("LiftCoeff");
         UserLiftCoeff = GUILayout.HorizontalSlider(UserLiftCoeff, 0.0f, 100.0f);
-        BasicPlaneControllerRotated.LiftCoeff = UserLiftCoeff;
+        PlaneController.LiftCoeff = UserLiftCoeff;
         GUILayout.Box("DragCoeff");
         UserDragCoeff = GUILayout.HorizontalSlider(UserDragCoeff, 0.0f, 100.0f);
-        BasicPlaneControllerRotated.DragCoeff = UserDragCoeff;
+        PlaneController.DragCoeff = UserDragCoeff;
         GUILayout.Box("ThrustPower");
         UserThrustPower = GUILayout.HorizontalSlider(UserThrustPower, 0.0f, 100.0f);
-        BasicPlaneControllerRotated.ThrustPower = UserThrustPower;
+        PlaneController.ThrustPower = UserThrustPower;
         GUILayout.Box("RollIntensity");
         UserRollIntensity = GUILayout.HorizontalSlider(UserRollIntensity, 0.0f, 360.0f);
-        BasicPlaneControllerRotated.RollIntensity = UserRollIntensity;
+        PlaneController.RollIntensity = UserRollIntensity;
         GUILayout.Box("PitchIntensity");
         UserPitchIntensity = GUILayout.HorizontalSlider(UserPitchIntensity, 0.0f, 360.0f);
-        BasicPlaneControllerRotated.PitchIntensity = UserPitchIntensity;
+        PlaneController.PitchIntensity = UserPitchIntensity;
         GUILayout.Box("YawIntensity");
         UserYawIntensity = GUILayout.HorizontalSlider(UserYawIntensity, 0.0f, 360.0f);
-        BasicPlaneControllerRotated.YawIntensity = UserYawIntensity;
+        PlaneController.YawIntensity = UserYawIntensity;
         if (GUILayout.Button("Back"))
         {
             clicked = "";
