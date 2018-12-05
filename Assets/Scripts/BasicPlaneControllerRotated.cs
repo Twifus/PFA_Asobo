@@ -64,10 +64,11 @@ public class BasicPlaneControllerRotated : MonoBehaviour {
         transform.Rotate(Vector3.up * Time.deltaTime * YawIntensity * Input.GetAxis("Yaw"));
         
         _thrust = _thrust * Input.GetAxis("Accelerate");
-
+        
         _rb.AddForce(_lift);
         _rb.AddForce(_drag);
         _rb.AddForce(_thrust);
+        
     }
 
     private void OnDrawGizmos()

@@ -725,6 +725,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1306829432}
   - component: {fileID: 1306829433}
+  - component: {fileID: 1306829431}
   m_Layer: 0
   m_Name: GameSettings
   m_TagString: Untagged
@@ -732,6 +733,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1306829431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1306829430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 157f72ad9668cb544b6759f6cc03363b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Plane: {fileID: 972927858}
 --- !u!4 &1306829432
 Transform:
   m_ObjectHideFlags: 0
@@ -1118,6 +1131,20 @@ Prefab:
     - target: {fileID: 4097248109876262, guid: 3bcb4e92dc4ec494b83bbdd20e349261, type: 2}
       propertyPath: m_LocalRotation.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4097248109876262, guid: 3bcb4e92dc4ec494b83bbdd20e349261, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114350750180225696, guid: 3bcb4e92dc4ec494b83bbdd20e349261,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54413956071243674, guid: 3bcb4e92dc4ec494b83bbdd20e349261,
+        type: 2}
+      propertyPath: m_UseGravity
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bcb4e92dc4ec494b83bbdd20e349261, type: 2}
