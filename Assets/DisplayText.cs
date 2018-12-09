@@ -6,21 +6,17 @@ using UnityEngine.UI;
 public class DisplayText : MonoBehaviour {
 
     public Text FigureText;
-    private bool _loop;
     public GameObject FigureRecorder;
 
 	// Use this for initialization
 	void Start () {
-        Invoke("DisableText", 0);
-        _loop = FigureRecorder.GetComponent<LoopDetect>().LoopDone;
-        Debug.Log(_loop);
+        DisableText();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        _loop = FigureRecorder.GetComponent<LoopDetect>().LoopDone;
 
-        if (_loop)
+        if (FigureRecorder.GetComponent<LoopDetect>().LoopDone)
         {
             FigureText.text = "LOOPING";
             Invoke("DisableText", 3f);
