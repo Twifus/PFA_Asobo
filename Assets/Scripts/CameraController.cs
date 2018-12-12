@@ -3,39 +3,53 @@
 public class CameraController : MonoBehaviour
 {
     public Transform Target;
-    public float SphereRadius = 5f;
-    public float SmoothTime = 1f;
+    public float HorizontalStickSensitivity = 10f;
+    public float VerticalStickSensitivity = 10f;
 
-    private Vector3 _nextPointOnSphere;
-    private float _interpolationFactor;
-    private Vector3 _pointOnSphere;
+    private bool _lockCamera;
+    private Vector3 _targetLastPos;
 
     void Awake()
     {
-        Random.InitState(666);
-        _nextPointOnSphere = SphereRadius * Random.onUnitSphere;
-        _nextPointOnSphere.y = Mathf.Abs(_nextPointOnSphere.y);
-        _nextPointOnSphere.z = -Mathf.Abs(_nextPointOnSphere.z);
-        _interpolationFactor = 1f;
+        InitMoveStick();
+    }
+
+    void Start()
+    {
+        _targetLastPos = Target.transform.position;
     }
 
     void Update()
     {
-        Move();
+        transform.position += Target.transform.position - _targetLastPos;
+        _targetLastPos = Target.transform.position;
+        if (Input.GetKeyDown(KeyCode.JoystickButton9))
+        {
+            _lockCamera = !_lockCamera;
+        }
+        if (_lockCamera)
+            CenterBehind();
+        else
+            MoveStick();
+    }
+
+    private void InitMoveStick()
+    {
+        CenterBehind();
+    }
+
+    private void MoveStick()
+    {
+        float x = Input.GetAxis("CameraHorizontal");
+        float y = Input.GetAxis("CameraVertical");
+        transform.RotateAround(Target.transform.position, transform.right, y * VerticalStickSensitivity);
+        transform.RotateAround(Target.transform.position, transform.up, x * HorizontalStickSensitivity);
         transform.LookAt(Target);
     }
 
-    void Move()
+    private void CenterBehind()
     {
-        _interpolationFactor += SmoothTime * Time.deltaTime;
-        if (_interpolationFactor >= 0.99f)
-        {
-            _pointOnSphere = _nextPointOnSphere;
-            _nextPointOnSphere = SphereRadius * Random.onUnitSphere;
-            _nextPointOnSphere.y = Mathf.Abs(_nextPointOnSphere.y);
-            _nextPointOnSphere.z = -Mathf.Abs(_nextPointOnSphere.z);
-            _interpolationFactor = 0f;
-        }
-        transform.position = Target.transform.position + Vector3.Slerp(_pointOnSphere, _nextPointOnSphere, _interpolationFactor);
+        transform.position = Target.transform.position - Target.transform.right + 0.15f * Target.transform.up;
+        transform.LookAt(Target);
     }
 }
