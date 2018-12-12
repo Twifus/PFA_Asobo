@@ -5,13 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class BasicPlaneControllerRotated : MonoBehaviour
 {
-    private float UserWingArea = 5.0f;
-    private float UserLiftCoeff = 10.0f;
-    private float UserDragCoeff = 20.0f;
-    private float UserThrustPower = 50.0f;
-    private float UserRollIntensity = 30.0f;
-    private float UserPitchIntensity = 30.0f;
-    private float UserYawIntensity = 30.0f;
 
     [Range(0f, 100f)]
     static public float WingArea = 5.0f;

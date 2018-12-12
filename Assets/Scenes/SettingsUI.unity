@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   guiSkin: {fileID: 0}
-  background: {fileID: 2800000, guid: f82db2d199f53fd489e3d821ad873501, type: 3}
+  background: {fileID: 2800000, guid: 2ec0065d20cbf554084a49b780f02b7c, type: 3}
   LOGO: {fileID: 0}
   DragWindow: 0
   AboutTextLines: []

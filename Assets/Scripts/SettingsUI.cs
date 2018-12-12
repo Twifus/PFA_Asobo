@@ -10,7 +10,7 @@ public class SettingsUI : MonoBehaviour
     public string[] AboutTextLines = new string[0];
 
     private string clicked = "", MessageDisplayOnAbout = "About \n ";
-    private Rect WindowRect = new Rect(700, 300, Screen.width-1400, Screen.height-100);
+    private Rect WindowRect = new Rect(3*Screen.width/7, Screen.height/3, 300, 500);
     private float volume = 1.0f;
     private float UserWingArea = 5.0f;
     private float UserLiftCoeff = 10.0f;
