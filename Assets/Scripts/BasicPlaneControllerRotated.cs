@@ -5,29 +5,36 @@ using UnityEngine.SceneManagement;
 
 public class BasicPlaneControllerRotated : MonoBehaviour
 {
+    private float UserWingArea = 5.0f;
+    private float UserLiftCoeff = 10.0f;
+    private float UserDragCoeff = 20.0f;
+    private float UserThrustPower = 50.0f;
+    private float UserRollIntensity = 30.0f;
+    private float UserPitchIntensity = 30.0f;
+    private float UserYawIntensity = 30.0f;
 
     [Range(0f, 100f)]
-    static public float WingArea;
+    static public float WingArea = 5.0f;
 
     [Range(0f, 100f)]
-    static public float LiftCoeff;
+    static public float LiftCoeff = 10.0f;
 
     [Range(0f, 100f)]
-    static public float DragCoeff;
+    static public float DragCoeff = 20.0f;
 
     [Range(0f, 100f)]
-    static public float ThrustPower;
+    static public float ThrustPower = 50.0f;
 
     public float ThrustCoeff;
 
     [Range(0f, 360f)]
-    static public float RollIntensity;
+    static public float RollIntensity = 30.0f;
 
     [Range(0f, 360f)]
-    static public float PitchIntensity;
+    static public float PitchIntensity = 30.0f;
 
     [Range(0f, 360f)]
-    static public float YawIntensity;
+    static public float YawIntensity = 30.0f;
 
     private Rigidbody _rb;
     private float _airDensity = 1.184f;
