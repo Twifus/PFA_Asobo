@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class RingPoint : MonoBehaviour {
 
-    AudioSource Point;
+    private AudioSource _point;
 
 
 	// Use this for initialization
 	void Start () {
-        Point = GetComponent<AudioSource>();
+        _point = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        transform.Rotate(Vector3.right * Time.deltaTime * 25);
 
 	}
 
     private void OnTriggerEnter(Collider other)
     {
-        Point.Play(0);
+        _point.Play(0);
         Debug.Log("1 point");
     }
 }
