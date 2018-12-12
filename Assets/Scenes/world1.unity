@@ -113,6 +113,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &103419969 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4123408653523720, guid: e3220e060b2863d41a2b703eaff8fe93,
+    type: 2}
+  m_PrefabInternal: {fileID: 1304160206}
 --- !u!1 &134381294
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,6 +262,11 @@ Transform:
   m_Father: {fileID: 571774553}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &157006358 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4123408653523720, guid: e3220e060b2863d41a2b703eaff8fe93,
+    type: 2}
+  m_PrefabInternal: {fileID: 2016861796}
 --- !u!1 &177121201
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,7 +354,7 @@ RectTransform:
   m_Children:
   - {fileID: 1222088152}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -377,8 +387,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1710708440}
+  - {fileID: 157006358}
+  - {fileID: 103419969}
+  - {fileID: 1343927449}
+  - {fileID: 1625381784}
+  - {fileID: 1383624537}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &436264946
 GameObject:
@@ -440,7 +455,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &571774552
 GameObject:
@@ -472,7 +487,7 @@ Transform:
   - {fileID: 134381297}
   - {fileID: 138434557}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &674539618
 GameObject:
@@ -578,7 +593,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 340081432}
     m_Modifications:
     - target: {fileID: 4123408653523720, guid: e3220e060b2863d41a2b703eaff8fe93, type: 2}
       propertyPath: m_LocalPosition.x
@@ -687,7 +702,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1222088151
 GameObject:
@@ -770,7 +785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FigureText: {fileID: 1222088153}
-  FigureRecorder: {fileID: 1306829430}
+  FigureRecorder: {fileID: 1377014360}
 --- !u!222 &1222088155
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -815,7 +830,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4163236470758460, guid: 1b8878d5706e13d44b5c5fff6e8da573, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114264876648622020, guid: 1b8878d5706e13d44b5c5fff6e8da573,
         type: 2}
@@ -830,7 +845,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 340081432}
     m_Modifications:
     - target: {fileID: 4123408653523720, guid: e3220e060b2863d41a2b703eaff8fe93, type: 2}
       propertyPath: m_LocalPosition.x
@@ -884,7 +899,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1306829432}
   - component: {fileID: 1306829433}
-  - component: {fileID: 1306829431}
   m_Layer: 0
   m_Name: GameSettings
   m_TagString: Untagged
@@ -892,19 +906,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1306829431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1306829430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 157f72ad9668cb544b6759f6cc03363b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Plane: {fileID: 972927858}
-  LoopDone: 0
 --- !u!4 &1306829432
 Transform:
   m_ObjectHideFlags: 0
@@ -916,7 +917,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1306829433
 AudioSource:
@@ -1085,6 +1086,11 @@ Transform:
   m_Father: {fileID: 571774553}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1343927449 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4123408653523720, guid: e3220e060b2863d41a2b703eaff8fe93,
+    type: 2}
+  m_PrefabInternal: {fileID: 1984139234}
 --- !u!1 &1377014360
 GameObject:
   m_ObjectHideFlags: 0
@@ -1143,12 +1149,14 @@ MonoBehaviour:
       actionData:
         actionNames:
         - HutongGames.PlayMaker.Actions.FloatCompare
+        - HutongGames.PlayMaker.Actions.SetBoolValue
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 1bcdca04
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000007000000
+        actionHashCodes: 1bcdca0427fbe103
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -1183,7 +1191,19 @@ MonoBehaviour:
           networkSync: 0
           value: 5
         fsmIntParams: []
-        fsmBoolParams: []
+        fsmBoolParams:
+        - useVariable: 1
+          name: LoopDone
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
         fsmVector2Params: []
         fsmVector3Params: []
         fsmColorParams: []
@@ -1193,12 +1213,12 @@ MonoBehaviour:
         - 0D
         - 
         - 
-        byteData: 01
+        byteData: 0100
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 0f0000000f0000000f00000017000000170000001700000001000000
+        paramDataType: 0f0000000f0000000f00000017000000170000001700000001000000110000001100000001000000
         paramName:
         - float1
         - float2
@@ -1207,8 +1227,11 @@ MonoBehaviour:
         - lessThan
         - greaterThan
         - everyFrame
-        paramDataPos: 00000000010000000200000000000000010000000200000000000000
-        paramByteDataSize: 00000000000000000000000000000000000000000000000001000000
+        - boolVariable
+        - boolValue
+        - everyFrame
+        paramDataPos: 00000000010000000200000000000000010000000200000000000000000000000100000001000000
+        paramByteDataSize: 00000000000000000000000000000000000000000000000001000000000000000000000001000000
     - name: State 2
       description: 
       colorIndex: 0
@@ -1705,12 +1728,14 @@ MonoBehaviour:
         linkConstraint: 0
         colorIndex: 0
       actionData:
-        actionNames: []
-        customNames: []
-        actionEnabled: 
-        actionIsOpen: 
-        actionStartIndex: 
-        actionHashCodes: 
+        actionNames:
+        - HutongGames.PlayMaker.Actions.Wait
+        customNames:
+        - 
+        actionEnabled: 01
+        actionIsOpen: 01
+        actionStartIndex: 00000000
+        actionHashCodes: 48c01101
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -1725,7 +1750,13 @@ MonoBehaviour:
         fsmVarParams: []
         fsmArrayParams: []
         fsmEnumParams: []
-        fsmFloatParams: []
+        fsmFloatParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 1
         fsmIntParams: []
         fsmBoolParams: []
         fsmVector2Params: []
@@ -1733,16 +1764,20 @@ MonoBehaviour:
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
-        stringParams: []
-        byteData: 
+        stringParams:
+        - FINISHED
+        byteData: 01
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 
-        paramName: []
-        paramDataPos: 
-        paramByteDataSize: 
+        paramDataType: 0f0000001700000001000000
+        paramName:
+        - time
+        - finishEvent
+        - realTime
+        paramDataPos: 000000000000000000000000
+        paramByteDataSize: 000000000000000001000000
     - name: Loop
       description: 
       colorIndex: 0
@@ -1765,12 +1800,14 @@ MonoBehaviour:
         linkConstraint: 0
         colorIndex: 0
       actionData:
-        actionNames: []
-        customNames: []
-        actionEnabled: 
-        actionIsOpen: 
-        actionStartIndex: 
-        actionHashCodes: 
+        actionNames:
+        - HutongGames.PlayMaker.Actions.SetBoolValue
+        customNames:
+        - 
+        actionEnabled: 01
+        actionIsOpen: 01
+        actionStartIndex: 00000000
+        actionHashCodes: 27fbe103
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -1787,22 +1824,37 @@ MonoBehaviour:
         fsmEnumParams: []
         fsmFloatParams: []
         fsmIntParams: []
-        fsmBoolParams: []
+        fsmBoolParams:
+        - useVariable: 1
+          name: LoopDone
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 1
         fsmVector2Params: []
         fsmVector3Params: []
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData: 
+        byteData: 00
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 
-        paramName: []
-        paramDataPos: 
-        paramByteDataSize: 
+        paramDataType: 110000001100000001000000
+        paramName:
+        - boolVariable
+        - boolValue
+        - everyFrame
+        paramDataPos: 000000000100000000000000
+        paramByteDataSize: 000000000000000001000000
     events:
     - name: FINISHED
       isSystemEvent: 1
@@ -1841,7 +1893,13 @@ MonoBehaviour:
         networkSync: 0
         value: 5
       intVariables: []
-      boolVariables: []
+      boolVariables:
+      - useVariable: 1
+        name: LoopDone
+        tooltip: 
+        showInInspector: 0
+        networkSync: 0
+        value: 0
       stringVariables: []
       vector2Variables: []
       vector3Variables: []
@@ -1856,8 +1914,8 @@ MonoBehaviour:
       enumVariables: []
       categories:
       - 
-      variableCategoryIDs: 0000000000000000
-    description: 
+      variableCategoryIDs: 000000000000000000000000
+    description: Detects a Looping
     docUrl: 
     showStateLabel: 0
     maxLoopCount: 0
@@ -1912,7 +1970,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1377014363
 MonoBehaviour:
@@ -1927,6 +1985,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Fsm: {fileID: 1377014361}
   Plane: {fileID: 972927858}
+  LoopDone: 0
+--- !u!4 &1383624537 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4123408653523720, guid: e3220e060b2863d41a2b703eaff8fe93,
+    type: 2}
+  m_PrefabInternal: {fileID: 973320260}
 --- !u!1 &1547410367
 GameObject:
   m_ObjectHideFlags: 0
@@ -1967,14 +2031,14 @@ Transform:
   m_Children:
   - {fileID: 674539622}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: -35, z: 0}
 --- !u!1001 &1618071387
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 340081432}
     m_Modifications:
     - target: {fileID: 4123408653523720, guid: e3220e060b2863d41a2b703eaff8fe93, type: 2}
       propertyPath: m_LocalPosition.x
@@ -2019,6 +2083,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3220e060b2863d41a2b703eaff8fe93, type: 2}
   m_IsPrefabAsset: 0
+--- !u!4 &1625381784 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4123408653523720, guid: e3220e060b2863d41a2b703eaff8fe93,
+    type: 2}
+  m_PrefabInternal: {fileID: 1618071387}
 --- !u!1001 &1655983224
 Prefab:
   m_ObjectHideFlags: 0
@@ -2195,14 +2264,14 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1984139234
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 340081432}
     m_Modifications:
     - target: {fileID: 4123408653523720, guid: e3220e060b2863d41a2b703eaff8fe93, type: 2}
       propertyPath: m_LocalPosition.x
@@ -2244,6 +2313,14 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -97.893005
       objectReference: {fileID: 0}
+    - target: {fileID: 4123408653523720, guid: e3220e060b2863d41a2b703eaff8fe93, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4123408653523720, guid: e3220e060b2863d41a2b703eaff8fe93, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3220e060b2863d41a2b703eaff8fe93, type: 2}
   m_IsPrefabAsset: 0
@@ -2252,7 +2329,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 340081432}
     m_Modifications:
     - target: {fileID: 4123408653523720, guid: e3220e060b2863d41a2b703eaff8fe93, type: 2}
       propertyPath: m_LocalPosition.x
@@ -2289,6 +2366,10 @@ Prefab:
     - target: {fileID: 4123408653523720, guid: e3220e060b2863d41a2b703eaff8fe93, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -11.217001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012733334716894, guid: e3220e060b2863d41a2b703eaff8fe93, type: 2}
+      propertyPath: m_Name
+      value: Ring (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3220e060b2863d41a2b703eaff8fe93, type: 2}

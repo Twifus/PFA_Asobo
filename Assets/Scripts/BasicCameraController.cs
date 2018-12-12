@@ -13,7 +13,8 @@ public class BasicCameraController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        this.transform.position = target.transform.position; 
-        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, target.transform.rotation, Time.deltaTime * 10); 
+        this.transform.position = target.transform.position;
+        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, target.transform.rotation, Time.deltaTime * 10);
+        transform.LookAt(target.transform);
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using HutongGames.PlayMaker;
 
 public class DisplayText : MonoBehaviour {
 
@@ -16,7 +17,7 @@ public class DisplayText : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (FigureRecorder.GetComponent<LoopingDetection>().LoopDone)
+        if (FigureRecorder.GetComponent<FsmDetectionUpdate>().LoopDone)
         {
             FigureText.text = "LOOPING";
             Invoke("DisableText", 3f);

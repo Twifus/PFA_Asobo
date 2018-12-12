@@ -7,11 +7,14 @@ public class FsmDetectionUpdate : MonoBehaviour {
 
     public PlayMakerFSM Fsm;
     public GameObject Plane;
+    public bool LoopDone;
 
-    // Update is called once per frame
     void Update () {
         // getting fsm variables by name
         FsmFloat PlaneRot = Fsm.FsmVariables.GetFsmFloat("PlaneRot");
+        FsmBool FsmLoopDone = Fsm.FsmVariables.GetFsmBool("LoopDone");
+
+        LoopDone = FsmLoopDone.Value;
 
         // setting fsm variable value
         float pitch = Vector3.Angle(Vector3.up, Plane.transform.up);
