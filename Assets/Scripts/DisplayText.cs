@@ -7,19 +7,27 @@ using HutongGames.PlayMaker;
 public class DisplayText : MonoBehaviour {
 
     public Text FigureText;
-    public GameObject FigureRecorder;
+    public GameObject XRecorder;
+    public GameObject YRecorder;
+    public GameObject ZRecorder;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         DisableText();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (FigureRecorder.GetComponent<YDetection>().LoopDone)
+        if (YRecorder.GetComponent<YDetection>().LoopDone)
         {
             FigureText.text = "LOOPING";
+            Invoke("DisableText", 3f);
+        }
+
+        if (ZRecorder.GetComponent<ZDetection>().BarrelDone)
+        {
+            FigureText.text = "BARREL";
             Invoke("DisableText", 3f);
         }
 

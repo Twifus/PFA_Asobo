@@ -3,24 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using HutongGames.PlayMaker;
 
-public class XDetection : MonoBehaviour
+public class ZDetection : MonoBehaviour
 {
 
     public PlayMakerFSM Fsm;
     public GameObject Plane;
+    public bool BarrelDone;
 
     void Update()
     {
         // getting fsm variables by name
         FsmFloat PlaneRot = Fsm.FsmVariables.GetFsmFloat("PlaneRot");
+        FsmBool FsmBarrelDone = Fsm.FsmVariables.GetFsmBool("BarrelDone");
+
+        BarrelDone = FsmBarrelDone.Value;
 
         // setting fsm variable value
-        float yaw = Vector3.Angle(Vector3.right, Plane.transform.right);
-        if (Plane.transform.right.x < 0)
+        float roll = Vector3.Angle(Vector3.forward, Plane.transform.forward);
+        if (Plane.transform.right.z < 0) //tofix
         {
-            yaw = 360 - yaw;
+            roll = 360 - roll;
         }
-        PlaneRot.Value = yaw; // Plane.transform.eulerAngles.z;
+        PlaneRot.Value = roll; // Plane.transform.eulerAngles.z;
         Debug.Log(PlaneRot.Value);
 
         // sending an event
@@ -28,3 +32,4 @@ public class XDetection : MonoBehaviour
 
     }
 }
+
