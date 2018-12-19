@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FigureManager : MonoBehaviour{
-    public GameObject plane;
+    public Plane plane;
     public FigureDetection IfigureDetection;
     public Settings settings;
 
@@ -34,17 +34,21 @@ public class FigureManager : MonoBehaviour{
         _rotates[2] = _rotateZ;
         _rotates[3] = _rotateW;
 
-    /** Récupère les coordonnées et les rotations de l'avion dans un tableau (ArrayList à voir) */
-    private ArrayList GetCoordinates(GameObject plane)
-    {
-        _coordinates[0].Add(plane.GetComponent<Transform>().position.x);
-        _coordinates[1].Add(plane.GetComponent<Transform>().position.y);
-        _coordinates[2].Add(plane.GetComponent<Transform>().position.z);
+        _position[0] = _coordinates;
+        _position[1] = _rotates;
+    }
 
-        _rotates[0].Add(plane.GetComponent<Transform>().rotation.x);
-        _rotates[1].Add(plane.GetComponent<Transform>().rotation.y);
-        _rotates[2].Add(plane.GetComponent<Transform>().rotation.z);
-        _rotates[3].Add(plane.GetComponent<Transform>().rotation.w);
+    /** Récupère les coordonnées et les rotations de l'avion dans un tableau (ArrayList à voir) */
+    private void GetCoordinates(GameObject plane)
+    {
+        _coordinates[0].Add(plane.position.x);
+        _coordinates[1].Add(plane.position.y);
+        _coordinates[2].Add(plane.position.z);
+
+        _rotates[0].Add(plane.rotation.x);
+        _rotates[1].Add(plane.rotation.y);
+        _rotates[2].Add(plane.rotation.z);
+        _rotates[3].Add(plane.rotation.w);
     }
 
     /** Affiche le score du joueur */
