@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BasicPlaneControllerRotated : MonoBehaviour
+public class PlaneController : MonoBehaviour
 {
 
     [Range(0f, 100f)]
@@ -64,11 +64,11 @@ public class BasicPlaneControllerRotated : MonoBehaviour
 
         _lift = 0.5f * dynamicLiftCoeff * _airDensity * _rb.velocity.sqrMagnitude * transform.up;
         _drag = -0.5f * DragCoeff * _airDensity * _rb.velocity.sqrMagnitude * _rb.velocity.normalized;
-        _thrust = ThrustPower * ThrustCoeff * transform.right;
+        _thrust = ThrustPower * ThrustCoeff * transform.forward;
 
-        transform.Rotate(Vector3.right * Time.deltaTime * RollIntensity * -Input.GetAxis("Roll"));
+        transform.Rotate(Vector3.forward * Time.deltaTime * RollIntensity * -Input.GetAxis("Roll"));
 
-        transform.Rotate(Vector3.forward * Time.deltaTime * PitchIntensity * Input.GetAxis("Pitch"));
+        transform.Rotate(Vector3.right * Time.deltaTime * PitchIntensity * -Input.GetAxis("Pitch"));
 
         transform.Rotate(Vector3.up * Time.deltaTime * YawIntensity * Input.GetAxis("Yaw"));
 

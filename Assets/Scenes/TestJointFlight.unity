@@ -409,6 +409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 1016593009}
+  DistanceFromTarget: 50
   HorizontalStickSensitivity: 1
   VerticalStickSensitivity: 0.6
 --- !u!81 &431931057
@@ -670,11 +671,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4097248109876262, guid: 3bcb4e92dc4ec494b83bbdd20e349261, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0.445
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4097248109876262, guid: 3bcb4e92dc4ec494b83bbdd20e349261, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 45.6853
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 4097248109876262, guid: 3bcb4e92dc4ec494b83bbdd20e349261, type: 2}
       propertyPath: m_LocalScale.x
@@ -690,13 +691,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4097248109876262, guid: 3bcb4e92dc4ec494b83bbdd20e349261, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.5912
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 33843862326590446, guid: 3bcb4e92dc4ec494b83bbdd20e349261,
         type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 4300000, guid: a35eb7edf70b03147a3170ef3dc734b6, type: 3}
+      objectReference: {fileID: 4300000, guid: a177abf1731635b4eb497da067c2708e, type: 3}
+    - target: {fileID: 64202762617662798, guid: 3bcb4e92dc4ec494b83bbdd20e349261,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: a177abf1731635b4eb497da067c2708e, type: 3}
+    - target: {fileID: 64202762617662798, guid: 3bcb4e92dc4ec494b83bbdd20e349261,
+        type: 2}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114350750180225696, guid: 3bcb4e92dc4ec494b83bbdd20e349261, type: 2}
     - {fileID: 54413956071243674, guid: 3bcb4e92dc4ec494b83bbdd20e349261, type: 2}

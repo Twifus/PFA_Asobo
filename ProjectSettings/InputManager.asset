@@ -41,8 +41,8 @@ InputManager:
     m_Name: Yaw
     descriptiveName: Yaw (Button)
     descriptiveNegativeName: 
-    negativeButton: a
-    positiveButton: e
+    negativeButton: left
+    positiveButton: right
     altNegativeButton: joystick button 4
     altPositiveButton: joystick button 5
     gravity: 1000
