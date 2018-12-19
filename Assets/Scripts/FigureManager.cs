@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FigureManager : MonoBehaviour{
-    public Plane plane;
-    public FigureDetection IfigureDetection;
-    public Settings settings;
+    private Plane _plane;
+    //public FigureDetection IfigureDetection;
+    //public Settings settings;
 
+    public GameObject plane;
     private int _score;
     private ArrayList[][] _position = new ArrayList[2][];
 
@@ -25,6 +26,8 @@ public class FigureManager : MonoBehaviour{
 
     private void Start()
     {
+        _plane = new Plane(plane);
+
         _coordinates[0] = _coordinateX;
         _coordinates[1] = _coordinateY;
         _coordinates[2] = _coordinateZ;
@@ -38,17 +41,27 @@ public class FigureManager : MonoBehaviour{
         _position[1] = _rotates;
     }
 
-    /** Récupère les coordonnées et les rotations de l'avion dans un tableau (ArrayList à voir) */
-    private void GetCoordinates(GameObject plane)
+    private void Update()
     {
-        _coordinates[0].Add(plane.position.x);
-        _coordinates[1].Add(plane.position.y);
-        _coordinates[2].Add(plane.position.z);
+        GetCoordinates(_plane);
+        Debug.Log(_coordinates[0][0]);
+        print(_coordinates[0][0]);
 
-        _rotates[0].Add(plane.rotation.x);
-        _rotates[1].Add(plane.rotation.y);
-        _rotates[2].Add(plane.rotation.z);
-        _rotates[3].Add(plane.rotation.w);
+    }
+
+    #region Private Methods
+
+    /** Récupère les coordonnées et les rotations de l'avion dans un tableau (ArrayList à voir) */
+    private void GetCoordinates(Plane _plane)
+    {
+        _coordinates[0].Add(_plane.Position.x);
+        _coordinates[1].Add(_plane.Position.y);
+        _coordinates[2].Add(_plane.Position.z);
+
+        _rotates[0].Add(_plane.Rotation.x);
+        _rotates[1].Add(_plane.Rotation.y);
+        _rotates[2].Add(_plane.Rotation.z);
+        _rotates[3].Add(_plane.Rotation.w);
     }
 
     /** Affiche le score du joueur */
@@ -75,3 +88,5 @@ public class FigureManager : MonoBehaviour{
         //TODO
     }
 }
+
+#endregion
