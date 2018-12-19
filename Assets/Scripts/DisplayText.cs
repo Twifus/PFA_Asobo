@@ -17,7 +17,7 @@ public class DisplayText : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (FigureRecorder.GetComponent<FsmDetectionUpdate>().LoopDone)
+        if (FigureRecorder.GetComponent<YDetection>().LoopDone)
         {
             FigureText.text = "LOOPING";
             Invoke("DisableText", 3f);

@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using HutongGames.PlayMaker;
 
-public class FsmDetectionUpdate : MonoBehaviour {
+public class XDetection : MonoBehaviour
+{
 
     public PlayMakerFSM Fsm;
     public GameObject Plane;
     public bool LoopDone;
 
-    void Update () {
+    void Update()
+    {
         // getting fsm variables by name
         FsmFloat PlaneRot = Fsm.FsmVariables.GetFsmFloat("PlaneRot");
         FsmBool FsmLoopDone = Fsm.FsmVariables.GetFsmBool("LoopDone");
@@ -17,12 +19,12 @@ public class FsmDetectionUpdate : MonoBehaviour {
         LoopDone = FsmLoopDone.Value;
 
         // setting fsm variable value
-        float pitch = Vector3.Angle(Vector3.up, Plane.transform.up);
-        if (Plane.transform.right.y < 0)
+        float yaw = Vector3.Angle(Vector3.right, Plane.transform.right);
+        if (Plane.transform.right.x < 0)
         {
-            pitch = 360 - pitch;
+            yaw = 360 - yaw;
         }
-        PlaneRot.Value = pitch; // Plane.transform.eulerAngles.z;
+        PlaneRot.Value = yaw; // Plane.transform.eulerAngles.z;
         Debug.Log(PlaneRot.Value);
 
         // sending an event
