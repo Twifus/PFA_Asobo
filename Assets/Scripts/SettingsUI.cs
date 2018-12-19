@@ -71,7 +71,7 @@ public class SettingsUI : MonoBehaviour
 
     private float Slider(string name, float f, float max)
     {
-        GUILayout.Box(name);
+        GUILayout.Box(name + " : " + f);
         return GUILayout.HorizontalSlider(f, 0.0f, max);
         
     }
@@ -82,15 +82,23 @@ public class SettingsUI : MonoBehaviour
         {
             clicked = "resolution";
         }
+        volume = Slider("Volume", volume, 1.0f);
+        UserWingArea = Slider("Wing Area", UserWingArea, 100.0f);
+        UserLiftCoeff = Slider("Lift Coefficient", UserLiftCoeff, 100.0f);
+        UserDragCoeff = Slider("Drag Coefficient", UserDragCoeff, 100.0f);
+        UserThrustPower = Slider("Thrust Power", UserThrustPower, 100.0f);
+        UserRollIntensity = Slider("Roll Intensity", UserRollIntensity, 360.0f);
+        UserPitchIntensity = Slider("Pitch Intensity", UserPitchIntensity, 360.0f);
+        UserYawIntensity = Slider("Yaw Intensity", UserYawIntensity, 360.0f);
 
-        AudioListener.volume = Slider("Volume", volume, 1.0f);
-        BasicPlaneControllerRotated.WingArea = Slider("Wing Area", UserWingArea, 100.0f);
-        BasicPlaneControllerRotated.LiftCoeff = Slider("Lift Coefficient", UserLiftCoeff, 100.0f);
-        BasicPlaneControllerRotated.DragCoeff = Slider("Drag Coefficient", UserDragCoeff, 100.0f);
-        BasicPlaneControllerRotated.ThrustPower = Slider("Thrust Power", UserThrustPower, 100.0f);
-        BasicPlaneControllerRotated.RollIntensity = Slider("Roll Intensity", UserRollIntensity, 360.0f);
-        BasicPlaneControllerRotated.PitchIntensity = Slider("Pitch Intensity", UserPitchIntensity, 360.0f);
-        BasicPlaneControllerRotated.YawIntensity = Slider("Yaw Intensity", UserYawIntensity, 360.0f);
+        AudioListener.volume = volume;
+        BasicPlaneControllerRotated.WingArea = UserWingArea;
+        BasicPlaneControllerRotated.LiftCoeff = UserLiftCoeff;
+        BasicPlaneControllerRotated.DragCoeff = UserDragCoeff;
+        BasicPlaneControllerRotated.ThrustPower = UserThrustPower;
+        BasicPlaneControllerRotated.RollIntensity = UserRollIntensity;
+        BasicPlaneControllerRotated.PitchIntensity = UserPitchIntensity;
+        BasicPlaneControllerRotated.YawIntensity = UserYawIntensity;
 
         if (GUILayout.Button("Back"))
         {
