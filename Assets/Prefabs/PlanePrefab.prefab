@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 54998488278260704}
   - component: {fileID: 114933291204838150}
   m_Layer: 0
-  m_Name: PlaneModel
+  m_Name: PlanePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,3 +130,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThrustCoeff: 1000
+  plane: {fileID: 0}

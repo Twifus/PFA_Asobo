@@ -27,13 +27,13 @@ public class Plane {
 
     public Vector3 Position {
         get {
-            return _rigidbody.GetComponent<Transform>().position;
+            return _plane.GetComponent<Transform>().position;
         }
     }
 
     public Quaternion Rotation {
         get {
-            return _rigidbody.GetComponent<Transform>().rotation;
+            return _plane.GetComponent<Transform>().rotation;
         }
     }
 

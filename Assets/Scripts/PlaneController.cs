@@ -37,11 +37,15 @@ public class PlaneController : MonoBehaviour
     private Vector3 _lift;
     private Vector3 _drag;
 
+    public GameObject plane;
+    private Plane _plane;
+
     // Use this for initialization
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _lastHeigth = 0;
+        _plane = new Plane(plane);
     }
 
     // Update is called once per frame
@@ -77,6 +81,9 @@ public class PlaneController : MonoBehaviour
         _rb.AddForce(_lift);
         _rb.AddForce(_drag);
         _rb.AddForce(_thrust);
+        //_plane.AddForce(_lift);
+        //_plane.AddForce(_drag);
+        //_plane.AddForce(_thrust);
     }
 
     private void OnDrawGizmos()
