@@ -1457,7 +1457,7 @@ MonoBehaviour:
       categories:
       - 
       variableCategoryIDs: 000000000000000000000000
-    description: Detects a Looping
+    description: 'Detects the plane''s Z Rotation '
     docUrl: 
     showStateLabel: 0
     maxLoopCount: 0
@@ -2348,8 +2348,8 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 0
-        - useVariable: 0
-          name: 
+        - useVariable: 1
+          name: WaitTime
           tooltip: 
           showInInspector: 0
           networkSync: 0
@@ -2488,8 +2488,8 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 0
-        - useVariable: 0
-          name: 
+        - useVariable: 1
+          name: WaitTime
           tooltip: 
           showInInspector: 0
           networkSync: 0
@@ -2628,8 +2628,8 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 0
-        - useVariable: 0
-          name: 
+        - useVariable: 1
+          name: WaitTime
           tooltip: 
           showInInspector: 0
           networkSync: 0
@@ -2861,6 +2861,12 @@ MonoBehaviour:
         showInInspector: 0
         networkSync: 0
         value: 5
+      - useVariable: 1
+        name: WaitTime
+        tooltip: 
+        showInInspector: 0
+        networkSync: 0
+        value: 5
       intVariables: []
       boolVariables:
       - useVariable: 1
@@ -2883,8 +2889,8 @@ MonoBehaviour:
       enumVariables: []
       categories:
       - 
-      variableCategoryIDs: 000000000000000000000000
-    description: Detects a Looping
+      variableCategoryIDs: 00000000000000000000000000000000
+    description: 'Detects the plane''s Y Rotation '
     docUrl: 
     showStateLabel: 0
     maxLoopCount: 0
@@ -3975,7 +3981,7 @@ MonoBehaviour:
       categories:
       - 
       variableCategoryIDs: 0000000000000000
-    description: Detects a Looping
+    description: 'Detects the plane''s X Rotation '
     docUrl: 
     showStateLabel: 0
     maxLoopCount: 0
