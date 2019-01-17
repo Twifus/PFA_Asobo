@@ -573,6 +573,18 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1784992606044474, guid: 3bcb4e92dc4ec494b83bbdd20e349261,
     type: 2}
   m_PrefabInternal: {fileID: 1709996871}
+--- !u!114 &972927859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 972927858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a463b36210a8be2449c6f78fdb619e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plane: {fileID: 972927858}
 --- !u!1001 &973320260
 Prefab:
   m_ObjectHideFlags: 0
@@ -1296,6 +1308,10 @@ Prefab:
         type: 2}
       propertyPath: m_UseGravity
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784992606044474, guid: 3bcb4e92dc4ec494b83bbdd20e349261, type: 2}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bcb4e92dc4ec494b83bbdd20e349261, type: 2}
