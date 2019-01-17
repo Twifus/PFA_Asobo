@@ -46,6 +46,7 @@ public class FigureManager : MonoBehaviour{
     private void Update()
     {
         GetCoordinates(_plane);
+        DisplayScore();
     }
 
     #region Private Methods
