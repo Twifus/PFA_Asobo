@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FigureManager : MonoBehaviour{
-    private Plane _plane;
+
     //public FigureDetection IfigureDetection;
     //public Settings settings;
 
     public GameObject plane;
+    public Text textScore;
+
+    private Plane _plane;
     private int _score;
 
     private List<List<float>> _coordinates = new List<List<float>>();
@@ -61,9 +65,9 @@ public class FigureManager : MonoBehaviour{
     }
 
     /** Affiche le score du joueur */
-    private void DisplayScore(int points)
+    private void DisplayScore()
     {
-        //TODO
+        textScore.text = "Score : " + _score;
     }
 
     /** Met à jour le score du joueur */
