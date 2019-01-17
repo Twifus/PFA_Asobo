@@ -9,59 +9,55 @@ public class FigureManager : MonoBehaviour{
 
     public GameObject plane;
     private int _score;
-    private ArrayList[][] _position = new ArrayList[2][];
 
-    private ArrayList[] _coordinates = new ArrayList[3];
+    private List<List<float>> _coordinates = new List<List<float>>();
 
-    private ArrayList _coordinateX = new ArrayList();
-    private ArrayList _coordinateY = new ArrayList();
-    private ArrayList _coordinateZ = new ArrayList();
+    private List<float> _coordinateX = new List<float>();
+    private List<float> _coordinateY = new List<float>();
+    private List<float> _coordinateZ = new List<float>();
 
-    private ArrayList[] _rotates = new ArrayList[4];
-    private ArrayList _rotateX = new ArrayList();
-    private ArrayList _rotateY = new ArrayList();
-    private ArrayList _rotateZ = new ArrayList();
-    private ArrayList _rotateW = new ArrayList();
+    private List<List<float>> _rotates = new List<List<float>>();
+    private List<float> _rotateX = new List<float>();
+    private List<float> _rotateY = new List<float>();
+    private List<float> _rotateZ = new List<float>();
+    private List<float> _rotateW = new List<float>();
 
+    private List<float> _time = new List<float>();
 
     private void Start()
     {
+        _score = 0;
         _plane = new Plane(plane);
 
-        _coordinates[0] = _coordinateX;
-        _coordinates[1] = _coordinateY;
-        _coordinates[2] = _coordinateZ;
+        _coordinates.Add(_coordinateX);
+        _coordinates.Add(_coordinateY);
+        _coordinates.Add(_coordinateZ);
 
-        _rotates[0] = _rotateX;
-        _rotates[1] = _rotateY;
-        _rotates[2] = _rotateZ;
-        _rotates[3] = _rotateW;
-
-        _position[0] = _coordinates;
-        _position[1] = _rotates;
+        _rotates.Add(_rotateX);
+        _rotates.Add(_rotateY);
+        _rotates.Add(_rotateZ);
+        _rotates.Add(_rotateW);
     }
 
     private void Update()
     {
         GetCoordinates(_plane);
-        Debug.Log(_coordinates[0][0]);
-        print(_coordinates[0][0]);
-
     }
 
     #region Private Methods
 
-    /** Récupère les coordonnées et les rotations de l'avion dans un tableau (ArrayList à voir) */
+    /** Récupère les coordonnées et les rotations de l'avion dans un tableau (List<float> à voir) */
     private void GetCoordinates(Plane _plane)
     {
-        _coordinates[0].Add(_plane.Position.x);
-        _coordinates[1].Add(_plane.Position.y);
-        _coordinates[2].Add(_plane.Position.z);
+        _coordinateX.Add(_plane.Position.x);
+        _coordinateY.Add(_plane.Position.y);
+        _coordinateZ.Add(_plane.Position.z);
 
-        _rotates[0].Add(_plane.Rotation.x);
-        _rotates[1].Add(_plane.Rotation.y);
-        _rotates[2].Add(_plane.Rotation.z);
-        _rotates[3].Add(_plane.Rotation.w);
+        _rotateX.Add(_plane.Rotation.x);
+        _rotateY.Add(_plane.Rotation.y);
+        _rotateZ.Add(_plane.Rotation.z);
+        _rotateW.Add(_plane.Rotation.w);
+        _time.Add(Time.time);
     }
 
     /** Affiche le score du joueur */
