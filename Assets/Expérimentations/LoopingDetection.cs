@@ -23,7 +23,7 @@ public class LoopingDetection : MonoBehaviour {
             if (Between(Mathf.Abs(Plane.transform.eulerAngles.z), 100*i, 100*(i+1)) && (_state == i || _state == i + 1))
             {
                 _state = i + 1;
-                Debug.Log(_state);
+                //Debug.Log(_state);
                 _check = true;
             }
         }
