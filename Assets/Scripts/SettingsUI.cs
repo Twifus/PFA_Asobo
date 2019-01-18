@@ -6,7 +6,7 @@ public class SettingsUI : MonoBehaviour
 {
     public GUISkin guiSkin;
     public Texture2D background, LOGO;
-    public bool DragWindow = false;
+    public bool DragWindow = true;
     public string[] AboutTextLines = new string[0];
 
     private string clicked = "", MessageDisplayOnAbout = "About \n ";
