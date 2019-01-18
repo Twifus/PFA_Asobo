@@ -202,10 +202,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c9e6508aff3cc4394a99f44a2e1be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guiSkin: {fileID: 0}
+  guiSkin: {fileID: 11400000, guid: c9133c91cd117417d0000cf8a220b639, type: 2}
   background: {fileID: 2800000, guid: 2ec0065d20cbf554084a49b780f02b7c, type: 3}
   LOGO: {fileID: 0}
-  DragWindow: 0
+  DragWindow: 1
   AboutTextLines: []
 --- !u!1 &151702454
 GameObject:
