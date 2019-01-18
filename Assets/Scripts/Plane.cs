@@ -19,6 +19,24 @@ public class Plane {
 
     #region Properties
 
+    public Rigidbody Rigidbody {
+        get {
+            return _rigidbody;
+        }
+    }
+
+    public Vector3 Position {
+        get {
+            return _rigidbody.GetComponent<Transform>().position;
+        }
+    }
+
+    public Quaternion Rotation {
+        get {
+            return _rigidbody.GetComponent<Transform>().rotation;
+        }
+    }
+
     public float WingArea {
         get {
             return _wingArea;
