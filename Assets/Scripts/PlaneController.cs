@@ -3,30 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BasicPlaneControllerRotated : MonoBehaviour {
+public class PlaneController : MonoBehaviour
+{
 
     [Range(0f, 100f)]
-    public static float WingArea = PlaneSettings.WingArea;
+    static public float WingArea = 5.0f;
 
     [Range(0f, 100f)]
-    public static float LiftCoeff = PlaneSettings.LiftCoeff;
+    static public float LiftCoeff = 10.0f;
 
     [Range(0f, 100f)]
-    public static float DragCoeff = PlaneSettings.DragCoeff;
+    static public float DragCoeff = 20.0f;
 
     [Range(0f, 100f)]
-    public static float ThrustPower = PlaneSettings.ThrustPower;
+    static public float ThrustPower = 50.0f;
 
-    public static float ThrustCoeff = PlaneSettings.ThrustCoeff;
+    public float ThrustCoeff;
 
     [Range(0f, 360f)]
-    public static float RollIntensity = PlaneSettings.RollIntensity;
+    static public float RollIntensity = 30.0f;
 
     [Range(0f, 360f)]
-    public static float PitchIntensity = PlaneSettings.PitchIntensity;
+    static public float PitchIntensity = 30.0f;
 
     [Range(0f, 360f)]
-    public static float YawIntensity = PlaneSettings.YawIntensity;
+    static public float YawIntensity = 30.0f;
 
     private Rigidbody _rb;
     private float _airDensity = 1.184f;
@@ -37,19 +38,21 @@ public class BasicPlaneControllerRotated : MonoBehaviour {
     private Vector3 _drag;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         _rb = GetComponent<Rigidbody>();
         _lastHeigth = 0;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+        
         if (Input.GetKey(KeyCode.Escape))
         {
             SceneManager.LoadScene("SettingsUI");
         }
-
+        
         if (transform.position.y >= _lastHeigth + 100)
         {
             _lastHeigth = _lastHeigth + 100;
@@ -61,20 +64,19 @@ public class BasicPlaneControllerRotated : MonoBehaviour {
 
         _lift = 0.5f * dynamicLiftCoeff * _airDensity * _rb.velocity.sqrMagnitude * transform.up;
         _drag = -0.5f * DragCoeff * _airDensity * _rb.velocity.sqrMagnitude * _rb.velocity.normalized;
-        _thrust = ThrustPower * ThrustCoeff * transform.right;
-        
-        transform.Rotate(Vector3.right * Time.deltaTime * RollIntensity * -Input.GetAxis("Roll"));
-        
-        transform.Rotate(Vector3.forward * Time.deltaTime * PitchIntensity * Input.GetAxis("Pitch"));
+        _thrust = ThrustPower * ThrustCoeff * transform.forward;
+
+        transform.Rotate(Vector3.forward * Time.deltaTime * RollIntensity * -Input.GetAxis("Roll"));
+
+        transform.Rotate(Vector3.right * Time.deltaTime * PitchIntensity * -Input.GetAxis("Pitch"));
 
         transform.Rotate(Vector3.up * Time.deltaTime * YawIntensity * Input.GetAxis("Yaw"));
-        
+
         _thrust = _thrust * Input.GetAxis("Accelerate");
-        
+
         _rb.AddForce(_lift);
         _rb.AddForce(_drag);
         _rb.AddForce(_thrust);
-        
     }
 
     private void OnDrawGizmos()

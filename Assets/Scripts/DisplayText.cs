@@ -18,19 +18,16 @@ public class DisplayText : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
         if (YRecorder.GetComponent<YDetection>().LoopDone)
         {
             FigureText.text = "LOOPING";
             Invoke("DisableText", 3f);
         }
-
         if (ZRecorder.GetComponent<ZDetection>().BarrelDone)
         {
             FigureText.text = "BARREL";
             Invoke("DisableText", 3f);
         }
-
     }
 
     void DisableText()

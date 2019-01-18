@@ -1,45 +1,20 @@
 fileFormatVersion: 2
-guid: 25cc4bd23011c514dadd1f72b81ea484
+guid: 69223cde786fe3349a5a25afbad2afa9
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Camera
-    100002: Cube.000
-    100004: Cube.001
-    100006: Cube.002
-    100008: Cube.003
-    100010: Cube.004
-    100012: Lamp
-    100014: //RootNode
-    400000: Camera
-    400002: Cube.000
-    400004: Cube.001
-    400006: Cube.002
-    400008: Cube.003
-    400010: Cube.004
-    400012: Lamp
-    400014: //RootNode
-    2000000: Camera
-    2100000: Marron
-    2100002: Grey
-    2100004: Red
-    2300000: Cube.000
-    2300002: Cube.001
-    2300004: Cube.002
-    2300006: Cube.003
-    2300008: Cube.004
-    3300000: Cube.000
-    3300002: Cube.001
-    3300004: Cube.002
-    3300006: Cube.003
-    3300008: Cube.004
-    4300000: Cube.001
-    4300002: Cube.004
-    4300004: Cube.003
-    4300006: Cube.002
-    4300008: Cube.000
+    100000: //RootNode
+    400000: //RootNode
+    2100000: Grey
+    2100002: unnamed
+    2100004: Blanc
+    2100006: Marron
+    2100008: Red
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Cube_001
+    7400000: Default Take
     9500000: //RootNode
-    10800000: Lamp
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -91,7 +66,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
+    previousCalculatedGlobalScale: 1
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
