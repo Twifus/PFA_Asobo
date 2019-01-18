@@ -3,31 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BasicPlaneControllerRotated : MonoBehaviour
-{
+public class BasicPlaneControllerRotated : MonoBehaviour {
 
     [Range(0f, 100f)]
-    static public float WingArea = 5.0f;
+    public static float WingArea = PlaneSettings.WingArea;
 
     [Range(0f, 100f)]
-    static public float LiftCoeff = 10.0f;
+    public static float LiftCoeff = PlaneSettings.LiftCoeff;
 
     [Range(0f, 100f)]
-    static public float DragCoeff = 20.0f;
+    public static float DragCoeff = PlaneSettings.DragCoeff;
 
     [Range(0f, 100f)]
-    static public float ThrustPower = 50.0f;
+    public static float ThrustPower = PlaneSettings.ThrustPower;
 
-    public float ThrustCoeff;
+    public static float ThrustCoeff = PlaneSettings.ThrustCoeff;
 
     [Range(0f, 360f)]
-    static public float RollIntensity = 30.0f;
+    public static float RollIntensity = PlaneSettings.RollIntensity;
 
     [Range(0f, 360f)]
-    static public float PitchIntensity = 30.0f;
+    public static float PitchIntensity = PlaneSettings.PitchIntensity;
 
     [Range(0f, 360f)]
-    static public float YawIntensity = 30.0f;
+    public static float YawIntensity = PlaneSettings.YawIntensity;
 
     private Rigidbody _rb;
     private float _airDensity = 1.184f;
@@ -41,22 +40,20 @@ public class BasicPlaneControllerRotated : MonoBehaviour
     private Plane _plane;
 
     // Use this for initialization
-    void Start()
-    {
+    void Start () {
         _rb = GetComponent<Rigidbody>();
         _lastHeigth = 0;
         _plane = Plane.NewPlane(plane);
     }
+	
+	// Update is called once per frame
+	void Update () {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
         if (Input.GetKey(KeyCode.Escape))
         {
             SceneManager.LoadScene("SettingsUI");
         }
-        
+
         if (transform.position.y >= _lastHeigth + 100)
         {
             _lastHeigth = _lastHeigth + 100;
@@ -69,13 +66,13 @@ public class BasicPlaneControllerRotated : MonoBehaviour
         _lift = 0.5f * dynamicLiftCoeff * _airDensity * _rb.velocity.sqrMagnitude * transform.up;
         _drag = -0.5f * DragCoeff * _airDensity * _rb.velocity.sqrMagnitude * _rb.velocity.normalized;
         _thrust = ThrustPower * ThrustCoeff * transform.right;
-
+        
         transform.Rotate(Vector3.right * Time.deltaTime * RollIntensity * -Input.GetAxis("Roll"));
-
+        
         transform.Rotate(Vector3.forward * Time.deltaTime * PitchIntensity * Input.GetAxis("Pitch"));
 
         transform.Rotate(Vector3.up * Time.deltaTime * YawIntensity * Input.GetAxis("Yaw"));
-
+        
         _thrust = _thrust * Input.GetAxis("Accelerate");
 
         //_rb.AddForce(_lift);
