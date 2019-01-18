@@ -45,7 +45,7 @@ public class BasicPlaneControllerRotated : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _lastHeigth = 0;
-        _plane = new Plane(plane);
+        _plane = Plane.NewPlane(plane);
     }
 
     // Update is called once per frame

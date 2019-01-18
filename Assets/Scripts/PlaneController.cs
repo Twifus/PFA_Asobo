@@ -45,7 +45,7 @@ public class PlaneController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _lastHeigth = 0;
-        _plane = new Plane(plane);
+        _plane = Plane.NewPlane(plane);
     }
 
     // Update is called once per frame
@@ -78,12 +78,12 @@ public class PlaneController : MonoBehaviour
 
         _thrust = _thrust * Input.GetAxis("Accelerate");
 
-        _rb.AddForce(_lift);
-        _rb.AddForce(_drag);
-        _rb.AddForce(_thrust);
-        //_plane.AddForce(_lift);
-        //_plane.AddForce(_drag);
-        //_plane.AddForce(_thrust);
+        //_rb.AddForce(_lift);
+        //_rb.AddForce(_drag);
+        //_rb.AddForce(_thrust);
+        _plane.AddForce(_lift);
+        _plane.AddForce(_drag);
+        _plane.AddForce(_thrust);
     }
 
     private void OnDrawGizmos()

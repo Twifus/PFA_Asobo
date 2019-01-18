@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Plane {
 
+    private static Dictionary<GameObject, Plane> listInstances = new Dictionary<GameObject, Plane>();
+    private static readonly object padlock = new object();
+
+    #region Variables
+
     private float _wingArea;
     private float _liftCoeff;
     private float _dragCoeff;
@@ -16,6 +21,7 @@ public class Plane {
     private GameObject _plane;
     private Rigidbody _rigidbody;
 
+    #endregion
 
     #region Properties
 
@@ -90,8 +96,9 @@ public class Plane {
 
     #region Constructor
 
-    public Plane(GameObject plane) {
+    private Plane(GameObject plane) {
         _plane = plane;
+        
         _rigidbody = plane.GetComponent<Rigidbody>();
         LoadSettings();
     }
@@ -121,6 +128,19 @@ public class Plane {
         _rollIntensity = rollIntensity;
         _pitchIntensity = pitchIntensity;
         _yawIntensity = yawIntensity;
+    }
+
+    public static Plane NewPlane(GameObject plane) {
+        lock (padlock) { // thread safety
+            if (listInstances.ContainsKey(plane)) {
+                return listInstances[plane];
+            }
+            else {
+                Plane ret = new Plane(plane);
+                listInstances.Add(plane, ret);
+                return ret;
+            }
+        }
     }
 
     #endregion
