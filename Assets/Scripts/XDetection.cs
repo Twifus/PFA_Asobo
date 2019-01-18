@@ -16,12 +16,11 @@ public class XDetection : MonoBehaviour
 
         // setting fsm variable value
         float yaw = Vector3.Angle(Vector3.right, Plane.transform.right);
-        if (Plane.transform.right.x < 0)
+        if (Plane.transform.forward.x < 0)
         {
             yaw = 360 - yaw;
         }
         PlaneRot.Value = yaw; // Plane.transform.eulerAngles.z;
-        Debug.Log(PlaneRot.Value);
 
         // sending an event
         //fsm.SendEvent("myEvent");

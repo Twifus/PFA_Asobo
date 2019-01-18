@@ -19,8 +19,8 @@ public class ZDetection : MonoBehaviour
         BarrelDone = FsmBarrelDone.Value;
 
         // setting fsm variable value
-        float roll = Vector3.Angle(Vector3.forward, Plane.transform.forward);
-        if (Plane.transform.right.z < 0) //tofix
+        float roll = Vector3.Angle(Vector3.up, Plane.transform.up);
+        if (Plane.transform.forward.y < 0) //tofix
         {
             roll = 360 - roll;
         }
