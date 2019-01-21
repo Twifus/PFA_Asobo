@@ -9,14 +9,14 @@ public class Plane {
 
     #region Variables
 
-    private float _wingArea;
-    private float _liftCoeff;
-    private float _dragCoeff;
-    private float _trustPower;
-    private float _trustCoeff;
-    private float _rollIntensity;
-    private float _pitchIntensity;
-    private float _yawIntensity;
+    //private float _wingArea;
+    //private float _liftCoeff;
+    //private float _dragCoeff;
+    //private float _trustPower;
+    //private float _trustCoeff;
+    //private float _rollIntensity;
+    //private float _pitchIntensity;
+    //private float _yawIntensity;
 
     private GameObject _plane;
     private Rigidbody _rigidbody;
@@ -45,49 +45,57 @@ public class Plane {
 
     public float WingArea {
         get {
-            return _wingArea;
+            //return _wingArea;
+            return PlaneSettings.WingArea;
         }
     }
 
     public float LiftCoeff {
         get {
-            return _liftCoeff;
+            //return _liftCoeff;
+            return PlaneSettings.LiftCoeff;
         }
     }
 
     public float DragCoeff {
         get {
-            return _dragCoeff;
+            //return _dragCoeff;
+            return PlaneSettings.DragCoeff;
         }
     }
 
     public float TrustPower {
         get {
-            return _trustPower;
+            //return _trustPower;
+            return PlaneSettings.ThrustPower;
         }
     }
 
     public float TrustCoeff {
         get {
-            return _trustCoeff;
+            //return _trustCoeff;
+            return PlaneSettings.ThrustCoeff;
         }
     }
 
     public float RollIntensity {
         get {
-            return _rollIntensity;
+            //return _rollIntensity;
+            return PlaneSettings.RollIntensity;
         }
     }
 
     public float PitchIntensity {
         get {
-            return _pitchIntensity;
+            //return _pitchIntensity;
+            return PlaneSettings.PitchIntensity;
         }
     }
 
     public float YawIntensity {
         get {
-            return _yawIntensity;
+            //return _yawIntensity;
+            return PlaneSettings.YawIntensity;
         }
     }
 
@@ -114,20 +122,27 @@ public class Plane {
 
 
     public void LoadSettings() {
-
+        //_wingArea = PlaneSettings.WingArea;
+        //_liftCoeff = PlaneSettings.LiftCoeff;
+        //_dragCoeff = PlaneSettings.DragCoeff;
+        //_trustPower = PlaneSettings.ThrustPower;
+        //_trustCoeff = PlaneSettings.ThrustCoeff;
+        //_rollIntensity = PlaneSettings.RollIntensity;
+        //_pitchIntensity = PlaneSettings.PitchIntensity;
+        //_yawIntensity = PlaneSettings.YawIntensity;
     }
 
     public void LoadSettings(float wingArea, float liftCoeff, float dragCoeff,
                             float thrustPower, float thrustCoeff, float rollIntensity,
                             float pitchIntensity, float yawIntensity) {
-        _wingArea = wingArea;
-        _liftCoeff = liftCoeff;
-        _dragCoeff = dragCoeff;
-        _trustPower = thrustPower;
-        _trustCoeff = thrustCoeff;
-        _rollIntensity = rollIntensity;
-        _pitchIntensity = pitchIntensity;
-        _yawIntensity = yawIntensity;
+        //_wingArea = wingArea;
+        //_liftCoeff = liftCoeff;
+        //_dragCoeff = dragCoeff;
+        //_trustPower = thrustPower;
+        //_trustCoeff = thrustCoeff;
+        //_rollIntensity = rollIntensity;
+        //_pitchIntensity = pitchIntensity;
+        //_yawIntensity = yawIntensity;
     }
 
     public static Plane NewPlane(GameObject plane) {
