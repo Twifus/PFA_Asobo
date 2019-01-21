@@ -21,6 +21,7 @@ public class RingPoint : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         _point.Play(0);
-        Debug.Log("1 point");
+        Debug.Log("10 point");
+        other.GetComponent<FigureManager>().UpdateScore(10);
     }
 }
