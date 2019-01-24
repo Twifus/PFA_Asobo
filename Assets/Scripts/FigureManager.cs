@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/* 
+ * Utilisation de Time.frameCount permettra de savoir le nombre de frame passées 
+ * afin d'enregistrer les données suivant la volonté de l'utilisateur 
+ */
 public class FigureManager : MonoBehaviour{
 
     //public FigureDetection IfigureDetection;
@@ -28,6 +33,15 @@ public class FigureManager : MonoBehaviour{
 
     private List<float> _time = new List<float>();
 
+    
+    /** Met à jour le score du joueur */
+    public void UpdateScore(int points)
+    {
+        _score += points;
+    }
+
+    #region Private Methods
+
     private void Start()
     {
         _score = 0;
@@ -45,11 +59,11 @@ public class FigureManager : MonoBehaviour{
 
     private void Update()
     {
-        GetCoordinates(_plane);
         DisplayScore();
+        //Condition sur les frames pour enregistrement des coordonnées
+        GetCoordinates(_plane);
     }
 
-    #region Private Methods
 
     /** Récupère les coordonnées et les rotations de l'avion dans un tableau (List<float> à voir) */
     private void GetCoordinates(Plane _plane)
@@ -71,20 +85,8 @@ public class FigureManager : MonoBehaviour{
         textScore.text = "Score : " + _score;
     }
 
-    /** Met à jour le score du joueur */
-    private void UpdateScore(int points)
-    {
-        _score += points;
-    }
-
     /** Appelle la fonction qui analyse la trajectoire */
     private void AnalyzeTrajectory()
-    {
-        //TODO
-    }
-
-    /** Détermine quelle figure a été réalisée */
-    private void WhichFigure()
     {
         //TODO
     }
