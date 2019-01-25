@@ -20,12 +20,12 @@ public class YDetection : MonoBehaviour
 
         // setting fsm variable value
         float pitch = Vector3.Angle(Vector3.up, Plane.transform.up);
-        if (Plane.transform.right.y < 0)
+        if (Plane.transform.forward.y < 0)
         {
             pitch = 360 - pitch;
         }
         PlaneRot.Value = pitch; // Plane.transform.eulerAngles.z;
-        Debug.Log(PlaneRot.Value);
+        Debug.Log("Yangle :" + PlaneRot.Value);
 
         // sending an event
         //fsm.SendEvent("myEvent");

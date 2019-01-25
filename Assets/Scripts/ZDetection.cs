@@ -20,12 +20,12 @@ public class ZDetection : MonoBehaviour
 
         // setting fsm variable value
         float roll = Vector3.Angle(Vector3.up, Plane.transform.up);
-        if (Plane.transform.forward.y < 0) //tofix
+        if (Plane.transform.right.y < 0) //tofix
         {
             roll = 360 - roll;
         }
         PlaneRot.Value = roll; // Plane.transform.eulerAngles.z;
-        Debug.Log(PlaneRot.Value);
+        Debug.Log("Zangle :" + PlaneRot.Value);
 
         // sending an event
         //fsm.SendEvent("myEvent");
