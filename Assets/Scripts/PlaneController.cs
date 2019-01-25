@@ -74,9 +74,11 @@ public class PlaneController : MonoBehaviour
 
         _thrust = _thrust * Input.GetAxis("Accelerate");
 
+        /*
         _rb.AddForce(_lift);
         _rb.AddForce(_drag);
         _rb.AddForce(_thrust);
+        */
     }
 
     private void OnDrawGizmos()

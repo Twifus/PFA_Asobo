@@ -9,6 +9,7 @@ public class YDetection : MonoBehaviour
     public PlayMakerFSM Fsm;
     public GameObject Plane;
     public bool LoopDone;
+    public float pitch; 
 
     void Update()
     {
@@ -18,6 +19,8 @@ public class YDetection : MonoBehaviour
 
         LoopDone = FsmLoopDone.Value;
 
+
+        /*
         // setting fsm variable value
         float pitch = Vector3.Angle(Vector3.up, Plane.transform.up);
         if (Plane.transform.forward.y < 0)
@@ -25,12 +28,16 @@ public class YDetection : MonoBehaviour
             pitch = 360 - pitch;
         }
         PlaneRot.Value = pitch; // Plane.transform.eulerAngles.z;
+        */
         Debug.Log("Yangle :" + PlaneRot.Value);
+        Debug.Log("XeulerAngles :" + pitch);
         Debug.Log("YeulerAngles :" + Plane.transform.localEulerAngles.y);
+        Debug.Log("ZeulerAngles :" + Plane.transform.localEulerAngles.z);
 
 
         // sending an event
         //fsm.SendEvent("myEvent");
 
     }
+
 }
