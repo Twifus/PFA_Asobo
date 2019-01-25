@@ -26,6 +26,7 @@ public class ZDetection : MonoBehaviour
         }
         PlaneRot.Value = roll; // Plane.transform.eulerAngles.z;
         Debug.Log("Zangle :" + PlaneRot.Value);
+        Debug.Log("ZeulerAngles :" + Plane.transform.localEulerAngles.z);
 
         // sending an event
         //fsm.SendEvent("myEvent");

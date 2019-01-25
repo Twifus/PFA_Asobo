@@ -21,6 +21,7 @@ public class XDetection : MonoBehaviour
             yaw = 360 - yaw;
         }
         PlaneRot.Value = yaw; // Plane.transform.eulerAngles.z;
+        Debug.Log("XeulerAngles :" + Plane.transform.localEulerAngles.x);
 
         // sending an event
         //fsm.SendEvent("myEvent");

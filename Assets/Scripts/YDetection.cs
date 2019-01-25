@@ -26,6 +26,8 @@ public class YDetection : MonoBehaviour
         }
         PlaneRot.Value = pitch; // Plane.transform.eulerAngles.z;
         Debug.Log("Yangle :" + PlaneRot.Value);
+        Debug.Log("YeulerAngles :" + Plane.transform.localEulerAngles.y);
+
 
         // sending an event
         //fsm.SendEvent("myEvent");
