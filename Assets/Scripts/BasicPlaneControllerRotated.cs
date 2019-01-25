@@ -6,27 +6,27 @@ using UnityEngine.SceneManagement;
 public class BasicPlaneControllerRotated : MonoBehaviour {
 
     [Range(0f, 100f)]
-    public static float WingArea = PlaneSettings.WingArea;
+    public static float WingArea;
 
     [Range(0f, 100f)]
-    public static float LiftCoeff = PlaneSettings.LiftCoeff;
+    public static float LiftCoeff;
 
     [Range(0f, 100f)]
-    public static float DragCoeff = PlaneSettings.DragCoeff;
+    public static float DragCoeff;
 
     [Range(0f, 100f)]
-    public static float ThrustPower = PlaneSettings.ThrustPower;
+    public static float ThrustPower;
 
-    public static float ThrustCoeff = PlaneSettings.ThrustCoeff;
-
-    [Range(0f, 360f)]
-    public static float RollIntensity = PlaneSettings.RollIntensity;
+    public static float ThrustCoeff;
 
     [Range(0f, 360f)]
-    public static float PitchIntensity = PlaneSettings.PitchIntensity;
+    public static float RollIntensity;
 
     [Range(0f, 360f)]
-    public static float YawIntensity = PlaneSettings.YawIntensity;
+    public static float PitchIntensity;
+
+    [Range(0f, 360f)]
+    public static float YawIntensity;
 
     private Rigidbody _rb;
     private float _airDensity = 1.184f;
@@ -40,7 +40,15 @@ public class BasicPlaneControllerRotated : MonoBehaviour {
     void Start () {
         _rb = GetComponent<Rigidbody>();
         _lastHeigth = 0;
-	}
+        WingArea = PlaneSettings.WingArea;
+        LiftCoeff = PlaneSettings.LiftCoeff;
+        DragCoeff = PlaneSettings.DragCoeff;
+        ThrustPower = PlaneSettings.ThrustPower;
+        ThrustCoeff = PlaneSettings.ThrustCoeff;
+        RollIntensity = PlaneSettings.RollIntensity;
+        PitchIntensity = PlaneSettings.PitchIntensity;
+        YawIntensity = PlaneSettings.YawIntensity;
+    }
 	
 	// Update is called once per frame
 	void Update () {

@@ -7,27 +7,27 @@ public class PlaneController : MonoBehaviour
 {
 
     [Range(0f, 100f)]
-    static public float WingArea = 5.0f;
+    public static float WingArea;
 
     [Range(0f, 100f)]
-    static public float LiftCoeff = 10.0f;
+    public static float LiftCoeff;
 
     [Range(0f, 100f)]
-    static public float DragCoeff = 20.0f;
+    public static float DragCoeff;
 
     [Range(0f, 100f)]
-    static public float ThrustPower = 50.0f;
+    public static float ThrustPower;
 
-    public float ThrustCoeff;
-
-    [Range(0f, 360f)]
-    static public float RollIntensity = 30.0f;
+    public static float ThrustCoeff;
 
     [Range(0f, 360f)]
-    static public float PitchIntensity = 30.0f;
+    public static float RollIntensity;
 
     [Range(0f, 360f)]
-    static public float YawIntensity = 30.0f;
+    public static float PitchIntensity;
+
+    [Range(0f, 360f)]
+    public static float YawIntensity;
 
     private Rigidbody _rb;
     private float _airDensity = 1.184f;
@@ -42,6 +42,14 @@ public class PlaneController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _lastHeigth = 0;
+        WingArea = PlaneSettings.WingArea;
+        LiftCoeff = PlaneSettings.LiftCoeff;
+        DragCoeff = PlaneSettings.DragCoeff;
+        ThrustPower = PlaneSettings.ThrustPower;
+        ThrustCoeff = PlaneSettings.ThrustCoeff;
+        RollIntensity = PlaneSettings.RollIntensity;
+        PitchIntensity = PlaneSettings.PitchIntensity;
+        YawIntensity = PlaneSettings.YawIntensity;
     }
 
     // Update is called once per frame
