@@ -45,7 +45,7 @@ public class FigureManager : MonoBehaviour{
     private void Start()
     {
         _score = 0;
-        _plane = new Plane(plane);
+        _plane = Plane.NewPlane(plane);
 
         _coordinates.Add(_coordinateX);
         _coordinates.Add(_coordinateY);

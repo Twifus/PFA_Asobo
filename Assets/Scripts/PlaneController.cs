@@ -37,11 +37,15 @@ public class PlaneController : MonoBehaviour
     private Vector3 _lift;
     private Vector3 _drag;
 
+    public GameObject plane;
+    private Plane _plane;
+
     // Use this for initialization
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _lastHeigth = 0;
+        _plane = Plane.NewPlane(plane);
     }
 
     // Update is called once per frame
@@ -66,17 +70,20 @@ public class PlaneController : MonoBehaviour
         _drag = -0.5f * DragCoeff * _airDensity * _rb.velocity.sqrMagnitude * _rb.velocity.normalized;
         _thrust = ThrustPower * ThrustCoeff * transform.forward;
 
-        transform.Rotate(Vector3.forward * Time.deltaTime * RollIntensity * -Input.GetAxis("Roll"));
+        _plane.Rigidbody.transform.Rotate(Vector3.forward * Time.deltaTime * RollIntensity * -Input.GetAxis("Roll"));
 
-        transform.Rotate(Vector3.right * Time.deltaTime * PitchIntensity * -Input.GetAxis("Pitch"));
+        _plane.Rigidbody.transform.Rotate(Vector3.right * Time.deltaTime * PitchIntensity * -Input.GetAxis("Pitch"));
 
-        transform.Rotate(Vector3.up * Time.deltaTime * YawIntensity * Input.GetAxis("Yaw"));
+        _plane.Rigidbody.transform.Rotate(Vector3.up * Time.deltaTime * YawIntensity * Input.GetAxis("Yaw"));
 
         _thrust = _thrust * Input.GetAxis("Accelerate");
 
-        _rb.AddForce(_lift);
-        _rb.AddForce(_drag);
-        _rb.AddForce(_thrust);
+        //_rb.AddForce(_lift);
+        //_rb.AddForce(_drag);
+        //_rb.AddForce(_thrust);
+        _plane.AddForce(_lift);
+        _plane.AddForce(_drag);
+        _plane.AddForce(_thrust);
     }
 
     private void OnDrawGizmos()
