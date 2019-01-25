@@ -13,7 +13,7 @@ public class FigureManager : MonoBehaviour{
     //public FigureDetection IfigureDetection;
     //public Settings settings;
 
-    public GameObject plane;
+    //public GameObject plane;
     public Text textScore;
 
     private Plane _plane;
