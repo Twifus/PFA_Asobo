@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 /* 
  * Utilisation de Time.frameCount permettra de savoir le nombre de frame passées 
  * afin d'enregistrer les données suivant la volonté de l'utilisateur 
  */
 public class FigureManager : MonoBehaviour{
 
-    //public FigureDetection IfigureDetection;
+    private FigureDetection IfigureDetection;
     //public Settings settings;
 
     public GameObject plane;
@@ -44,6 +43,7 @@ public class FigureManager : MonoBehaviour{
 
     private void Start()
     {
+        IfigureDetection = new FigureFaussaire();
         _score = 0;
         _plane = Plane.NewPlane(plane);
 
@@ -62,6 +62,7 @@ public class FigureManager : MonoBehaviour{
         DisplayScore();
         //Condition sur les frames pour enregistrement des coordonnées
         GetCoordinates(_plane);
+        AnalyzeTrajectory();
     }
 
 
@@ -88,7 +89,11 @@ public class FigureManager : MonoBehaviour{
     /** Appelle la fonction qui analyse la trajectoire */
     private void AnalyzeTrajectory()
     {
-        //TODO
+        if (IfigureDetection.analyzeBarrel())
+            UpdateScore(10);
+
+        if (IfigureDetection.analyzeLoop())
+            UpdateScore(20);
     }
 }
 
