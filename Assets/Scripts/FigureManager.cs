@@ -107,6 +107,12 @@ public class FigureManager : MonoBehaviour{
             UpdateScore(20);
             DisplayFigure("LOOP");
         }
+
+        if (IfigureDetection.analyzeCubanEight())
+        {
+            UpdateScore(50);
+            DisplayFigure("CUBAN EIGHT");
+        }
     }
 
     private void DisableText()

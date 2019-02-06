@@ -5,23 +5,13 @@ using UnityEngine;
 public class FigureFaussaire: FigureDetection{
     private float timeBarrel;
     private float timeLoop;
-
+    private float timeCuban;
 
 	// Use this for initialization
 	void Start () {
         timeBarrel = Time.time;
         timeLoop = timeBarrel;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        timeBarrel = Time.time;
-        timeLoop = Time.time;
-        Debug.Log(timeBarrel);
-        //print(timeBarrel);
-
-        analyzeBarrel();
-        analyzeLoop();
+        timeCuban = timeBarrel;
 	}
 
     public bool analyzeLoop()
@@ -38,6 +28,16 @@ public class FigureFaussaire: FigureDetection{
     {
         timeBarrel = Time.time;
         if (timeBarrel % 3f < 0.5)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool analyzeCubanEight()
+    {
+        timeCuban = Time.time;
+        if (timeCuban % 29f < 0.1)
         {
             return true;
         }
