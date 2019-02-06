@@ -37,7 +37,6 @@ public class PlaneController : MonoBehaviour
     private Vector3 _lift;
     private Vector3 _drag;
 
-    public GameObject plane;
     private Plane _plane;
 
     // Use this for initialization
@@ -45,13 +44,12 @@ public class PlaneController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _lastHeigth = 0;
-        _plane = Plane.NewPlane(plane);
+        _plane = Plane.NewPlane(gameObject);
     }
 
     // Update is called once per frame
     void Update()
-    {
-        
+    {        
         if (Input.GetKey(KeyCode.Escape))
         {
             SceneManager.LoadScene("SettingsUI");
