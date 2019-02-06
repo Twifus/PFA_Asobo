@@ -90,10 +90,14 @@ public class FigureManager : MonoBehaviour{
     private void AnalyzeTrajectory()
     {
         if (IfigureDetection.analyzeBarrel())
+        {
             UpdateScore(10);
+        }
 
         if (IfigureDetection.analyzeLoop())
+        {
             UpdateScore(20);
+        }
     }
 }
 

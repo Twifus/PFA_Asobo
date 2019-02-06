@@ -15,20 +15,19 @@ public class FigureFaussaire: FigureDetection{
 	
 	// Update is called once per frame
 	void Update () {
-		if(timeBarrel % 3 == 0)
-        {
-            analyzeBarrel();
-        }
+        timeBarrel = Time.time;
+        timeLoop = Time.time;
+        Debug.Log(timeBarrel);
+        //print(timeBarrel);
 
-        if(timeLoop % 5 == 0)
-        {
-            analyzeLoop();
-        }
+        analyzeBarrel();
+        analyzeLoop();
 	}
 
     public bool analyzeLoop()
     {
-        if (timeLoop % 5 == 0)
+        timeLoop = Time.time;
+        if (timeLoop % 5f < 0.5)
         {
             return true;
         }
@@ -37,7 +36,8 @@ public class FigureFaussaire: FigureDetection{
 
     public bool analyzeBarrel()
     {
-        if (timeBarrel % 3 == 0)
+        timeBarrel = Time.time;
+        if (timeBarrel % 3f < 0.5)
         {
             return true;
         }

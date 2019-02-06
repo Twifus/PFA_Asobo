@@ -60,7 +60,7 @@ public class PlaneController : MonoBehaviour
         if (transform.position.y >= _lastHeigth + 100)
         {
             _lastHeigth = _lastHeigth + 100;
-            Debug.Log("Altitude : " + _lastHeigth);
+            //Debug.Log("Altitude : " + _lastHeigth);
         }
 
         //float dynamicLiftCoeff = LiftCoeff * (2-Vector3.Dot(_rb.velocity.normalized, transform.right));
