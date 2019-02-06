@@ -28,4 +28,10 @@ public class DisplayText : MonoBehaviour {
     {
         FigureText.text = "";
     }
+
+    void DisplayFigure(string figure)
+    {
+        FigureText.text = figure;
+        Invoke("DisableText", 2f);
+    }
 }

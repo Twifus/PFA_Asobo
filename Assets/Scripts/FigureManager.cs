@@ -14,9 +14,11 @@ public class FigureManager : MonoBehaviour{
 
     public GameObject plane;
     public Text textScore;
+    public Text textFigure;
 
     private Plane _plane;
     private int _score;
+    private float _timeToDisplay;
 
     private List<List<float>> _coordinates = new List<List<float>>();
 
@@ -37,6 +39,7 @@ public class FigureManager : MonoBehaviour{
     public void UpdateScore(int points)
     {
         _score += points;
+        Invoke("DisplayScore",0f);
     }
 
     #region Private Methods
@@ -46,6 +49,7 @@ public class FigureManager : MonoBehaviour{
         IfigureDetection = new FigureFaussaire();
         _score = 0;
         _plane = Plane.NewPlane(plane);
+        _timeToDisplay = Time.time;
 
         _coordinates.Add(_coordinateX);
         _coordinates.Add(_coordinateY);
@@ -59,10 +63,13 @@ public class FigureManager : MonoBehaviour{
 
     private void Update()
     {
-        DisplayScore();
         //Condition sur les frames pour enregistrement des coordonnées
         GetCoordinates(_plane);
         AnalyzeTrajectory();
+        if(Time.time > _timeToDisplay + 1.5f)
+        {
+            DisableText();
+        }
     }
 
 
@@ -92,12 +99,25 @@ public class FigureManager : MonoBehaviour{
         if (IfigureDetection.analyzeBarrel())
         {
             UpdateScore(10);
+            DisplayFigure("BARREL");
         }
 
         if (IfigureDetection.analyzeLoop())
         {
             UpdateScore(20);
+            DisplayFigure("LOOP");
         }
+    }
+
+    private void DisableText()
+    {
+        textFigure.text = "";
+    }
+
+    private void DisplayFigure(string figure)
+    {
+        textFigure.text = figure;
+        _timeToDisplay = Time.time;
     }
 }
 
