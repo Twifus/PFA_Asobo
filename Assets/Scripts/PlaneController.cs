@@ -51,7 +51,6 @@ public class PlaneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         if (Input.GetKey(KeyCode.Escape))
         {
             SceneManager.LoadScene("SettingsUI");

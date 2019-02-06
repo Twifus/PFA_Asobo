@@ -25,9 +25,25 @@ public class UIDial : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         rollTransform.rotation = Quaternion.Euler(0, 0, _plane.Rotation.eulerAngles.z);
-        var angle = Mathf.Atan2(_plane.Rigidbody.transform.forward.y, _plane.Rigidbody.transform.forward.z) * Mathf.Rad2Deg;
-        angle = Vector3.SignedAngle(_plane.Rigidbody.transform.up, transform.up, _plane.Rigidbody.transform.right);
+
+        //Vector3 planeForward = _plane.Rigidbody.transform.forward;
+        //Vector3 vectorOnPlane;
+        //if (Vector3.Dot(Vector3.up, _plane.Rigidbody.transform.up) > 0) { 
+        //    vectorOnPlane = Vector3.ProjectOnPlane(_plane.Rigidbody.transform.forward, Vector3.up);
+        //}
+        //else { // Plane is upside down
+        //    vectorOnPlane = Vector3.ProjectOnPlane(-_plane.Rigidbody.transform.forward, Vector3.up);
+        //}
+        //var angle = Vector3.SignedAngle(planeForward, vectorOnPlane, _plane.Rigidbody.transform.right);
+
+        var angle = _plane.Pitch;
+        if (Vector3.Dot(Vector3.up, _plane.Rigidbody.transform.up) < 0) {
+            angle -= 180;
+        }
+
+        Debug.Log(angle);
         pitchTransform.rotation = Quaternion.Euler(0, 0, angle);
         altitude.text = ((int) _plane.Position.y).ToString();
+        
     }
 }

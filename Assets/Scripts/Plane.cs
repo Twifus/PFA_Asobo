@@ -43,6 +43,24 @@ public class Plane {
         }
     }
 
+    public float Pitch {
+        get {
+            return _Pitch();
+        }
+    }
+
+    public float Roll {
+        get {
+            return _Roll();
+        }
+    }
+
+    public float Yaw {
+        get {
+            return _Yaw();
+        }
+    }
+
     public float WingArea {
         get {
             //return _wingArea;
@@ -106,7 +124,7 @@ public class Plane {
 
     private Plane(GameObject plane) {
         _plane = plane;
-        
+
         _rigidbody = plane.GetComponent<Rigidbody>();
         LoadSettings();
     }
@@ -156,6 +174,43 @@ public class Plane {
                 return ret;
             }
         }
+    }
+
+    #endregion
+
+    #region Private Methods
+
+    private float _Pitch() {
+        Vector3 planeForward = _rigidbody.transform.forward;
+        Vector3 vectorOnPlane = Vector3.ProjectOnPlane(planeForward, Vector3.up);
+        //if (Vector3.Dot(Vector3.up, _rigidbody.transform.up) > 0) {
+        //    vectorOnPlane = Vector3.ProjectOnPlane(planeForward, Vector3.up);
+        //}
+        //else { // Plane is upside down
+        //    vectorOnPlane = Vector3.ProjectOnPlane(-planeForward, Vector3.up);
+        //}
+        float angle = Vector3.SignedAngle(planeForward, vectorOnPlane, _rigidbody.transform.right);
+        return angle;
+    }
+
+    private float _Roll() {
+        Vector3 planeRight = _rigidbody.transform.right;
+        Vector3 vectorOnPlane = Vector3.ProjectOnPlane(planeRight, Vector3.up);
+
+        if (Vector3.Dot(Vector3.up, _rigidbody.transform.up) < 0) {
+            vectorOnPlane = -vectorOnPlane;
+        }
+        
+        float angle = Vector3.SignedAngle(planeRight, vectorOnPlane, _rigidbody.transform.forward);
+        return angle;
+    }
+
+    private float _Yaw() {
+        Vector3 forwardOnPlane = Vector3.ProjectOnPlane(_rigidbody.transform.forward, Vector3.up);
+        Vector3 north = Vector3.forward;
+
+        float angle = Vector3.SignedAngle(forwardOnPlane, Vector3.forward, Vector3.up);
+        return angle;
     }
 
     #endregion
