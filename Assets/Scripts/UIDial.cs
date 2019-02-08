@@ -41,7 +41,7 @@ public class UIDial : MonoBehaviour {
             angle -= 180;
         }
 
-        Debug.Log(angle);
+        //Debug.Log(angle);
         pitchTransform.rotation = Quaternion.Euler(0, 0, angle);
         altitude.text = ((int) _plane.Position.y).ToString();
         
