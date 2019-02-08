@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FigureFaussaire: FigureDetection{
+public class FigureFaussaire: IFigureDetection{
     private float timeBarrel;
     private float timeLoop;
     private float timeCuban;
@@ -42,5 +42,15 @@ public class FigureFaussaire: FigureDetection{
             return true;
         }
         return false;
+    }
+
+    public void setPoint(Coordinate point)
+    {
+
+    }
+
+    public List<Figure> detection()
+    {
+        return new List<Figure>();
     }
 }
