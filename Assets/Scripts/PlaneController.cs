@@ -6,31 +6,23 @@ using UnityEngine.SceneManagement;
 public class PlaneController : MonoBehaviour
 {
 
-    [Range(0f, 100f)]
-    static public float WingArea = 5.0f;
+    public float WingArea;
 
-    [Range(0f, 100f)]
-    static public float LiftCoeff = 10.0f;
+    public float LiftCoeff;
 
-    [Range(0f, 100f)]
-    static public float DragCoeff = 20.0f;
+    public float DragCoeff;
 
-    [Range(0f, 100f)]
-    static public float ThrustPower = 50.0f;
+    public float ThrustPower;
 
     public float ThrustCoeff;
 
-    [Range(0f, 360f)]
-    static public float RollIntensity = 60.0f;
+    public float RollIntensity;
 
-    [Range(0f, 360f)]
-    static public float PitchIntensity = 60.0f;
+    public float PitchIntensity;
 
-    [Range(0f, 360f)]
-    static public float YawIntensity = 60.0f;
+    public float YawIntensity;
 
-    [Range(0f, 1f)]
-    static public float RollCoeff = 0.1f;
+    public float RollCoeff;
     
     private Rigidbody _body;
 
@@ -57,6 +49,14 @@ public class PlaneController : MonoBehaviour
         _body = GetComponent<Rigidbody>();
         _body.centerOfMass = CenterOfMass.localPosition;
         _plane = Plane.NewPlane(gameObject);
+        WingArea = PlaneSettings.WingArea;
+        LiftCoeff = PlaneSettings.LiftCoeff;
+        DragCoeff = PlaneSettings.DragCoeff;
+        ThrustPower = PlaneSettings.ThrustPower;
+        ThrustCoeff = PlaneSettings.ThrustCoeff;
+        RollIntensity = PlaneSettings.RollIntensity;
+        PitchIntensity = PlaneSettings.PitchIntensity;
+        YawIntensity = PlaneSettings.YawIntensity;
     }
 
     // Update is called once per frame

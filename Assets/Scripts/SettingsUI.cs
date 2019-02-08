@@ -12,14 +12,14 @@ public class SettingsUI : MonoBehaviour
     private string clicked = "", MessageDisplayOnAbout = "About \n ";
     private Rect WindowRect = new Rect(3*Screen.width/7, Screen.height/3, 300, 500);
     private float volume = 1.0f;
-    private float UserWingArea = PlaneSettings.WingArea;
-    private float UserLiftCoeff = PlaneSettings.LiftCoeff;
-    private float UserDragCoeff = PlaneSettings.DragCoeff;
-    private float UserThrustPower = PlaneSettings.ThrustPower;
-    private float UserThrustCoeff = PlaneSettings.ThrustCoeff;
-    private float UserRollIntensity = PlaneSettings.RollIntensity;
-    private float UserPitchIntensity = PlaneSettings.PitchIntensity;
-    private float UserYawIntensity = PlaneSettings.YawIntensity;
+    private float UserWingArea;
+    private float UserLiftCoeff;
+    private float UserDragCoeff;
+    private float UserThrustPower;
+    private float UserThrustCoeff;
+    private float UserRollIntensity;
+    private float UserPitchIntensity;
+    private float UserYawIntensity;
 
     private void Start()
     {
@@ -28,6 +28,14 @@ public class SettingsUI : MonoBehaviour
             MessageDisplayOnAbout += AboutTextLines[x] + " \n ";
         }
         MessageDisplayOnAbout += "Press Esc To Go Back";
+        UserWingArea = PlaneSettings.WingArea;
+        UserLiftCoeff = PlaneSettings.LiftCoeff;
+        UserDragCoeff = PlaneSettings.DragCoeff;
+        UserThrustPower = PlaneSettings.ThrustPower;
+        UserThrustCoeff = PlaneSettings.ThrustCoeff;
+        UserRollIntensity = PlaneSettings.RollIntensity;
+        UserPitchIntensity = PlaneSettings.PitchIntensity;
+        UserYawIntensity = PlaneSettings.YawIntensity;
     }
 
     private void OnGUI()
@@ -93,14 +101,14 @@ public class SettingsUI : MonoBehaviour
         UserYawIntensity = Slider("Yaw Intensity", UserYawIntensity, 360.0f);
 
         AudioListener.volume = volume;
-        BasicPlaneControllerRotated.WingArea = UserWingArea;
-        BasicPlaneControllerRotated.LiftCoeff = UserLiftCoeff;
-        BasicPlaneControllerRotated.DragCoeff = UserDragCoeff;
-        BasicPlaneControllerRotated.ThrustPower = UserThrustPower;
-        BasicPlaneControllerRotated.ThrustCoeff = UserThrustCoeff;
-        BasicPlaneControllerRotated.RollIntensity = UserRollIntensity;
-        BasicPlaneControllerRotated.PitchIntensity = UserPitchIntensity;
-        BasicPlaneControllerRotated.YawIntensity = UserYawIntensity;
+        PlaneSettings.WingArea = UserWingArea;
+        PlaneSettings.LiftCoeff = UserLiftCoeff;
+        PlaneSettings.DragCoeff = UserDragCoeff;
+        PlaneSettings.ThrustPower = UserThrustPower;
+        PlaneSettings.ThrustCoeff = UserThrustCoeff;
+        PlaneSettings.RollIntensity = UserRollIntensity;
+        PlaneSettings.PitchIntensity = UserPitchIntensity;
+        PlaneSettings.YawIntensity = UserYawIntensity;
 
         if (GUILayout.Button("Back"))
         {
