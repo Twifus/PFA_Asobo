@@ -21,31 +21,42 @@ public class PlaneController : MonoBehaviour
     public float ThrustCoeff;
 
     [Range(0f, 360f)]
-    static public float RollIntensity = 30.0f;
+    static public float RollIntensity = 60.0f;
 
     [Range(0f, 360f)]
-    static public float PitchIntensity = 30.0f;
+    static public float PitchIntensity = 60.0f;
 
     [Range(0f, 360f)]
-    static public float YawIntensity = 30.0f;
+    static public float YawIntensity = 60.0f;
 
-    private Rigidbody _rb;
+    [Range(0f, 1f)]
+    static public float RollCoeff = 0.1f;
+    
+    private Rigidbody _body;
+
+    public Transform CenterOfMass;
+    public Transform Engine;
+    public Transform LeftWing;
+    public Transform RightWing;
+    public Transform Tail;
+
+    public GameObject[] PathRenderers;
+
     private float _airDensity = 1.184f;
-    private int _lastHeigth;
 
     private Vector3 _thrust;
-    private Vector3 _lift;
+    private Vector3 _llift;
+    private Vector3 _rlift;
     private Vector3 _drag;
 
-    public GameObject plane;
     private Plane _plane;
 
     // Use this for initialization
     void Start()
     {
-        _rb = GetComponent<Rigidbody>();
-        _lastHeigth = 0;
-        _plane = Plane.NewPlane(plane);
+        _body = GetComponent<Rigidbody>();
+        _body.centerOfMass = CenterOfMass.localPosition;
+        _plane = Plane.NewPlane(gameObject);
     }
 
     // Update is called once per frame
@@ -55,41 +66,39 @@ public class PlaneController : MonoBehaviour
         {
             SceneManager.LoadScene("SettingsUI");
         }
-        
-        if (transform.position.y >= _lastHeigth + 100)
-        {
-            _lastHeigth = _lastHeigth + 100;
-            Debug.Log("Altitude : " + _lastHeigth);
-        }
 
-        //float dynamicLiftCoeff = LiftCoeff * (2-Vector3.Dot(_rb.velocity.normalized, transform.right));
-        float dynamicLiftCoeff = LiftCoeff * transform.up.y;
+        /* Lift */
+        _llift = _rlift = Vector3.zero;
+        Vector3 baseLift = 0.5f * LiftCoeff * _airDensity * _body.velocity.sqrMagnitude * transform.up;
 
-        _lift = 0.5f * dynamicLiftCoeff * _airDensity * _rb.velocity.sqrMagnitude * transform.up;
-        _drag = -0.5f * DragCoeff * _airDensity * _rb.velocity.sqrMagnitude * _rb.velocity.normalized;
+        _llift = (CustomInput.GetAxis("Pitch") + RollCoeff * CustomInput.GetAxis("Roll")) * baseLift;
+        _rlift = (CustomInput.GetAxis("Pitch") - RollCoeff * CustomInput.GetAxis("Roll")) * baseLift;
+
+        /* Drag */
+        _drag = -0.5f * DragCoeff * _airDensity * _body.velocity.sqrMagnitude * _body.velocity.normalized;
+
+        /* Thrust */
         _thrust = ThrustPower * ThrustCoeff * transform.forward;
+        _thrust = _thrust * CustomInput.GetAxis("Accelerate");
+        
+        _body.AddForceAtPosition(_thrust, Engine.position);
+        _body.AddForceAtPosition(_llift, LeftWing.position);
+        _body.AddForceAtPosition(_rlift, RightWing.position);
+        _body.AddForce(_drag);
 
-        _plane.Rigidbody.transform.Rotate(Vector3.forward * Time.deltaTime * RollIntensity * -Input.GetAxis("Roll"));
-
-        _plane.Rigidbody.transform.Rotate(Vector3.right * Time.deltaTime * PitchIntensity * -Input.GetAxis("Pitch"));
-
-        _plane.Rigidbody.transform.Rotate(Vector3.up * Time.deltaTime * YawIntensity * Input.GetAxis("Yaw"));
-
-        _thrust = _thrust * Input.GetAxis("Accelerate");
-
-        //_rb.AddForce(_lift);
-        //_rb.AddForce(_drag);
-        //_rb.AddForce(_thrust);
-        _plane.AddForce(_lift);
-        _plane.AddForce(_drag);
-        _plane.AddForce(_thrust);
+        //_body.AddForceAtPosition(- 0.1f * baseLift.magnitude * CustomInput.GetAxis("Yaw") * transform.right, Tail.position); // Yaw (useful?)
     }
 
     private void OnDrawGizmos()
     {
-        Vector3 position = transform.position;
-        Gizmos.DrawLine(position, position + _thrust / 1000);
-        Gizmos.DrawLine(position, position + _lift / 1000);
-        Gizmos.DrawLine(position, position + _drag / 1000);
+        Vector3 bodyPos = transform.position;
+        Vector3 enginePos = Engine.transform.position;
+        Vector3 lwPos = LeftWing.transform.position;
+        Vector3 rwPos = RightWing.transform.position;
+
+        Gizmos.DrawLine(enginePos, enginePos + _thrust / 1000);
+        Gizmos.DrawLine(lwPos, lwPos + _llift / 1000);
+        Gizmos.DrawLine(rwPos, rwPos + _rlift / 1000);
+        Gizmos.DrawLine(bodyPos, bodyPos + _drag / 1000);
     }
 }
