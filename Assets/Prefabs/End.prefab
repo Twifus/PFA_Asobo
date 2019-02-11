@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 65894184531035610}
   - component: {fileID: 82231892676109802}
   m_Layer: 0
-  m_Name: Ring (6)
+  m_Name: End
   m_TagString: End
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
