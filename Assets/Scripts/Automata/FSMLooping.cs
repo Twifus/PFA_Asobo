@@ -3,19 +3,19 @@ using System.Collections.Generic;
 
     public enum LoopingState
     {
-        Start,
+        Start = 0,
         dX90,
         dX180,
         dX270,
-        Looping
+        Looping = 4
     }
     public enum LoopingTransition
     {
-        Reset,
+        Reset = 0,
         todX90,
         todX180,
         todX270,
-        todX360
+        todX360 = 4
     }
 
 public class FSMLooping : FSMDetection {
