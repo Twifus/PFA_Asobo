@@ -3,7 +3,7 @@ public enum figure_id {LOOP, BARREL, CUBANEIGHT};
 
 public class Figure {
 
-    figure_id id;
+    public figure_id id;
     public float quality;
 }
 

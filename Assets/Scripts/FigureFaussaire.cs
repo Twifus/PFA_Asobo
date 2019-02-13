@@ -3,45 +3,56 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FigureFaussaire: IFigureDetection{
-    private float timeBarrel;
-    private float timeLoop;
-    private float timeCuban;
+    private float _timeBarrel;
+    private float _timeLoop;
+    private float _timeCuban;
+
+    private List<Figure> _listFig;
+
 
 	// Use this for initialization
 	void Start () {
-        timeBarrel = Time.time;
-        timeLoop = timeBarrel;
-        timeCuban = timeBarrel;
-	}
+        _timeBarrel = Time.time;
+        _timeLoop = _timeBarrel;
+        _timeCuban = _timeBarrel;
 
-    public bool analyzeLoop()
-    {
-        timeLoop = Time.time;
-        if (timeLoop % 5f < 0.5)
-        {
-            return true;
-        }
-        return false;
+        _listFig.Add(new Figure());
+        _listFig[0].id = figure_id.LOOP;
+        _listFig.Add(new Figure());
+        _listFig[1].id = figure_id.BARREL;
+        _listFig.Add(new Figure());
+        _listFig[2].id = figure_id.CUBANEIGHT;
+
     }
 
-    public bool analyzeBarrel()
+    public void analyzeLoop()
     {
-        timeBarrel = Time.time;
-        if (timeBarrel % 3f < 0.5)
+        _timeLoop = Time.time;
+        if (_timeLoop % 5f < 0.5)
         {
-            return true;
+            _listFig[0].quality = 1f;
         }
-        return false;
+        _listFig[0].quality = 0f;
     }
 
-    public bool analyzeCubanEight()
+    public void analyzeBarrel()
     {
-        timeCuban = Time.time;
-        if (timeCuban % 29f < 0.1)
+        _timeBarrel = Time.time;
+        if (_timeBarrel % 3f < 0.5)
         {
-            return true;
+            _listFig[1].quality = 1f;
         }
-        return false;
+        _listFig[1].quality = 0f;
+    }
+
+    public void analyzeCubanEight()
+    {
+        _timeCuban = Time.time;
+        if (_timeCuban % 29f < 0.1)
+        {
+            _listFig[2].quality = 1f;
+        }
+        _listFig[2].quality = 0f;
     }
 
     public void setPoint(Coordinate point)
@@ -51,6 +62,9 @@ public class FigureFaussaire: IFigureDetection{
 
     public List<Figure> detection()
     {
-        return new List<Figure>();
+        analyzeBarrel();
+        analyzeCubanEight();
+        analyzeLoop();
+        return _listFig;
     }
 }

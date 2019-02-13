@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 /* 
  * Utilisation de Time.frameCount permettra de savoir le nombre de frame passées 
  * afin d'enregistrer les données suivant la volonté de l'utilisateur 
  */
 public class FigureManager : MonoBehaviour{
+
 
     private IFigureDetection _figureDetection;
     //public Settings settings;
@@ -20,9 +20,10 @@ public class FigureManager : MonoBehaviour{
     private Plane _plane;
     private int _score;
     private float _timeToDisplay;
-    private ArrayList _figureName;
+    private string[] _figureName;
+    private int[] _figurePoint;
 
-    private List<List<float>> _coordinates = new List<List<float>>();
+    /*private List<List<float>> _coordinates = new List<List<float>>();
 
     private List<float> _coordinateX = new List<float>();
     private List<float> _coordinateY = new List<float>();
@@ -34,7 +35,7 @@ public class FigureManager : MonoBehaviour{
     private List<float> _rotateZ = new List<float>();
     private List<float> _rotateW = new List<float>();
 
-    private List<float> _time = new List<float>();
+    private List<float> _time = new List<float>();*/
 
     
     /** Met à jour le score du joueur */
@@ -53,14 +54,17 @@ public class FigureManager : MonoBehaviour{
         _plane = Plane.NewPlane(plane);
         _timeToDisplay = Time.time;
 
-        _coordinates.Add(_coordinateX);
+        _figureName = new string[] { "LOOP", "BARREL", "CUBANEIGHT" };
+        _figurePoint = new int[] { 20, 10, 50 };
+
+        /*_coordinates.Add(_coordinateX);
         _coordinates.Add(_coordinateY);
         _coordinates.Add(_coordinateZ);
 
         _rotates.Add(_rotateX);
         _rotates.Add(_rotateY);
         _rotates.Add(_rotateZ);
-        _rotates.Add(_rotateW);
+        _rotates.Add(_rotateW);*/
     }
 
     private void Update()
@@ -113,22 +117,13 @@ public class FigureManager : MonoBehaviour{
     /** Appelle la fonction qui analyse la trajectoire */
     private void AnalyzeTrajectory()
     {
-        if (_figureDetection.analyzeBarrel())
+        List<Figure> result = _figureDetection.detection();
+        for(int i = 0; i < result.Capacity; i++)
         {
-            UpdateScore(10);
-            DisplayFigure("BARREL");
-        }
-
-        if (_figureDetection.analyzeLoop())
-        {
-            UpdateScore(20);
-            DisplayFigure("LOOP");
-        }
-
-        if (_figureDetection.analyzeCubanEight())
-        {
-            UpdateScore(50);
-            DisplayFigure("CUBAN EIGHT");
+            if(result[i].quality == 1f)
+            {
+                Display(i);
+            }
         }
     }
 
@@ -137,9 +132,11 @@ public class FigureManager : MonoBehaviour{
         textFigure.text = "";
     }
 
-    private void DisplayFigure(string figure)
+    private void Display(int id)
     {
-        textFigure.text = figure;
+        textFigure.text = _figureName[id];
+        UpdateScore(_figurePoint[id]);
+        textScore.text = "Score : " + _score;
         _timeToDisplay = Time.time;
     }
 }
