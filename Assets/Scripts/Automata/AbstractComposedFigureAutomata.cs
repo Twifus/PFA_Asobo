@@ -15,7 +15,7 @@ public abstract class AbstractComposedFigureAutomata : IFigureAutomata {
         _subFigures.Add(auto);
         _subFiguresRealised.Add(false);
     }
-    public abstract FigureId getFigureId();
+    public abstract figure_id getFigureId();
     public abstract string getName();
     public void resetStates() {
         _mainFigure.resetStates();

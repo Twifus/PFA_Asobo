@@ -11,7 +11,7 @@ public abstract class AbstractSequentialFigureAutomata : IFigureAutomata {
     public IFigureAutomata getCurrentAuto() {
         return _listFigures[_currentFigureIndex];
     }
-    public abstract FigureId getFigureId();
+    public abstract figure_id getFigureId();
     public abstract string getName();
     public void resetStates() {
         foreach(IFigureAutomata auto in _listFigures)

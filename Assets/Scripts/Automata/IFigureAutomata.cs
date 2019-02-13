@@ -12,7 +12,7 @@ public interface IFigureAutomata {
     //appelé par l'interface et/ou les automates parents
     void resetStates();
     //renvoie l'id de la figure représentée par FigureId
-    FigureId getFigureId();
+    figure_id getFigureId();
     //affiche le nom de la figure que l'automate gère (debug)
     string getName();
     //renvoie si l'automate est sur un état final ou pas

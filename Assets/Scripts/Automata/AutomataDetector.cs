@@ -19,15 +19,15 @@ public class AutomataDetector : IFigureDetection {
             auto.calculateState(point);
     }
 
-    public List<FigureDetection> detection() {
-        List<FigureDetection> list = new List<FigureDetection>();
+    public List<Figure> detection() {
+        List<Figure> list = new List<Figure>();
         foreach (IFigureAutomata auto in _myAutomatas) {
             if(auto.isValid()) {
-                list.Add(new FigureDetection(auto.getFigureId(), 100));
+                list.Add(new Figure(auto.getFigureId(), 100));
                 auto.resetStates();
             }
             else
-                list.Add(new FigureDetection(auto.getFigureId(), 0));
+                list.Add(new Figure(auto.getFigureId(), 0));
         }
         return list;
     }
