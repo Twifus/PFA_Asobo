@@ -63,6 +63,9 @@ public class FigureManager : MonoBehaviour{
         _rotates.Add(_rotateY);
         _rotates.Add(_rotateZ);
         _rotates.Add(_rotateW);*/
+
+        DisplayScore();
+        DisableText();
     }
 
     private void Update()
@@ -118,6 +121,7 @@ public class FigureManager : MonoBehaviour{
         List<Figure> result = _figureDetection.detection();
         for(int i = 0; i < result.Count; i++)
         {
+            //Debug.Log(result[i].quality);
             if(result[i].quality == 1f)
             {
                 Display(i);

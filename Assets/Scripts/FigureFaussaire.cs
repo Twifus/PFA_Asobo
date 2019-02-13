@@ -3,52 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FigureFaussaire: IFigureDetection{
-    private float _timeBarrel;
-    private float _timeLoop;
-    private float _timeCuban;
-
-    private List<Figure> _listFig;
-
 
 	// Use this for initialization
 	void Start () {
-        _timeBarrel = Time.time;
-        _timeLoop = _timeBarrel;
-        _timeCuban = _timeBarrel;
-
-        
-
-        Debug.Log(_listFig);
     }
 
-    public void analyzeLoop()
+    public void analyzeLoop(List<Figure> _listFig)
     {
-        _timeLoop = Time.time;
-        if (_timeLoop % 5f < 0.5)
+        if (Time.time % 5f < 0.5f)
         {
             _listFig[0].quality = 1f;
         }
-        _listFig[0].quality = 0f;
+        else
+            _listFig[0].quality = 0f;
     }
 
-    public void analyzeBarrel()
+    public void analyzeBarrel(List<Figure> _listFig)
     {
-        _timeBarrel = Time.time;
-        if (_timeBarrel % 3f < 0.5)
+        if (Time.time % 3f < 0.5f)
         {
             _listFig[1].quality = 1f;
         }
-        _listFig[1].quality = 0f;
+        else
+            _listFig[1].quality = 0f;
     }
 
-    public void analyzeCubanEight()
+    public void analyzeCubanEight(List<Figure> _listFig)
     {
-        _timeCuban = Time.time;
-        if (_timeCuban % 29f < 0.1)
+        if (Time.time % 29f < 0.1f)
         {
             _listFig[2].quality = 1f;
         }
-        _listFig[2].quality = 0f;
+        else
+            _listFig[2].quality = 0f;
     }
 
     public void setPoint(Coordinate point)
@@ -58,7 +45,7 @@ public class FigureFaussaire: IFigureDetection{
 
     public List<Figure> detection()
     {
-        _listFig = new List<Figure>();
+        List<Figure>  _listFig = new List<Figure>();
         _listFig.Add(new Figure());
         _listFig[0].id = figure_id.LOOP;
         _listFig.Add(new Figure());
@@ -66,15 +53,10 @@ public class FigureFaussaire: IFigureDetection{
         _listFig.Add(new Figure());
         _listFig[2].id = figure_id.CUBANEIGHT;
 
-        analyzeBarrel();
-        analyzeCubanEight();
-        analyzeLoop();
+        analyzeBarrel(_listFig);
+        analyzeCubanEight(_listFig);
+        analyzeLoop(_listFig);
 
-        List<Figure> result = _listFig;/*
-        for (int i = 0; i < _listFig.Count; i++)
-        {
-            _listFig.Remove(_listFig[i]);
-        }*/
-        return result;
+        return _listFig;
     }
 }
