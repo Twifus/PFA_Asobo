@@ -10,7 +10,7 @@ public class FigureFaussaire: IFigureDetection{
 
     public void analyzeLoop(List<Figure> _listFig)
     {
-        if (Time.time % 5f < 0.5f)
+        if (Time.time % 7f < 0.5f)
         {
             _listFig[0].quality = 1f;
         }

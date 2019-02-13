@@ -20,21 +20,6 @@ public class FigureManager : MonoBehaviour{
     private float _timeToDisplay;
     private string[] _figureName;
     private int[] _figurePoint;
-
-    /*private List<List<float>> _coordinates = new List<List<float>>();
-
-    private List<float> _coordinateX = new List<float>();
-    private List<float> _coordinateY = new List<float>();
-    private List<float> _coordinateZ = new List<float>();
-
-    private List<List<float>> _rotates = new List<List<float>>();
-    private List<float> _rotateX = new List<float>();
-    private List<float> _rotateY = new List<float>();
-    private List<float> _rotateZ = new List<float>();
-    private List<float> _rotateW = new List<float>();
-
-    private List<float> _time = new List<float>();*/
-
     
     /** Met à jour le score du joueur */
     public void UpdateScore(int points)
@@ -55,15 +40,6 @@ public class FigureManager : MonoBehaviour{
         _figureName = new string[] { "LOOP", "BARREL", "CUBANEIGHT" };
         _figurePoint = new int[] { 20, 10, 50 };
 
-        /*_coordinates.Add(_coordinateX);
-        _coordinates.Add(_coordinateY);
-        _coordinates.Add(_coordinateZ);
-
-        _rotates.Add(_rotateX);
-        _rotates.Add(_rotateY);
-        _rotates.Add(_rotateZ);
-        _rotates.Add(_rotateW);*/
-
         DisplayScore();
         DisableText();
     }
@@ -83,16 +59,6 @@ public class FigureManager : MonoBehaviour{
     /** Récupère les coordonnées et les rotations de l'avion dans un tableau (List<float> à voir) */
     private void GetCoordinates(Plane _plane)
     {
-        /*        _coordinateX.Add(_plane.Position.x);
-                _coordinateY.Add(_plane.Position.y);
-                _coordinateZ.Add(_plane.Position.z);
-
-                _rotateX.Add(_plane.Rotation.x);
-                _rotateY.Add(_plane.Rotation.y);
-                _rotateZ.Add(_plane.Rotation.z);
-                _rotateW.Add(_plane.Rotation.w);
-                _time.Add(Time.time);*/
-
         Coordinate point = new Coordinate();
         point.xpos = _plane.Position.x;
         point.ypos = _plane.Position.y;
