@@ -16,13 +16,9 @@ public class FigureFaussaire: IFigureDetection{
         _timeLoop = _timeBarrel;
         _timeCuban = _timeBarrel;
 
-        _listFig.Add(new Figure());
-        _listFig[0].id = figure_id.LOOP;
-        _listFig.Add(new Figure());
-        _listFig[1].id = figure_id.BARREL;
-        _listFig.Add(new Figure());
-        _listFig[2].id = figure_id.CUBANEIGHT;
+        
 
+        Debug.Log(_listFig);
     }
 
     public void analyzeLoop()
@@ -62,9 +58,23 @@ public class FigureFaussaire: IFigureDetection{
 
     public List<Figure> detection()
     {
+        _listFig = new List<Figure>();
+        _listFig.Add(new Figure());
+        _listFig[0].id = figure_id.LOOP;
+        _listFig.Add(new Figure());
+        _listFig[1].id = figure_id.BARREL;
+        _listFig.Add(new Figure());
+        _listFig[2].id = figure_id.CUBANEIGHT;
+
         analyzeBarrel();
         analyzeCubanEight();
         analyzeLoop();
-        return _listFig;
+
+        List<Figure> result = _listFig;/*
+        for (int i = 0; i < _listFig.Count; i++)
+        {
+            _listFig.Remove(_listFig[i]);
+        }*/
+        return result;
     }
 }

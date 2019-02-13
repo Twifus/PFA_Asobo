@@ -8,8 +8,6 @@ using UnityEngine.UI;
  * afin d'enregistrer les données suivant la volonté de l'utilisateur 
  */
 public class FigureManager : MonoBehaviour{
-
-
     private IFigureDetection _figureDetection;
     //public Settings settings;
 
@@ -118,7 +116,7 @@ public class FigureManager : MonoBehaviour{
     private void AnalyzeTrajectory()
     {
         List<Figure> result = _figureDetection.detection();
-        for(int i = 0; i < result.Capacity; i++)
+        for(int i = 0; i < result.Count; i++)
         {
             if(result[i].quality == 1f)
             {

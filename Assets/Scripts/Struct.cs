@@ -5,6 +5,12 @@ public class Figure {
 
     public figure_id id;
     public float quality;
+
+    public Figure()
+    {
+        id = figure_id.LOOP;
+        quality = 0f;
+    }
 }
 
 public class Coordinate {
@@ -22,4 +28,19 @@ public class Coordinate {
 
     //Temps de récupération du point depuis le début du jeu
     public float time;
+
+    public Coordinate()
+    {
+        xpos = 0f;
+        ypos = 0f;
+        zpos = 0f;
+
+        xangle = 0f;
+        yangle = 0f;
+        zangle = 0f;
+        wangle = 0f;
+
+        time = 0f;
+    }
+
 }
