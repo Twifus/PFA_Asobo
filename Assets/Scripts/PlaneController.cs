@@ -6,19 +6,6 @@ using UnityEngine.SceneManagement;
 public class PlaneController : MonoBehaviour
 {
 
-<<<<<<< HEAD
-    [Range(0f, 100f)]
-    public static float WingArea;
-
-    [Range(0f, 100f)]
-    public static float LiftCoeff;
-
-    [Range(0f, 100f)]
-    public static float DragCoeff;
-
-    [Range(0f, 100f)]
-    public static float ThrustPower;
-=======
     public float WingArea;
 
     public float LiftCoeff;
@@ -26,20 +13,9 @@ public class PlaneController : MonoBehaviour
     public float DragCoeff;
 
     public float ThrustPower;
->>>>>>> master
 
     public static float ThrustCoeff;
 
-<<<<<<< HEAD
-    [Range(0f, 360f)]
-    public static float RollIntensity;
-
-    [Range(0f, 360f)]
-    public static float PitchIntensity;
-
-    [Range(0f, 360f)]
-    public static float YawIntensity;
-=======
     public float RollIntensity;
 
     public float PitchIntensity;
@@ -57,7 +33,6 @@ public class PlaneController : MonoBehaviour
     public Transform Tail;
 
     public GameObject[] PathRenderers;
->>>>>>> master
 
     private float _airDensity = 1.184f;
 
@@ -71,14 +46,9 @@ public class PlaneController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-<<<<<<< HEAD
-        _rb = GetComponent<Rigidbody>();
-        _lastHeigth = 0;
-=======
         _body = GetComponent<Rigidbody>();
         _body.centerOfMass = CenterOfMass.localPosition;
         _plane = Plane.NewPlane(gameObject);
->>>>>>> master
         WingArea = PlaneSettings.WingArea;
         LiftCoeff = PlaneSettings.LiftCoeff;
         DragCoeff = PlaneSettings.DragCoeff;
