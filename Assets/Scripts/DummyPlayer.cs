@@ -4,12 +4,25 @@ using UnityEngine;
 
 public class DummyPlayer : MonoBehaviour {
 
-    public int mode = -1;
+    private int mode = 0;
+    private int selection = 0;
     private int step = 0;
     private float ts = 0f;
 
+    private int nModes = 2;
+
+    public GameObject Player;
+
+    private Plane _plane;
+
 	// Use this for initialization
 	void Start ()
+    {
+        Debug.Log(0);
+        _plane = Plane.NewPlane(Player);
+    }
+
+    private void toggleDummy()
     {
         CustomInput.ToggleDummyInput("Accelerate");
         CustomInput.ToggleDummyInput("Pitch");
@@ -37,6 +50,9 @@ public class DummyPlayer : MonoBehaviour {
         {
             case 0:
                 CustomInput.SetAxis("Accelerate", 1f);
+                CustomInput.SetAxis("Pitch", 0f);
+                CustomInput.SetAxis("Roll", 0f);
+                CustomInput.SetAxis("Yaw", 0f);
                 NextStep();
                 break;
             case 1:
@@ -45,6 +61,17 @@ public class DummyPlayer : MonoBehaviour {
             case 2:
                 CustomInput.SetAxis("Pitch", 1f);
                 NextStep();
+                break;
+            case 3:
+                if (_plane.Pitch < 0f)
+                    NextStep();
+                break;
+            case 4:
+                if (_plane.Pitch > 5f)
+                    NextStep();
+                break;
+            case 5:
+                CustomInput.SetAxis("Pitch", 0f);
                 break;
             default:
                 break;
@@ -57,6 +84,9 @@ public class DummyPlayer : MonoBehaviour {
         {
             case 0:
                 CustomInput.SetAxis("Accelerate", 1f);
+                CustomInput.SetAxis("Pitch", 0f);
+                CustomInput.SetAxis("Roll", 0f);
+                CustomInput.SetAxis("Yaw", 0f);
                 NextStep();
                 break;
             case 1:
@@ -79,13 +109,39 @@ public class DummyPlayer : MonoBehaviour {
     }
 
 	// Update is called once per frame
-	void Update () {
-		switch (mode)
+	void Update ()
+    {
+        if (Input.GetKeyDown(KeyCode.KeypadPlus) || Input.GetKeyDown(KeyCode.JoystickButton7))
+        {
+            selection = (selection + 1) % (nModes + 1);
+            Debug.Log(selection);
+        }
+
+        if (Input.GetKeyDown(KeyCode.KeypadMinus) || Input.GetKeyDown(KeyCode.JoystickButton6))
+        {
+            selection = (nModes + selection) % (nModes + 1);
+            Debug.Log(selection);
+        }
+
+        if ((Input.GetKeyDown(KeyCode.U) || Input.GetKeyDown(KeyCode.JoystickButton3)) && (selection != mode))
+        {
+            if ((mode == 0 && selection != 0) || (mode != 0 && selection == 0))
+                toggleDummy();
+            Debug.Log("Mode changed: " + mode + "->" + selection);
+            mode = selection;
+            step = 0;
+            ts = 0f;
+        }
+        
+        switch (mode)
         {
             case 0:
-                Looping();
+
                 break;
             case 1:
+                Looping();
+                break;
+            case 2:
                 Roll();
                 break;
             default:
