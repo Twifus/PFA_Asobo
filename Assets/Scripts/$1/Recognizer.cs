@@ -353,6 +353,14 @@ namespace Recognizer.Dollar
 			return success; // Xml file successfully written (or not)
 		}
 
+        public void CreateGesture(string name, List<TimePointF> points)
+        {
+            Unistroke newPrototype = new Unistroke(name, points);
+            if (_gestures.ContainsKey(name))
+                _gestures.Remove(name);
+            _gestures.Add(name, newPrototype);
+        }
+
 		public bool LoadGesture(string filename)
 		{
 			bool success = true;
