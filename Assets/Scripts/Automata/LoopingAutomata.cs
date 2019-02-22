@@ -1,11 +1,38 @@
 using System;
 using System.Collections.Generic;
 
+public enum LoopingState
+    {
+        Start = 0,
+        dX90,
+        dX180,
+        dX270,
+        Looping = 4
+    }
+public enum LoopingTransition
+    {
+        Reset = 0,
+        todX90,
+        todX180,
+        todX270,
+        todX360 = 4
+    }
 
-public class LoopingAutomata : IFigureAutomata {
-    private FSMLooping _myAuto;
+public class LoopingAutomata : FSMDetection, IFigureAutomata {
+    //private FSMLooping _myAuto;
     public LoopingAutomata (){
-        _myAuto = new FSMLooping();
+        //_myAuto = new FSMLooping();
+        CurrentState = (int) LoopingState.Start;
+        DicoTransitions = new Dictionary<FSMDetection.StateTransition, int>{
+            {new StateTransition((int) LoopingState.Start,(int) LoopingTransition.todX90), (int) LoopingState.dX90},
+            {new StateTransition((int) LoopingState.dX90, (int) LoopingTransition.todX180), (int) LoopingState.dX180},
+            {new StateTransition((int) LoopingState.dX180, (int) LoopingTransition.todX270), (int) LoopingState.dX270},
+            {new StateTransition((int) LoopingState.dX270, (int) LoopingTransition.todX360), (int) LoopingState.Looping},
+            {new StateTransition((int) LoopingState.Looping, (int) LoopingTransition.Reset), (int) LoopingState.Start},
+            {new StateTransition((int) LoopingState.dX90, (int) LoopingTransition.Reset), (int) LoopingState.Start},
+            {new StateTransition((int) LoopingState.dX180, (int) LoopingTransition.Reset), (int) LoopingState.Start},
+            {new StateTransition((int) LoopingState.dX270, (int) LoopingTransition.Reset), (int) LoopingState.Start},
+        };
     }
     
 
@@ -13,7 +40,7 @@ public class LoopingAutomata : IFigureAutomata {
     //necessaire pour reset les automates terminés
     //appelé par l'interface et/ou les automates parents
     public void resetStates() {
-        _myAuto.CurrentState = (int) LoopingState.Start;
+        CurrentState = (int) LoopingState.Start;
     }
     //renvoie l'id de la figure représentée par FigureId
     public figure_id getFigureId() {
@@ -25,11 +52,11 @@ public class LoopingAutomata : IFigureAutomata {
     }
     //renvoie si l'automate est sur un état final ou pas
     public bool isValid() {
-        return (_myAuto.CurrentState == (int) LoopingState.Looping);
+        return (CurrentState == (int) LoopingState.Looping);
     }
     //renvoie l'id de l'état actuel (debug)
     public int getCurrentState() {
-        return _myAuto.CurrentState;
+        return CurrentState;
     }
     //renvoie le nombre d'états de l'automate (debug)
     public int getNumberOfState() {
@@ -46,7 +73,7 @@ public class LoopingAutomata : IFigureAutomata {
         int state = getCurrentState();
         if (state < (int) LoopingState.dX270) {
             if (idDegrees == state || idDegrees == state + 1) {
-                _myAuto.MoveNext(state);
+                MoveNext(state);
             }
             else {
                 resetStates();
@@ -55,7 +82,7 @@ public class LoopingAutomata : IFigureAutomata {
         }
         else {
             if (idDegrees == 0 || idDegrees >= 4) {
-                _myAuto.MoveNext(4);
+                MoveNext(4);
             }
             else {
                 resetStates();
