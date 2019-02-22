@@ -16,7 +16,6 @@ public class SettingsUI : MonoBehaviour
     private float UserLiftCoeff;
     private float UserDragCoeff;
     private float UserThrustPower;
-    private float UserThrustCoeff;
     private float UserRollIntensity;
     private float UserPitchIntensity;
     private float UserYawIntensity;
@@ -32,7 +31,6 @@ public class SettingsUI : MonoBehaviour
         UserLiftCoeff = PlaneSettings.LiftCoeff;
         UserDragCoeff = PlaneSettings.DragCoeff;
         UserThrustPower = PlaneSettings.ThrustPower;
-        UserThrustCoeff = PlaneSettings.ThrustCoeff;
         UserRollIntensity = PlaneSettings.RollIntensity;
         UserPitchIntensity = PlaneSettings.PitchIntensity;
         UserYawIntensity = PlaneSettings.YawIntensity;
@@ -105,7 +103,6 @@ public class SettingsUI : MonoBehaviour
         PlaneSettings.LiftCoeff = UserLiftCoeff;
         PlaneSettings.DragCoeff = UserDragCoeff;
         PlaneSettings.ThrustPower = UserThrustPower;
-        PlaneSettings.ThrustCoeff = UserThrustCoeff;
         PlaneSettings.RollIntensity = UserRollIntensity;
         PlaneSettings.PitchIntensity = UserPitchIntensity;
         PlaneSettings.YawIntensity = UserYawIntensity;
