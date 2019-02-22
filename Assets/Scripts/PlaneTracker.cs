@@ -24,8 +24,8 @@ public class PlaneTracker : MonoBehaviour {
 
     private void Update()
     {
-        //Debug.Log(string.Format("{0},{1},{2},{3},{4}", Time.time, Plane.Position.z, Plane.Roll, Plane.Pitch, Plane.Yaw));
-        Writer.WriteLine(string.Format("{0},{1},{2},{3},{4}", Time.time, Plane.Position.y, Plane.Roll, Plane.Pitch, Plane.Yaw));
+        //Debug.Log(string.Format("{0};{1};{2};{3};{4}", Time.time, Plane.Position.z, Plane.Roll, Plane.Pitch, Plane.Yaw));
+        Writer.WriteLine(string.Format("{0};{1};{2};{3};{4}", Time.time, Plane.Position.y, Plane.Roll, Plane.Pitch, Plane.Yaw));
     }
 
 }
