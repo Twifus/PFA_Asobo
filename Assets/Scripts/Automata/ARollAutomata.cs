@@ -2,21 +2,21 @@ using System;
 using System.Collections.Generic;
 
     public enum ARollState{
-        Start,
+        Start = 0,
         dZ90,
         dZ180,
         dZ270,
-        ARoll
+        ARoll = 4
 
     }
 
     public enum ARollTransition{
 
-        Reset,
+        Reset = 0,
         todZ90,
         todZ180,
         todZ270,
-        todZ360
+        todZ360 = 4
     }
     
     
@@ -68,7 +68,31 @@ public class ARollAutomata : FSMDetection, IFigureAutomata {
     //-1 si l'automate recommence à l'état initial
     //si l'automate est déjà à l'état final, devrait renvoyer 1
     public int calculateState(Coordinate newPos) {
-        /* TODO */
+        if (isValid()) {
+            resetStates();
+            return 1;
+        }
+        int idDegrees = (int) newPos.zangle / 90;
+        int state = getCurrentState();
+        if (state < (int) ARollState.dZ270) {
+            if (idDegrees == state || idDegrees == state + 1) {
+                MoveNext(idDegrees); 
+            }
+            else {
+                resetStates();
+                return -1;
+            }
+        }
+        else {
+            if (idDegrees == 0 || idDegrees >= 4) {
+                MoveNext(4);
+            }
+            else {
+                resetStates();
+                return -1;
+            }
+        }
+        if (isValid()) return 1;
         return 0;
     }
 }
