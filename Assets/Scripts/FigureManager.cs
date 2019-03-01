@@ -20,7 +20,7 @@ public class FigureManager : MonoBehaviour{
     private Plane _plane;
     private int _score;
     private float _timeToDisplay;
-    private ArrayList _figureName;
+    private string[] _figureName;
 
     private List<List<float>> _coordinates = new List<List<float>>();
 
@@ -53,14 +53,17 @@ public class FigureManager : MonoBehaviour{
         _plane = Plane.NewPlane(plane);
         _timeToDisplay = Time.time;
 
-        _coordinates.Add(_coordinateX);
+        /*_coordinates.Add(_coordinateX);
         _coordinates.Add(_coordinateY);
         _coordinates.Add(_coordinateZ);
 
         _rotates.Add(_rotateX);
         _rotates.Add(_rotateY);
         _rotates.Add(_rotateZ);
-        _rotates.Add(_rotateW);
+        _rotates.Add(_rotateW);*/
+
+        _figureName = { "LOOP", "BARREL"};
+
     }
 
     private void Update()
@@ -141,6 +144,11 @@ public class FigureManager : MonoBehaviour{
     {
         textFigure.text = figure;
         _timeToDisplay = Time.time;
+    }
+
+    private string GetNameFigure(figure_id id)
+    {
+        return _figureName[(int)id];
     }
 }
 
