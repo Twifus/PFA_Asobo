@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 /* 
  * Utilisation de Time.frameCount permettra de savoir le nombre de frame passées 
  * afin d'enregistrer les données suivant la volonté de l'utilisateur 
  */
 public class FigureManager : MonoBehaviour{
-
     private IFigureDetection _figureDetection;
     //public Settings settings;
 
@@ -22,20 +20,7 @@ public class FigureManager : MonoBehaviour{
     private float _timeToDisplay;
     private string[] _figureName;
 
-    private List<List<float>> _coordinates = new List<List<float>>();
-
-    private List<float> _coordinateX = new List<float>();
-    private List<float> _coordinateY = new List<float>();
-    private List<float> _coordinateZ = new List<float>();
-
-    private List<List<float>> _rotates = new List<List<float>>();
-    private List<float> _rotateX = new List<float>();
-    private List<float> _rotateY = new List<float>();
-    private List<float> _rotateZ = new List<float>();
-    private List<float> _rotateW = new List<float>();
-
-    private List<float> _time = new List<float>();
-
+    private int[] _figurePoint;
     
     /** Met à jour le score du joueur */
     public void UpdateScore(int points)
@@ -53,17 +38,11 @@ public class FigureManager : MonoBehaviour{
         _plane = Plane.NewPlane(plane);
         _timeToDisplay = Time.time;
 
-        /*_coordinates.Add(_coordinateX);
-        _coordinates.Add(_coordinateY);
-        _coordinates.Add(_coordinateZ);
+        _figureName = new string[] { "LOOP", "BARREL", "CUBANEIGHT" };
+        _figurePoint = new int[] { 20, 10, 50 };
 
-        _rotates.Add(_rotateX);
-        _rotates.Add(_rotateY);
-        _rotates.Add(_rotateZ);
-        _rotates.Add(_rotateW);*/
-
-        _figureName = { "LOOP", "BARREL"};
-
+        DisplayScore();
+        DisableText();
     }
 
     private void Update()
@@ -81,16 +60,6 @@ public class FigureManager : MonoBehaviour{
     /** Récupère les coordonnées et les rotations de l'avion dans un tableau (List<float> à voir) */
     private void GetCoordinates(Plane _plane)
     {
-        /*        _coordinateX.Add(_plane.Position.x);
-                _coordinateY.Add(_plane.Position.y);
-                _coordinateZ.Add(_plane.Position.z);
-
-                _rotateX.Add(_plane.Rotation.x);
-                _rotateY.Add(_plane.Rotation.y);
-                _rotateZ.Add(_plane.Rotation.z);
-                _rotateW.Add(_plane.Rotation.w);
-                _time.Add(Time.time);*/
-
         Coordinate point = new Coordinate();
         point.xpos = _plane.Position.x;
         point.ypos = _plane.Position.y;
@@ -116,22 +85,13 @@ public class FigureManager : MonoBehaviour{
     /** Appelle la fonction qui analyse la trajectoire */
     private void AnalyzeTrajectory()
     {
-        if (_figureDetection.analyzeBarrel())
+        List<Figure> result = _figureDetection.detection();
+        for(int i = 0; i < result.Count; i++)
         {
-            UpdateScore(10);
-            DisplayFigure("BARREL");
-        }
-
-        if (_figureDetection.analyzeLoop())
-        {
-            UpdateScore(20);
-            DisplayFigure("LOOP");
-        }
-
-        if (_figureDetection.analyzeCubanEight())
-        {
-            UpdateScore(50);
-            DisplayFigure("CUBAN EIGHT");
+            if(result[i].quality == 1f)
+            {
+                Display(i);
+            }
         }
     }
 
@@ -140,9 +100,11 @@ public class FigureManager : MonoBehaviour{
         textFigure.text = "";
     }
 
-    private void DisplayFigure(string figure)
+    private void Display(int id)
     {
-        textFigure.text = figure;
+        textFigure.text = _figureName[id];
+        UpdateScore(_figurePoint[id]);
+        textScore.text = "Score : " + _score;
         _timeToDisplay = Time.time;
     }
 

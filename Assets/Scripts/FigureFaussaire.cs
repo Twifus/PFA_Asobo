@@ -3,45 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FigureFaussaire: IFigureDetection{
-    private float timeBarrel;
-    private float timeLoop;
-    private float timeCuban;
 
 	// Use this for initialization
 	void Start () {
-        timeBarrel = Time.time;
-        timeLoop = timeBarrel;
-        timeCuban = timeBarrel;
-	}
-
-    public bool analyzeLoop()
-    {
-        timeLoop = Time.time;
-        if (timeLoop % 5f < 0.5)
-        {
-            return true;
-        }
-        return false;
     }
 
-    public bool analyzeBarrel()
+    public void analyzeLoop(List<Figure> _listFig)
     {
-        timeBarrel = Time.time;
-        if (timeBarrel % 3f < 0.5)
+        if (Time.time % 7f < 0.5f)
         {
-            return true;
+            _listFig[0].quality = 1f;
         }
-        return false;
+        else
+            _listFig[0].quality = 0f;
     }
 
-    public bool analyzeCubanEight()
+    public void analyzeBarrel(List<Figure> _listFig)
     {
-        timeCuban = Time.time;
-        if (timeCuban % 29f < 0.1)
+        if (Time.time % 3f < 0.5f)
         {
-            return true;
+            _listFig[1].quality = 1f;
         }
-        return false;
+        else
+            _listFig[1].quality = 0f;
+    }
+
+    public void analyzeCubanEight(List<Figure> _listFig)
+    {
+        if (Time.time % 29f < 0.1f)
+        {
+            _listFig[2].quality = 1f;
+        }
+        else
+            _listFig[2].quality = 0f;
     }
 
     public void setPoint(Coordinate point)
@@ -51,6 +45,18 @@ public class FigureFaussaire: IFigureDetection{
 
     public List<Figure> detection()
     {
-        return new List<Figure>();
+        List<Figure>  _listFig = new List<Figure>();
+        _listFig.Add(new Figure());
+        _listFig[0].id = figure_id.LOOP;
+        _listFig.Add(new Figure());
+        _listFig[1].id = figure_id.BARREL;
+        _listFig.Add(new Figure());
+        _listFig[2].id = figure_id.CUBANEIGHT;
+
+        analyzeBarrel(_listFig);
+        analyzeCubanEight(_listFig);
+        analyzeLoop(_listFig);
+
+        return _listFig;
     }
 }
