@@ -10,7 +10,7 @@ public class DummyPlayer : MonoBehaviour {
     private int step = 0;
     private float ts = 0f;
 
-    private int nModes = 2;
+    private int nModes = 3;
 
     public GameObject Player;
 
@@ -69,70 +69,66 @@ public class DummyPlayer : MonoBehaviour {
     
     private void Looping()
     {
-        replayFromFile("Assets/Loop-Input.csv");
-
-        //switch (step)
-        //{
-        //    case 0:
-        //        CustomInput.SetAxis("Accelerate", 1f);
-        //        CustomInput.SetAxis("Pitch", 0f);
-        //        CustomInput.SetAxis("Roll", 0f);
-        //        CustomInput.SetAxis("Yaw", 0f);
-        //        NextStep();
-        //        break;
-        //    case 1:
-        //        Wait(5f);
-        //        break;
-        //    case 2:
-        //        CustomInput.SetAxis("Pitch", 1f);
-        //        NextStep();
-        //        break;
-        //    case 3:
-        //        if (_plane.Pitch < 0f)
-        //            NextStep();
-        //        break;
-        //    case 4:
-        //        if (_plane.Pitch > 5f)
-        //            NextStep();
-        //        break;
-        //    case 5:
-        //        CustomInput.SetAxis("Pitch", 0f);
-        //        break;
-        //    default:
-        //        break;
-        //}
+        switch (step)
+        {
+            case 0:
+                CustomInput.SetAxis("Accelerate", 1f);
+                CustomInput.SetAxis("Pitch", 0f);
+                CustomInput.SetAxis("Roll", 0f);
+                CustomInput.SetAxis("Yaw", 0f);
+                NextStep();
+                break;
+            case 1:
+                Wait(5f);
+                break;
+            case 2:
+                CustomInput.SetAxis("Pitch", 1f);
+                NextStep();
+                break;
+            case 3:
+                if (_plane.Pitch < 0f)
+                    NextStep();
+                break;
+            case 4:
+                if (_plane.Pitch > 5f)
+                    NextStep();
+                break;
+            case 5:
+                CustomInput.SetAxis("Pitch", 0f);
+                break;
+            default:
+                break;
+        }
     }
 
     private void Roll()
     {
-        replayFromFile("Assets/Roll-Input.csv");
-
-        //switch (step)
-        //{
-        //    case 0:
-        //        CustomInput.SetAxis("Accelerate", 1f);
-        //        CustomInput.SetAxis("Pitch", 0f);
-        //        CustomInput.SetAxis("Roll", 0f);
-        //        CustomInput.SetAxis("Yaw", 0f);
-        //        NextStep();
-        //        break;
-        //    case 1:
-        //        Wait(5f);
-        //        break;
-        //    case 2:
-        //        CustomInput.SetAxis("Pitch", 0.2f);
-        //        NextStep();
-        //        break;
-        //    case 3:
-        //        Wait(1f);
-        //        break;
-        //    case 4:
-        //        CustomInput.SetAxis("Pitch", 0f);
-        //        CustomInput.SetAxis("Roll", 1f);
-        //        break;
-        //    default:
-        //        break;
-        //}
+        switch (step)
+        {
+            case 0:
+                CustomInput.SetAxis("Accelerate", 1f);
+                CustomInput.SetAxis("Pitch", 0f);
+                CustomInput.SetAxis("Roll", 0f);
+                CustomInput.SetAxis("Yaw", 0f);
+                NextStep();
+                break;
+            case 1:
+                Wait(5f);
+                break;
+            case 2:
+                CustomInput.SetAxis("Pitch", 0.2f);
+                NextStep();
+                break;
+            case 3:
+                Wait(1f);
+                break;
+            case 4:
+                CustomInput.SetAxis("Pitch", 0f);
+                CustomInput.SetAxis("Roll", 1f);
+                break;
+            default:
+                break;
+        }
     }
 
 	// Update is called once per frame
@@ -157,10 +153,13 @@ public class DummyPlayer : MonoBehaviour {
         switch (mode)
         {
             case 1:
-                Looping();
+                replayFromFile("Assets/Loop-Input.csv");
                 break;
             case 2:
-                Roll();
+                replayFromFile("Assets/Roll-Input.csv");
+                break;
+            case 3:
+                replayFromFile("Assets/CubanEight-Input.csv");
                 break;
             default:
                 break;
