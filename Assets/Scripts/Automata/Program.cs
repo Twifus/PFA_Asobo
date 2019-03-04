@@ -17,13 +17,16 @@ public class Program
         Coordinate simu = new Coordinate();
         List<int> trajectoryX = new List<int>();
         trajectoryX.Add(120);
+        trajectoryX.Add(200);
+        trajectoryX.Add(200);
+        trajectoryX.Add(60);
         trajectoryX.Add(120);
         trajectoryX.Add(200);
         trajectoryX.Add(300);
-        trajectoryX.Add(1);
-        trajectoryX.Add(5);
+        trajectoryX.Add(10);
         trajectoryX.Add(100);
-        
+
+        Console.WriteLine("LOOPING :");
         foreach(int newAngle in trajectoryX){
             simu.xangle = newAngle;
             l.calculateState(simu);
@@ -40,7 +43,8 @@ public class Program
         trajectoryZ.Add(1);
         trajectoryZ.Add(5);
         trajectoryZ.Add(100);
-        
+
+        Console.WriteLine("AILERON ROLL :");
         foreach(int newAngle in trajectoryZ){
             simu.zangle = newAngle;
             a.calculateState(simu);
