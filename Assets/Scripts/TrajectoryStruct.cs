@@ -29,6 +29,11 @@ public class Coordinate {
     //Temps de récupération du point depuis le début du jeu
     public float time;
 
+    public float inputRoll;
+    public float inputPitch;
+    public float inputYaw;
+    public float inputAccelerate;
+
     public Coordinate()
     {
         xpos = 0f;
@@ -41,6 +46,11 @@ public class Coordinate {
         wangle = 0f;
 
         time = 0f;
+
+        inputRoll = CustomInput.GetAxis("Roll");
+        inputPitch = CustomInput.GetAxis("Pitch");
+        inputYaw = CustomInput.GetAxis("Yaw");
+        inputAccelerate = CustomInput.GetAxis("Accelerate");
     }
 
 }
