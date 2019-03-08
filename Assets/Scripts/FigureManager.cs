@@ -19,6 +19,7 @@ public class FigureManager : MonoBehaviour{
     private int _score;
     private float _timeToDisplay;
     private string[] _figureName;
+
     private int[] _figurePoint;
     
     /** Met à jour le score du joueur */
@@ -87,7 +88,6 @@ public class FigureManager : MonoBehaviour{
         List<Figure> result = _figureDetection.detection();
         for(int i = 0; i < result.Count; i++)
         {
-            //Debug.Log(result[i].quality);
             if(result[i].quality == 1f)
             {
                 Display(i);
@@ -106,6 +106,11 @@ public class FigureManager : MonoBehaviour{
         UpdateScore(_figurePoint[id]);
         textScore.text = "Score : " + _score;
         _timeToDisplay = Time.time;
+    }
+
+    private string GetNameFigure(figure_id id)
+    {
+        return _figureName[(int)id];
     }
 }
 

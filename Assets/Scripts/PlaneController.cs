@@ -5,25 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class PlaneController : MonoBehaviour
 {
-
-    public float WingArea;
-
-    public float LiftCoeff;
-
-    public float DragCoeff;
-
-    public float ThrustPower;
-
-    public float ThrustCoeff;
-
-    public float RollIntensity;
-
-    public float PitchIntensity;
-
-    public float YawIntensity;
-
-    public float RollCoeff;
-    
     private Rigidbody _body;
 
     public Transform CenterOfMass;
@@ -33,8 +14,6 @@ public class PlaneController : MonoBehaviour
     public Transform Tail;
 
     public GameObject[] PathRenderers;
-
-    private float _airDensity = 1.184f;
 
     private Vector3 _thrust;
     private Vector3 _llift;
@@ -49,14 +28,6 @@ public class PlaneController : MonoBehaviour
         _body = GetComponent<Rigidbody>();
         _body.centerOfMass = CenterOfMass.localPosition;
         _plane = Plane.NewPlane(gameObject);
-        WingArea = PlaneSettings.WingArea;
-        LiftCoeff = PlaneSettings.LiftCoeff;
-        DragCoeff = PlaneSettings.DragCoeff;
-        ThrustPower = PlaneSettings.ThrustPower;
-        ThrustCoeff = PlaneSettings.ThrustCoeff;
-        RollIntensity = PlaneSettings.RollIntensity;
-        PitchIntensity = PlaneSettings.PitchIntensity;
-        YawIntensity = PlaneSettings.YawIntensity;
     }
 
     // Update is called once per frame
@@ -69,16 +40,16 @@ public class PlaneController : MonoBehaviour
 
         /* Lift */
         _llift = _rlift = Vector3.zero;
-        Vector3 baseLift = 0.5f * LiftCoeff * _airDensity * _body.velocity.sqrMagnitude * transform.up;
+        Vector3 baseLift = 0.5f * PlaneSettings.LiftCoeff * PlaneSettings.AirDensity * _body.velocity.sqrMagnitude * transform.up;
 
-        _llift = (CustomInput.GetAxis("Pitch") + RollCoeff * CustomInput.GetAxis("Roll")) * baseLift;
-        _rlift = (CustomInput.GetAxis("Pitch") - RollCoeff * CustomInput.GetAxis("Roll")) * baseLift;
+        _llift = (CustomInput.GetAxis("Pitch") + PlaneSettings.RollIntensity * CustomInput.GetAxis("Roll")) * baseLift;
+        _rlift = (CustomInput.GetAxis("Pitch") - PlaneSettings.RollIntensity * CustomInput.GetAxis("Roll")) * baseLift;
 
         /* Drag */
-        _drag = -0.5f * DragCoeff * _airDensity * _body.velocity.sqrMagnitude * _body.velocity.normalized;
+        _drag = -0.5f * PlaneSettings.DragCoeff * PlaneSettings.AirDensity * _body.velocity.sqrMagnitude * _body.velocity.normalized;
 
         /* Thrust */
-        _thrust = ThrustPower * ThrustCoeff * transform.forward;
+        _thrust = PlaneSettings.ThrustPower * PlaneSettings.ThrustCoeff * transform.forward;
         _thrust = _thrust * CustomInput.GetAxis("Accelerate");
         
         _body.AddForceAtPosition(_thrust, Engine.position);
@@ -86,7 +57,7 @@ public class PlaneController : MonoBehaviour
         _body.AddForceAtPosition(_rlift, RightWing.position);
         _body.AddForce(_drag);
 
-        //_body.AddForceAtPosition(- 0.1f * baseLift.magnitude * CustomInput.GetAxis("Yaw") * transform.right, Tail.position); // Yaw (useful?)
+        _body.AddForceAtPosition(- 0.1f * baseLift.magnitude * CustomInput.GetAxis("Yaw") * transform.right, Tail.position); // Yaw
     }
 
     private void OnDrawGizmos()
