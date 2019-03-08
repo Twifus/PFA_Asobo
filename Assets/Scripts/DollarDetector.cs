@@ -6,42 +6,67 @@ using WobbrockLib.Extensions;
 
 public class DollarDetector : IFigureDetection {
 
-    private List<TimePointF> _timePointsHeight = new List<TimePointF>(1000);
-    private List<TimePointF> _timePointsRoll = new List<TimePointF>(1000);
-    private List<TimePointF> _timePointsPitch = new List<TimePointF>(1000);
-    private List<TimePointF> _timePointsYaw = new List<TimePointF>(1000);
+    private int MAX_SIZE = 200;
+
+    private List<TimePointF> _timePointsHeight;
+    private List<TimePointF> _timePointsRoll;
+    private List<TimePointF> _timePointsPitch;
+    private List<TimePointF> _timePointsYaw;
 
     Recognizer _recHeight = new Recognizer();
     Recognizer _recRoll = new Recognizer();
     Recognizer _recPitch = new Recognizer();
     Recognizer _recYaw = new Recognizer();
 
+    int time = 0;
+
     public DollarDetector()
     {
         FigureLoader loader = new FigureLoader(_recHeight, _recRoll, _recPitch, _recYaw);
         loader.LoadFigures();
-    }
+        _timePointsHeight = new List<TimePointF>(MAX_SIZE);
+        _timePointsRoll = new List<TimePointF>(MAX_SIZE);
+        _timePointsPitch = new List<TimePointF>(MAX_SIZE);
+        _timePointsYaw = new List<TimePointF>(MAX_SIZE);
+}
 
 
     public void setPoint(Coordinate point) {
-        if (_timePointsHeight.Count == 1000)
+        if (_timePointsHeight.Count == MAX_SIZE)
         {
-            for(int i=0; i < _timePointsHeight.Count-2; i++)
+            int i;
+            for(i=0; i < _timePointsHeight.Count-2; i++)
             {
                 _timePointsHeight.RemoveAt(i);
-                _timePointsHeight.Insert(i, _timePointsHeight[i + 1]);
                 _timePointsRoll.RemoveAt(i);
-                _timePointsRoll.Insert(i, _timePointsRoll[i + 1]);
                 _timePointsPitch.RemoveAt(i);
-                _timePointsPitch.Insert(i, _timePointsPitch[i + 1]);
                 _timePointsYaw.RemoveAt(i);
-                _timePointsYaw.Insert(i, _timePointsYaw[i + 1]);
+                
+                TimePointF height = _timePointsHeight[i + 1];
+                TimePointF roll = _timePointsRoll[i + 1];
+                TimePointF pitch = _timePointsPitch[i + 1];
+                TimePointF yaw = _timePointsYaw[i + 1];
+
+                height.X--;
+                roll.X--;
+                pitch.X--;
+                yaw.X--;
+
+                _timePointsHeight.Insert(i, height);
+                _timePointsRoll.Insert(i, roll);
+                _timePointsPitch.Insert(i, pitch);
+                _timePointsYaw.Insert(i, yaw);
             }
+            _timePointsHeight.RemoveAt(i);
+            _timePointsRoll.RemoveAt(i);
+            _timePointsPitch.RemoveAt(i);
+            _timePointsYaw.RemoveAt(i);
         }
-        _timePointsHeight.Add(new TimePointF(point.time, point.ypos, point.time));
-        _timePointsYaw.Add(new TimePointF(point.time, point.yaw, point.time));
-        _timePointsPitch.Add(new TimePointF(point.time, point.pitch, point.time));
-        _timePointsRoll.Add(new TimePointF(point.time, point.roll, point.time));
+        time++;
+        _timePointsHeight.Add(new TimePointF(time, point.ypos, point.time));
+        _timePointsYaw.Add(new TimePointF(time, point.yaw, point.time));
+        _timePointsPitch.Add(new TimePointF(time, point.pitch, point.time));
+        _timePointsRoll.Add(new TimePointF(time, point.roll, point.time));
         
     }
 
@@ -51,14 +76,15 @@ public class DollarDetector : IFigureDetection {
         _timePointsRoll.Clear();
         _timePointsPitch.Clear();
         _timePointsYaw.Clear();
+        time = 0;
     }
 
     private bool AnalyseResults(NBestList resultHeight, NBestList resultRoll, NBestList resultPitch, NBestList resultYaw, string height, string roll, string pitch, string yaw)
     {
-        return (resultHeight.Name.Equals(height) && resultHeight.Score > 0.6f
-            && resultRoll.Name.Equals(roll) && resultRoll.Score > 0.6f
-            && resultPitch.Name.Equals(pitch) && resultPitch.Score > 0.6f
-            && resultYaw.Name.Equals(yaw) && resultYaw.Score > 0.6f);
+        return (resultHeight.Name.Equals(height) && resultHeight.Score > 0.7f
+            && resultRoll.Name.Equals(roll) && resultRoll.Score > 0.7f
+            && resultPitch.Name.Equals(pitch) && resultPitch.Score > 0.7f
+            && resultYaw.Name.Equals(yaw) && resultYaw.Score > 0.7f);
     }
 
 	public List<Figure> detection() {
