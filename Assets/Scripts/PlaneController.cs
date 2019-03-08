@@ -24,9 +24,9 @@ public class PlaneController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        _body = GetComponent<Rigidbody>();
-        _body.centerOfMass = CenterOfMass.localPosition;
         _plane = Plane.NewPlane(gameObject);
+        _body = _plane.Rigidbody;
+        _body.centerOfMass = CenterOfMass.localPosition;
     }
 
     // Update is called once per frame
