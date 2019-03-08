@@ -66,4 +66,10 @@ public class PlaneController : MonoBehaviour
         Gizmos.DrawLine(rwPos, rwPos + _rlift / 1000);
         Gizmos.DrawLine(bodyPos, bodyPos + _drag / 1000);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Floor" && Vector3.Dot(collision.contacts[0].normal, collision.relativeVelocity) > 50f)
+            Debug.Log("WASTED");
+    }
 }
