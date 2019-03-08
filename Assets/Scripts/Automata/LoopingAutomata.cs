@@ -1,23 +1,32 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class LoopingAutomata : FSMDetection, IFigureAutomata {
     //private FSMLooping _myAuto;
     private int _finalState;
     private bool _yawState = true;
 
+    private double yaw1 = 1;
+    private double yaw2 = 1;
+    
+    private bool jump = false;
+
     //renvoie une valeur convertie du pitch entre 0 et 360 
     private double getTrueAngle(double pitch, double yaw) {
+        
+        
         if(_yawState) {//yaw defaut > 0
             if (yaw > 0)
                 return (pitch + 360)%360;
-            return 180 + pitch;
+            return 180 - pitch;
             }
         else {
-            if (yaw < 0)
+            if (yaw > 0)
                 return (pitch + 360)%360;
-            return 180 + pitch;
+            return 180 - pitch;
         }
+        
     }
 
     public LoopingAutomata (int n = 4) {
@@ -85,11 +94,32 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
     
     public int calculateState(Coordinate newPos) {
         if (isValid()) return 1;
-        double yaw = newPos.yangle;
+        yaw2 = yaw1;
+        yaw1 = newPos.zangle;
+        
+        double yaw = newPos.zangle;
         double pitch = newPos.xangle;
-        pitch = getTrueAngle(pitch, yaw);
-        //Console.WriteLine("C'est bon les pitchs : " +pitch + "  yawState : " + _yawState);
+        if (CurrentState == 0) _yawState = (yaw >= 0);
+        pitch = (pitch + 360)%360;
+        //yaw = (yaw + 360)%360;
+        Debug.Log("Yaw1,Yaw2 : " + yaw1 + ", " + yaw2);
+        if (Math.Abs(yaw1-yaw2) > 90f  && jump ) {
+            jump = false;
+            yaw2 = yaw1;
+        } else if (Math.Abs(yaw1-yaw2) > 90f  && !jump ) {
+            jump = true;
+        }
+
+        if (jump){
+            pitch = 180-newPos.xangle;
+        }
+
+        Debug.Log("Pitch : " + pitch);
+        Debug.Log( "   Jump : " + jump);
+        
+
         int idDegrees = (int) pitch / (360/_finalState);
+        
         int state = getCurrentState();
         //avant dernier etat, penser à verifier si l'angle reboucle
         if(state == _finalState-1 && idDegrees == 0) { 
@@ -104,12 +134,15 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
             return -1;
         }
         //if (isValid()) return 1;
-        if (CurrentState == 0) _yawState = (yaw >= 0);
         return 0;
     }
     
 /* 
     public int calculateState(Coordinate newPos) {
+        yaw1 = newPos.yangle;
+        yaw2 = yaw1;
+        if (yaw1*yaw2 <0)
+            _yawState = false;
         if (isValid()) return 1;
         int window = 5;
         int state = getCurrentState();
@@ -136,6 +169,8 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
                 MoveNext(4);
             } else resetStates();
         } 
+
+        if (isValid()) return 1;
         
     }
 

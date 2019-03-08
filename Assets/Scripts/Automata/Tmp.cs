@@ -1,4 +1,4 @@
-using System.Collections;
+/* using System.Collections;
 using System.Collections.Generic;
 public enum figure_id {LOOP, BARREL, CUBANEIGHT};
 public interface IFigureDetection {
@@ -50,3 +50,5 @@ public class Coordinate {
     }
 
 }
+
+*/

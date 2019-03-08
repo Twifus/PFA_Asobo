@@ -28,8 +28,8 @@ public class AutomataDetector : IFigureDetection {
                 list.Add(new Figure(auto.getFigureId(), 1f));
                 auto.resetStates();
             }
-            else
-                list.Add(new Figure(auto.getFigureId(), 0));
+            //else
+            //    list.Add(new Figure(auto.getFigureId(), 0));
         }
         return list;
     }

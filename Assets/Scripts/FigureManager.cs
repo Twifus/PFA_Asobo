@@ -67,7 +67,7 @@ public class FigureManager : MonoBehaviour{
         point.zpos = _plane.Position.z;
 
         point.xangle = _plane.Pitch;
-        point.yangle = _plane.Pitch;
+        point.yangle = _plane.Yaw;
         point.zangle = _plane.Roll;
 
         /*
@@ -80,7 +80,6 @@ public class FigureManager : MonoBehaviour{
 
         _figureDetection.setPoint(point);
 
-        Debug.Log(_plane.Roll);
 
     }
 
@@ -92,7 +91,8 @@ public class FigureManager : MonoBehaviour{
 
     /** Appelle la fonction qui analyse la trajectoire */
     private void AnalyzeTrajectory()
-    {
+    { 
+        //Debug.Log(
         List<Figure> result = _figureDetection.detection();
         for(int i = 0; i < result.Count; i++)
         {

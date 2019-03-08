@@ -11,12 +11,12 @@ public class Program
         Console.WriteLine("Current State Looping = " + l.CurrentState + " with angle " + simu.xangle);
 
         simu.xangle = 60;
-        simu.yangle = 30;
+        simu.yangle = -30;
         l.calculateState(simu);
         Console.WriteLine("Current State Looping = " + l.CurrentState + " with angle " + simu.xangle);
 
-        simu.xangle = -60;
-        simu.yangle = -30;
+        simu.xangle = 70;
+        simu.yangle = 30;
         l.calculateState(simu);
         Console.WriteLine("Current State Looping = " + l.CurrentState + " with angle " + simu.xangle);
 
@@ -24,19 +24,21 @@ public class Program
         l.calculateState(simu);
         Console.WriteLine("Current State Looping = " + l.CurrentState + " with angle " + simu.xangle);
 
-        simu.xangle = 10;
+        simu.xangle = -30;
+        simu.yangle = -30;
         l.calculateState(simu);
         Console.WriteLine("Current State Looping = " + l.CurrentState + " with angle " + simu.xangle);
 
-        simu.xangle = -80;
-        simu.yangle = 30;
+        simu.xangle = 30;
+        simu.yangle = -30;
         l.calculateState(simu);
         Console.WriteLine("Current State Looping = " + l.CurrentState + " with angle " + simu.xangle);
         if (l.isValid()) {
             l.resetStates();
         }
 
-        simu.xangle = 5;
+        simu.xangle = 70;
+        simu.yangle = 30;
         l.calculateState(simu);
         Console.WriteLine("Current State Looping = " + l.CurrentState + " with angle " + simu.xangle);
         if (l.isValid()) {
