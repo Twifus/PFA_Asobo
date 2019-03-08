@@ -17,13 +17,15 @@ public class Program
         trajectoryX.Add(300);
         trajectoryX.Add(10);
         trajectoryX.Add(100);
-        trajectoryX.Add(100);
 
         Console.WriteLine("LOOPING :");
         foreach(int newAngle in trajectoryX){
             simu.xangle = newAngle;
             l.calculateState(simu);
-            Console.WriteLine("Current State Looping = " + l.CurrentState);
+            Console.WriteLine("Current State Looping = " + l.CurrentState + " with angle " + newAngle);
+            if (l.isValid()) {
+                l.resetStates();
+            }
         }
 
         
@@ -41,7 +43,10 @@ public class Program
         foreach(int newAngle in trajectoryZ){
             simu.zangle = newAngle;
             a.calculateState(simu);
-            Console.WriteLine("Current State ARoll = " + a.CurrentState);
+            Console.WriteLine("Current State ARoll = " + a.CurrentState +  " with angle " + newAngle);
+            if (a.isValid()) {
+                a.resetStates();
+            }
         }
     }
     

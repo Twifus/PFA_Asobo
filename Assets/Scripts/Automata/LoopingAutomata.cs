@@ -68,10 +68,7 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
     //-1 si l'automate recommence à l'état initial
     //si l'automate est déjà à l'état final, devrait renvoyer 1
     public int calculateState(Coordinate newPos) {
-        if (isValid()) {
-            resetStates();
-            return 1;
-        }
+        if (isValid()) return 1;
         int idDegrees = (int) newPos.xangle / 90;
         int state = getCurrentState();
         if (state < (int) LoopingState.dX270) {

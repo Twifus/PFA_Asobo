@@ -38,7 +38,6 @@ using System.Collections.Generic;
             StateTransition Stransition = new StateTransition(CurrentState, TargetTransition);
             int nextState;
             if (!DicoTransitions.TryGetValue(Stransition, out nextState)){
-                Console.WriteLine("GetNext didn't find the next State");
                 return CurrentState;
             }
             return nextState;
