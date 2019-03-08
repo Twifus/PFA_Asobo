@@ -98,7 +98,7 @@ public class DollarDetector : IFigureDetection {
         List<Figure> result = new List<Figure>();
 
         // Loop
-        if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "Bosse", "LigneDroite", "ZigZag", "LigneCoupee"))
+        if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "Bosse", "LigneCoupee", "ZigZag", "LigneCoupee"))
         {
             Debug.Log("Loop");
             result.Add(new Figure());
