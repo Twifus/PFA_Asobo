@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class DummyPlayer : MonoBehaviour {
 
@@ -9,17 +10,39 @@ public class DummyPlayer : MonoBehaviour {
     private int step = 0;
     private float ts = 0f;
 
-    private int nModes = 2;
+    private int nModes = 3;
 
     public GameObject Player;
 
     private Plane _plane;
+
+    private StreamReader file;
 
 	// Use this for initialization
 	void Start ()
     {
         Debug.Log(0);
         _plane = Plane.NewPlane(Player);
+    }
+
+    private void replayFromFile(string path)
+    {
+        if (file == null)
+        {
+            file = new StreamReader(path);
+        }
+        string line = file.ReadLine();
+        if (line == null)
+        {
+            file.Close();
+            file = null;
+            return;
+        }
+        string[] data = line.Split(';');
+        CustomInput.SetAxis("Accelerate", float.Parse(data[1]));
+        CustomInput.SetAxis("Roll", float.Parse(data[2]));
+        CustomInput.SetAxis("Pitch", float.Parse(data[3]));
+        CustomInput.SetAxis("Yaw", float.Parse(data[4]));
     }
 
     private void toggleDummy()
@@ -111,38 +134,32 @@ public class DummyPlayer : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.KeypadPlus) || Input.GetKeyDown(KeyCode.JoystickButton7))
+        if (Input.GetButtonDown("SelectReplay"))
         {
             selection = (selection + 1) % (nModes + 1);
             Debug.Log(selection);
         }
 
-        if (Input.GetKeyDown(KeyCode.KeypadMinus) || Input.GetKeyDown(KeyCode.JoystickButton6))
-        {
-            selection = (nModes + selection) % (nModes + 1);
-            Debug.Log(selection);
-        }
-
-        if ((Input.GetKeyDown(KeyCode.U) || Input.GetKeyDown(KeyCode.JoystickButton3)) && (selection != mode))
+        if (Input.GetButtonDown("StartReplay") && (selection != mode))
         {
             if ((mode == 0 && selection != 0) || (mode != 0 && selection == 0))
                 toggleDummy();
             Debug.Log("Mode changed: " + mode + "->" + selection);
             mode = selection;
-            step = 0;
-            ts = 0f;
+            //step = 0;
+            //ts = 0f;
         }
         
         switch (mode)
         {
-            case 0:
-
-                break;
             case 1:
-                Looping();
+                replayFromFile("Assets/Loop-Input.csv");
                 break;
             case 2:
-                Roll();
+                replayFromFile("Assets/Roll-Input.csv");
+                break;
+            case 3:
+                replayFromFile("Assets/CubanEight-Input.csv");
                 break;
             default:
                 break;
