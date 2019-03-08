@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c521b4d2039474f991b3a00e4be69c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 1660655917}
+  Player: {fileID: 684220398}
 --- !u!4 &135297414
 Transform:
   m_ObjectHideFlags: 0
@@ -192,7 +192,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4838411434118854, guid: 0feead951699fc94bbe5f552989e2a66, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114162632603096854, guid: 0feead951699fc94bbe5f552989e2a66,
         type: 2}
@@ -326,7 +326,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4592970925910066, guid: f581bb1179006fa4cb83727d60b76982, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f581bb1179006fa4cb83727d60b76982, type: 2}
@@ -475,7 +475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 016676a79450a5f4f917ddaf2e32957c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 1660655917}
+  Player: {fileID: 684220398}
 --- !u!4 &1099304617
 Transform:
   m_ObjectHideFlags: 0
