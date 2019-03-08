@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlaneController : MonoBehaviour
 {
@@ -25,19 +24,14 @@ public class PlaneController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        _body = GetComponent<Rigidbody>();
-        _body.centerOfMass = CenterOfMass.localPosition;
         _plane = Plane.NewPlane(gameObject);
+        _body = _plane.Rigidbody;
+        _body.centerOfMass = CenterOfMass.localPosition;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            SceneManager.LoadScene("SettingsUI");
-        }
-
         /* Lift */
         _llift = _rlift = Vector3.zero;
         Vector3 baseLift = 0.5f * PlaneSettings.LiftCoeff * PlaneSettings.AirDensity * _body.velocity.sqrMagnitude * transform.up;
@@ -71,5 +65,11 @@ public class PlaneController : MonoBehaviour
         Gizmos.DrawLine(lwPos, lwPos + _llift / 1000);
         Gizmos.DrawLine(rwPos, rwPos + _rlift / 1000);
         Gizmos.DrawLine(bodyPos, bodyPos + _drag / 1000);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Floor" && Vector3.Dot(collision.contacts[0].normal, collision.relativeVelocity) > 50f)
+            Debug.Log("WASTED");
     }
 }
