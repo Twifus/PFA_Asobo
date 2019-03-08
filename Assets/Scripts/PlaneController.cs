@@ -24,9 +24,9 @@ public class PlaneController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        _body = GetComponent<Rigidbody>();
-        _body.centerOfMass = CenterOfMass.localPosition;
         _plane = Plane.NewPlane(gameObject);
+        _body = _plane.Rigidbody;
+        _body.centerOfMass = CenterOfMass.localPosition;
     }
 
     // Update is called once per frame
@@ -65,5 +65,11 @@ public class PlaneController : MonoBehaviour
         Gizmos.DrawLine(lwPos, lwPos + _llift / 1000);
         Gizmos.DrawLine(rwPos, rwPos + _rlift / 1000);
         Gizmos.DrawLine(bodyPos, bodyPos + _drag / 1000);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Floor" && Vector3.Dot(collision.contacts[0].normal, collision.relativeVelocity) > 50f)
+            Debug.Log("WASTED");
     }
 }

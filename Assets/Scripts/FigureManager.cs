@@ -70,12 +70,10 @@ public class FigureManager : MonoBehaviour{
         point.yangle = _plane.Yaw;
         point.zangle = _plane.Roll;
 
-        /*
-        point.xangle = _plane.Rotation.x;
-        point.yangle = _plane.Rotation.y;
-        point.zangle = _plane.Rotation.z;
-        point.wangle = _plane.Rotation.w;
-        */
+        point.roll = _plane.Roll;
+        point.pitch = _plane.Pitch;
+        point.yaw = _plane.Yaw;
+
         point.time = Time.time;
 
         _figureDetection.setPoint(point);
