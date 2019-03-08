@@ -6,10 +6,10 @@ public class Figure {
     public figure_id id;
     public float quality;
 
-    public Figure()
+    public Figure(figure_id id = figure_id.LOOP, float quality = 0f)
     {
-        id = figure_id.LOOP;
-        quality = 0f;
+        this.id = id;
+        this.quality = quality;
     }
 }
 
