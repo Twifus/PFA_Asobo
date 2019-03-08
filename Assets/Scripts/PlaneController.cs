@@ -24,6 +24,7 @@ public class PlaneController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Application.targetFrameRate = 60;
         _plane = Plane.NewPlane(gameObject);
         _body = _plane.Rigidbody;
         _body.centerOfMass = CenterOfMass.localPosition;
