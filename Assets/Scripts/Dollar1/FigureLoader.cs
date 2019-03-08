@@ -8,7 +8,10 @@ public class FigureLoader {
 
     #region Members
 
-    private Recognizer recognizer;
+    private Recognizer recognizerHeight;
+    private Recognizer recognizerRoll;
+    private Recognizer recognizerPitch;
+    private Recognizer recognizerYaw;
     private readonly string filePath = "./Assets/Figures/";
     private string[] figures = { "Roll", "Loop" };
     private string[] curves = { "height", "roll", "pitch", "yaw" };
@@ -17,8 +20,11 @@ public class FigureLoader {
 
     #region Constructor
 
-    public FigureLoader(Recognizer recognizer) {
-        this.recognizer = recognizer;
+    public FigureLoader(Recognizer recognizerHeight, Recognizer recognizerRoll, Recognizer recognizerPitch, Recognizer recognizerYaw) {
+        this.recognizerHeight = recognizerHeight;
+        this.recognizerRoll = recognizerRoll;
+        this.recognizerPitch = recognizerPitch;
+        this.recognizerYaw = recognizerYaw;
     }
 
     #endregion
@@ -67,10 +73,10 @@ public class FigureLoader {
         } while (file.Peek() != -1);
         
         // Ecrire les fichiers de figures
-        recognizer.SaveGesture(filePath + figure + "_" + "height" + ".xml", height);
-        recognizer.SaveGesture(filePath + figure + "_" + "roll" + ".xml", roll);
-        recognizer.SaveGesture(filePath + figure + "_" + "pitch" + ".xml", pitch);
-        recognizer.SaveGesture(filePath + figure + "_" + "yaw" + ".xml", yaw);
+        recognizerHeight.SaveGesture(filePath + figure + "_" + "height" + ".xml", height);
+        recognizerRoll.SaveGesture(filePath + figure + "_" + "roll" + ".xml", roll);
+        recognizerPitch.SaveGesture(filePath + figure + "_" + "pitch" + ".xml", pitch);
+        recognizerYaw.SaveGesture(filePath + figure + "_" + "yaw" + ".xml", yaw);
     }
 
 
@@ -110,10 +116,10 @@ public class FigureLoader {
         CSVParser(file, height, roll, pitch, yaw);
 
         // Créer les figures
-        recognizer.CreateGesture("Bosse", height);
-        recognizer.CreateGesture("LigneDroite", roll);
-        recognizer.CreateGesture("ZigZag", pitch);
-        recognizer.CreateGesture("LigneCoupee", yaw);
+        recognizerHeight.CreateGesture("Bosse", height);
+        recognizerRoll.CreateGesture("LigneDroite", roll);
+        recognizerPitch.CreateGesture("ZigZag", pitch);
+        recognizerYaw.CreateGesture("LigneCoupee", yaw);
     }
 
 
@@ -128,10 +134,10 @@ public class FigureLoader {
         CSVParser(file, height, roll, pitch, yaw);
 
         // Créer les figures
-        //recognizer.CreateGesture("LigneDroite", height);
-        recognizer.CreateGesture("LigneMontante", roll);
-        //recognizer.CreateGesture("LigneDroite", pitch);
-        //recognizer.CreateGesture("LigneDroite", yaw);
+        recognizerHeight.CreateGesture("LigneDroite", height);
+        recognizerRoll.CreateGesture("LigneMontante", roll);
+        recognizerPitch.CreateGesture("LigneDroite", pitch);
+        recognizerYaw.CreateGesture("LigneDroite", yaw);
     }
 
 
@@ -146,9 +152,9 @@ public class FigureLoader {
         CSVParser(file, height, roll, pitch, yaw);
 
         // Créer les figures
-        recognizer.CreateGesture("DoubleBosse", height);
-        recognizer.CreateGesture("DoubleDemieLigneMontante", roll);
-        recognizer.CreateGesture("DoubleZigZag", pitch);
+        recognizerHeight.CreateGesture("DoubleBosse", height);
+        recognizerRoll.CreateGesture("DoubleDemieLigneMontante", roll);
+        recognizerPitch.CreateGesture("DoubleZigZag", pitch);
         //recognizer.CreateGesture("LigneCoupee", yaw);
     }
 
