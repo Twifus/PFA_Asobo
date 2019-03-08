@@ -5,7 +5,7 @@ using UnityEngine;
 public class TestFileLoader : MonoBehaviour {
     
 	void Start () {
-        FigureLoader f = new FigureLoader(new Recognizer.Dollar.Recognizer());
+        FigureLoader f = new FigureLoader(new Recognizer());
         f.LoadFigures();
 	}
 }

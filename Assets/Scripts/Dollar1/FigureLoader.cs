@@ -4,13 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using WobbrockLib;
 
-using Dollar = Recognizer.Dollar;
-
 public class FigureLoader {
 
     #region Members
 
-    private Dollar.Recognizer recognizer;
+    private Recognizer recognizer;
     private readonly string filePath = "./Assets/Figures/";
     private string[] figures = { "Roll", "Loop" };
     private string[] curves = { "height", "roll", "pitch", "yaw" };
@@ -19,7 +17,7 @@ public class FigureLoader {
 
     #region Constructor
 
-    public FigureLoader(Dollar.Recognizer recognizer) {
+    public FigureLoader(Recognizer recognizer) {
         this.recognizer = recognizer;
     }
 
