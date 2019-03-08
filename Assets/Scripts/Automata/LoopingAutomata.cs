@@ -1,38 +1,30 @@
 using System;
 using System.Collections.Generic;
 
-public enum LoopingState
-    {
-        Start = 0,
-        dX90,
-        dX180,
-        dX270,
-        Looping = 4
-    }
-public enum LoopingTransition
-    {
-        Reset = 0,
-        todX90,
-        todX180,
-        todX270,
-        todX360 = 4
-    }
-
 public class LoopingAutomata : FSMDetection, IFigureAutomata {
     //private FSMLooping _myAuto;
-    public LoopingAutomata (){
+    private int _finalState;
+
+    //renvoie une valeur convertie du pitch entre 0 et 360 
+    static private double getTrueAngle(double pitch, double yaw) {
+        if (yaw > 0)
+            return (pitch + 360)%360;
+        return 180 - pitch;
+    }
+
+    public LoopingAutomata (int n = 4){
         //_myAuto = new FSMLooping();
-        CurrentState = (int) LoopingState.Start;
-        DicoTransitions = new Dictionary<FSMDetection.StateTransition, int>{
-            {new StateTransition((int) LoopingState.Start,(int) LoopingTransition.todX90), (int) LoopingState.dX90},
-            {new StateTransition((int) LoopingState.dX90, (int) LoopingTransition.todX180), (int) LoopingState.dX180},
-            {new StateTransition((int) LoopingState.dX180, (int) LoopingTransition.todX270), (int) LoopingState.dX270},
-            {new StateTransition((int) LoopingState.dX270, (int) LoopingTransition.todX360), (int) LoopingState.Looping},
-            {new StateTransition((int) LoopingState.Looping, (int) LoopingTransition.Reset), (int) LoopingState.Start},
-            {new StateTransition((int) LoopingState.dX90, (int) LoopingTransition.Reset), (int) LoopingState.Start},
-            {new StateTransition((int) LoopingState.dX180, (int) LoopingTransition.Reset), (int) LoopingState.Start},
-            {new StateTransition((int) LoopingState.dX270, (int) LoopingTransition.Reset), (int) LoopingState.Start},
-        };
+        CurrentState = 0;
+        _finalState = n;
+        DicoTransitions = new Dictionary<FSMDetection.StateTransition, int>();
+        for (int i = 0; i < n; i++) {
+            StateTransition t = new StateTransition(i, i+1); //transition vers l'etat suivant
+            DicoTransitions.Add(t, i+1);
+            t = new StateTransition(i, 0); //transition vers l'etat de depart
+            DicoTransitions.Add(t, 0);
+            t = new StateTransition(i, i); //transition vers l'etat courant (boucle)
+            DicoTransitions.Add(t, i);
+        }
     }
     
 
@@ -40,7 +32,7 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
     //necessaire pour reset les automates terminés
     //appelé par l'interface et/ou les automates parents
     public void resetStates() {
-        CurrentState = (int) LoopingState.Start;
+        CurrentState = 0;
     }
     //renvoie l'id de la figure représentée par FigureId
     public figure_id getFigureId() {
@@ -52,7 +44,7 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
     }
     //renvoie si l'automate est sur un état final ou pas
     public bool isValid() {
-        return (CurrentState == (int) LoopingState.Looping);
+        return (CurrentState == _finalState);
     }
     //renvoie l'id de l'état actuel (debug)
     public int getCurrentState() {
@@ -60,7 +52,7 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
     }
     //renvoie le nombre d'états de l'automate (debug)
     public int getNumberOfState() {
-        return ((int)LoopingState.Looping)+1;
+        return _finalState + 1;
     }
     //calcule le nouvel état de l'automate étant donné la position passée en paramètre
     //renvoie 1 si le nouvel état est terminal (même résultat que isValid())
