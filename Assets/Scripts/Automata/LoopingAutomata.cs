@@ -22,6 +22,8 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
     //private FSMLooping _myAuto;
     public LoopingAutomata (){
         //_myAuto = new FSMLooping();
+        bool yawState = true;
+        int 
         CurrentState = (int) LoopingState.Start;
         DicoTransitions = new Dictionary<FSMDetection.StateTransition, int>{
             {new StateTransition((int) LoopingState.Start,(int) LoopingTransition.todX90), (int) LoopingState.dX90},
@@ -67,11 +69,13 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
     //0 si le nouvel état est intermédiaire
     //-1 si l'automate recommence à l'état initial
     //si l'automate est déjà à l'état final, devrait renvoyer 1
+
+    
     public int calculateState(Coordinate newPos) {
         if (isValid()) return 1;
-        int idDegrees = (int) newPos.xangle / 90;
+        int idDegrees = (int) newPos.xangle / (360/_finalState);
         int state = getCurrentState();
-        if (state < (int) LoopingState.dX270) {
+        if (state < _finalState-1) {
             if (idDegrees == state || idDegrees == state + 1) {
                 MoveNext(idDegrees); 
             }
@@ -81,8 +85,8 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
             }
         }
         else {
-            if (idDegrees == 0 || idDegrees >= 4) {
-                MoveNext(4);
+            if (idDegrees == 0 || idDegrees >= _finalState) {
+                MoveNext(_finalState);
             }
             else {
                 resetStates();
@@ -92,4 +96,37 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
         if (isValid()) return 1;
         return 0;
     }
+    
+/* 
+    public int calculateState(Coordinate newPos) {
+        if (isValid()) return 1;
+        int window = 5;
+        int state = getCurrentState();
+        if (state == 0){
+            yawState = true;
+        }
+
+        
+
+        if (newPos.xangle > (90-window) || newPos.xangle < 90){
+            if (yaw && (state == 0 || state == 1)){
+                MoveNext(1);
+            } else resetStates();
+        } else if (newPos.xangle > (0-window) || newPos.xangle < (0 + window)){
+            if (!yaw && (state == 1 || state == 2)){
+                MoveNext(2);
+            } else resetStates();
+        } else if (newPos.xangle > -90 || newPos.xangle < (-90 + window)){
+            if (!yaw && (state == 2 || state == 3)){
+                MoveNext(3);
+            } else resetStates();
+        } else if (newPos.xangle > (0-window) || newPos.xangle < (0 + window)){
+            if (!yaw && (state == 3 || state == 4)){
+                MoveNext(4);
+            } else resetStates();
+        } 
+        
+    }
+
+    */
 }
