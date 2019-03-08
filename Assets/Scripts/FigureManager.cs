@@ -33,7 +33,8 @@ public class FigureManager : MonoBehaviour{
 
     private void Start()
     {
-        _figureDetection = new FigureFaussaire();
+        //_figureDetection = new FigureFaussaire();
+        _figureDetection = new DollarDetector();
         _score = 0;
         _plane = Plane.NewPlane(plane);
         _timeToDisplay = Time.time;
@@ -69,6 +70,10 @@ public class FigureManager : MonoBehaviour{
         point.yangle = _plane.Rotation.y;
         point.zangle = _plane.Rotation.z;
         point.wangle = _plane.Rotation.w;
+
+        point.roll = _plane.Roll;
+        point.pitch = _plane.Pitch;
+        point.yaw = _plane.Yaw;
 
         point.time = Time.time;
 

@@ -13,7 +13,7 @@ public class DollarDetector : IFigureDetection {
 
     Recognizer _rec = new Recognizer();
 
-    public void initialize()
+    public DollarDetector()
     {
         FigureLoader loader = new FigureLoader(_rec);
         loader.LoadFigures();
@@ -22,9 +22,9 @@ public class DollarDetector : IFigureDetection {
 
     public void setPoint(Coordinate point) {
         _timePointsHeight.Add(new TimePointF(point.time, point.ypos, point.time));
-        _timePointsYaw.Add(new TimePointF(point.time, point.xangle, point.time));
-        _timePointsPitch.Add(new TimePointF(point.time, point.yangle, point.time));
-        _timePointsRoll.Add(new TimePointF(point.time, point.zangle, point.time));
+        _timePointsYaw.Add(new TimePointF(point.time, point.yaw, point.time));
+        _timePointsPitch.Add(new TimePointF(point.time, point.pitch, point.time));
+        _timePointsRoll.Add(new TimePointF(point.time, point.roll, point.time));
     }
 	
 	public List<Figure> detection() {
@@ -33,8 +33,11 @@ public class DollarDetector : IFigureDetection {
         NBestList resultPitch = _rec.Recognize(_timePointsPitch, false);
         NBestList resultYaw = _rec.Recognize(_timePointsYaw, false);
 
+        Debug.Log(resultHeight.Name + ", " + resultRoll.Name + ", " + resultPitch.Name + ", " + resultYaw.Name);
+
         List<Figure> result = new List<Figure>();
 
+        // Loop
         if (resultHeight.Name.Equals("Bosse") && resultRoll.Name.Equals("LigneDroite")
             && resultPitch.Name.Equals("ZigZag") && resultYaw.Name.Equals("LigneCoupee"))
         {
@@ -46,7 +49,8 @@ public class DollarDetector : IFigureDetection {
             _timePointsPitch.Clear();
             _timePointsYaw.Clear();
         }
-
+         
+        // Roll
         if (resultHeight.Name.Equals("LigneDroite") && resultRoll.Name.Equals("LigneMontante")
             && resultPitch.Name.Equals("LigneDroite") && resultYaw.Name.Equals("LigneDroite"))
         {
@@ -59,6 +63,7 @@ public class DollarDetector : IFigureDetection {
             _timePointsYaw.Clear();
         }
 
+        // Cuban Eight
         if (resultHeight.Name.Equals("DoubleBosse") && resultRoll.Name.Equals("DoubleDemieLigneMontante")
             && resultPitch.Name.Equals("DoubleZigZag") && resultYaw.Name.Equals("LigneCoupee"))
         {

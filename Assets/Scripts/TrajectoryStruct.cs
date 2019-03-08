@@ -26,6 +26,11 @@ public class Coordinate {
     public float zangle;
     public float wangle;
 
+    //Angles de l'avion
+    public float roll;
+    public float pitch;
+    public float yaw;
+
     //Temps de récupération du point depuis le début du jeu
     public float time;
 
@@ -44,6 +49,10 @@ public class Coordinate {
         yangle = 0f;
         zangle = 0f;
         wangle = 0f;
+
+        roll = 0f;
+        pitch = 0f;
+        yaw = 0f;
 
         time = 0f;
 
