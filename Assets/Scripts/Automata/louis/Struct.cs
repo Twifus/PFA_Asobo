@@ -1,4 +1,4 @@
-﻿
+﻿/* 
 public enum figure_id {LOOP, BARREL, CUBANEIGHT};
 
 public class Figure {
@@ -47,3 +47,4 @@ public class Coordinate {
     }
 
 }
+*/
