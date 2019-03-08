@@ -4,19 +4,19 @@ using System.Collections.Generic;
 public class LoopingAutomata : FSMDetection, IFigureAutomata {
     //private FSMLooping _myAuto;
     private int _finalState;
-    private bool _yawState;
+    private bool _yawState = true;
 
     //renvoie une valeur convertie du pitch entre 0 et 360 
     private double getTrueAngle(double pitch, double yaw) {
         if(_yawState) {//yaw defaut > 0
             if (yaw > 0)
                 return (pitch + 360)%360;
-            return 180 - pitch;
+            return 180 + pitch;
             }
         else {
             if (yaw < 0)
                 return (pitch + 360)%360;
-            return 180 - pitch;
+            return 180 + pitch;
         }
     }
 
@@ -27,8 +27,8 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
         for (int i = 0; i < n; i++) {
             StateTransition t = new StateTransition(i, i+1); //transition vers l'etat suivant
             DicoTransitions.Add(t, i+1);
-            t = new StateTransition(i, 0); //transition vers l'etat de depart
-            DicoTransitions.Add(t, 0);
+            //t = new StateTransition(i, 0); //transition vers l'etat de depart
+            //DicoTransitions.Add(t, 0);
             t = new StateTransition(i, i); //transition vers l'etat courant (boucle)
             DicoTransitions.Add(t, i);
         }
@@ -87,8 +87,8 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
         if (isValid()) return 1;
         double yaw = newPos.yangle;
         double pitch = newPos.xangle;
-        if (CurrentState == 0) _yawState = (yaw > 0);
         pitch = getTrueAngle(pitch, yaw);
+        //Console.WriteLine("C'est bon les pitchs : " +pitch + "  yawState : " + _yawState);
         int idDegrees = (int) pitch / (360/_finalState);
         int state = getCurrentState();
         //avant dernier etat, penser à verifier si l'angle reboucle
@@ -104,6 +104,7 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
             return -1;
         }
         //if (isValid()) return 1;
+        if (CurrentState == 0) _yawState = (yaw >= 0);
         return 0;
     }
     

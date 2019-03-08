@@ -40,7 +40,7 @@ public class ARollAutomata : FSMDetection, IFigureAutomata {
     //necessaire pour reset les automates terminés
     //appelé par l'interface et/ou les automates parents
     public void resetStates() {
-        CurrentState = (int) LoopingState.Start;
+        CurrentState = (int) ARollState.Start;
     }
     //renvoie l'id de la figure représentée par FigureId
     public figure_id getFigureId() {
