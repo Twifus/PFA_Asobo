@@ -4,16 +4,23 @@ using System.Collections.Generic;
 public class LoopingAutomata : FSMDetection, IFigureAutomata {
     //private FSMLooping _myAuto;
     private int _finalState;
+    private bool _yawState;
 
     //renvoie une valeur convertie du pitch entre 0 et 360 
-    static private double getTrueAngle(double pitch, double yaw) {
-        if (yaw > 0)
-            return (pitch + 360)%360;
-        return 180 - pitch;
+    private double getTrueAngle(double pitch, double yaw) {
+        if(_yawState) {//yaw defaut > 0
+            if (yaw > 0)
+                return (pitch + 360)%360;
+            return 180 - pitch;
+            }
+        else {
+            if (yaw < 0)
+                return (pitch + 360)%360;
+            return 180 - pitch;
+        }
     }
 
-    public LoopingAutomata (int n = 4){
-        //_myAuto = new FSMLooping();
+    public LoopingAutomata (int n = 4) {
         CurrentState = 0;
         _finalState = n;
         DicoTransitions = new Dictionary<FSMDetection.StateTransition, int>();
@@ -26,6 +33,21 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
             DicoTransitions.Add(t, i);
         }
     }
+/* =======
+        bool yawState = true;
+        int 
+        CurrentState = (int) LoopingState.Start;
+        DicoTransitions = new Dictionary<FSMDetection.StateTransition, int>{
+            {new StateTransition((int) LoopingState.Start,(int) LoopingTransition.todX90), (int) LoopingState.dX90},
+            {new StateTransition((int) LoopingState.dX90, (int) LoopingTransition.todX180), (int) LoopingState.dX180},
+            {new StateTransition((int) LoopingState.dX180, (int) LoopingTransition.todX270), (int) LoopingState.dX270},
+            {new StateTransition((int) LoopingState.dX270, (int) LoopingTransition.todX360), (int) LoopingState.Looping},
+            {new StateTransition((int) LoopingState.Looping, (int) LoopingTransition.Reset), (int) LoopingState.Start},
+            {new StateTransition((int) LoopingState.dX90, (int) LoopingTransition.Reset), (int) LoopingState.Start},
+            {new StateTransition((int) LoopingState.dX180, (int) LoopingTransition.Reset), (int) LoopingState.Start},
+            {new StateTransition((int) LoopingState.dX270, (int) LoopingTransition.Reset), (int) LoopingState.Start},
+        };
+>>>>>>> bb571059a86d52aad4390efd9416d1613e200bf7*/
     
 
     //reinitialise l'automate de la figure 
@@ -59,29 +81,62 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
     //0 si le nouvel état est intermédiaire
     //-1 si l'automate recommence à l'état initial
     //si l'automate est déjà à l'état final, devrait renvoyer 1
+
+    
     public int calculateState(Coordinate newPos) {
         if (isValid()) return 1;
-        int idDegrees = (int) newPos.xangle / 90;
+        double yaw = newPos.yangle;
+        double pitch = newPos.xangle;
+        if (CurrentState == 0) _yawState = (yaw > 0);
+        pitch = getTrueAngle(pitch, yaw);
+        int idDegrees = (int) pitch / (360/_finalState);
         int state = getCurrentState();
-        if (state < (int) LoopingState.dX270) {
-            if (idDegrees == state || idDegrees == state + 1) {
-                MoveNext(idDegrees); 
-            }
-            else {
-                resetStates();
-                return -1;
-            }
+        //avant dernier etat, penser à verifier si l'angle reboucle
+        if(state == _finalState-1 && idDegrees == 0) { 
+            MoveNext(_finalState);
+            return 1; 
+        }
+        if (idDegrees == state || idDegrees == state + 1) {
+            MoveNext(idDegrees); 
         }
         else {
-            if (idDegrees == 0 || idDegrees >= 4) {
-                MoveNext(4);
-            }
-            else {
-                resetStates();
-                return -1;
-            }
+            resetStates();
+            return -1;
         }
-        if (isValid()) return 1;
+        //if (isValid()) return 1;
         return 0;
     }
+    
+/* 
+    public int calculateState(Coordinate newPos) {
+        if (isValid()) return 1;
+        int window = 5;
+        int state = getCurrentState();
+        if (state == 0){
+            yawState = true;
+        }
+
+        
+
+        if (newPos.xangle > (90-window) || newPos.xangle < 90){
+            if (yaw && (state == 0 || state == 1)){
+                MoveNext(1);
+            } else resetStates();
+        } else if (newPos.xangle > (0-window) || newPos.xangle < (0 + window)){
+            if (!yaw && (state == 1 || state == 2)){
+                MoveNext(2);
+            } else resetStates();
+        } else if (newPos.xangle > -90 || newPos.xangle < (-90 + window)){
+            if (!yaw && (state == 2 || state == 3)){
+                MoveNext(3);
+            } else resetStates();
+        } else if (newPos.xangle > (0-window) || newPos.xangle < (0 + window)){
+            if (!yaw && (state == 3 || state == 4)){
+                MoveNext(4);
+            } else resetStates();
+        } 
+        
+    }
+
+    */
 }

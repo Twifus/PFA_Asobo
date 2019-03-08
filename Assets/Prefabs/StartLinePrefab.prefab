@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 4620899398751526}
   - component: {fileID: 114883797064658758}
   m_Layer: 0
-  m_Name: StartLine
+  m_Name: StartLinePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
