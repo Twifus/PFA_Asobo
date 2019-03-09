@@ -31,7 +31,7 @@ public class PlaneController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         /* Lift */
         _llift = _rlift = Vector3.zero;
