@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlaneController : MonoBehaviour
 {
@@ -12,7 +13,9 @@ public class PlaneController : MonoBehaviour
     public Transform RightWing;
     public Transform Tail;
 
-    public GameObject[] PathRenderers;
+    public GameObject explosionPrefab;
+
+    public GameObject[] SmokeTrails;
 
     private Vector3 _thrust;
     private Vector3 _llift;
@@ -20,11 +23,12 @@ public class PlaneController : MonoBehaviour
     private Vector3 _drag;
 
     private Plane _plane;
+    private bool _crashed;
+    private GameObject _explosion;
 
     // Use this for initialization
     void Start()
     {
-        Application.targetFrameRate = 60;
         _plane = Plane.NewPlane(gameObject);
         _body = _plane.Rigidbody;
         _body.centerOfMass = CenterOfMass.localPosition;
@@ -33,26 +37,35 @@ public class PlaneController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        /* Lift */
-        _llift = _rlift = Vector3.zero;
-        Vector3 baseLift = 0.5f * PlaneSettings.LiftCoeff * PlaneSettings.AirDensity * _body.velocity.sqrMagnitude * transform.up;
+        if (!_crashed)
+        {
+            /* Lift */
+            _llift = _rlift = Vector3.zero;
+            Vector3 baseLift = 0.5f * PlaneSettings.LiftCoeff * PlaneSettings.AirDensity * _body.velocity.sqrMagnitude * transform.up;
 
-        _llift = (CustomInput.GetAxis("Pitch") + PlaneSettings.RollIntensity * CustomInput.GetAxis("Roll")) * baseLift;
-        _rlift = (CustomInput.GetAxis("Pitch") - PlaneSettings.RollIntensity * CustomInput.GetAxis("Roll")) * baseLift;
+            _llift = (CustomInput.GetAxis("Pitch") + PlaneSettings.RollIntensity * CustomInput.GetAxis("Roll")) * baseLift;
+            _rlift = (CustomInput.GetAxis("Pitch") - PlaneSettings.RollIntensity * CustomInput.GetAxis("Roll")) * baseLift;
 
-        /* Drag */
-        _drag = -0.5f * PlaneSettings.DragCoeff * PlaneSettings.AirDensity * _body.velocity.sqrMagnitude * _body.velocity.normalized;
+            /* Drag */
+            _drag = -0.5f * PlaneSettings.DragCoeff * PlaneSettings.AirDensity * _body.velocity.sqrMagnitude * _body.velocity.normalized;
 
-        /* Thrust */
-        _thrust = PlaneSettings.ThrustPower * PlaneSettings.ThrustCoeff * transform.forward;
-        _thrust = _thrust * CustomInput.GetAxis("Accelerate");
-        
-        _body.AddForceAtPosition(_thrust, Engine.position);
-        _body.AddForceAtPosition(_llift, LeftWing.position);
-        _body.AddForceAtPosition(_rlift, RightWing.position);
-        _body.AddForce(_drag);
+            /* Thrust */
+            _thrust = PlaneSettings.ThrustPower * PlaneSettings.ThrustCoeff * transform.forward;
+            _thrust = _thrust * CustomInput.GetAxis("Accelerate");
 
-        _body.AddForceAtPosition(- 0.1f * baseLift.magnitude * CustomInput.GetAxis("Yaw") * transform.right, Tail.position); // Yaw
+            _body.AddForceAtPosition(_thrust, Engine.position);
+            _body.AddForceAtPosition(_llift, LeftWing.position);
+            _body.AddForceAtPosition(_rlift, RightWing.position);
+            _body.AddForce(_drag);
+
+            _body.AddForceAtPosition(-0.1f * baseLift.magnitude * CustomInput.GetAxis("Yaw") * transform.right, Tail.position); // Yaw
+        }
+    }
+
+    private void Update()
+    {
+        if (_crashed && !_explosion)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void OnDrawGizmos()
@@ -70,7 +83,10 @@ public class PlaneController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Floor" && Vector3.Dot(collision.contacts[0].normal, collision.relativeVelocity) > 50f)
-            Debug.Log("WASTED");
+        if (collision.gameObject.tag == "Obstacle" && Vector3.Dot(collision.contacts[0].normal, collision.relativeVelocity) > 15f)
+        {
+            _explosion = Instantiate(explosionPrefab, transform.position, new Quaternion(0, 0, 0, 0));
+            _crashed = true;
+        }
     }
 }
