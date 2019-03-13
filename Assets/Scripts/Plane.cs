@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Plane {
+public class Plane : IPlane {
 
     private static Dictionary<GameObject, Plane> listInstances = new Dictionary<GameObject, Plane>();
     private static readonly object padlock = new object();
@@ -51,6 +51,31 @@ public class Plane {
             return _Yaw();
         }
     }
+
+    /* IPlane */
+    public float posX { get { return _rigidbody.transform.position.x; } }
+    public float posY { get { return _rigidbody.transform.position.y; } }
+    public float posZ { get { return _rigidbody.transform.position.z; } }
+
+    public float rotationX { get { return _rigidbody.transform.rotation.x; } }
+    public float rotationY { get { return _rigidbody.transform.rotation.y; } }
+    public float rotationZ { get { return _rigidbody.transform.rotation.z; } }
+    public float rotationW { get { return _rigidbody.transform.rotation.w; } }
+
+    // System.Numerics n'est pas compatible dans cette version
+    // vector3 up { get; }
+    // vector3 forward { get; }
+    // vector3 right { get; }
+
+    public float speedX { get { return _rigidbody.velocity.x; } }
+    public float speedY { get { return _rigidbody.velocity.y; } }
+    public float speedZ { get { return _rigidbody.velocity.z; } }
+    public float speedMagnitude { get { return _rigidbody.velocity.magnitude; } }
+
+    //public float accelerationX { get; }
+    //public float accelerationY { get; }
+    //public float accelerationZ { get; }
+    //public float accelerationMagnitude { get; }
 
     #endregion
 
