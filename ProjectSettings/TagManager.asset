@@ -6,7 +6,7 @@ TagManager:
   tags:
   - End
   - Ring
-  - Floor
+  - Obstacle
   layers:
   - Default
   - TransparentFX

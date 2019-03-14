@@ -96,7 +96,7 @@ public class FigureManager : MonoBehaviour{
         {
             if(result[i].quality == 1f)
             {
-                Display(i);
+                Display(result[i].id);
             }
         }
     }
@@ -106,10 +106,10 @@ public class FigureManager : MonoBehaviour{
         textFigure.text = "";
     }
 
-    private void Display(int id)
+    private void Display(figure_id id)
     {
-        textFigure.text = _figureName[id];
-        UpdateScore(_figurePoint[id]);
+        textFigure.text = _figureName[(int)id];
+        UpdateScore(_figurePoint[(int)id]);
         textScore.text = "Score : " + _score;
         _timeToDisplay = Time.time;
     }

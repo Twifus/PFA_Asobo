@@ -117,7 +117,7 @@ public class FigureLoader {
 
         // Créer les figures
         recognizerHeight.CreateGesture("Bosse", height);
-        recognizerRoll.CreateGesture("LigneDroite", roll);
+        recognizerRoll.CreateGesture("LigneCoupee", roll);
         recognizerPitch.CreateGesture("ZigZag", pitch);
         recognizerYaw.CreateGesture("LigneCoupee", yaw);
     }
