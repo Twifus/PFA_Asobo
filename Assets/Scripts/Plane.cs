@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using s = System.Numerics;
 using UnityEngine;
 
-public class Plane {
+public class Plane : IFlyingObject {
 
     private static Dictionary<GameObject, Plane> listInstances = new Dictionary<GameObject, Plane>();
     private static readonly object padlock = new object();
@@ -15,6 +16,26 @@ public class Plane {
     #endregion
 
     #region Properties
+
+    /* IFLYING OBJECT */
+
+    public s.Vector3 pos { get { return UnityVector3ToSystemVector3(_rigidbody.transform.position); } }
+
+    public s.Quaternion rotation { get { return UnityQuaternionToSystemQuaternion(_rigidbody.transform.rotation); } }
+
+    public float roll { get { return _Roll(); } }
+    public float pitch { get { return _Pitch(); } }
+    public float yaw { get { return _Yaw(); } }
+
+    public s.Vector3 up { get { return UnityVector3ToSystemVector3(_rigidbody.transform.up); } }
+    public s.Vector3 forward { get { return UnityVector3ToSystemVector3(_rigidbody.transform.forward); } }
+    public s.Vector3 right { get { return UnityVector3ToSystemVector3(_rigidbody.transform.right); } }
+
+    public s.Vector3 speed { get { return UnityVector3ToSystemVector3(_rigidbody.velocity); } }
+
+    public float time { get { return Time.time; } }
+    
+    /* PLANE */
 
     public Rigidbody Rigidbody {
         get {
@@ -31,24 +52,6 @@ public class Plane {
     public Quaternion Rotation {
         get {
             return _plane.GetComponent<Transform>().rotation;
-        }
-    }
-
-    public float Pitch {
-        get {
-            return _Pitch();
-        }
-    }
-
-    public float Roll {
-        get {
-            return _Roll();
-        }
-    }
-
-    public float Yaw {
-        get {
-            return _Yaw();
         }
     }
 
@@ -121,6 +124,14 @@ public class Plane {
 
         float angle = Vector3.SignedAngle(north, forwardOnPlane, Vector3.up);
         return angle;
+    }
+
+    private s.Vector3 UnityVector3ToSystemVector3(Vector3 vector) {
+        return new s.Vector3(vector.x, vector.y, vector.z);
+    }
+
+    private s.Quaternion UnityQuaternionToSystemQuaternion(Quaternion quaternion) {
+        return new s.Quaternion(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
     }
 
     #endregion
