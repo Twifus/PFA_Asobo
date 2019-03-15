@@ -3,96 +3,81 @@ using System.Collections.Generic;
 using UnityEngine;
 using WobbrockLib;
 using WobbrockLib.Extensions;
+using PDollarGestureRecognizer;
 
 public class DollarDetector : IFigureDetection {
 
     private int MAX_SIZE = 200;
+    private int next = 0;
+    private int time = 0;
 
-    private List<TimePointF> _timePointsHeight;
-    private List<TimePointF> _timePointsRoll;
-    private List<TimePointF> _timePointsPitch;
-    private List<TimePointF> _timePointsYaw;
+    private Point[] _timePointsHeight;
+    private Point[] _timePointsRoll;
+    private Point[] _timePointsPitch;
+    private Point[] _timePointsYaw;
 
-    Recognizer _recHeight = new Recognizer();
-    Recognizer _recRoll = new Recognizer();
-    Recognizer _recPitch = new Recognizer();
-    Recognizer _recYaw = new Recognizer();
+    private Gesture[] gesturesHeight;
+    private Gesture[] gesturesRoll;
+    private Gesture[] gesturesPitch;
+    private Gesture[] gesturesYaw;
 
-    int time = 0;
 
     public DollarDetector()
     {
-        FigureLoader loader = new FigureLoader(_recHeight, _recRoll, _recPitch, _recYaw);
-        loader.LoadFigures();
-        _timePointsHeight = new List<TimePointF>(MAX_SIZE);
-        _timePointsRoll = new List<TimePointF>(MAX_SIZE);
-        _timePointsPitch = new List<TimePointF>(MAX_SIZE);
-        _timePointsYaw = new List<TimePointF>(MAX_SIZE);
-}
+        FigureLoaderP loader = new FigureLoaderP();
+        loader.LoadFigures(gesturesHeight, gesturesRoll, gesturesPitch, gesturesYaw);
+        _timePointsHeight = new Point[MAX_SIZE];
+        _timePointsRoll = new Point[MAX_SIZE];
+        _timePointsPitch = new Point[MAX_SIZE];
+        _timePointsYaw = new Point[MAX_SIZE];
+    }
 
 
     public void setPoint(Coordinate point) {
-        if (_timePointsHeight.Count == MAX_SIZE)
+        if (next == MAX_SIZE - 1)
         {
             int i;
-            for(i=0; i < _timePointsHeight.Count-2; i++)
+            for (i = 0; i < MAX_SIZE - 2; i++)
             {
-                _timePointsHeight.RemoveAt(i);
-                _timePointsRoll.RemoveAt(i);
-                _timePointsPitch.RemoveAt(i);
-                _timePointsYaw.RemoveAt(i);
-                
-                TimePointF height = _timePointsHeight[i + 1];
-                TimePointF roll = _timePointsRoll[i + 1];
-                TimePointF pitch = _timePointsPitch[i + 1];
-                TimePointF yaw = _timePointsYaw[i + 1];
 
-                height.X--;
-                roll.X--;
-                pitch.X--;
-                yaw.X--;
+                _timePointsHeight[i] = _timePointsHeight[i + 1];
+                _timePointsRoll[i] = _timePointsRoll[i + 1];
+                _timePointsPitch[i] = _timePointsPitch[i + 1];
+                _timePointsYaw[i] = _timePointsYaw[i + 1];
 
-                _timePointsHeight.Insert(i, height);
-                _timePointsRoll.Insert(i, roll);
-                _timePointsPitch.Insert(i, pitch);
-                _timePointsYaw.Insert(i, yaw);
+                _timePointsHeight[i].X--;
+                _timePointsRoll[i].X--;
+                _timePointsPitch[i].X--;
+                _timePointsYaw[i].X--;
             }
-            _timePointsHeight.RemoveAt(i);
-            _timePointsRoll.RemoveAt(i);
-            _timePointsPitch.RemoveAt(i);
-            _timePointsYaw.RemoveAt(i);
         }
         time++;
-        _timePointsHeight.Add(new TimePointF(time, point.ypos, point.time));
-        _timePointsYaw.Add(new TimePointF(time, point.yaw, point.time));
-        _timePointsPitch.Add(new TimePointF(time, point.pitch, point.time));
-        _timePointsRoll.Add(new TimePointF(time, point.roll, point.time));
-        
+        _timePointsHeight[next] = new Point(time, point.ypos, 0);
+        _timePointsRoll[next] = new Point(time, point.roll, 0);
+        _timePointsPitch[next] = new Point(time, point.pitch, 0);
+        _timePointsYaw[next] = new Point(time, point.yaw, 0);
     }
 
     private void ClearLists()
     {
-        _timePointsHeight.Clear();
-        _timePointsRoll.Clear();
-        _timePointsPitch.Clear();
-        _timePointsYaw.Clear();
+        next = 0;
         time = 0;
     }
 
-    private bool AnalyseResults(NBestList resultHeight, NBestList resultRoll, NBestList resultPitch, NBestList resultYaw, string height, string roll, string pitch, string yaw)
+    private bool AnalyseResults(BestGesture resultHeight, BestGesture resultRoll, BestGesture resultPitch, BestGesture resultYaw, string height, string roll, string pitch, string yaw)
     {
-        return (resultHeight.Name.Equals(height) && resultHeight.Score > 0.7f
-            && resultRoll.Name.Equals(roll) && resultRoll.Score > 0.7f
-            && resultPitch.Name.Equals(pitch) && resultPitch.Score > 0.7f
-            && resultYaw.Name.Equals(yaw) && resultYaw.Score > 0.7f);
+        return (resultHeight.Name.Equals(height) //&& resultHeight.Score > 0.7f
+            && resultRoll.Name.Equals(roll) //&& resultRoll.Score > 0.7f
+            && resultPitch.Name.Equals(pitch) //&& resultPitch.Score > 0.7f
+            && resultYaw.Name.Equals(yaw)); //&& resultYaw.Score > 0.7f);
     }
 
 	public List<Figure> detection() {
-        NBestList resultHeight = _recHeight.Recognize(_timePointsHeight, false);
-        NBestList resultRoll = _recRoll.Recognize(_timePointsRoll, false);
-        NBestList resultPitch = _recPitch.Recognize(_timePointsPitch, false);
-        NBestList resultYaw = _recYaw.Recognize(_timePointsYaw, false);
-
+        BestGesture resultHeight = PointCloudRecognizer.Classify(new Gesture(_timePointsHeight), gesturesHeight);
+        BestGesture resultRoll = PointCloudRecognizer.Classify(new Gesture(_timePointsRoll), gesturesRoll);
+        BestGesture resultPitch = PointCloudRecognizer.Classify(new Gesture(_timePointsPitch), gesturesPitch);
+        BestGesture resultYaw = PointCloudRecognizer.Classify(new Gesture(_timePointsYaw), gesturesYaw);
+        
         //Debug.Log(resultHeight.Name + ", " + resultRoll.Name + ", " + resultPitch.Name + ", " + resultYaw.Name);
 
         List<Figure> result = new List<Figure>();
