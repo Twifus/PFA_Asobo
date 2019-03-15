@@ -1,15 +1,17 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Numerics;
 
 public class LoopingAutomata : FSMDetection, IFigureAutomata {
     //private FSMLooping _myAuto;
     private int _finalState;
     private bool _yawState = true;
-
+    private float _upScalar = 0;
+    private float _forwardScalar = 0;
+/* 
     private double yaw1 = 1;
     private double yaw2 = 1;
-    
+    private int numberIterations = 0;*/
     private bool jump = false;
 
     //renvoie une valeur convertie du pitch entre 0 et 360 
@@ -91,22 +93,27 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
     //-1 si l'automate recommence à l'état initial
     //si l'automate est déjà à l'état final, devrait renvoyer 1
 
-    
+    /* 
     public int calculateState(Coordinate newPos) {
+        numberIterations++;
         if (isValid()) return 1;
-        yaw2 = yaw1;
+        if (numberIterations%3 == 0){
+            yaw2 = yaw1;
+        }
         yaw1 = newPos.zangle;
         
         double yaw = newPos.zangle;
         double pitch = newPos.xangle;
-        if (CurrentState == 0) _yawState = (yaw >= 0);
+        if (CurrentState == 0){
+            _yawState = (yaw >= 0);
+        } 
         pitch = (pitch + 360)%360;
         //yaw = (yaw + 360)%360;
         Debug.Log("Yaw1,Yaw2 : " + yaw1 + ", " + yaw2);
-        if (Math.Abs(yaw1-yaw2) > 90f  && jump ) {
+        if (Math.Abs(yaw1-yaw2) > 50f  && jump ) {
             jump = false;
             yaw2 = yaw1;
-        } else if (Math.Abs(yaw1-yaw2) > 90f  && !jump ) {
+        } else if (Math.Abs(yaw1-yaw2) > 50f  && !jump ) {
             jump = true;
         }
 
@@ -135,44 +142,37 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
         }
         //if (isValid()) return 1;
         return 0;
-    }
+    }*/
     
-/* 
-    public int calculateState(Coordinate newPos) {
-        yaw1 = newPos.yangle;
-        yaw2 = yaw1;
-        if (yaw1*yaw2 <0)
-            _yawState = false;
+
+
+    public int calculateState(Plane plane) {
+        _forwardScalar = plane.forward;
+        _upScalar = plane.up;
         if (isValid()) return 1;
-        int window = 5;
         int state = getCurrentState();
-        if (state == 0){
-            yawState = true;
-        }
-
         
-
-        if (newPos.xangle > (90-window) || newPos.xangle < 90){
-            if (yaw && (state == 0 || state == 1)){
+        if (_upScalar <= 0 && _forwardScalar >= 0){
+            if (state == 0 || state == 1){
                 MoveNext(1);
             } else resetStates();
-        } else if (newPos.xangle > (0-window) || newPos.xangle < (0 + window)){
-            if (!yaw && (state == 1 || state == 2)){
+        } else if (_upScalar <= 0 && _forwardScalar < 0){
+            if (state == 1 || state == 2){
                 MoveNext(2);
             } else resetStates();
-        } else if (newPos.xangle > -90 || newPos.xangle < (-90 + window)){
-            if (!yaw && (state == 2 || state == 3)){
+        } else if (_upScalar > 0 && _forwardScalar < 0){
+            if (state == 2 || state == 3){
                 MoveNext(3);
             } else resetStates();
-        } else if (newPos.xangle > (0-window) || newPos.xangle < (0 + window)){
-            if (!yaw && (state == 3 || state == 4)){
+        } else if (_upScalar <= 0 && _forwardScalar >= 0){
+            if (state == 3 || state == 4){
                 MoveNext(4);
             } else resetStates();
         } 
 
         if (isValid()) return 1;
-        
+        return 0;
     }
 
-    */
+    
 }
