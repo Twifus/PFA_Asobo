@@ -33,7 +33,8 @@ public class FigureManager : MonoBehaviour{
 
     private void Start()
     {
-        _figureDetection = new FigureFaussaire();
+        //_figureDetection = new FigureFaussaire();
+        _figureDetection = new DollarDetector();
         _score = 0;
         _plane = Plane.NewPlane(plane);
         _timeToDisplay = Time.time;
@@ -70,6 +71,10 @@ public class FigureManager : MonoBehaviour{
         point.zangle = _plane.Rotation.z;
         point.wangle = _plane.Rotation.w;
 
+        point.roll = _plane.Roll;
+        point.pitch = _plane.Pitch;
+        point.yaw = _plane.Yaw;
+
         point.time = Time.time;
 
         _figureDetection.setPoint(point);
@@ -90,7 +95,7 @@ public class FigureManager : MonoBehaviour{
         {
             if(result[i].quality == 1f)
             {
-                Display(i);
+                Display(result[i].id);
             }
         }
     }
@@ -100,10 +105,10 @@ public class FigureManager : MonoBehaviour{
         textFigure.text = "";
     }
 
-    private void Display(int id)
+    private void Display(figure_id id)
     {
-        textFigure.text = _figureName[id];
-        UpdateScore(_figurePoint[id]);
+        textFigure.text = _figureName[(int)id];
+        UpdateScore(_figurePoint[(int)id]);
         textScore.text = "Score : " + _score;
         _timeToDisplay = Time.time;
     }

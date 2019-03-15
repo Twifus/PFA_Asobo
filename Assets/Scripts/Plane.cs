@@ -8,16 +8,7 @@ public class Plane {
     private static readonly object padlock = new object();
 
     #region Variables
-
-    //private float _wingArea;
-    //private float _liftCoeff;
-    //private float _dragCoeff;
-    //private float _trustPower;
-    //private float _trustCoeff;
-    //private float _rollIntensity;
-    //private float _pitchIntensity;
-    //private float _yawIntensity;
-
+    
     private GameObject _plane;
     private Rigidbody _rigidbody;
 
@@ -61,62 +52,6 @@ public class Plane {
         }
     }
 
-    public float WingArea {
-        get {
-            //return _wingArea;
-            return PlaneSettings.WingArea;
-        }
-    }
-
-    public float LiftCoeff {
-        get {
-            //return _liftCoeff;
-            return PlaneSettings.LiftCoeff;
-        }
-    }
-
-    public float DragCoeff {
-        get {
-            //return _dragCoeff;
-            return PlaneSettings.DragCoeff;
-        }
-    }
-
-    public float TrustPower {
-        get {
-            //return _trustPower;
-            return PlaneSettings.ThrustPower;
-        }
-    }
-
-    public float TrustCoeff {
-        get {
-            //return _trustCoeff;
-            return PlaneSettings.ThrustCoeff;
-        }
-    }
-
-    public float RollIntensity {
-        get {
-            //return _rollIntensity;
-            return PlaneSettings.RollIntensity;
-        }
-    }
-
-    public float PitchIntensity {
-        get {
-            //return _pitchIntensity;
-            return PlaneSettings.PitchIntensity;
-        }
-    }
-
-    public float YawIntensity {
-        get {
-            //return _yawIntensity;
-            return PlaneSettings.YawIntensity;
-        }
-    }
-
     #endregion
 
 
@@ -126,7 +61,6 @@ public class Plane {
         _plane = plane;
 
         _rigidbody = plane.GetComponent<Rigidbody>();
-        LoadSettings();
     }
 
     #endregion
@@ -136,31 +70,6 @@ public class Plane {
 
     public void AddForce(Vector3 force) {
         _rigidbody.AddForce(force);
-    }
-
-
-    public void LoadSettings() {
-        //_wingArea = PlaneSettings.WingArea;
-        //_liftCoeff = PlaneSettings.LiftCoeff;
-        //_dragCoeff = PlaneSettings.DragCoeff;
-        //_trustPower = PlaneSettings.ThrustPower;
-        //_trustCoeff = PlaneSettings.ThrustCoeff;
-        //_rollIntensity = PlaneSettings.RollIntensity;
-        //_pitchIntensity = PlaneSettings.PitchIntensity;
-        //_yawIntensity = PlaneSettings.YawIntensity;
-    }
-
-    public void LoadSettings(float wingArea, float liftCoeff, float dragCoeff,
-                            float thrustPower, float thrustCoeff, float rollIntensity,
-                            float pitchIntensity, float yawIntensity) {
-        //_wingArea = wingArea;
-        //_liftCoeff = liftCoeff;
-        //_dragCoeff = dragCoeff;
-        //_trustPower = thrustPower;
-        //_trustCoeff = thrustCoeff;
-        //_rollIntensity = rollIntensity;
-        //_pitchIntensity = pitchIntensity;
-        //_yawIntensity = yawIntensity;
     }
 
     public static Plane NewPlane(GameObject plane) {
@@ -197,14 +106,12 @@ public class Plane {
     }
 
     private float _Roll() {
+        Vector3 planeForward = _rigidbody.transform.forward;
         Vector3 planeRight = _rigidbody.transform.right;
-        Vector3 vectorOnPlane = Vector3.ProjectOnPlane(planeRight, Vector3.up);
+        Vector3 vectorOnPlane = Vector3.ProjectOnPlane(planeForward, Vector3.up);
+        Vector3 vectorRef = Vector3.Cross(Vector3.up, vectorOnPlane);
 
-        // if (Vector3.Dot(Vector3.up, _rigidbody.transform.up) < 0) {
-        //     vectorOnPlane = -vectorOnPlane;
-        // }
-
-        float angle = Vector3.SignedAngle(planeRight, vectorOnPlane, _rigidbody.transform.forward);
+        float angle = Vector3.SignedAngle(planeRight, vectorRef, _rigidbody.transform.forward);
         return angle;
     }
 
