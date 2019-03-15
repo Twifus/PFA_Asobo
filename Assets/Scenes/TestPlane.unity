@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 624367754}
   - component: {fileID: 624367753}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -245,6 +245,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b1dd487066ca4c4e91917f0d7fa173c, type: 3}
+--- !u!1 &1103260122 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3589291725414024420, guid: b87c6aacfc1bddb4e90804e0571675f7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1659282566}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1627334968
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,6 +324,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1725292234050374, guid: b87c6aacfc1bddb4e90804e0571675f7, type: 3}
+      propertyPath: m_Name
+      value: StartLine
+      objectReference: {fileID: 0}
     - target: {fileID: 1066346794762548, guid: b87c6aacfc1bddb4e90804e0571675f7, type: 3}
       propertyPath: m_Name
       value: StartLinePrefab
@@ -567,6 +577,6 @@ PrefabInstance:
         type: 3}
       propertyPath: plane
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1103260122}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6df970209879c54c93c32b4fd5f548f, type: 3}
