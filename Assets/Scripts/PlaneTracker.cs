@@ -16,17 +16,15 @@ public class PlaneTracker : MonoBehaviour {
 
     public void Start()
     {
-        string path = string.Format("../Figure-{0}", System.DateTime.Now.ToFileTime());
-        InputWriter = new StreamWriter(path + "-Input.csv", true);
-        TrajWriter = new StreamWriter(path + "-Traj.csv", true);
         Plane = Plane.NewPlane(Player);
-        Debug.Log("Traj log file : " + path);
     }
 
     private void OnApplicationQuit()
     {
-        InputWriter.Close();
-        TrajWriter.Close();
+        if (InputWriter != null)
+            InputWriter.Close();
+        if (TrajWriter != null)
+            TrajWriter.Close();
     }
 
     private void Update()
@@ -40,9 +38,18 @@ public class PlaneTracker : MonoBehaviour {
         if (buttonPress && Input.GetButton("ToggleRecord") && Time.time > ts + 0.3f)
         {
             if (!record)
-                Debug.Log("Record started");
+            {
+                string path = string.Format("../Figure-{0}", System.DateTime.Now.ToFileTime());
+                InputWriter = new StreamWriter(path + "-Input.csv", true);
+                TrajWriter = new StreamWriter(path + "-Traj.csv", true);
+                Debug.Log("Record started - Writting at " + path);
+            }
             else
+            {
+                InputWriter.Close();
+                TrajWriter.Close();
                 Debug.Log("Record stopped");
+            }
             record = !record;
             buttonPress = false;
         }
