@@ -77,7 +77,8 @@ public class FigureManager : MonoBehaviour{
 
         point.time = Time.time;
 
-        _figureDetection.setPoint(point);
+        //_figureDetection.setPoint(point);
+        _figureDetection.setPoint(_plane);
 
     }
 
