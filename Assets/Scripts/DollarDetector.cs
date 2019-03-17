@@ -8,24 +8,29 @@ using PDollarGestureRecognizer;
 public class DollarDetector : IFigureDetection {
 
     private int MAX_SIZE = 200;
-    private int next = 0;
+    private int next = -1;
     private int time = 0;
 
-    private Point[] _timePointsHeight;
-    private Point[] _timePointsRoll;
-    private Point[] _timePointsPitch;
-    private Point[] _timePointsYaw;
+    Point[] _timePointsHeight;
+    Point[] _timePointsRoll;
+    Point[] _timePointsPitch;
+    Point[] _timePointsYaw;
 
-    private Gesture[] gesturesHeight;
-    private Gesture[] gesturesRoll;
-    private Gesture[] gesturesPitch;
-    private Gesture[] gesturesYaw;
+    Gesture[] gesturesHeight;
+    Gesture[] gesturesRoll;
+    Gesture[] gesturesPitch;
+    Gesture[] gesturesYaw;
 
 
     public DollarDetector()
     {
+        gesturesHeight = new Gesture[3];
+        gesturesRoll = new Gesture[3];
+        gesturesPitch = new Gesture[3];
+        gesturesYaw = new Gesture[2];
         FigureLoaderP loader = new FigureLoaderP();
         loader.LoadFigures(gesturesHeight, gesturesRoll, gesturesPitch, gesturesYaw);
+
         _timePointsHeight = new Point[MAX_SIZE];
         _timePointsRoll = new Point[MAX_SIZE];
         _timePointsPitch = new Point[MAX_SIZE];
@@ -51,6 +56,10 @@ public class DollarDetector : IFigureDetection {
                 _timePointsYaw[i].X--;
             }
         }
+        else
+        {
+            next++;
+        }
         time++;
         _timePointsHeight[next] = new Point(time, point.ypos, 0);
         _timePointsRoll[next] = new Point(time, point.roll, 0);
@@ -60,7 +69,7 @@ public class DollarDetector : IFigureDetection {
 
     private void ClearLists()
     {
-        next = 0;
+        next = -1;
         time = 0;
     }
 
@@ -73,45 +82,48 @@ public class DollarDetector : IFigureDetection {
     }
 
 	public List<Figure> detection() {
-        BestGesture resultHeight = PointCloudRecognizer.Classify(new Gesture(_timePointsHeight), gesturesHeight);
-        BestGesture resultRoll = PointCloudRecognizer.Classify(new Gesture(_timePointsRoll), gesturesRoll);
-        BestGesture resultPitch = PointCloudRecognizer.Classify(new Gesture(_timePointsPitch), gesturesPitch);
-        BestGesture resultYaw = PointCloudRecognizer.Classify(new Gesture(_timePointsYaw), gesturesYaw);
-        
-        //Debug.Log(resultHeight.Name + ", " + resultRoll.Name + ", " + resultPitch.Name + ", " + resultYaw.Name);
-
         List<Figure> result = new List<Figure>();
 
-        // Loop
-        if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "Bosse", "LigneCoupee", "ZigZag", "LigneCoupee"))
+        if (next == MAX_SIZE - 1)
         {
-            Debug.Log("Loop");
-            result.Add(new Figure());
-            result[0].id = figure_id.LOOP;
-            result[0].quality = 1f;
-            ClearLists();
-        }
-         
-        // Roll
-        if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw,"LigneDroite", "LigneMontante", "LigneDroite", "LigneDroite"))
-        { 
-            Debug.Log("Roll");
-            result.Add(new Figure());
-            result[0].id = figure_id.BARREL;
-            result[0].quality = 1f;
-            ClearLists();
-        }
+            BestGesture resultHeight = PointCloudRecognizer.Classify(new Gesture(_timePointsHeight, "test height"), gesturesHeight);
+            BestGesture resultRoll = PointCloudRecognizer.Classify(new Gesture(_timePointsRoll, "test roll"), gesturesRoll);
+            BestGesture resultPitch = PointCloudRecognizer.Classify(new Gesture(_timePointsPitch, "test pitch"), gesturesPitch);
+            BestGesture resultYaw = PointCloudRecognizer.Classify(new Gesture(_timePointsYaw, "test yax"), gesturesYaw);
 
-        // Cuban Eight
-        if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "DoubleBosse", "DoubleDemieLigneMontante", "DoubleZigZag", "LigneCoupee"))
-        {
-            Debug.Log("CubanEight");
-            result.Add(new Figure());
-            result[0].id = figure_id.CUBANEIGHT;
-            result[0].quality = 1f;
-            ClearLists();
-        }
+            //Debug.Log(resultHeight.Name + ", " + resultRoll.Name + ", " + resultPitch.Name + ", " + resultYaw.Name);
 
+
+            // Loop
+            if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "Bosse", "LigneCoupee", "ZigZag", "LigneCoupee"))
+            {
+                Debug.Log("Loop");
+                result.Add(new Figure());
+                result[0].id = figure_id.LOOP;
+                result[0].quality = 1f;
+                ClearLists();
+            }
+
+            // Roll
+            if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "LigneDroite", "LigneMontante", "LigneDroite", "LigneDroite"))
+            {
+                Debug.Log("Roll");
+                result.Add(new Figure());
+                result[0].id = figure_id.BARREL;
+                result[0].quality = 1f;
+                ClearLists();
+            }
+
+            // Cuban Eight
+            if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "DoubleBosse", "DoubleDemieLigneMontante", "DoubleZigZag", "LigneCoupee"))
+            {
+                Debug.Log("CubanEight");
+                result.Add(new Figure());
+                result[0].id = figure_id.CUBANEIGHT;
+                result[0].quality = 1f;
+                ClearLists();
+            }
+        }
         return result;
 	}
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using PDollarGestureRecognizer;
+using UnityEngine;
 
 public class FigureLoaderP {
 
@@ -42,10 +43,15 @@ public class FigureLoaderP {
         Roll();
         CubanEight();
 
-        height = gesturesHeight;
-        roll = gesturesRoll;
-        pitch = gesturesPitch;
-        yaw = gesturesYaw;
+        for (int i=0; i<3; i++)
+        {
+            height[i] = gesturesHeight[i];
+            roll[i] = gesturesRoll[i];
+            pitch[i] = gesturesPitch[i];
+            if (i < 2) yaw[i] = gesturesYaw[i];
+        }
+
+        
     }
 
     #endregion
@@ -108,55 +114,55 @@ public class FigureLoaderP {
 
     private void Loop() {
         StreamReader file = new StreamReader(filePath + "Loop" + "-Traj.csv");
-        Point[] height = new Point[256];
-        Point[] roll = new Point[256];
-        Point[] pitch = new Point[256];
-        Point[] yaw = new Point[256];
+        Point[] height = new Point[362];
+        Point[] roll = new Point[362];
+        Point[] pitch = new Point[362];
+        Point[] yaw = new Point[362];
 
         // Lire le fichier et le parser
         CSVParser(file, height, roll, pitch, yaw);
 
         // Créer les figures
         gesturesHeight[next[0] ++]= new Gesture(height, "Bosse");
-        gesturesRoll[next[1]++] = new Gesture(roll, "LigneCoupee");
-        gesturesPitch[next[2]] = new Gesture(pitch, "ZigZag");
-        gesturesYaw[next[3]] = new Gesture(yaw, "LigneCoupee");
+        gesturesRoll[next[1] ++] = new Gesture(roll, "LigneCoupee");
+        gesturesPitch[next[2] ++] = new Gesture(pitch, "ZigZag");
+        gesturesYaw[next[3] ++] = new Gesture(yaw, "LigneCoupee");
     }
 
 
     private void Roll() {
         StreamReader file = new StreamReader(filePath + "Roll" + "-Traj.csv");
-        Point[] height = new Point[256];
-        Point[] roll = new Point[256];
-        Point[] pitch = new Point[256];
-        Point[] yaw = new Point[256];
-
+        Point[] height = new Point[276];
+        Point[] roll = new Point[276];
+        Point[] pitch = new Point[276];
+        Point[] yaw = new Point[276];
+   
         // Lire le fichier et le parser
         CSVParser(file, height, roll, pitch, yaw);
 
         // Créer les figures
-        gesturesHeight[next[0]++] = new Gesture(height, "LigneDroite");
-        gesturesRoll[next[1]++] = new Gesture(roll, "LigneMontante");
-        gesturesPitch[next[2]] = new Gesture(pitch, "LigneDroite");
-        gesturesYaw[next[3]] = new Gesture(yaw, "LigneDroite");
+        gesturesHeight[next[0] ++] = new Gesture(height, "LigneDroite");
+        gesturesRoll[next[1] ++] = new Gesture(roll, "LigneMontante");
+        gesturesPitch[next[2] ++] = new Gesture(pitch, "LigneDroite");
+        gesturesYaw[next[3] ++] = new Gesture(yaw, "LigneDroite");
     }
 
 
     private void CubanEight() {
         StreamReader file = new StreamReader(filePath + "CubanEight" + "-Traj.csv");
-        Point[] height = new Point[256];
-        Point[] roll = new Point[256];
-        Point[] pitch = new Point[256];
-        Point[] yaw = new Point[256];
+        Point[] height = new Point[1333];
+        Point[] roll = new Point[1333];
+        Point[] pitch = new Point[1333];
+        Point[] yaw = new Point[1333];
 
         // Lire le fichier et le parser
         CSVParser(file, height, roll, pitch, yaw);
 
         // Créer les figures
-        gesturesHeight[next[0]++] = new Gesture(height, "DoubleBosse");
-        gesturesRoll[next[1]++] = new Gesture(roll, "DoubleDemieLigneMontante");
-        gesturesPitch[next[2]] = new Gesture(pitch, "DoubleZigZag");
-        gesturesYaw[next[3]] = new Gesture(yaw, "LigneCoupee");
+        gesturesHeight[next[0] ++] = new Gesture(height, "DoubleBosse");
+        gesturesRoll[next[1] ++] = new Gesture(roll, "DoubleDemieLigneMontante");
+        gesturesPitch[next[2] ++] = new Gesture(pitch, "DoubleZigZag");
+        //gesturesYaw[next[3]] = new Gesture(yaw, "LigneCoupee");
     }
 
     #endregion
