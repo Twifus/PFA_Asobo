@@ -50,7 +50,7 @@ public class PlaneTracker : MonoBehaviour {
         if (record)
         {
             TrajWriter.WriteLine(string.Format("{0};{1};{2};{3};{4}",
-                Time.time, Plane.Position.y, Plane.Roll, Plane.Pitch, Plane.Yaw));
+                Time.time, Plane.Position.y, Plane.roll, Plane.pitch, Plane.yaw));
 
             InputWriter.WriteLine(string.Format("{0};{1};{2};{3};{4}",
                 Time.time, CustomInput.GetAxis("Accelerate"), CustomInput.GetAxis("Roll"), CustomInput.GetAxis("Pitch"), CustomInput.GetAxis("Yaw")));
