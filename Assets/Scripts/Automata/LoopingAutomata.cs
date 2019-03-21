@@ -9,6 +9,8 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
     private bool _yawState = true;
     private float _upScalar = 0;
     private float _forwardScalar = 0;
+
+    private float _rightScalar = 0;
 /* 
     private double yaw1 = 1;
     private double yaw2 = 1;
@@ -150,24 +152,29 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
     public int calculateState(IFlyingObject plane) {
         _forwardScalar = Vector3.Dot(plane.forward, System.Numerics.Vector3.UnitY);
         _upScalar = Vector3.Dot(plane.up, System.Numerics.Vector3.UnitY);
+        _rightScalar = Vector3.Dot(plane.right, System.Numerics.Vector3.UnitY);
         unity.Debug.Log("_upScalar :" + _upScalar);
         if (isValid()) return 1;
+        float _rightScalarStart;
+        int window = 10;
         int state = getCurrentState();
-        
-        if (_upScalar <= 0 && _forwardScalar >= 0){
-            if (state == 0 || state == 1){
+        if (state ==0){
+            _rightScalarStart = Vector3.Dot(plane.right, System.Numerics.Vector3.UnitY);
+        }
+        if (_upScalar <= 0 && _forwardScalar >= 0){          
+            if ((state == 0 || state == 1) && (Math.Abs(_rightScalarStart - _rightScalar) < window)){
                 MoveNext(1);
             } else resetStates();
         } else if (_upScalar <= 0 && _forwardScalar < 0){
-            if (state == 1 || state == 2){
+            if (state == 1 || state == 2 && (Math.Abs(_rightScalarStart - _rightScalar) < window)){
                 MoveNext(2);
             } else resetStates();
         } else if (_upScalar > 0 && _forwardScalar < 0){
-            if (state == 2 || state == 3){
+            if (state == 2 || state == 3 && (Math.Abs(_rightScalarStart - _rightScalar) < window)){
                 MoveNext(3);
             } else resetStates();
         } else if (_upScalar <= 0 && _forwardScalar >= 0){
-            if (state == 3 || state == 4){
+            if (state == 3 || state == 4 && (Math.Abs(_rightScalarStart - _rightScalar) < window)){
                 MoveNext(4);
             } else resetStates();
         } 
