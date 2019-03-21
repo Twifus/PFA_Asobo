@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+//using unity = UnityEngine;
 
 /*
     Représente le gestionaire des automates
@@ -21,6 +22,7 @@ public class AutomataDetector : IFigureDetection {
     }
 
     public void setPoint(IFlyingObject plane) {
+        //unity.Debug.Log("Test");
         foreach (IFigureAutomata auto in _myAutomatas)
             auto.calculateState(plane);
     }

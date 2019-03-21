@@ -9,7 +9,7 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
     private bool _yawState = true;
     private float _upScalar = 0;
     private float _forwardScalar = 0;
-
+    float _rightScalarStart = 0;
     private float _rightScalar = 0;
 /* 
     private double yaw1 = 1;
@@ -95,69 +95,16 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
     //0 si le nouvel état est intermédiaire
     //-1 si l'automate recommence à l'état initial
     //si l'automate est déjà à l'état final, devrait renvoyer 1
-
-    /* 
-    public int calculateState(Coordinate newPos) {
-        numberIterations++;
-        if (isValid()) return 1;
-        if (numberIterations%3 == 0){
-            yaw2 = yaw1;
-        }
-        yaw1 = newPos.zangle;
-        
-        double yaw = newPos.zangle;
-        double pitch = newPos.xangle;
-        if (CurrentState == 0){
-            _yawState = (yaw >= 0);
-        } 
-        pitch = (pitch + 360)%360;
-        //yaw = (yaw + 360)%360;
-        Debug.Log("Yaw1,Yaw2 : " + yaw1 + ", " + yaw2);
-        if (Math.Abs(yaw1-yaw2) > 50f  && jump ) {
-            jump = false;
-            yaw2 = yaw1;
-        } else if (Math.Abs(yaw1-yaw2) > 50f  && !jump ) {
-            jump = true;
-        }
-
-        if (jump){
-            pitch = 180-newPos.xangle;
-        }
-
-        Debug.Log("Pitch : " + pitch);
-        Debug.Log( "   Jump : " + jump);
-        
-
-        int idDegrees = (int) pitch / (360/_finalState);
-        
-        int state = getCurrentState();
-        //avant dernier etat, penser à verifier si l'angle reboucle
-        if(state == _finalState-1 && idDegrees == 0) { 
-            MoveNext(_finalState);
-            return 1; 
-        }
-        if (idDegrees == state || idDegrees == state + 1) {
-            MoveNext(idDegrees); 
-        }
-        else {
-            resetStates();
-            return -1;
-        }
-        //if (isValid()) return 1;
-        return 0;
-    }*/
-    
-
-
     public int calculateState(IFlyingObject plane) {
         _forwardScalar = Vector3.Dot(plane.forward, System.Numerics.Vector3.UnitY);
         _upScalar = Vector3.Dot(plane.up, System.Numerics.Vector3.UnitY);
         _rightScalar = Vector3.Dot(plane.right, System.Numerics.Vector3.UnitY);
         unity.Debug.Log("_upScalar :" + _upScalar);
+        unity.Debug.Log("_forwardScalar :" + _forwardScalar);
         if (isValid()) return 1;
-        float _rightScalarStart;
-        int window = 10;
+        int window = 3;
         int state = getCurrentState();
+        unity.Debug.Log(state);
         if (state ==0){
             _rightScalarStart = Vector3.Dot(plane.right, System.Numerics.Vector3.UnitY);
         }
@@ -173,7 +120,7 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
             if ((state == 2 || state == 3) && (Math.Abs(_rightScalarStart - _rightScalar) < window)){
                 MoveNext(3);
             } else resetStates();
-        } else if (_upScalar <= 0 && _forwardScalar >= 0){
+        } else if (_upScalar >= 0 && _forwardScalar >= 0){
             if ((state == 3 || state == 4) && (Math.Abs(_rightScalarStart - _rightScalar) < window)){
                 MoveNext(4);
             } else resetStates();
