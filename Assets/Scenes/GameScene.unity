@@ -710,6 +710,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StartLine
       objectReference: {fileID: 0}
+    - target: {fileID: 1725292234050374, guid: b87c6aacfc1bddb4e90804e0571675f7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4030935618098092, guid: b87c6aacfc1bddb4e90804e0571675f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
