@@ -15,7 +15,7 @@ public class FigureManager : MonoBehaviour{
     public Text textScore;
     public Text textFigure;
 
-    private Plane _plane;
+    private IFlyingObject _plane;
     private int _score;
     private float _timeToDisplay;
     private string[] _figureName;
@@ -59,9 +59,9 @@ public class FigureManager : MonoBehaviour{
 
 
     /** Récupère les coordonnées et les rotations de l'avion dans un tableau (List<float> à voir) */
-    private void GetCoordinates(Plane _plane)
+    private void GetCoordinates(IFlyingObject _plane)
     {
-        Coordinate point = new Coordinate();
+        /*Coordinate point = new Coordinate();
         point.xpos = _plane.Position.x;
         point.ypos = _plane.Position.y;
         point.zpos = _plane.Position.z;
@@ -74,7 +74,7 @@ public class FigureManager : MonoBehaviour{
         point.pitch = _plane.pitch;
         point.yaw = _plane.yaw;
 
-        point.time = Time.time;
+        point.time = Time.time;*/
 
         //_figureDetection.setPoint(point);
         _figureDetection.setPoint(_plane);
