@@ -86,11 +86,11 @@ public class DummyPlayer : MonoBehaviour {
                 NextStep();
                 break;
             case 3:
-                if (_plane.Pitch < 0f)
+                if (_plane.pitch < 0f)
                     NextStep();
                 break;
             case 4:
-                if (_plane.Pitch > 5f)
+                if (_plane.pitch > 5f)
                     NextStep();
                 break;
             case 5:

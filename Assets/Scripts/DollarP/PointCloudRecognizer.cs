@@ -80,7 +80,6 @@ namespace PDollarGestureRecognizer
         {
             float minDistance = float.MaxValue;
             string gestureClass = "";
-            double score = 0;
             foreach (Gesture template in trainingSet)
             {
                 float dist = GreedyCloudMatch(candidate.Points, template.Points);
@@ -88,10 +87,9 @@ namespace PDollarGestureRecognizer
                 {
                     minDistance = dist;
                     gestureClass = template.Name;
-                    score = 1 - dist;
                 }
             }
-            return new BestGesture(gestureClass, score);
+            return new BestGesture(gestureClass, Math.Max(0, (2-minDistance)/2));
         }
 
         /// <summary>
@@ -145,7 +143,7 @@ namespace PDollarGestureRecognizer
                             index = j;
                         }
                     }
-                matched[index] = true; // point index from the 2nd cloud is matched to point i from the 1st cloud
+                if (index > -1) matched[index] = true; // point index from the 2nd cloud is matched to point i from the 1st cloud
                 float weight = 1.0f - ((i - startIndex + n) % n) / (1.0f * n);
                 sum += weight * minDistance; // weight each distance with a confidence coefficient that decreases from 1 to 0
                 i = (i + 1) % n;

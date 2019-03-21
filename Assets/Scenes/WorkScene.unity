@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -212,6 +212,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &736206795 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3589291725414024420, guid: b87c6aacfc1bddb4e90804e0571675f7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1571552095}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &736206802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736206795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a463b36210a8be2449c6f78fdb619e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plane: {fileID: 736206795}
+  textScore: {fileID: 1339221735}
+  textFigure: {fileID: 1712698563}
 --- !u!1001 &814584120
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -249,7 +270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4123408653523720, guid: e3220e060b2863d41a2b703eaff8fe93, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4123408653523720, guid: e3220e060b2863d41a2b703eaff8fe93, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -409,6 +430,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1725292234050374, guid: b87c6aacfc1bddb4e90804e0571675f7, type: 3}
+      propertyPath: m_Name
+      value: StartLine
+      objectReference: {fileID: 0}
     - target: {fileID: 1066346794762548, guid: b87c6aacfc1bddb4e90804e0571675f7, type: 3}
       propertyPath: m_Name
       value: StartLinePrefab
@@ -573,7 +598,7 @@ PrefabInstance:
         type: 3}
       propertyPath: plane
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 736206795}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6df970209879c54c93c32b4fd5f548f, type: 3}
 --- !u!1 &1712698561
@@ -668,7 +693,7 @@ GameObject:
   - component: {fileID: 1834048411}
   - component: {fileID: 1834048410}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

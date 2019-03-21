@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c521b4d2039474f991b3a00e4be69c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  Player: {fileID: 286375687}
 --- !u!4 &135297414
 Transform:
   m_ObjectHideFlags: 0
@@ -157,6 +157,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &286375687 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3589291725414024420, guid: b87c6aacfc1bddb4e90804e0571675f7,
+    type: 3}
+  m_PrefabInstance: {fileID: 8992812954440471422}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &454134823
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,7 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 016676a79450a5f4f917ddaf2e32957c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  Player: {fileID: 286375687}
 --- !u!4 &1099304617
 Transform:
   m_ObjectHideFlags: 0
@@ -369,6 +375,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1725292234050374, guid: b87c6aacfc1bddb4e90804e0571675f7, type: 3}
+      propertyPath: m_Name
+      value: StartLine
+      objectReference: {fileID: 0}
     - target: {fileID: 1066346794762548, guid: b87c6aacfc1bddb4e90804e0571675f7, type: 3}
       propertyPath: m_Name
       value: StartLine
