@@ -16,9 +16,13 @@ public class AutomataDetector : IFigureDetection {
         //    _myAutomatas.Add(new DummyAutomata());
     }
 
-    public void setPoint(Coordinate point) {
+    public void setPoint(Coordinate coord) {
+        ;
+    }
+
+    public void setPoint(IFlyingObject plane) {
         foreach (IFigureAutomata auto in _myAutomatas)
-            auto.calculateState(point);
+            auto.calculateState(plane);
     }
 
     public List<Figure> detection() {

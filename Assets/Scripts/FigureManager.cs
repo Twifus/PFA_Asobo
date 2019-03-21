@@ -66,9 +66,9 @@ public class FigureManager : MonoBehaviour{
         point.ypos = _plane.Position.y;
         point.zpos = _plane.Position.z;
 
-        point.xangle = _plane.Pitch;
-        point.yangle = _plane.Yaw;
-        point.zangle = _plane.Roll;
+        point.xangle = _plane.pitch;
+        point.yangle = _plane.yaw;
+        point.zangle = _plane.roll;
 
         point.roll = _plane.roll;
         point.pitch = _plane.pitch;
@@ -76,8 +76,8 @@ public class FigureManager : MonoBehaviour{
 
         point.time = Time.time;
 
-        _figureDetection.setPoint(point);
-        //_figureDetection.setPoint(_plane);
+        //_figureDetection.setPoint(point);
+        _figureDetection.setPoint(_plane);
 
 
     }

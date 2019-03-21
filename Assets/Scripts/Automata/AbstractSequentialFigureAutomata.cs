@@ -36,10 +36,10 @@ public abstract class AbstractSequentialFigureAutomata : IFigureAutomata {
     //renvoie 1 si le nouvel état est terminal (même résultat que isValid())
     //0 si le nouvel état est intermédiaire
     //-1 si l'automate recommence à l'état initial
-    public int calculateState(Coordinate newPos) {
+    public int calculateState(IFlyingObject plane) {
         if (isValid()) 
             return 1;
-        int intState = getCurrentAuto().calculateState(newPos);
+        int intState = getCurrentAuto().calculateState(plane);
         if (intState == -1) {
             resetStates();
             return -1;

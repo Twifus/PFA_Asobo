@@ -5,6 +5,7 @@ public class Program
 {
     static void Main(string[] args)
     {
+        /* 
         LoopingAutomata l = new LoopingAutomata();
         Coordinate simu = new Coordinate();
 

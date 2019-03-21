@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Numerics;
+using unity = UnityEngine;
 
 public class LoopingAutomata : FSMDetection, IFigureAutomata {
     //private FSMLooping _myAuto;
@@ -146,9 +147,10 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
     
 
 
-    public int calculateState(Plane plane) {
-        _forwardScalar = plane.forward;
-        _upScalar = plane.up;
+    public int calculateState(IFlyingObject plane) {
+        _forwardScalar = Vector3.Dot(plane.forward, System.Numerics.Vector3.UnitY);
+        _upScalar = Vector3.Dot(plane.up, System.Numerics.Vector3.UnitY);
+        unity.Debug.Log("_upScalar :" + _upScalar);
         if (isValid()) return 1;
         int state = getCurrentState();
         
