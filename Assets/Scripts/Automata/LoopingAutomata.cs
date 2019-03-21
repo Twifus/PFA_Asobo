@@ -166,15 +166,15 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
                 MoveNext(1);
             } else resetStates();
         } else if (_upScalar <= 0 && _forwardScalar < 0){
-            if (state == 1 || state == 2 && (Math.Abs(_rightScalarStart - _rightScalar) < window)){
+            if ((state == 1 || state == 2) && (Math.Abs(_rightScalarStart - _rightScalar) < window)){
                 MoveNext(2);
             } else resetStates();
         } else if (_upScalar > 0 && _forwardScalar < 0){
-            if (state == 2 || state == 3 && (Math.Abs(_rightScalarStart - _rightScalar) < window)){
+            if ((state == 2 || state == 3) && (Math.Abs(_rightScalarStart - _rightScalar) < window)){
                 MoveNext(3);
             } else resetStates();
         } else if (_upScalar <= 0 && _forwardScalar >= 0){
-            if (state == 3 || state == 4 && (Math.Abs(_rightScalarStart - _rightScalar) < window)){
+            if ((state == 3 || state == 4) && (Math.Abs(_rightScalarStart - _rightScalar) < window)){
                 MoveNext(4);
             } else resetStates();
         } 
