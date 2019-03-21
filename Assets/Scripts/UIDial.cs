@@ -36,7 +36,7 @@ public class UIDial : MonoBehaviour {
         //}
         //var angle = Vector3.SignedAngle(planeForward, vectorOnPlane, _plane.Rigidbody.transform.right);
 
-        var angle = _plane.Pitch;
+        var angle = _plane.pitch;
         if (Vector3.Dot(Vector3.up, _plane.Rigidbody.transform.up) < 0) {
             angle -= 180;
         }
