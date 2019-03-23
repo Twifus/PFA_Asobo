@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using unity = UnityEngine;
 
-public class LoopingAutomata : FSMDetection, IFigureAutomata {
+public class LoopingAutomata :FSMDetection, IFigureAutomata  {
     //private FSMLooping _myAuto;
     private int _finalState;
     private bool _yawState = true;
