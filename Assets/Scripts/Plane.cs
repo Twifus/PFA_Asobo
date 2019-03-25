@@ -27,6 +27,10 @@ public class Plane : IFlyingObject {
     public float pitch { get { return _Pitch(); } }
     public float yaw { get { return _Yaw(); } }
 
+    public float rollScalar { get { return _RollScalar(); } }
+    public float pitchScalar { get { return _PitchScalar(); } }
+    public float yawScalar { get { return _YawScalar(); } }
+
     public s.Vector3 up { get { return UnityVector3ToSystemVector3(_rigidbody.transform.up); } }
     public s.Vector3 forward { get { return UnityVector3ToSystemVector3(_rigidbody.transform.forward); } }
     public s.Vector3 right { get { return UnityVector3ToSystemVector3(_rigidbody.transform.right); } }
@@ -108,6 +112,15 @@ public class Plane : IFlyingObject {
         return angle;
     }
 
+    private float _PitchScalar() {
+        Vector3 planeForward = _rigidbody.transform.forward;
+        Vector3 vectorOnPlane = Vector3.ProjectOnPlane(planeForward, Vector3.up);
+        Vector3 referenceAxis = Vector3.Cross(vectorOnPlane, Vector3.up);
+
+        float scalar = Vector3.Dot(vectorOnPlane, planeForward);
+        return scalar;
+    }
+
     private float _Roll() {
         Vector3 planeForward = _rigidbody.transform.forward;
         Vector3 planeRight = _rigidbody.transform.right;
@@ -118,12 +131,30 @@ public class Plane : IFlyingObject {
         return angle;
     }
 
+    private float _RollScalar() {
+        Vector3 planeForward = _rigidbody.transform.forward;
+        Vector3 planeRight = _rigidbody.transform.right;
+        Vector3 vectorOnPlane = Vector3.ProjectOnPlane(planeForward, Vector3.up);
+        Vector3 vectorRef = Vector3.Cross(Vector3.up, vectorOnPlane);
+
+        float scalar = Vector3.Dot(planeRight, vectorRef);
+        return scalar;
+    }
+
     private float _Yaw() {
         Vector3 forwardOnPlane = Vector3.ProjectOnPlane(_rigidbody.transform.forward, Vector3.up);
         Vector3 north = Vector3.forward;
 
         float angle = Vector3.SignedAngle(north, forwardOnPlane, Vector3.up);
         return angle;
+    }
+
+    private float _YawScalar() {
+        Vector3 forwardOnPlane = Vector3.ProjectOnPlane(_rigidbody.transform.forward, Vector3.up);
+        Vector3 north = Vector3.forward;
+
+        float scalar = Vector3.Dot(north, forwardOnPlane);
+        return scalar;
     }
 
     private s.Vector3 UnityVector3ToSystemVector3(Vector3 vector) {
