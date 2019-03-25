@@ -5,6 +5,7 @@ using UnityEngine;
 public class RingRotation : MonoBehaviour
 {
     private Quaternion _rotation;
+    public float epsilon;
     public GameObject _bar;
 
     void Start()
@@ -23,7 +24,8 @@ public class RingRotation : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.rotation == _rotation)
+        Debug.Log(other.transform.rotation.z);
+        if (other.transform.rotation.z >= _rotation.z - epsilon && other.transform.rotation.z <= _rotation.z + epsilon)
         { 
             //_point.Play(0);
             Debug.Log("15 point");
