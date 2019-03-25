@@ -1,9 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.IO;
+using System.Globalization;
 
 public class DummyPlayer : MonoBehaviour {
+
+    public Text modeText;
+    public Text selectionText;
 
     private int mode = 0;
     private int selection = 0;
@@ -11,6 +16,7 @@ public class DummyPlayer : MonoBehaviour {
     private float ts = 0f;
 
     private int nModes = 3;
+    private string[] nameModes = { "Aucun", "Loop", "Roll", "Cuban8" };
 
     public GameObject Player;
 
@@ -38,11 +44,14 @@ public class DummyPlayer : MonoBehaviour {
             file = null;
             return;
         }
+
+        Debug.Log(line);
         string[] data = line.Split(';');
-        CustomInput.SetAxis("Accelerate", float.Parse(data[1]));
-        CustomInput.SetAxis("Roll", float.Parse(data[2]));
-        CustomInput.SetAxis("Pitch", float.Parse(data[3]));
-        CustomInput.SetAxis("Yaw", float.Parse(data[4]));
+        CultureInfo ci = new CultureInfo("en-US");
+        CustomInput.SetAxis("Accelerate", float.Parse(data[1], ci));
+        CustomInput.SetAxis("Roll", float.Parse(data[2], ci));
+        CustomInput.SetAxis("Pitch", float.Parse(data[3], ci));
+        CustomInput.SetAxis("Yaw", float.Parse(data[4], ci));
     }
 
     private void toggleDummy()
@@ -137,15 +146,17 @@ public class DummyPlayer : MonoBehaviour {
         if (Input.GetButtonDown("SelectReplay"))
         {
             selection = (selection + 1) % (nModes + 1);
-            Debug.Log(selection);
+            selectionText.text = "Selection : " + nameModes[selection];
+            //Debug.Log(selection);
         }
 
         if (Input.GetButtonDown("StartReplay") && (selection != mode))
         {
             if ((mode == 0 && selection != 0) || (mode != 0 && selection == 0))
                 toggleDummy();
-            Debug.Log("Mode changed: " + mode + "->" + selection);
+            //Debug.Log("Mode changed: " + mode + "->" + selection);
             mode = selection;
+            modeText.text = "Actif : " + nameModes[selection];
             //step = 0;
             //ts = 0f;
         }
