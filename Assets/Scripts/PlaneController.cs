@@ -61,7 +61,6 @@ public class PlaneController : MonoBehaviour
 
             _body.AddForceAtPosition(-0.1f * baseLift.magnitude * CustomInput.GetAxis("Yaw") * transform.right, Tail.position); // Yaw
         }
-        Debug.Log(_plane.rollScalar +" "+ _plane.pitchScalar +" "+ _plane.yawScalar);
     }
 
     private void Update()

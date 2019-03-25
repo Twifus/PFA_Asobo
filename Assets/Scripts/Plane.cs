@@ -114,10 +114,10 @@ public class Plane : IFlyingObject {
 
     private float _PitchScalar() {
         Vector3 planeForward = _rigidbody.transform.forward;
-        Vector3 vectorOnPlane = Vector3.ProjectOnPlane(planeForward, Vector3.up);
-        Vector3 referenceAxis = Vector3.Cross(vectorOnPlane, Vector3.up);
+        //Vector3 vectorOnPlane = Vector3.ProjectOnPlane(planeForward, Vector3.up);
+        //Vector3 referenceAxis = Vector3.Cross(vectorOnPlane, Vector3.up);
 
-        float scalar = Vector3.Dot(vectorOnPlane, planeForward);
+        float scalar = Vector3.Dot(Vector3.up, planeForward);
         return scalar;
     }
 
