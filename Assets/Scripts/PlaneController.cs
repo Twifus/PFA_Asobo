@@ -31,7 +31,8 @@ public class PlaneController : MonoBehaviour
     {
         _plane = Plane.NewPlane(gameObject);
         _body = _plane.Rigidbody;
-        _body.centerOfMass = CenterOfMass.localPosition;
+        if (CenterOfMass != null)
+            _body.centerOfMass = CenterOfMass.localPosition;
     }
 
     // Update is called once per frame

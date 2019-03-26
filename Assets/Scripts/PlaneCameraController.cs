@@ -11,8 +11,8 @@ public class PlaneCameraController : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
-        transform.position = target.transform.position; 
-        transform.rotation = Quaternion.Slerp(transform.rotation, target.transform.rotation, Time.deltaTime * 10); 
+	void FixedUpdate () {
+        transform.position = Vector3.Lerp(transform.position, target.transform.position, Time.deltaTime * 20); 
+        transform.rotation = Quaternion.Slerp(transform.rotation, target.transform.rotation, Time.deltaTime * 15); 
     }
 }
