@@ -46,7 +46,7 @@ public class FigureManager : MonoBehaviour{
         DisableText();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         //Condition sur les frames pour enregistrement des coordonnées
         GetCoordinates(_plane);
@@ -77,8 +77,8 @@ public class FigureManager : MonoBehaviour{
 
         point.time = Time.time;
 
-        _figureDetection.setPoint(point);
-        //_figureDetection.setPoint(_plane);
+        //_figureDetection.setPoint(point);
+        _figureDetection.setPoint(_plane);
 
     }
 

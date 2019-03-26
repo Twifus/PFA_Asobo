@@ -10,15 +10,15 @@ public class DollarDetector : IFigureDetection {
     private int MAX_SIZE = 280;
     private int time = 0;
 
-    List<Point> _timePointsHeight;
-    List<Point> _timePointsRoll;
-    List<Point> _timePointsPitch;
-    List<Point> _timePointsYaw;
+    protected List<Point> _timePointsHeight;
+    protected List<Point> _timePointsRoll;
+    protected List<Point> _timePointsPitch;
+    protected List<Point> _timePointsYaw;
 
-    List<Gesture> gesturesHeight;
-    List<Gesture> gesturesRoll;
-    List<Gesture> gesturesPitch;
-    List<Gesture> gesturesYaw;
+    protected List<Gesture> gesturesHeight;
+    protected List<Gesture> gesturesRoll;
+    protected List<Gesture> gesturesPitch;
+    protected List<Gesture> gesturesYaw;
 
 
     public DollarDetector()
@@ -61,7 +61,28 @@ public class DollarDetector : IFigureDetection {
         _timePointsYaw.Add(new Point(time, point.yaw, 0));
     }
 
-    private void ClearLists()
+    public void setPoint(IFlyingObject flyingObject) {
+        if (_timePointsHeight.Count == MAX_SIZE) {
+            _timePointsHeight.RemoveAt(0);
+            int i;
+            for (i = 0; i < MAX_SIZE - 1; i++) {
+                _timePointsHeight[i].X--;
+                _timePointsRoll[i].X--;
+                _timePointsPitch[i].X--;
+                _timePointsYaw[i].X--;
+            }
+        }
+        else {
+            time++;
+        }
+
+        _timePointsHeight.Add(new Point(time, flyingObject.pos.Y, 0));
+        _timePointsRoll.Add(new Point(time, flyingObject.rollScalar, 0));
+        _timePointsPitch.Add(new Point(time, flyingObject.pitchScalar, 0));
+        _timePointsYaw.Add(new Point(time, flyingObject.yawScalar, 0));
+    }
+
+    protected void ClearLists()
     {
         _timePointsHeight.Clear();
         _timePointsRoll.Clear();
@@ -70,7 +91,7 @@ public class DollarDetector : IFigureDetection {
         time = 0;
     }
 
-    private bool AnalyseResults(BestGesture resultHeight, BestGesture resultRoll, BestGesture resultPitch, BestGesture resultYaw, string height, string roll, string pitch, string yaw)
+    protected bool AnalyseResults(BestGesture resultHeight, BestGesture resultRoll, BestGesture resultPitch, BestGesture resultYaw, string height, string roll, string pitch, string yaw)
     {
         return (resultHeight.Name.Equals(height) && resultHeight.Score > 0.7f
             && resultRoll.Name.Equals(roll) //&& resultRoll.Score > 0.7f
@@ -96,8 +117,8 @@ public class DollarDetector : IFigureDetection {
             // Loop
             if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "Bosse", "LigneCoupee", "ZigZag", "LigneCoupee"))
             {
-                Debug.Log("Loop");
-                Debug.Log(resultHeight.Score + ", " + resultRoll.Score + ", " + resultPitch.Score + ", " + resultYaw.Score);
+                //Debug.Log("Loop");
+                //Debug.Log(resultHeight.Score + ", " + resultRoll.Score + ", " + resultPitch.Score + ", " + resultYaw.Score);
                 result.Add(new Figure());
                 result[0].id = figure_id.LOOP;
                 result[0].quality = 1f;
@@ -107,8 +128,8 @@ public class DollarDetector : IFigureDetection {
             // Roll
             if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "LigneDroite", "LigneMontante", "LigneDroite", "LigneDroite"))
             {
-                Debug.Log("Roll");
-                Debug.Log(resultHeight.Score + ", " + resultRoll.Score + ", " + resultPitch.Score + ", " + resultYaw.Score);
+                //Debug.Log("Roll");
+                //Debug.Log(resultHeight.Score + ", " + resultRoll.Score + ", " + resultPitch.Score + ", " + resultYaw.Score);
                 result.Add(new Figure());
                 result[0].id = figure_id.BARREL;
                 result[0].quality = 1f;
@@ -118,7 +139,7 @@ public class DollarDetector : IFigureDetection {
             // Cuban Eight
             if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "DoubleBosse", "DoubleDemieLigneMontante", "DoubleZigZag", "LigneCoupee"))
             {
-                Debug.Log("CubanEight");
+                //Debug.Log("CubanEight");
                 result.Add(new Figure());
                 result[0].id = figure_id.CUBANEIGHT;
                 result[0].quality = 1f;

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using PDollarGestureRecognizer;
-using UnityEngine;
+//using UnityEngine;
 
 public class FigureLoaderP {
 
@@ -18,16 +18,6 @@ public class FigureLoaderP {
     #region Loader
 
     public void LoadFigures(List<Gesture> height, List<Gesture> roll, List<Gesture> pitch, List<Gesture> yaw) {
-        //foreach(string figure in figures) {
-        //    foreach(string curve in curves) {
-        //        // vérifier l'existence du fichier
-        //        if (!File.Exists(filePath + figure + "_" + curve + ".xml")) {
-        //            CreateFigureFiles(figure);
-        //        }
-        //        recognizer.LoadGesture(filePath + figure + "_" + curve + ".xml");
-        //    }
-        //}
-
         Loop(height, roll, pitch, yaw);
         Roll(height, roll, pitch, yaw);
         //CubanEight(height, roll, pitch, yaw);
@@ -46,15 +36,16 @@ public class FigureLoaderP {
         List<Point> yaw = new List<Point>();
 
         // Lire le fichier et le parser
+        file.ReadLine(); // first line doesn't have values
         int i = 0;
         do {
             string textLine = file.ReadLine();
             float[] values = Array.ConvertAll<string, float>(textLine.Split(';'), new Converter<string, float>(StringToFloat));
             long time = (long)(values[0] * 1000); // values[0] est le temps en secondes
-            height.Add(new Point(i, values[1], 0));
-            roll.Add(new Point(i, values[2], 0));
-            pitch.Add(new Point(i, values[3], 0));
-            yaw.Add(new Point(i, values[4], 0));
+            height.Add(new Point(i, values[2], 0));
+            roll.Add(new Point(i, values[19], 0));
+            pitch.Add(new Point(i, values[20], 0));
+            yaw.Add(new Point(i, values[21], 0));
             i++;
         } while (file.Peek() != -1);
         
@@ -68,15 +59,16 @@ public class FigureLoaderP {
 
     private void CSVParser(StreamReader file, List<Point> height, List<Point> roll, List<Point> pitch, List<Point> yaw) {
         // Lire le fichier et le parser
+        file.ReadLine(); // la première ligne contient les noms de colonnes
         int i = 0;
         do {
             string textLine = file.ReadLine();
             float[] values = Array.ConvertAll<string, float>(textLine.Split(';'), new Converter<string, float>(StringToFloat));
             long time = (long)(values[0] * 1000); // values[0] est le temps en secondes
-            height.Add(new Point(i, values[1], 0));
-            roll.Add(new Point(i, values[2], 0));
-            pitch.Add(new Point(i, values[3], 0));
-            yaw.Add(new Point(i, values[4], 0));
+            height.Add(new Point(i, values[2], 0));
+            roll.Add(new Point(i, values[19], 0));
+            pitch.Add(new Point(i, values[20], 0));
+            yaw.Add(new Point(i, values[21], 0));
             i++;
         } while (file.Peek() != -1);
     }
@@ -92,7 +84,7 @@ public class FigureLoaderP {
     #region Figures
 
     private void Loop(List<Gesture> gesturesHeight, List<Gesture> gesturesRoll, List<Gesture> gesturesPitch, List<Gesture> gesturesYaw) {
-        StreamReader file = new StreamReader(filePath + "Loop" + "-Traj.csv");
+        StreamReader file = new StreamReader(filePath + "Perfect-Loop" + ".csv");
         List<Point> height = new List<Point>();
         List<Point> roll = new List<Point>();
         List<Point> pitch = new List<Point>();
@@ -110,7 +102,7 @@ public class FigureLoaderP {
 
 
     private void Roll(List<Gesture> gesturesHeight, List<Gesture> gesturesRoll, List<Gesture> gesturesPitch, List<Gesture> gesturesYaw) {
-        StreamReader file = new StreamReader(filePath + "Roll" + "-Traj.csv");
+        StreamReader file = new StreamReader(filePath + "Perfect-Roll" + ".csv");
         List<Point> height = new List<Point>();
         List<Point> roll = new List<Point>();
         List<Point> pitch = new List<Point>();
