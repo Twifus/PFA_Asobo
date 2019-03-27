@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.IO;
 using s = System.Numerics;
 
@@ -10,6 +11,10 @@ public class PlaneTracker : MonoBehaviour {
     private Plane Plane;
     public GameObject Player;
 
+    public RawImage recordImage;
+    private float blinkTime;
+    private float blinkDelay = 0.5f;
+
     private float ts;
     private bool buttonPress;
     private bool record;
@@ -17,6 +22,7 @@ public class PlaneTracker : MonoBehaviour {
     public void Start()
     {
         Plane = Plane.NewPlane(Player);
+        recordImage.enabled = false;
     }
 
     private void OnApplicationQuit()
@@ -50,11 +56,14 @@ public class PlaneTracker : MonoBehaviour {
                     "ScalarRoll;ScalarPitch;ScalarYaw;" +
                     "InputAccelerate;" +
                     "InputRoll;InputPitch;InputRoll");
+                recordImage.enabled = true;
+                blinkTime = Time.time;
                 Debug.Log("Record started - Writting at " + path);
             }
             else
             {
                 FileWriter.Close();
+                recordImage.enabled = false;
                 Debug.Log("Record stopped");
             }
             record = !record;
@@ -66,6 +75,11 @@ public class PlaneTracker : MonoBehaviour {
     {
         if (record)
         {
+            if (Time.time > blinkTime + blinkDelay)
+            {
+                recordImage.enabled = !recordImage.enabled;
+                blinkTime = Time.time;
+            }
             FileWriter.WriteLine(
                 string.Format(
                     "{0};{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{14};{15};{16};{17};{18};{19};{20};{21};{22};{23};{24};{25}",
