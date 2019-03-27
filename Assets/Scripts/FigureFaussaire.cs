@@ -43,6 +43,11 @@ public class FigureFaussaire: IFigureDetection{
 
     }
 
+    public void setPoint(IFlyingObject plane)
+    {
+
+    }
+
     public List<Figure> detection()
     {
         List<Figure>  _listFig = new List<Figure>();

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 
     public enum ARollState{
         Start = 0,
@@ -40,7 +41,7 @@ public class ARollAutomata : FSMDetection, IFigureAutomata {
     //necessaire pour reset les automates terminés
     //appelé par l'interface et/ou les automates parents
     public void resetStates() {
-        CurrentState = (int) LoopingState.Start;
+        CurrentState = (int) ARollState.Start;
     }
     //renvoie l'id de la figure représentée par FigureId
     public figure_id getFigureId() {
@@ -67,7 +68,8 @@ public class ARollAutomata : FSMDetection, IFigureAutomata {
     //0 si le nouvel état est intermédiaire
     //-1 si l'automate recommence à l'état initial
     //si l'automate est déjà à l'état final, devrait renvoyer 1
-    public int calculateState(Coordinate newPos) {
+    public int calculateState(IFlyingObject plane) {
+        /* 
         if (isValid()) {
             resetStates();
             return 1;
@@ -93,6 +95,8 @@ public class ARollAutomata : FSMDetection, IFigureAutomata {
             }
         }
         if (isValid()) return 1;
+        return 0;
+        */
         return 0;
     }
 }
