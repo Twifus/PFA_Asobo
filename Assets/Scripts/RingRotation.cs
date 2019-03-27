@@ -8,10 +8,18 @@ public class RingRotation : MonoBehaviour
     public float epsilon;
     public GameObject _bar;
 
+    [System.Serializable]
+    public struct ZRot
+    {
+        public float min;
+        public float max;
+    }
+
+    public ZRot rotRange;
+
     void Start()
     {
-        _rotation = Quaternion.Euler(0, 0, 0);
-        //_point = GetComponent<AudioSource>();
+        _rotation = Quaternion.Euler(0, 0, Random.Range(rotRange.min, rotRange.max));
         _bar.transform.rotation = _rotation;
     }
 
@@ -24,10 +32,9 @@ public class RingRotation : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.transform.rotation.z);
+
         if (other.transform.rotation.z >= _rotation.z - epsilon && other.transform.rotation.z <= _rotation.z + epsilon)
         { 
-            //_point.Play(0);
             Debug.Log("15 point");
             other.GetComponent<FigureManager>().UpdateScore(15);
         }
