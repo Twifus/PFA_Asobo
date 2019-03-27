@@ -5,19 +5,48 @@ public class Program
 {
     static void Main(string[] args)
     {
+        /* 
         LoopingAutomata l = new LoopingAutomata();
         Coordinate simu = new Coordinate();
-        List<int> trajectoryX = new List<int>();
-        trajectoryX.Add(120);
-        trajectoryX.Add(200);
-        trajectoryX.Add(200);
-        trajectoryX.Add(60);
-        trajectoryX.Add(120);
-        trajectoryX.Add(200);
-        trajectoryX.Add(300);
-        trajectoryX.Add(10);
-        trajectoryX.Add(100);
 
+        Console.WriteLine("Current State Looping = " + l.CurrentState + " with angle " + simu.xangle);
+
+        simu.xangle = 60;
+        simu.yangle = -30;
+        l.calculateState(simu);
+        Console.WriteLine("Current State Looping = " + l.CurrentState + " with angle " + simu.xangle);
+
+        simu.xangle = 70;
+        simu.yangle = 30;
+        l.calculateState(simu);
+        Console.WriteLine("Current State Looping = " + l.CurrentState + " with angle " + simu.xangle);
+
+        simu.xangle = -30;
+        l.calculateState(simu);
+        Console.WriteLine("Current State Looping = " + l.CurrentState + " with angle " + simu.xangle);
+
+        simu.xangle = -30;
+        simu.yangle = -30;
+        l.calculateState(simu);
+        Console.WriteLine("Current State Looping = " + l.CurrentState + " with angle " + simu.xangle);
+
+        simu.xangle = 30;
+        simu.yangle = -30;
+        l.calculateState(simu);
+        Console.WriteLine("Current State Looping = " + l.CurrentState + " with angle " + simu.xangle);
+        if (l.isValid()) {
+            l.resetStates();
+        }
+
+        simu.xangle = 70;
+        simu.yangle = 30;
+        l.calculateState(simu);
+        Console.WriteLine("Current State Looping = " + l.CurrentState + " with angle " + simu.xangle);
+        if (l.isValid()) {
+            l.resetStates();
+        }
+        
+        /* 
         Console.WriteLine("LOOPING :");
         foreach(int newAngle in trajectoryX){
             simu.xangle = newAngle;
@@ -31,7 +60,7 @@ public class Program
         
         ARollAutomata a = new ARollAutomata();
         List<int> trajectoryZ = new List<int>();
-        trajectoryZ.Add(120);
+        trajectoryZ.Add(60);
         trajectoryZ.Add(120);
         trajectoryZ.Add(200);
         trajectoryZ.Add(300);
@@ -48,6 +77,8 @@ public class Program
                 a.resetStates();
             }
         }
+        */
     }
+    
     
 }

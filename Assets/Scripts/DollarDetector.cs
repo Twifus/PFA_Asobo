@@ -30,6 +30,10 @@ public class DollarDetector : IFigureDetection {
         _timePointsYaw = new List<TimePointF>(MAX_SIZE);
 }
 
+    public void setPoint(IFlyingObject plane)
+    {
+
+    }
 
     public void setPoint(Coordinate point) {
         if (_timePointsHeight.Count == MAX_SIZE)

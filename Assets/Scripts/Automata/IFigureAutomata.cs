@@ -26,5 +26,5 @@ public interface IFigureAutomata {
     //0 si le nouvel état est intermédiaire
     //-1 si l'automate recommence à l'état initial
     //si l'automate est déjà à l'état final, devrait renvoyer 1
-    int calculateState(Coordinate newPos);
+    int calculateState(IFlyingObject plane);
 }
