@@ -887,8 +887,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c608a61f3a54664295c552f9bff9cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  epsilon: 0
+  epsilon: 5
   _bar: {fileID: 1539964107}
+  rotRange:
+    min: 0
+    max: 90
 --- !u!4 &1859942979 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4123408653523720, guid: e3220e060b2863d41a2b703eaff8fe93,
