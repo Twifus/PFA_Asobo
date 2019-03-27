@@ -687,6 +687,11 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1963649687}
+    - target: {fileID: 3564073707629456582, guid: b87c6aacfc1bddb4e90804e0571675f7,
+        type: 3}
+      propertyPath: m_Mass
+      value: 800
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b87c6aacfc1bddb4e90804e0571675f7, type: 3}
 --- !u!1 &610949777
@@ -732,6 +737,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 016676a79450a5f4f917ddaf2e32957c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modeText: {fileID: 0}
+  selectionText: {fileID: 0}
   Player: {fileID: 1963649687}
 --- !u!4 &610949780
 Transform:

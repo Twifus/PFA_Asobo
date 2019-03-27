@@ -11,10 +11,13 @@ public class LoopingAutomata :FSMDetection, IFigureAutomata  {
     private float _forwardScalar = 0;
     float _rightScalarStart = 0;
     private float _rightScalar = 0;
-/* 
-    private double yaw1 = 1;
-    private double yaw2 = 1;
-    private int numberIterations = 0;*/
+    private float altitude = 0;
+    int window = 3;
+    int state;
+    /* 
+        private double yaw1 = 1;
+        private double yaw2 = 1;
+        private int numberIterations = 0;*/
     private bool jump = false;
 
     //renvoie une valeur convertie du pitch entre 0 et 360 
@@ -96,18 +99,128 @@ public class LoopingAutomata :FSMDetection, IFigureAutomata  {
     //-1 si l'automate recommence à l'état initial
     //si l'automate est déjà à l'état final, devrait renvoyer 1
     public int calculateState(IFlyingObject plane) {
+        init(plane);
+        if (isValid()) return 1;
+        checkAltitude(plane, 50, 2);
+        
+        Q1Loop(0);
+        Q2Loop(1);
+        Q3Loop(2);
+        Q4Loop(3);
+
+        //unity.Debug.Log(state);
+        //unity.Debug.Log("_upScalar :" + _upScalar);
+        //unity.Debug.Log("_forwardScalar :" + _forwardScalar);
+        //unity.Debug.Log(plane.pos.Y);
+        //unity.Debug.Log(altitude);
+        if (isValid()) return 1;
+        return 0;
+    }
+
+    public void init(IFlyingObject plane)
+    {
+        _forwardScalar = Vector3.Dot(plane.forward, System.Numerics.Vector3.UnitY);
+        _upScalar = Vector3.Dot(plane.up, System.Numerics.Vector3.UnitY);
+        _rightScalar = Vector3.Dot(plane.right, System.Numerics.Vector3.UnitY);
+        state = getCurrentState();
+        if (state == 0)
+        {
+            _rightScalarStart = Vector3.Dot(plane.right, System.Numerics.Vector3.UnitY);
+        }
+    }
+
+    //Vérifie si l'écart d'altitude entre l'état 0 et l'état controlSttae est bien supérieur à minAltitude
+    public void checkAltitude(IFlyingObject plane, int minAltitude, int controlState)
+    {
+        if (_forwardScalar <= 0.3 && state == 0)
+        {
+            altitude = plane.pos.Y;
+        }
+        if (_forwardScalar <= 0.2 && state == controlState)
+        {
+            if (plane.pos.Y < altitude + minAltitude)
+                resetStates();
+        }
+    }
+
+    public void Q1Loop(int automataState)
+    {
+        if (_upScalar <= 0 && _forwardScalar >= 0)
+        {
+            if ((state == automataState || state == automataState + 1) && (Math.Abs(_rightScalarStart - _rightScalar) < window))
+            {
+                MoveNext(automataState + 1);
+            }
+            else resetStates();
+        }
+    }
+
+    public void Q2Loop(int automataState)
+    {
+        if (_upScalar <= 0 && _forwardScalar < 0)
+        {
+            if ((state == automataState || state == automataState + 1) && (Math.Abs(_rightScalarStart - _rightScalar) < window))
+            {
+                MoveNext(automataState + 1);
+            }
+            else resetStates();
+        }
+    }
+
+    public void Q3Loop(int automataState)
+    {
+        if (_upScalar > 0 && _forwardScalar < 0)
+        {
+            if ((state == automataState || state == automataState + 1) && (Math.Abs(_rightScalarStart - _rightScalar) < window))
+            {
+                MoveNext(automataState + 1);
+            }
+            else resetStates();
+        }
+    }
+
+    public void Q4Loop(int automataState)
+    {
+        if (_upScalar >= 0 && _forwardScalar >= 0)
+        {
+            if ((state == automataState || state == automataState + 1) && (Math.Abs(_rightScalarStart - _rightScalar) < window))
+            {
+                MoveNext(automataState + 1);
+            }
+            else resetStates();
+        }
+    }
+
+    /*
+     public int calculateState(IFlyingObject plane) {
         _forwardScalar = Vector3.Dot(plane.forward, System.Numerics.Vector3.UnitY);
         _upScalar = Vector3.Dot(plane.up, System.Numerics.Vector3.UnitY);
         _rightScalar = Vector3.Dot(plane.right, System.Numerics.Vector3.UnitY);
         unity.Debug.Log("_upScalar :" + _upScalar);
         unity.Debug.Log("_forwardScalar :" + _forwardScalar);
         if (isValid()) return 1;
-        int window = 3;
+        
         int state = getCurrentState();
         unity.Debug.Log(state);
+
+        //Set les checkers au debut du loop
         if (state ==0){
             _rightScalarStart = Vector3.Dot(plane.right, System.Numerics.Vector3.UnitY);
+            
+            if (_forwardScalar <= 0.3)
+            {
+                altitude = plane.pos.Y;
+            }
         }
+        //Verif si l'alitude est assez haute au sommet du loop
+        if (_forwardScalar <= 0.2 && state == 2)
+        {
+            if (plane.pos.Y < altitude + 50)
+                resetStates();
+        }
+
+        unity.Debug.Log(plane.pos.Y);
+        unity.Debug.Log(altitude);
         if (_upScalar <= 0 && _forwardScalar >= 0){          
             if ((state == 0 || state == 1) && (Math.Abs(_rightScalarStart - _rightScalar) < window)){
                 MoveNext(1);
@@ -128,7 +241,6 @@ public class LoopingAutomata :FSMDetection, IFigureAutomata  {
 
         if (isValid()) return 1;
         return 0;
-    }
-
-    
+    }*/
 }
+ 
