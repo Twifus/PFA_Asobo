@@ -335,6 +335,7 @@ GameObject:
   - component: {fileID: 64871734343914304}
   - component: {fileID: 54021744868326790}
   - component: {fileID: 114377256108493888}
+  - component: {fileID: 8940004959757389267}
   m_Layer: 0
   m_Name: PlanePrefab
   m_TagString: Untagged
@@ -460,6 +461,21 @@ MonoBehaviour:
   Tail: {fileID: 4023946407432108}
   explosionPrefab: {fileID: 100010, guid: f9f259976dedf5d4ab698a1ea9cabb4a, type: 3}
   SmokeTrails: []
+--- !u!114 &8940004959757389267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820329296565668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a463b36210a8be2449c6f78fdb619e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plane: {fileID: 1820329296565668}
+  textScore: {fileID: 0}
+  textFigure: {fileID: 0}
 --- !u!1 &1966158552372660
 GameObject:
   m_ObjectHideFlags: 0
