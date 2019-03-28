@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Numerics;
 using unity = UnityEngine;
 
-public class LoopingAutomata :FSMDetection, IFigureAutomata  {
-    //private FSMLooping _myAuto;
+public class LoopingAutomata : FSMDetection, IFigureAutomata {
+
     private int _finalState;
     private bool _yawState = true;
     private float _upScalar = 0;
@@ -14,58 +14,23 @@ public class LoopingAutomata :FSMDetection, IFigureAutomata  {
     private float altitude = 0;
     int window = 3;
     int state;
-    /* 
-        private double yaw1 = 1;
-        private double yaw2 = 1;
-        private int numberIterations = 0;*/
-    private bool jump = false;
+    bool[] figure = new bool[4];
 
-    //renvoie une valeur convertie du pitch entre 0 et 360 
-    private double getTrueAngle(double pitch, double yaw) {
-        
-        
-        if(_yawState) {//yaw defaut > 0
-            if (yaw > 0)
-                return (pitch + 360)%360;
-            return 180 - pitch;
-            }
-        else {
-            if (yaw > 0)
-                return (pitch + 360)%360;
-            return 180 - pitch;
-        }
-        
-    }
 
-    public LoopingAutomata (int n = 4) {
+
+    public LoopingAutomata(int n = 4) {
         CurrentState = 0;
         _finalState = n;
         DicoTransitions = new Dictionary<FSMDetection.StateTransition, int>();
         for (int i = 0; i < n; i++) {
-            StateTransition t = new StateTransition(i, i+1); //transition vers l'etat suivant
-            DicoTransitions.Add(t, i+1);
+            StateTransition t = new StateTransition(i, i + 1); //transition vers l'etat suivant
+            DicoTransitions.Add(t, i + 1);
             //t = new StateTransition(i, 0); //transition vers l'etat de depart
             //DicoTransitions.Add(t, 0);
             t = new StateTransition(i, i); //transition vers l'etat courant (boucle)
             DicoTransitions.Add(t, i);
         }
     }
-/* =======
-        bool yawState = true;
-        int 
-        CurrentState = (int) LoopingState.Start;
-        DicoTransitions = new Dictionary<FSMDetection.StateTransition, int>{
-            {new StateTransition((int) LoopingState.Start,(int) LoopingTransition.todX90), (int) LoopingState.dX90},
-            {new StateTransition((int) LoopingState.dX90, (int) LoopingTransition.todX180), (int) LoopingState.dX180},
-            {new StateTransition((int) LoopingState.dX180, (int) LoopingTransition.todX270), (int) LoopingState.dX270},
-            {new StateTransition((int) LoopingState.dX270, (int) LoopingTransition.todX360), (int) LoopingState.Looping},
-            {new StateTransition((int) LoopingState.Looping, (int) LoopingTransition.Reset), (int) LoopingState.Start},
-            {new StateTransition((int) LoopingState.dX90, (int) LoopingTransition.Reset), (int) LoopingState.Start},
-            {new StateTransition((int) LoopingState.dX180, (int) LoopingTransition.Reset), (int) LoopingState.Start},
-            {new StateTransition((int) LoopingState.dX270, (int) LoopingTransition.Reset), (int) LoopingState.Start},
-        };
->>>>>>> bb571059a86d52aad4390efd9416d1613e200bf7*/
-    
 
     //reinitialise l'automate de la figure 
     //necessaire pour reset les automates terminés
@@ -98,23 +63,53 @@ public class LoopingAutomata :FSMDetection, IFigureAutomata  {
     //0 si le nouvel état est intermédiaire
     //-1 si l'automate recommence à l'état initial
     //si l'automate est déjà à l'état final, devrait renvoyer 1
-    public int calculateState(IFlyingObject plane) {
+    
+    public int calculateState(IFlyingObject plane)
+    {
         init(plane);
         if (isValid()) return 1;
         checkAltitude(plane, 50, 2);
-        
-        Q1Loop(0);
-        Q2Loop(1);
-        Q3Loop(2);
-        Q4Loop(3);
 
-        //unity.Debug.Log(state);
+        figure[0] = Q1Loop();
+        figure[1] = Q2Loop();
+        figure[2] = Q3Loop();
+        figure[3] = Q4Loop();
+        //figure[4] = Q1Loop();
+        //figure[5] = Q2Loop();
+
+        process();
+
+        //unity.Debug.Log("0 : " + Q1Loop() + ", 1 : " + Q2Loop() + ", 2 : " + Q3Loop() + ", 3 : " + Q4Loop());
+        //unity.Debug.Log(_finalState);
+        //unity.Debug.Log("State : " + state);
         //unity.Debug.Log("_upScalar :" + _upScalar);
         //unity.Debug.Log("_forwardScalar :" + _forwardScalar);
         //unity.Debug.Log(plane.pos.Y);
         //unity.Debug.Log(altitude);
         if (isValid()) return 1;
         return 0;
+    }
+
+    public void process()
+    {
+        if (figure[0])
+        {
+            MoveNext(1);
+        }
+        if (state > 0)
+        {
+            if (!figure[state - 1])
+            {
+                if (figure[state])
+                {
+                    MoveNext(state + 1);
+                }
+                else
+                {
+                    resetStates();
+                }
+            }
+        }
     }
 
     public void init(IFlyingObject plane)
@@ -143,53 +138,29 @@ public class LoopingAutomata :FSMDetection, IFigureAutomata  {
         }
     }
 
-    public void Q1Loop(int automataState)
+    public bool Q1Loop()
     {
-        if (_upScalar <= 0 && _forwardScalar >= 0)
-        {
-            if ((state == automataState || state == automataState + 1) && (Math.Abs(_rightScalarStart - _rightScalar) < window))
-            {
-                MoveNext(automataState + 1);
-            }
-            else resetStates();
-        }
+        return (_upScalar <= 0 && _forwardScalar >= 0 && (Math.Abs(_rightScalarStart - _rightScalar) < window));
     }
 
-    public void Q2Loop(int automataState)
+    public bool Q2Loop()
     {
-        if (_upScalar <= 0 && _forwardScalar < 0)
-        {
-            if ((state == automataState || state == automataState + 1) && (Math.Abs(_rightScalarStart - _rightScalar) < window))
-            {
-                MoveNext(automataState + 1);
-            }
-            else resetStates();
-        }
+        return ((_upScalar <= 0 && _forwardScalar < 0) && (Math.Abs(_rightScalarStart - _rightScalar) < window));
     }
 
-    public void Q3Loop(int automataState)
+    public bool Q3Loop()
     {
-        if (_upScalar > 0 && _forwardScalar < 0)
-        {
-            if ((state == automataState || state == automataState + 1) && (Math.Abs(_rightScalarStart - _rightScalar) < window))
-            {
-                MoveNext(automataState + 1);
-            }
-            else resetStates();
-        }
+        return ((_upScalar > 0 && _forwardScalar < 0) && (Math.Abs(_rightScalarStart - _rightScalar) < window));
     }
 
-    public void Q4Loop(int automataState)
+    public bool Q4Loop()
     {
-        if (_upScalar >= 0 && _forwardScalar >= 0)
-        {
-            if ((state == automataState || state == automataState + 1) && (Math.Abs(_rightScalarStart - _rightScalar) < window))
-            {
-                MoveNext(automataState + 1);
-            }
-            else resetStates();
-        }
+        return ((_upScalar >= 0 && _forwardScalar >= 0) && (Math.Abs(_rightScalarStart - _rightScalar) < window));
     }
+
+
+
+    /*  ANCIENNE VERSION */
 
     /*
      public int calculateState(IFlyingObject plane) {
