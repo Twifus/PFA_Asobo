@@ -4,7 +4,7 @@ using System.Numerics;
 using unity = UnityEngine;
 
 public class LoopingAutomata : FSMDetection, IFigureAutomata {
-    //private FSMLooping _myAuto;
+
     private int _finalState;
     private bool _yawState = true;
     private float _upScalar = 0;
@@ -14,31 +14,11 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
     private float altitude = 0;
     int window = 3;
     int state;
-    bool[] figure = new bool[6];
-    /* 
-        private double yaw1 = 1;
-        private double yaw2 = 1;
-        private int numberIterations = 0;*/
-    private bool jump = false;
-
-    //renvoie une valeur convertie du pitch entre 0 et 360 
-    private double getTrueAngle(double pitch, double yaw) {
+    bool[] figure = new bool[4];
 
 
-        if (_yawState) {//yaw defaut > 0
-            if (yaw > 0)
-                return (pitch + 360) % 360;
-            return 180 - pitch;
-        }
-        else {
-            if (yaw > 0)
-                return (pitch + 360) % 360;
-            return 180 - pitch;
-        }
 
-    }
-
-    public LoopingAutomata(int n = 6) {
+    public LoopingAutomata(int n = 4) {
         CurrentState = 0;
         _finalState = n;
         DicoTransitions = new Dictionary<FSMDetection.StateTransition, int>();
@@ -51,22 +31,6 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
             DicoTransitions.Add(t, i);
         }
     }
-    /* =======
-            bool yawState = true;
-            int 
-            CurrentState = (int) LoopingState.Start;
-            DicoTransitions = new Dictionary<FSMDetection.StateTransition, int>{
-                {new StateTransition((int) LoopingState.Start,(int) LoopingTransition.todX90), (int) LoopingState.dX90},
-                {new StateTransition((int) LoopingState.dX90, (int) LoopingTransition.todX180), (int) LoopingState.dX180},
-                {new StateTransition((int) LoopingState.dX180, (int) LoopingTransition.todX270), (int) LoopingState.dX270},
-                {new StateTransition((int) LoopingState.dX270, (int) LoopingTransition.todX360), (int) LoopingState.Looping},
-                {new StateTransition((int) LoopingState.Looping, (int) LoopingTransition.Reset), (int) LoopingState.Start},
-                {new StateTransition((int) LoopingState.dX90, (int) LoopingTransition.Reset), (int) LoopingState.Start},
-                {new StateTransition((int) LoopingState.dX180, (int) LoopingTransition.Reset), (int) LoopingState.Start},
-                {new StateTransition((int) LoopingState.dX270, (int) LoopingTransition.Reset), (int) LoopingState.Start},
-            };
-    >>>>>>> bb571059a86d52aad4390efd9416d1613e200bf7*/
-
 
     //reinitialise l'automate de la figure 
     //necessaire pour reset les automates terminés
@@ -104,20 +68,20 @@ public class LoopingAutomata : FSMDetection, IFigureAutomata {
     {
         init(plane);
         if (isValid()) return 1;
-        //checkAltitude(plane, 50, 2);
+        checkAltitude(plane, 50, 2);
 
         figure[0] = Q1Loop();
         figure[1] = Q2Loop();
         figure[2] = Q3Loop();
         figure[3] = Q4Loop();
-        figure[4] = Q1Loop();
-        figure[5] = Q2Loop();
+        //figure[4] = Q1Loop();
+        //figure[5] = Q2Loop();
 
         process();
 
         //unity.Debug.Log("0 : " + Q1Loop() + ", 1 : " + Q2Loop() + ", 2 : " + Q3Loop() + ", 3 : " + Q4Loop());
         //unity.Debug.Log(_finalState);
-        unity.Debug.Log("State : " + state);
+        //unity.Debug.Log("State : " + state);
         //unity.Debug.Log("_upScalar :" + _upScalar);
         //unity.Debug.Log("_forwardScalar :" + _forwardScalar);
         //unity.Debug.Log(plane.pos.Y);

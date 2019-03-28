@@ -27,7 +27,6 @@ public class DummyPlayer : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        Debug.Log(0);
         _plane = Plane.NewPlane(Player);
     }
 
