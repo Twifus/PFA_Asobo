@@ -38,9 +38,7 @@ sysinfo.txt
 Assets/Scripts/LessBasicPlaneController.cs
 Assets/Scripts/LessBasicPlaneController.cs.meta
 ProjectSettings/ProjectVersion.txt
-ProjectSettings/ProjectVersion.txt
-ProjectSettings/ProjectVersion.txt
-Assets/Scripts/Automata/bin/Debug/netcoreapp2.2/Automata.deps.json
-Assets/Scripts/Automata/bin/Debug/netcoreapp2.2/Automata.dll
-Assets/Scripts/Automata/bin/Debug/netcoreapp2.2/Automata.runtimeconfig.dev.json
-Assets/Scripts/Automata/bin/Debug/netcoreapp2.2/Automata.runtimeconfig.json
+Assets/Scripts/Automata/bin/*
+Assets/Scripts/Automata/bin.meta
+Assets/Scripts/netcoreapp2.2/*
+Assets/Scripts/netcoreapp2.2.meta
