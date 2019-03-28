@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+//using unity = UnityEngine;
 
 /*
     Représente le gestionaire des automates
@@ -8,15 +9,22 @@ using System.Collections.Generic;
 public class AutomataDetector : IFigureDetection {
     private List<IFigureAutomata> _myAutomatas;
 
-    public AutomataDetector(int n) {
+    public AutomataDetector() {
         _myAutomatas = new List<IFigureAutomata>();
-        for(int i = 0; i < n; i++)
-            _myAutomatas.Add(new DummyAutomata());
+        _myAutomatas.Add(new LoopingAutomata());
+        _myAutomatas.Add(new ARollAutomata());
+        //for (int i = 0; i < n; i++)
+        //    _myAutomatas.Add(new DummyAutomata());
     }
 
-    public void setPoint(Coordinate point) {
+    public void setPoint(Coordinate coord) {
+        ;
+    }
+
+    public void setPoint(IFlyingObject plane) {
+        //unity.Debug.Log("Test");
         foreach (IFigureAutomata auto in _myAutomatas)
-            auto.calculateState(point);
+            auto.calculateState(plane);
     }
 
     public void setPoint(IFlyingObject flyingObject) { }
@@ -25,11 +33,11 @@ public class AutomataDetector : IFigureDetection {
         List<Figure> list = new List<Figure>();
         foreach (IFigureAutomata auto in _myAutomatas) {
             if(auto.isValid()) {
-                list.Add(new Figure(auto.getFigureId(), 100));
+                list.Add(new Figure(auto.getFigureId(), 1f));
                 auto.resetStates();
             }
-            else
-                list.Add(new Figure(auto.getFigureId(), 0));
+            //else
+            //    list.Add(new Figure(auto.getFigureId(), 0));
         }
         return list;
     }

@@ -30,5 +30,5 @@ public class DummyAutomata : IFigureAutomata {
     public bool isValid() {return true;}
     public int getCurrentState() {return 0;}
     public int getNumberOfState() {return 3;}
-    public int calculateState(Coordinate newPos) {return 0;}
+    public int calculateState(IFlyingObject plane) {return 0;}
 }

@@ -15,7 +15,7 @@ public class FigureManager : MonoBehaviour{
     public Text textScore;
     public Text textFigure;
 
-    private Plane _plane;
+    private IFlyingObject _plane;
     private int _score;
     private float _timeToDisplay;
     private string[] _figureName;
@@ -34,7 +34,7 @@ public class FigureManager : MonoBehaviour{
     private void Start()
     {
         //_figureDetection = new FigureFaussaire();
-        _figureDetection = new DollarDetector();
+        _figureDetection = new AutomataDetector();
         _score = 0;
         _plane = Plane.NewPlane(plane);
         _timeToDisplay = Time.time;
@@ -59,23 +59,22 @@ public class FigureManager : MonoBehaviour{
 
 
     /** Récupère les coordonnées et les rotations de l'avion dans un tableau (List<float> à voir) */
-    private void GetCoordinates(Plane _plane)
+    private void GetCoordinates(IFlyingObject _plane)
     {
-        Coordinate point = new Coordinate();
+        /*Coordinate point = new Coordinate();
         point.xpos = _plane.Position.x;
         point.ypos = _plane.Position.y;
         point.zpos = _plane.Position.z;
 
-        point.xangle = _plane.Rotation.x;
-        point.yangle = _plane.Rotation.y;
-        point.zangle = _plane.Rotation.z;
-        point.wangle = _plane.Rotation.w;
+        point.xangle = _plane.pitch;
+        point.yangle = _plane.yaw;
+        point.zangle = _plane.roll;
 
         point.roll = _plane.roll;
         point.pitch = _plane.pitch;
         point.yaw = _plane.yaw;
 
-        point.time = Time.time;
+        point.time = Time.time;*/
 
         //_figureDetection.setPoint(point);
         _figureDetection.setPoint(_plane);
@@ -90,7 +89,8 @@ public class FigureManager : MonoBehaviour{
 
     /** Appelle la fonction qui analyse la trajectoire */
     private void AnalyzeTrajectory()
-    {
+    { 
+        //Debug.Log(
         List<Figure> result = _figureDetection.detection();
         for(int i = 0; i < result.Count; i++)
         {

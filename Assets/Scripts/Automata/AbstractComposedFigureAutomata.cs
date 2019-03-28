@@ -42,14 +42,14 @@ public abstract class AbstractComposedFigureAutomata : IFigureAutomata {
         return 0;
     }
     public int getNumberOfState() {return 1;}
-    public int calculateState(Coordinate newPos) {
-        int mainState = _mainFigure.calculateState(newPos);
+    public int calculateState(IFlyingObject plane) {
+        int mainState = _mainFigure.calculateState(plane);
         if (mainState == -1)
             resetStates(); //on relance tout
         else { //cas normal
             int i = 0;
             foreach(IFigureAutomata auto in _subFigures) {
-                if(auto.calculateState(newPos) == 1)
+                if(auto.calculateState(plane) == 1)
                     _subFiguresRealised[i] = true;
                 i++;
             }
