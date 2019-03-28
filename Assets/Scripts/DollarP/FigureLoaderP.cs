@@ -21,6 +21,7 @@ public class FigureLoaderP {
         Loop(height, roll, pitch, yaw);
         Roll(height, roll, pitch, yaw);
         //CubanEight(height, roll, pitch, yaw);
+        StraightLine(height, roll, pitch, yaw);
     }
 
     #endregion
@@ -134,6 +135,23 @@ public class FigureLoaderP {
         gesturesRoll.Add(new Gesture(roll.ToArray(), "DoubleDemieLigneMontante"));
         gesturesPitch.Add(new Gesture(pitch.ToArray(), "DoubleZigZag"));
         //gesturesYaw.Add(new Gesture(yaw.ToArray(), "LigneCoupee"));
+    }
+
+    private void StraightLine(List<Gesture> gesturesHeight, List<Gesture> gesturesRoll, List<Gesture> gesturesPitch, List<Gesture> gesturesYaw) {
+        StreamReader file = new StreamReader(filePath + "Perfect-StraightLine" + ".csv");
+        List<Point> height = new List<Point>();
+        List<Point> roll = new List<Point>();
+        List<Point> pitch = new List<Point>();
+        List<Point> yaw = new List<Point>();
+
+        // Lire le fichier et le parser
+        CSVParser(file, height, roll, pitch, yaw);
+
+        // Créer les figures
+        gesturesHeight.Add(new Gesture(height.ToArray(), "LigneDroite"));
+        gesturesRoll.Add(new Gesture(roll.ToArray(), "LigneDroite"));
+        gesturesPitch.Add(new Gesture(pitch.ToArray(), "LigneDroite"));
+        gesturesYaw.Add(new Gesture(yaw.ToArray(), "LigneDroite"));
     }
 
     #endregion

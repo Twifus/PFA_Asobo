@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+//using UnityEngine;
 using WobbrockLib;
 using WobbrockLib.Extensions;
 using PDollarGestureRecognizer;
@@ -34,11 +34,6 @@ public class DollarDetector : IFigureDetection {
         _timePointsRoll = new List<Point>();
         _timePointsPitch = new List<Point>();
         _timePointsYaw = new List<Point>();
-    }
-
-    public void setPoint(IFlyingObject plane)
-    {
-
     }
 
     public void setPoint(Coordinate point) {
@@ -106,7 +101,7 @@ public class DollarDetector : IFigureDetection {
 	public List<Figure> detection() {
         List<Figure> result = new List<Figure>();
 
-        Debug.Log(_timePointsHeight.Count);
+        //Debug.Log(_timePointsHeight.Count);
 
         if (_timePointsHeight.Count > 10)
         {
@@ -117,6 +112,12 @@ public class DollarDetector : IFigureDetection {
 
             //Debug.Log(resultHeight.Name + ", " + resultRoll.Name + ", " + resultPitch.Name + ", " + resultYaw.Name);
 
+            // Straight Line
+            if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "LigneDroite", "LigneDroite", "LigneDroite", "LigneDroite")) {
+                //Debug.Log("StraightLine");
+                //Debug.Log(resultHeight.Score + ", " + resultRoll.Score + ", " + resultPitch.Score + ", " + resultYaw.Score);
+                ClearLists();
+            }
 
             // Loop
             if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "Bosse", "LigneCoupee", "ZigZag", "LigneCoupee"))

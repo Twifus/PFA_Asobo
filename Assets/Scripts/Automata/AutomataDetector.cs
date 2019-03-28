@@ -27,8 +27,6 @@ public class AutomataDetector : IFigureDetection {
             auto.calculateState(plane);
     }
 
-    public void setPoint(IFlyingObject flyingObject) { }
-
     public List<Figure> detection() {
         List<Figure> list = new List<Figure>();
         foreach (IFigureAutomata auto in _myAutomatas) {
