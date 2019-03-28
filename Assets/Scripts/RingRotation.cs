@@ -33,7 +33,7 @@ public class RingRotation : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.transform.rotation.z >= _rotation.z - epsilon && other.transform.rotation.z <= _rotation.z + epsilon)
+        if (other.transform.rotation.eulerAngles.z >= _rotation.eulerAngles.z - epsilon && other.transform.rotation.eulerAngles.z <= _rotation.eulerAngles.z + epsilon)
         { 
             Debug.Log("15 point");
             other.GetComponent<FigureManager>().UpdateScore(15);
