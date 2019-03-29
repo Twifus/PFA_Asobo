@@ -22,7 +22,7 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
     //appelé par l'interface et/ou les automates parents
     public void resetStates()
     {
-        CurrentState = (int)ARollState.Start;
+        CurrentState = 0;
     }
     //renvoie l'id de la figure représentée par FigureId
     public abstract figure_id getFigureId();
