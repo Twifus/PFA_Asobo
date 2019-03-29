@@ -13,6 +13,7 @@ public class AutomataDetector : IFigureDetection {
         _myAutomatas = new List<IFigureAutomata>();
         _myAutomatas.Add(new LoopingAutomata());
         _myAutomatas.Add(new ARollAutomata());
+        _myAutomatas.Add(new CEAutomata());
         //for (int i = 0; i < n; i++)
         //    _myAutomatas.Add(new DummyAutomata());
     }
