@@ -8,6 +8,9 @@ using UnityEngine.UI;
  * afin d'enregistrer les données suivant la volonté de l'utilisateur 
  */
 public class FigureManager : MonoBehaviour{
+    public enum Detector { Faussaire, Automata, Dollar };
+
+    public Detector detector;
     private IFigureDetection _figureDetection;
     //public Settings settings;
 
@@ -33,8 +36,13 @@ public class FigureManager : MonoBehaviour{
 
     private void Start()
     {
-        //_figureDetection = new FigureFaussaire();
-        _figureDetection = new AutomataDetector();
+        // Init detector
+        if (detector == Detector.Faussaire)
+            _figureDetection = new FigureFaussaire();
+        else if (detector == Detector.Automata)
+            _figureDetection = new AutomataDetector();
+        else if (detector == Detector.Dollar)
+            _figureDetection = new DollarDetector();
         _score = 0;
         _plane = Plane.NewPlane(plane);
         _timeToDisplay = Time.time;
@@ -46,10 +54,11 @@ public class FigureManager : MonoBehaviour{
         DisableText();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         //Condition sur les frames pour enregistrement des coordonnées
-        GetCoordinates(_plane);
+        //GetCoordinates(_plane);
+        _figureDetection.setPoint(_plane);
         AnalyzeTrajectory();
         if(Time.time > _timeToDisplay + 1.5f)
         {
@@ -77,8 +86,6 @@ public class FigureManager : MonoBehaviour{
         point.time = Time.time;*/
 
         //_figureDetection.setPoint(point);
-        _figureDetection.setPoint(_plane);
-
 
     }
 

@@ -42,11 +42,8 @@ public class FigureFaussaire: IFigureDetection{
     {
 
     }
-
-    public void setPoint(IFlyingObject plane)
-    {
-
-    }
+    
+    public void setPoint(IFlyingObject flyingObject) { }
 
     public List<Figure> detection()
     {

@@ -12,8 +12,6 @@ public class DummyPlayer : MonoBehaviour {
 
     private int mode = 0;
     private int selection = 0;
-    private int step = 0;
-    private float ts = 0f;
 
     private int nModes = 3;
     private string[] nameModes = { "Aucun", "Loop", "Roll", "Cuban8" };
@@ -43,8 +41,7 @@ public class DummyPlayer : MonoBehaviour {
             file = null;
             return;
         }
-
-        Debug.Log(line);
+        
         string[] data = line.Split(';');
         CultureInfo ci = new CultureInfo("en-US");
         CustomInput.SetAxis("Accelerate", float.Parse(data[1], ci));
@@ -61,84 +58,6 @@ public class DummyPlayer : MonoBehaviour {
         CustomInput.ToggleDummyInput("Yaw");
     }
 
-    private void NextStep()
-    {
-        step++;
-        ts = Time.time;
-    }
-	
-    private void Wait(float t)
-    {
-        if (Time.time - ts > t)
-        {
-            NextStep();
-        }
-    }
-    
-    private void Looping()
-    {
-        switch (step)
-        {
-            case 0:
-                CustomInput.SetAxis("Accelerate", 1f);
-                CustomInput.SetAxis("Pitch", 0f);
-                CustomInput.SetAxis("Roll", 0f);
-                CustomInput.SetAxis("Yaw", 0f);
-                NextStep();
-                break;
-            case 1:
-                Wait(5f);
-                break;
-            case 2:
-                CustomInput.SetAxis("Pitch", 1f);
-                NextStep();
-                break;
-            case 3:
-                if (_plane.pitch < 0f)
-                    NextStep();
-                break;
-            case 4:
-                if (_plane.pitch > 5f)
-                    NextStep();
-                break;
-            case 5:
-                CustomInput.SetAxis("Pitch", 0f);
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void Roll()
-    {
-        switch (step)
-        {
-            case 0:
-                CustomInput.SetAxis("Accelerate", 1f);
-                CustomInput.SetAxis("Pitch", 0f);
-                CustomInput.SetAxis("Roll", 0f);
-                CustomInput.SetAxis("Yaw", 0f);
-                NextStep();
-                break;
-            case 1:
-                Wait(5f);
-                break;
-            case 2:
-                CustomInput.SetAxis("Pitch", 0.2f);
-                NextStep();
-                break;
-            case 3:
-                Wait(1f);
-                break;
-            case 4:
-                CustomInput.SetAxis("Pitch", 0f);
-                CustomInput.SetAxis("Roll", 1f);
-                break;
-            default:
-                break;
-        }
-    }
-
 	// Update is called once per frame
 	void Update ()
     {
@@ -146,7 +65,7 @@ public class DummyPlayer : MonoBehaviour {
         {
             selection = (selection + 1) % (nModes + 1);
             selectionText.text = "Selection : " + nameModes[selection];
-            //Debug.Log(selection);
+            //Debug.Log("Selected mode " + selection);
         }
 
         if (Input.GetButtonDown("StartReplay") && (selection != mode))
@@ -156,8 +75,6 @@ public class DummyPlayer : MonoBehaviour {
             //Debug.Log("Mode changed: " + mode + "->" + selection);
             mode = selection;
             modeText.text = "Actif : " + nameModes[selection];
-            //step = 0;
-            //ts = 0f;
         }
         
         switch (mode)

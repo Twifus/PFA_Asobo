@@ -45,6 +45,16 @@ public class ARollAutomata : SimpleAutomata {
         figure[2] = Q3ARoll();
         figure[3] = Q4ARoll();
 
+        /* CUBAN EIGHT */
+        //figure[0] = Q1Loop();
+        //figure[1] = Q2Loop();
+        //figure[2] = Q3ARoll();
+        //figure[3] = Q4ARoll();
+        //figure[4] = Q1Loop();
+        //figure[5] = Q2Loop();
+        //figure[6] = Q3ARoll();
+        //figure[7] = Q4ARoll();
+
 
         process();
 
