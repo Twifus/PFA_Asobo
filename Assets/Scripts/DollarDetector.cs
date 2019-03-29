@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-//using UnityEngine;
-using WobbrockLib;
-using WobbrockLib.Extensions;
+using UnityEngine;
+using System.IO;
 using PDollarGestureRecognizer;
 
 public class DollarDetector : IFigureDetection {
 
     private int MAX_SIZE = 280;
     private int time = 0;
+
+    private StreamWriter Writer;
 
     protected List<Point> _timePointsHeight;
     protected List<Point> _timePointsRoll;
@@ -76,9 +77,9 @@ public class DollarDetector : IFigureDetection {
         }
 
         _timePointsHeight.Add(new Point(time, flyingObject.pos.Y, 0));
-        _timePointsRoll.Add(new Point(time, flyingObject.rollScalar, 0));
-        _timePointsPitch.Add(new Point(time, flyingObject.pitchScalar, 0));
-        _timePointsYaw.Add(new Point(time, flyingObject.yawScalar, 0));
+        _timePointsRoll.Add(new Point(time, flyingObject.rollScalar*100, 0));
+        _timePointsPitch.Add(new Point(time, flyingObject.pitchScalar*100, 0));
+        _timePointsYaw.Add(new Point(time, flyingObject.yawScalar*100, 0));
     }
 
     protected void ClearLists()
@@ -90,12 +91,24 @@ public class DollarDetector : IFigureDetection {
         time = 0;
     }
 
+    public void WriteLists()
+    {
+        string path = string.Format("../Figure-{0}", System.DateTime.Now.ToFileTime());
+        Writer = new StreamWriter(path + ".csv", true);
+        for (int i = 0; i < _timePointsHeight.Count; i++)
+        {
+            Writer.WriteLine(string.Format("{0};{1};{2};{3};{4}",
+            _timePointsHeight[i].X, _timePointsHeight[i].Y, _timePointsRoll[i].Y, _timePointsPitch[i].Y, _timePointsYaw[i].Y));
+        }
+        Writer.Close();
+    }
+
     protected bool AnalyseResults(BestGesture resultHeight, BestGesture resultRoll, BestGesture resultPitch, BestGesture resultYaw, string height, string roll, string pitch, string yaw)
     {
-        return (resultHeight.Name.Equals(height) && resultHeight.Score > 0.7f
-            && resultRoll.Name.Equals(roll) //&& resultRoll.Score > 0.7f
-            && resultPitch.Name.Equals(pitch) && resultPitch.Score > 0.7f
-            && resultYaw.Name.Equals(yaw) && resultYaw.Score > 0.7f);
+        return (resultHeight.Name.Equals(height) //&& resultHeight.Score > 0.8f
+            && resultRoll.Name.Equals(roll) //&& resultRoll.Score > 0.8f
+            && resultPitch.Name.Equals(pitch) //&& resultPitch.Score > 0.8f
+            && resultYaw.Name.Equals(yaw)); //&& resultYaw.Score > 0.8f);
     }
 
 	public List<Figure> detection() {
@@ -122,8 +135,8 @@ public class DollarDetector : IFigureDetection {
             // Loop
             if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "Bosse", "LigneCoupee", "ZigZag", "LigneCoupee"))
             {
-                //Debug.Log("Loop");
-                //Debug.Log(resultHeight.Score + ", " + resultRoll.Score + ", " + resultPitch.Score + ", " + resultYaw.Score);
+                Debug.Log("Loop");
+                Debug.Log(resultHeight.Score + ", " + resultRoll.Score + ", " + resultPitch.Score + ", " + resultYaw.Score);
                 result.Add(new Figure());
                 result[0].id = figure_id.LOOP;
                 result[0].quality = 1f;
@@ -131,10 +144,10 @@ public class DollarDetector : IFigureDetection {
             }
 
             // Roll
-            if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "LigneDroite", "LigneMontante", "LigneDroite", "LigneDroite"))
+            if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "LigneDroite", "LigneMontante", "LigneBizarre", "LigneDroite"))
             {
-                //Debug.Log("Roll");
-                //Debug.Log(resultHeight.Score + ", " + resultRoll.Score + ", " + resultPitch.Score + ", " + resultYaw.Score);
+                Debug.Log("Roll");
+                Debug.Log(resultHeight.Score + ", " + resultRoll.Score + ", " + resultPitch.Score + ", " + resultYaw.Score);
                 result.Add(new Figure());
                 result[0].id = figure_id.BARREL;
                 result[0].quality = 1f;
