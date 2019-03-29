@@ -35,7 +35,7 @@ public class ARollAutomata : FSMDetection, IFigureAutomata {
     //necessaire pour reset les automates terminés
     //appelé par l'interface et/ou les automates parents
     public void resetStates() {
-        CurrentState = (int) ARollState.Start;
+        CurrentState = 0;
     }
     //renvoie l'id de la figure représentée par FigureId
     public figure_id getFigureId() {
@@ -71,16 +71,16 @@ public class ARollAutomata : FSMDetection, IFigureAutomata {
         figure[2] = Q3ARoll();
         figure[3] = Q4ARoll();
 
-        /* CUBAN EIGHT
-        figure[0] = Q1Loop();
-        figure[1] = Q2Loop();
-        figure[2] = Q3ARoll();
-        figure[3] = Q4ARoll();
-        figure[4] = Q1Loop();
-        figure[5] = Q2Loop();
-        figure[6] = Q3Loop();
-        figure[7] = Q4Loop();
-            */
+        /* CUBAN EIGHT */
+        //figure[0] = Q1Loop();
+        //figure[1] = Q2Loop();
+        //figure[2] = Q3ARoll();
+        //figure[3] = Q4ARoll();
+        //figure[4] = Q1Loop();
+        //figure[5] = Q2Loop();
+        //figure[6] = Q3ARoll();
+        //figure[7] = Q4ARoll();
+
 
         process();
 
