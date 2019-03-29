@@ -1,14 +1,13 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
 using unity = UnityEngine;
 
-
-public class ARollAutomata : SimpleAutomata {
-
-
-    public ARollAutomata(){
-        int n = 4;
+public class CEAutomata : SimpleAutomata
+{
+    public CEAutomata()
+    {
+        int n = 8;
         CurrentState = 0;
         _finalState = n;
         DicoTransitions = new Dictionary<FSMDetection.StateTransition, int>();
@@ -23,28 +22,37 @@ public class ARollAutomata : SimpleAutomata {
         }
     }
 
+    //renvoie l'id de la figure représentée par FigureId
     public override figure_id getFigureId()
     {
-        return figure_id.BARREL;
+        return figure_id.CUBANEIGHT;
     }
     //affiche le nom de la figure que l'automate gère (debug)
-    public override string getName() {
-        return "Aileron Roll";
+    public override string getName()
+    {
+        return "Cuban eight";
     }
+
     //calcule le nouvel état de l'automate étant donné la position passée en paramètre
     //renvoie 1 si le nouvel état est terminal (même résultat que isValid())
     //0 si le nouvel état est intermédiaire
     //-1 si l'automate recommence à l'état initial
     //si l'automate est déjà à l'état final, devrait renvoyer 1
-    public override int calculateState(IFlyingObject plane) {
+
+    public override int calculateState(IFlyingObject plane)
+    {
         init(plane);
         if (isValid()) return 1;
+        checkAltitude(plane, 50, 2);
 
-        figure[0] = Q1ARoll();
-        figure[1] = Q2ARoll();
+        figure[0] = Q1Loop();
+        figure[1] = Q2Loop();
         figure[2] = Q3ARoll();
         figure[3] = Q4ARoll();
-
+        figure[4] = Q1Loop();
+        figure[5] = Q2Loop();
+        figure[6] = Q3ARoll();
+        figure[7] = Q4ARoll();
 
         process();
 
@@ -58,7 +66,5 @@ public class ARollAutomata : SimpleAutomata {
         if (isValid()) return 1;
         return 0;
     }
-
-
 
 }
