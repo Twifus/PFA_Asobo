@@ -54,6 +54,9 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
         }
         if (state > 0)
         {
+            if (figure[state - 1] && figure[state])
+                MoveNext(state + 1);
+
             if (!figure[state - 1])
             {
                 if (figure[state])
@@ -69,43 +72,43 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
     }
 
 
-    public bool Q1ARoll()
+    public bool Q2ARoll()
     {
         return (_upScalar <= 0 && _rightScalar <= 0);
     }
 
-    public bool Q2ARoll()
+    public bool Q3ARoll()
     {
         return (_upScalar <= 0 && _rightScalar >= 0);
     }
 
-    public bool Q3ARoll()
+    public bool Q4ARoll()
     {
         return (_upScalar >= 0 && _rightScalar >= 0);
     }
 
-    public bool Q4ARoll()
+    public bool Q1ARoll()
     {
         return (_upScalar >= 0 && _rightScalar <= 0);
     }
 
 
-    public bool Q1Loop()
+    public bool Q2Loop()
     {
         return (_upScalar <= 0 && _forwardScalar >= 0 && (Math.Abs(_rightScalarStart - _rightScalar) < window));
     }
 
-    public bool Q2Loop()
+    public bool Q3Loop()
     {
         return ((_upScalar <= 0 && _forwardScalar < 0) && (Math.Abs(_rightScalarStart - _rightScalar) < window));
     }
 
-    public bool Q3Loop()
+    public bool Q4Loop()
     {
         return ((_upScalar > 0 && _forwardScalar < 0) && (Math.Abs(_rightScalarStart - _rightScalar) < window));
     }
 
-    public bool Q4Loop()
+    public bool Q1Loop()
     {
         return ((_upScalar >= 0 && _forwardScalar >= 0) && (Math.Abs(_rightScalarStart - _rightScalar) < window));
     }
