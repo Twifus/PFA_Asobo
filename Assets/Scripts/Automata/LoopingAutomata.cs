@@ -42,12 +42,10 @@ public class LoopingAutomata : SimpleAutomata {
         if (isValid()) return 1;
         checkAltitude(plane, 50, 2);
 
-        figure[0] = Q1Loop();
-        figure[1] = Q2Loop();
-        figure[2] = Q3Loop();
-        figure[3] = Q4Loop();
-        //figure[4] = Q1Loop();
-        //figure[5] = Q2Loop();
+        figure[0] = Q2Loop();
+        figure[1] = Q3Loop();
+        figure[2] = Q4Loop();
+        figure[3] = Q1Loop();
 
         process();
 
