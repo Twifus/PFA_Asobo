@@ -13,7 +13,7 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
     public float _rightScalarStart = 0;
     public float _rightScalar = 0;
     public float altitude = 0;
-    public int window = 3;
+    public float window = 0.2f;
     public int state;
     public bool[] figure = new bool[20];
 
