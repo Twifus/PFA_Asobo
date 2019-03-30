@@ -61,9 +61,9 @@ public class CEAutomata : SimpleAutomata
 
         //unity.Debug.Log("0 : " + Q1Loop() + ", 1 : " + Q2Loop() + ", 2 : " + Q3Loop() + ", 3 : " + Q4Loop());
         //unity.Debug.Log(_finalState);
-        unity.Debug.Log("State : " + state);
-        unity.Debug.Log("_upScalar :" + _upScalar);
-        unity.Debug.Log("_rightScalar :" + _rightScalar);
+        //unity.Debug.Log("State : " + state);
+        //unity.Debug.Log("_upScalar :" + _upScalar);
+        //unity.Debug.Log("_rightScalar :" + _rightScalar);
         //unity.Debug.Log("_forwardScalar :" + _forwardScalar);
         //unity.Debug.Log(plane.pos.Y);
         //unity.Debug.Log(altitude);
