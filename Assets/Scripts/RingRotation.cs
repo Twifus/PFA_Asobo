@@ -18,11 +18,14 @@ public class RingRotation : MonoBehaviour
     private float _rotation;
     public ZRot rotRange;
 
+    private AudioSource _point;
+
     void Start()
     {
         _outer_rot_side = Random.Range(0, 2) * 2 - 1; // -1 or 1
         _rotation = Random.Range(rotRange.min, rotRange.max);
         _indicator.transform.Rotate(Vector3.forward, _rotation);
+        _point = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -37,6 +40,7 @@ public class RingRotation : MonoBehaviour
         if (Vector3.Angle(_indicator.transform.up, reference) < tolerance)
         { 
             Debug.Log("15 point");
+            _point.Play(0);
             other.GetComponent<FigureManager>().UpdateScore(15);
         }
     }
