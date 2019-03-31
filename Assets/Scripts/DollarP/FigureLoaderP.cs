@@ -44,9 +44,9 @@ public class FigureLoaderP {
             float[] values = Array.ConvertAll<string, float>(textLine.Split(';'), new Converter<string, float>(StringToFloat));
             long time = (long)(values[0] * 1000); // values[0] est le temps en secondes
             height.Add(new Point(i, values[2], 0));
-            roll.Add(new Point(i, values[19], 0));
-            pitch.Add(new Point(i, values[20], 0));
-            yaw.Add(new Point(i, values[21], 0));
+            roll.Add(new Point(i, values[19]*100, 0));
+            pitch.Add(new Point(i, values[20]*100, 0));
+            yaw.Add(new Point(i, values[21]*100, 0));
             i++;
         } while (file.Peek() != -1);
         
@@ -67,13 +67,12 @@ public class FigureLoaderP {
             float[] values = Array.ConvertAll<string, float>(textLine.Split(';'), new Converter<string, float>(StringToFloat));
             long time = (long)(values[0] * 1000); // values[0] est le temps en secondes
             height.Add(new Point(i, values[2], 0));
-            roll.Add(new Point(i, values[19], 0));
-            pitch.Add(new Point(i, values[20], 0));
-            yaw.Add(new Point(i, values[21], 0));
+            roll.Add(new Point(i, values[19]*100, 0));
+            pitch.Add(new Point(i, values[20]*100, 0));
+            yaw.Add(new Point(i, values[21]*100, 0));
             i++;
         } while (file.Peek() != -1);
     }
-
 
     // Convertisseur de string (au format "xx.xxx") en float
     private float StringToFloat(string s) {
@@ -95,10 +94,10 @@ public class FigureLoaderP {
         CSVParser(file, height, roll, pitch, yaw);
 
         // Créer les figures
-        gesturesHeight.Add(new Gesture(height.ToArray(), "Bosse"));
-        gesturesRoll.Add(new Gesture(roll.ToArray(), "LigneCoupee"));
+        gesturesHeight.Add(new Gesture(height.ToArray(), "BosseHaut"));
+        gesturesRoll.Add(new Gesture(roll.ToArray(), "BosseBas"));
         gesturesPitch.Add(new Gesture(pitch.ToArray(), "ZigZag"));
-        gesturesYaw.Add(new Gesture(yaw.ToArray(), "LigneCoupee"));
+        gesturesYaw.Add(new Gesture(yaw.ToArray(), "BosseBas"));
     }
 
 
@@ -113,8 +112,8 @@ public class FigureLoaderP {
         CSVParser(file, height, roll, pitch, yaw);
 
         // Créer les figures
-        gesturesHeight.Add(new Gesture(height.ToArray(), "LigneDroite"));
-        gesturesRoll.Add(new Gesture(roll.ToArray(), "LigneMontante"));
+        gesturesHeight.Add(new Gesture(height.ToArray(), "LigneDescendante"));
+        gesturesRoll.Add(new Gesture(roll.ToArray(), "BosseBas"));
         gesturesPitch.Add(new Gesture(pitch.ToArray(), "LigneDroite"));
         gesturesYaw.Add(new Gesture(yaw.ToArray(), "LigneDroite"));
     }
@@ -148,10 +147,10 @@ public class FigureLoaderP {
         CSVParser(file, height, roll, pitch, yaw);
 
         // Créer les figures
-        gesturesHeight.Add(new Gesture(height.ToArray(), "LigneDroite"));
+        //gesturesHeight.Add(new Gesture(height.ToArray(), "LigneDroite"));
         gesturesRoll.Add(new Gesture(roll.ToArray(), "LigneDroite"));
-        gesturesPitch.Add(new Gesture(pitch.ToArray(), "LigneDroite"));
-        gesturesYaw.Add(new Gesture(yaw.ToArray(), "LigneDroite"));
+        //gesturesPitch.Add(new Gesture(pitch.ToArray(), "LigneDroite"));
+        //gesturesYaw.Add(new Gesture(yaw.ToArray(), "LigneDroite"));
     }
 
     #endregion

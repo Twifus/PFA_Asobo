@@ -11,7 +11,7 @@ public class FigureManager : MonoBehaviour{
     public enum Detector { Faussaire, Automata, Dollar };
 
     public Detector detector;
-    private IFigureDetection _figureDetection;
+    private DollarDetector _figureDetection;
     //public Settings settings;
 
     public GameObject plane;
@@ -37,12 +37,14 @@ public class FigureManager : MonoBehaviour{
     private void Start()
     {
         // Init detector
-        if (detector == Detector.Faussaire)
+        /*if (detector == Detector.Faussaire)
             _figureDetection = new FigureFaussaire();
         else if (detector == Detector.Automata)
             _figureDetection = new AutomataDetector();
         else if (detector == Detector.Dollar)
             _figureDetection = new DollarDetector();
+        */
+        _figureDetection = new DollarDetector();
         _score = 0;
         _plane = Plane.NewPlane(plane);
         _timeToDisplay = Time.time;
@@ -63,6 +65,10 @@ public class FigureManager : MonoBehaviour{
         if(Time.time > _timeToDisplay + 1.5f)
         {
             DisableText();
+        }
+        if (Input.GetKeyDown("space"))
+        {
+            _figureDetection.WriteLists();
         }
     }
 
