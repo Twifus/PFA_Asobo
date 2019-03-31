@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using PDollarGestureRecognizer;
-using UnityEngine;
+//using UnityEngine;
 
 public class FigureLoaderP {
 
@@ -94,10 +94,10 @@ public class FigureLoaderP {
         CSVParser(file, height, roll, pitch, yaw);
 
         // Créer les figures
-        gesturesHeight.Add(new Gesture(height.ToArray(), "Bosse"));
-        gesturesRoll.Add(new Gesture(roll.ToArray(), "LigneCoupee"));
+        gesturesHeight.Add(new Gesture(height.ToArray(), "BosseHaut"));
+        gesturesRoll.Add(new Gesture(roll.ToArray(), "BosseBas"));
         gesturesPitch.Add(new Gesture(pitch.ToArray(), "ZigZag"));
-        gesturesYaw.Add(new Gesture(yaw.ToArray(), "LigneCoupee"));
+        gesturesYaw.Add(new Gesture(yaw.ToArray(), "BosseBas"));
     }
 
 
@@ -112,8 +112,8 @@ public class FigureLoaderP {
         CSVParser(file, height, roll, pitch, yaw);
 
         // Créer les figures
-        gesturesHeight.Add(new Gesture(height.ToArray(), "LigneDroite"));
-        gesturesRoll.Add(new Gesture(roll.ToArray(), "LigneMontante"));
+        gesturesHeight.Add(new Gesture(height.ToArray(), "LigneDescendante"));
+        gesturesRoll.Add(new Gesture(roll.ToArray(), "BosseBas"));
         gesturesPitch.Add(new Gesture(pitch.ToArray(), "LigneDroite"));
         gesturesYaw.Add(new Gesture(yaw.ToArray(), "LigneDroite"));
     }

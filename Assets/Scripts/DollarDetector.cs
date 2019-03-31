@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
@@ -84,6 +85,7 @@ public class DollarDetector : IFigureDetection {
 
     protected void ClearLists()
     {
+        Debug.Log("Clear");
         _timePointsHeight.Clear();
         _timePointsRoll.Clear();
         _timePointsPitch.Clear();
@@ -111,7 +113,76 @@ public class DollarDetector : IFigureDetection {
             && resultYaw.Name.Equals(yaw)); //&& resultYaw.Score > 0.8f);
     }
 
-	public List<Figure> detection() {
+    protected bool AnalyseResults(Dictionary<string, double> resultHeight, Dictionary<string, double> resultRoll, Dictionary<string, double> resultPitch, Dictionary<string, double> resultYaw, string height, string roll, string pitch, string yaw) {
+        double moy = 0;
+        moy += resultHeight.ContainsKey(height) ? resultHeight[height] : 0;
+        moy += resultRoll.ContainsKey(roll) ? resultRoll[roll] : 0;
+        moy += resultPitch.ContainsKey(pitch) ? resultPitch[pitch] : 0;
+        moy += resultYaw.ContainsKey(yaw) ? resultYaw[yaw] : 0;
+        moy /= 4;
+        //Console.WriteLine("Debug : " + moy);
+        return moy > 0.8;
+    }
+
+    private float FigureScore(Dictionary<string, double> resultHeight, Dictionary<string, double> resultRoll, Dictionary<string, double> resultPitch, Dictionary<string, double> resultYaw, string height, string roll, string pitch, string yaw) {
+        double moy = 0;
+        moy += resultHeight.ContainsKey(height) ? resultHeight[height] : 0;
+        moy += resultRoll.ContainsKey(roll) ? resultRoll[roll] : 0;
+        moy += resultPitch.ContainsKey(pitch) ? resultPitch[pitch] : 0;
+        moy += resultYaw.ContainsKey(yaw) ? resultYaw[yaw] : 0;
+        return (float)moy / 4;
+    }
+
+    private Figure FigureDone(Dictionary<string, double> resultHeight, Dictionary<string, double> resultRoll, Dictionary<string, double> resultPitch, Dictionary<string, double> resultYaw) {
+        float straightLine = FigureScore(resultHeight, resultRoll, resultPitch, resultYaw, "LigneDroite", "LigneDroite", "LigneDroite", "LigneDroite");
+        float loop = FigureScore(resultHeight, resultRoll, resultPitch, resultYaw, "BosseHaut", "BosseBas", "ZigZag", "BosseBas");
+        float barrel = FigureScore(resultHeight, resultRoll, resultPitch, resultYaw, "LigneDescendante", "BosseBas", "LigneDroite", "LigneDroite");
+        float cubanEight = FigureScore(resultHeight, resultRoll, resultPitch, resultYaw, "DoubleBosse", "DoubleDemieLigneMontante", "DoubleZigZag", "LigneCoupee");
+        float max = Math.Max(Math.Max(straightLine, loop), Math.Max(barrel, cubanEight));
+        Debug.Log(loop + ", " + barrel + ", " + straightLine);
+        if (max == loop && loop > 0.6) {
+            ClearLists();
+            return new Figure(figure_id.LOOP, 1);
+        }
+        else if (max == barrel && barrel > 0.79) {
+            ClearLists();
+            return new Figure(figure_id.BARREL, 1);
+        }
+        else if (max == cubanEight && cubanEight > 0.8) {
+            ClearLists();
+            return new Figure(figure_id.CUBANEIGHT, 1);
+        }
+        else if (straightLine < 0.4) {
+            ClearLists();
+            return null;
+        }
+        return null;
+    }
+
+    public List<Figure> DetectionBis() {
+        List<Figure> result = new List<Figure>();
+
+        //Debug.Log(_timePointsHeight.Count);
+
+        if (_timePointsHeight.Count > 60) {
+            Dictionary<string, double> resultHeight = PointCloudRecognizer.Recognize(new Gesture(_timePointsHeight.ToArray(), "test height"), gesturesHeight.ToArray());
+            Dictionary<string, double> resultRoll = PointCloudRecognizer.Recognize(new Gesture(_timePointsRoll.ToArray(), "test roll"), gesturesRoll.ToArray());
+            Dictionary<string, double> resultPitch = PointCloudRecognizer.Recognize(new Gesture(_timePointsPitch.ToArray(), "test pitch"), gesturesPitch.ToArray());
+            Dictionary<string, double> resultYaw = PointCloudRecognizer.Recognize(new Gesture(_timePointsYaw.ToArray(), "test yax"), gesturesYaw.ToArray());
+
+            //Debug.Log(resultHeight.Name + ", " + resultRoll.Name + ", " + resultPitch.Name + ", " + resultYaw.Name);
+
+            Figure figure = FigureDone(resultHeight, resultRoll, resultPitch, resultYaw);
+            if (figure != null) {
+                //Debug.Log(figure.id);
+                result.Add(figure);
+            }
+        }
+        return result;
+    }
+
+    public List<Figure> detection() {
+        return DetectionBis();
         List<Figure> result = new List<Figure>();
 
         //Debug.Log(_timePointsHeight.Count);
@@ -133,10 +204,10 @@ public class DollarDetector : IFigureDetection {
             }
 
             // Loop
-            if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "Bosse", "LigneCoupee", "ZigZag", "LigneCoupee"))
+            if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "BosseHaut", "BosseBas", "ZigZag", "BosseBas"))
             {
-                Debug.Log("Loop");
-                Debug.Log(resultHeight.Score + ", " + resultRoll.Score + ", " + resultPitch.Score + ", " + resultYaw.Score);
+                //Debug.Log("Loop");
+                //Debug.Log(resultHeight.Score + ", " + resultRoll.Score + ", " + resultPitch.Score + ", " + resultYaw.Score);
                 result.Add(new Figure());
                 result[0].id = figure_id.LOOP;
                 result[0].quality = 1f;
@@ -144,10 +215,11 @@ public class DollarDetector : IFigureDetection {
             }
 
             // Roll
-            if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "LigneDroite", "LigneMontante", "LigneBizarre", "LigneDroite"))
+            if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "LigneDescendante", "BosseBas", "LigneDroite", "LigneDroite"))
             {
-                Debug.Log("Roll");
-                Debug.Log(resultHeight.Score + ", " + resultRoll.Score + ", " + resultPitch.Score + ", " + resultYaw.Score);
+                
+                //Debug.Log("Roll");
+                //Debug.Log(resultHeight.Score + ", " + resultRoll.Score + ", " + resultPitch.Score + ", " + resultYaw.Score);
                 result.Add(new Figure());
                 result[0].id = figure_id.BARREL;
                 result[0].quality = 1f;
