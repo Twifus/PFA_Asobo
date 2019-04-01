@@ -8,7 +8,7 @@ public class ARollLeftAutomata : SimpleAutomata
 {
     public ARollLeftAutomata()
     {
-        int n = 4;
+        int n = 5;
         CurrentState = 0;
         _finalState = n;
         DicoTransitions = new Dictionary<FSMDetection.StateTransition, int>();
@@ -42,11 +42,13 @@ public class ARollLeftAutomata : SimpleAutomata
         init(plane);
         if (isValid()) return 1;
         checkTime(3);
+        checkForward();
 
-        figure[0] = Q3ARoll();
-        figure[1] = Q2ARoll();
-        figure[2] = Q1ARoll();
-        figure[3] = Q4ARoll();
+        figure[0] = Q4ARoll();
+        figure[1] = Q3ARoll();
+        figure[2] = Q2ARoll();
+        figure[3] = Q1ARoll();
+        figure[4] = Q4ARoll();
 
         process();
 

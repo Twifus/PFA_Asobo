@@ -13,6 +13,7 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
     public float _upScalar = 0;
     public float _forwardScalar = 0;
     public float _rightScalarStart = 0;
+    public float _forwardScalarStart = 0;
     public float _rightScalar = 0;
     public float altitude = 0;
     public float window = 0.2f;
@@ -117,6 +118,18 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
         return ((_upScalar >= 0 && _forwardScalar >= 0) && (Math.Abs(_rightScalarStart - _rightScalar) < window));
     }
 
+    public void checkForward()
+    {
+        if (state == 1)
+        {
+            _forwardScalarStart = _forwardScalar;
+        }
+        if (Math.Abs(_forwardScalarStart - _forwardScalar) > 0.3)
+        {
+            resetStates();
+        }
+    }
+
     public void init(IFlyingObject plane)
     {
         _forwardScalar = Vector3.Dot(plane.forward, System.Numerics.Vector3.UnitY);
@@ -132,7 +145,7 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
     //Vérifie si l'écart d'altitude entre l'état 0 et l'état controlSttae est bien supérieur à minAltitude
     public void checkAltitude(IFlyingObject plane, int minAltitude, int controlState)
     {
-        if (_forwardScalar <= 0.3 && state == 0)
+        if (_forwardScalar <= 0.3 && state == 1)
         {
             altitude = plane.pos.Y;
         }
@@ -145,24 +158,27 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
 
     public void checkTime(int maxTime)
     {
-        
-        int tmpTime = 0;
-        
-        if (tmpState != getCurrentState())
+        if (getCurrentState() > 1)
         {
-            tmpState = getCurrentState();
-            time = DateTime.Now.Second;
-        } else
-        {
-            if (time + maxTime > 60)
-            {
-                tmpTime = DateTime.Now.Second - 60;
-            }
-            else tmpTime = DateTime.Now.Second;
+            int tmpTime = 0;
 
-            if ((time + maxTime) % 60 <= tmpTime)
+            if (tmpState != getCurrentState())
             {
-                resetStates();
+                tmpState = getCurrentState();
+                time = DateTime.Now.Second;
+            }
+            else
+            {
+                if (time + maxTime > 60)
+                {
+                    tmpTime = DateTime.Now.Second - 60;
+                }
+                else tmpTime = DateTime.Now.Second;
+
+                if ((time + maxTime) % 60 <= tmpTime)
+                {
+                    resetStates();
+                }
             }
         }
     }
