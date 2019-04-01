@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-//using unity = UnityEngine;
 
 /*
     Représente le gestionaire des automates

@@ -39,6 +39,7 @@ public class ARollAutomata : SimpleAutomata {
     public override int calculateState(IFlyingObject plane) {
         init(plane);
         if (isValid()) return 1;
+        checkTime(3);
 
         figure[0] = Q2ARoll();
         figure[1] = Q3ARoll();

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Numerics;
 using System;
+using System.Globalization;
+using unity = UnityEngine;
 
 public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
 {
@@ -15,6 +17,8 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
     public float altitude = 0;
     public float window = 0.2f;
     public int state;
+    public int tmpState = 0;
+    public int time;
     public bool[] figure = new bool[20];
 
     //reinitialise l'automate de la figure 
@@ -136,6 +140,30 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
         {
             if (plane.pos.Y < altitude + minAltitude)
                 resetStates();
+        }
+    }
+
+    public void checkTime(int maxTime)
+    {
+        
+        int tmpTime = 0;
+        
+        if (tmpState != getCurrentState())
+        {
+            tmpState = getCurrentState();
+            time = DateTime.Now.Second;
+        } else
+        {
+            if (time + maxTime > 60)
+            {
+                tmpTime = DateTime.Now.Second - 60;
+            }
+            else tmpTime = DateTime.Now.Second;
+
+            if ((time + maxTime) % 60 <= tmpTime)
+            {
+                resetStates();
+            }
         }
     }
 

@@ -41,11 +41,13 @@ public class LoopingAutomata : SimpleAutomata {
         init(plane);
         if (isValid()) return 1;
         checkAltitude(plane, 50, 2);
+        checkTime(3);
 
         figure[0] = Q2Loop();
         figure[1] = Q3Loop();
         figure[2] = Q4Loop();
         figure[3] = Q1Loop();
+
 
         process();
 

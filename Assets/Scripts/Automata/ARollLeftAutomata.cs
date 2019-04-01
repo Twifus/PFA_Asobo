@@ -41,6 +41,7 @@ public class ARollLeftAutomata : SimpleAutomata
     {
         init(plane);
         if (isValid()) return 1;
+        checkTime(3);
 
         figure[0] = Q3ARoll();
         figure[1] = Q2ARoll();
