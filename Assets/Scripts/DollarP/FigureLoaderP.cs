@@ -133,7 +133,7 @@ public class FigureLoaderP {
         gesturesHeight.Add(new Gesture(height.ToArray(), "DoubleBosse"));
         gesturesRoll.Add(new Gesture(roll.ToArray(), "DoubleDemieLigneMontante"));
         gesturesPitch.Add(new Gesture(pitch.ToArray(), "DoubleZigZag"));
-        //gesturesYaw.Add(new Gesture(yaw.ToArray(), "LigneCoupee"));
+        gesturesYaw.Add(new Gesture(yaw.ToArray(), "LigneCoupee"));
     }
 
     private void StraightLine(List<Gesture> gesturesHeight, List<Gesture> gesturesRoll, List<Gesture> gesturesPitch, List<Gesture> gesturesYaw) {
@@ -147,10 +147,10 @@ public class FigureLoaderP {
         CSVParser(file, height, roll, pitch, yaw);
 
         // Créer les figures
-        //gesturesHeight.Add(new Gesture(height.ToArray(), "LigneDroite"));
+        gesturesHeight.Add(new Gesture(height.ToArray(), "LigneDroite"));
         gesturesRoll.Add(new Gesture(roll.ToArray(), "LigneDroite"));
-        //gesturesPitch.Add(new Gesture(pitch.ToArray(), "LigneDroite"));
-        //gesturesYaw.Add(new Gesture(yaw.ToArray(), "LigneDroite"));
+        gesturesPitch.Add(new Gesture(pitch.ToArray(), "LigneDroite"));
+        gesturesYaw.Add(new Gesture(yaw.ToArray(), "LigneDroite"));
     }
 
     #endregion

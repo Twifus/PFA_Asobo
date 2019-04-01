@@ -42,6 +42,9 @@ public class DollarDetector : IFigureDetection {
         if (_timePointsHeight.Count == MAX_SIZE)
         {
             _timePointsHeight.RemoveAt(0);
+            _timePointsRoll.RemoveAt(0);
+            _timePointsPitch.RemoveAt(0);
+            _timePointsYaw.RemoveAt(0);
             int i;
             for (i = 0; i < MAX_SIZE - 1; i++)
             {
@@ -65,6 +68,9 @@ public class DollarDetector : IFigureDetection {
     public void setPoint(IFlyingObject flyingObject) {
         if (_timePointsHeight.Count == MAX_SIZE) {
             _timePointsHeight.RemoveAt(0);
+            _timePointsRoll.RemoveAt(0);
+            _timePointsPitch.RemoveAt(0);
+            _timePointsYaw.RemoveAt(0);
             int i;
             for (i = 0; i < MAX_SIZE - 1; i++) {
                 _timePointsHeight[i].X--;
@@ -85,7 +91,7 @@ public class DollarDetector : IFigureDetection {
 
     protected void ClearLists()
     {
-        Debug.Log("Clear");
+        //Debug.Log("Clear");
         _timePointsHeight.Clear();
         _timePointsRoll.Clear();
         _timePointsPitch.Clear();
@@ -144,7 +150,7 @@ public class DollarDetector : IFigureDetection {
             ClearLists();
             return new Figure(figure_id.LOOP, 1);
         }
-        else if (max == barrel && barrel > 0.79) {
+        else if (max == barrel && barrel > 0.85) {
             ClearLists();
             return new Figure(figure_id.BARREL, 1);
         }
@@ -152,7 +158,7 @@ public class DollarDetector : IFigureDetection {
             ClearLists();
             return new Figure(figure_id.CUBANEIGHT, 1);
         }
-        else if (straightLine < 0.4) {
+        else if (straightLine > 0.9) {
             ClearLists();
             return null;
         }
