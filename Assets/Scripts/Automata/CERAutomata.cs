@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Numerics;
 using unity = UnityEngine;
 
-
-public class ARollLeftAutomata : SimpleAutomata
+public class CERAutomata : SimpleAutomata
 {
-    public ARollLeftAutomata()
+
+    public CERAutomata()
     {
-        int n = 5;
+        int n = 9; //NOMBRE D'ETATS
         CurrentState = 0;
         _finalState = n;
         DicoTransitions = new Dictionary<FSMDetection.StateTransition, int>();
@@ -23,32 +23,41 @@ public class ARollLeftAutomata : SimpleAutomata
         }
     }
 
+    //renvoie l'id de la figure représentée par FigureId
     public override figure_id getFigureId()
     {
-        return figure_id.BARREL;
+        return figure_id.CUBANEIGHT;
     }
     //affiche le nom de la figure que l'automate gère (debug)
     public override string getName()
     {
-        return "Aileron Roll";
+        return "Cuban eight";
     }
+
     //calcule le nouvel état de l'automate étant donné la position passée en paramètre
     //renvoie 1 si le nouvel état est terminal (même résultat que isValid())
     //0 si le nouvel état est intermédiaire
     //-1 si l'automate recommence à l'état initial
     //si l'automate est déjà à l'état final, devrait renvoyer 1
+
     public override int calculateState(IFlyingObject plane)
     {
         init(plane);
+        window = 1;
         if (isValid()) return 1;
-        checkTime(3);
-        checkForward();
+        checkAltitude(plane, 50, 2);
+        //checkAltitude(plane, 50, 7);
+        checkTime(8);
 
-        figure[0] = Q4ARoll();
-        figure[1] = Q3ARoll();
-        figure[2] = Q2ARoll();
-        figure[3] = Q1ARoll();
+        figure[0] = Q1Loop();
+        figure[1] = Q2Loop();
+        figure[2] = Q3Loop();
+        figure[3] = Q3ARoll();
         figure[4] = Q4ARoll();
+        figure[5] = Q2Loop();
+        figure[6] = Q3Loop();
+        figure[7] = Q3ARoll();
+        figure[8] = Q4ARoll();
 
         process();
 
@@ -63,5 +72,4 @@ public class ARollLeftAutomata : SimpleAutomata
         if (isValid()) return 1;
         return 0;
     }
-
 }

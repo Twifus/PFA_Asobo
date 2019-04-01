@@ -8,7 +8,7 @@ public class CEAutomata : SimpleAutomata
 
     public CEAutomata()
     {
-        int n = 9; //NOMBRE D'ETATS
+        int n = 10; //NOMBRE D'ETATS
         CurrentState = 0;
         _finalState = n;
         DicoTransitions = new Dictionary<FSMDetection.StateTransition, int>();
@@ -45,18 +45,21 @@ public class CEAutomata : SimpleAutomata
         init(plane);
         window = 1;
         if (isValid()) return 1;
-        //checkAltitude(plane, 50, 2);
+        checkAltitude(plane, 50, 2);
+        //checkAltitude(plane, 50, 7);
+        checkTime(8);
 
-        figure[0] = Q2Loop();
-        figure[1] = Q3Loop();
-        figure[2] = Q3ARoll();
-        figure[3] = Q4ARoll();
-        figure[4] = Q1ARoll();
-        figure[5] = Q2Loop();
-        figure[6] = Q3Loop();
-        figure[7] = Q3ARoll();
-        figure[8] = Q4ARoll();
-
+        figure[0] = Q1Loop();
+        figure[1] = Q2Loop();
+        figure[2] = Q3Loop();
+        figure[3] = Q3ARoll();
+        figure[4] = Q4ARoll();
+        figure[5] = Q1ARoll();
+        figure[6] = Q2Loop();
+        figure[7] = Q3Loop();
+        figure[8] = Q3ARoll();
+        figure[9] = Q4ARoll();
+    
         process();
 
         //unity.Debug.Log("0 : " + Q1Loop() + ", 1 : " + Q2Loop() + ", 2 : " + Q3Loop() + ", 3 : " + Q4Loop());

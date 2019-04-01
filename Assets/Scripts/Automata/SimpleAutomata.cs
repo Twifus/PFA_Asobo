@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Numerics;
 using System;
+using System.Globalization;
+using unity = UnityEngine;
 
 public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
 {
@@ -11,10 +13,13 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
     public float _upScalar = 0;
     public float _forwardScalar = 0;
     public float _rightScalarStart = 0;
+    public float _forwardScalarStart = 0;
     public float _rightScalar = 0;
     public float altitude = 0;
     public float window = 0.2f;
     public int state;
+    public int tmpState = 0;
+    public int time;
     public bool[] figure = new bool[20];
 
     //reinitialise l'automate de la figure 
@@ -113,6 +118,19 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
         return ((_upScalar >= 0 && _forwardScalar >= 0) && (Math.Abs(_rightScalarStart - _rightScalar) < window));
     }
 
+    public void checkForward()
+    {
+        if (state == 1)
+        {
+            _forwardScalarStart = _forwardScalar;
+        }
+        if (Math.Abs(_forwardScalarStart - _forwardScalar) > 0.3)
+        {
+            //unity.Debug.Log("CheckForward failed");
+            resetStates();
+        }
+    }
+
     public void init(IFlyingObject plane)
     {
         _forwardScalar = Vector3.Dot(plane.forward, System.Numerics.Vector3.UnitY);
@@ -128,14 +146,47 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
     //Vérifie si l'écart d'altitude entre l'état 0 et l'état controlSttae est bien supérieur à minAltitude
     public void checkAltitude(IFlyingObject plane, int minAltitude, int controlState)
     {
-        if (_forwardScalar <= 0.3 && state == 0)
+        if (_forwardScalar <= 0.3 && state == 1)
         {
             altitude = plane.pos.Y;
         }
         if (_forwardScalar <= 0.2 && state == controlState)
         {
             if (plane.pos.Y < altitude + minAltitude)
+            {
+                //unity.Debug.Log("CheckAltitude failed");
                 resetStates();
+            }
+        }
+    }
+
+    public void checkTime(int maxTime)
+    {
+        if (getCurrentState() > 1)
+        {
+            int tmpTime = 0;
+
+            if (tmpState != getCurrentState())
+            {
+                tmpState = getCurrentState();
+                time = DateTime.Now.Second;
+            }
+            else
+            {  
+                if (time + maxTime > 60)
+                {
+                    tmpTime = DateTime.Now.Second - 60;
+                }
+                else tmpTime = DateTime.Now.Second;
+                //unity.Debug.Log(tmpTime + ", " + time + ", " + maxTime);
+                if ((time + maxTime) % 60 <= tmpTime)
+                {
+                    //unity.Debug.Log("CheckTime failed");
+                    resetStates();
+                    tmpState = -1;
+                    
+                }
+            }
         }
     }
 

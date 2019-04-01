@@ -7,7 +7,7 @@ public class LoopingAutomata : SimpleAutomata {
 
 
     public LoopingAutomata() {
-        int n = 4;
+        int n = 5;
         CurrentState = 0;
         _finalState = n;
         DicoTransitions = new Dictionary<FSMDetection.StateTransition, int>();
@@ -40,12 +40,15 @@ public class LoopingAutomata : SimpleAutomata {
     {
         init(plane);
         if (isValid()) return 1;
-        checkAltitude(plane, 50, 2);
+        checkAltitude(plane, 45, 3);
+        checkTime(5);
 
-        figure[0] = Q2Loop();
-        figure[1] = Q3Loop();
-        figure[2] = Q4Loop();
-        figure[3] = Q1Loop();
+        figure[0] = Q1Loop();
+        figure[1] = Q2Loop();
+        figure[2] = Q3Loop();
+        figure[3] = Q4Loop();
+        figure[4] = Q1Loop();
+
 
         process();
 
@@ -53,6 +56,7 @@ public class LoopingAutomata : SimpleAutomata {
         //unity.Debug.Log(_finalState);
         //unity.Debug.Log("State : " + state);
         //unity.Debug.Log("_upScalar :" + _upScalar);
+        //unity.Debug.Log("_rightScalar :" + _rightScalar);
         //unity.Debug.Log("_forwardScalar :" + _forwardScalar);
         //unity.Debug.Log(plane.pos.Y);
         //unity.Debug.Log(altitude);
