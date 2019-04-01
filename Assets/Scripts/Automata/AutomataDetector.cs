@@ -14,6 +14,7 @@ public class AutomataDetector : IFigureDetection {
         _myAutomatas.Add(new ARollAutomata());
         _myAutomatas.Add(new CEAutomata());
         _myAutomatas.Add(new ARollLeftAutomata());
+        _myAutomatas.Add(new CERAutomata());
         //for (int i = 0; i < n; i++)
         //    _myAutomatas.Add(new DummyAutomata());
     }

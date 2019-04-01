@@ -126,6 +126,7 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
         }
         if (Math.Abs(_forwardScalarStart - _forwardScalar) > 0.3)
         {
+            //unity.Debug.Log("CheckForward failed");
             resetStates();
         }
     }
@@ -152,7 +153,10 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
         if (_forwardScalar <= 0.2 && state == controlState)
         {
             if (plane.pos.Y < altitude + minAltitude)
+            {
+                //unity.Debug.Log("CheckAltitude failed");
                 resetStates();
+            }
         }
     }
 
@@ -168,16 +172,19 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
                 time = DateTime.Now.Second;
             }
             else
-            {
+            {  
                 if (time + maxTime > 60)
                 {
                     tmpTime = DateTime.Now.Second - 60;
                 }
                 else tmpTime = DateTime.Now.Second;
-
+                //unity.Debug.Log(tmpTime + ", " + time + ", " + maxTime);
                 if ((time + maxTime) % 60 <= tmpTime)
                 {
+                    //unity.Debug.Log("CheckTime failed");
                     resetStates();
+                    tmpState = -1;
+                    
                 }
             }
         }
