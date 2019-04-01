@@ -43,7 +43,7 @@ public class DummyPlayer : MonoBehaviour {
         }
         
         string[] data = line.Split(';');
-        CultureInfo ci = new CultureInfo("en-US");
+        CultureInfo ci = CultureInfo.InvariantCulture;
         CustomInput.SetAxis("Accelerate", float.Parse(data[1], ci));
         CustomInput.SetAxis("Roll", float.Parse(data[2], ci));
         CustomInput.SetAxis("Pitch", float.Parse(data[3], ci));

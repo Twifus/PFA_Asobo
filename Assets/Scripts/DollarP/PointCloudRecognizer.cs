@@ -68,21 +68,26 @@ namespace PDollarGestureRecognizer
     /// </summary>
     public class PointCloudRecognizer
     {
-        public static Dictionary<string, double> Recognize(Gesture candidate, Gesture[] trainingSet) {
+        // Retourne un dictionnaire du score de chacune des figures reconnues avec leur score
+        public static Dictionary<string, double> Recognize(Gesture candidate, Gesture[] trainingSet)
+        {
+
             Dictionary<string, double> scores = new Dictionary<string, double>();
-            foreach (Gesture template in trainingSet) {
+            foreach (Gesture template in trainingSet)
+            {
                 float dist = GreedyCloudMatch(candidate.Points, template.Points);
                 float value = Math.Max(0, (2 - dist) / 2);
-                if (scores.ContainsKey(template.Name)) {
+                if (scores.ContainsKey(template.Name))
+                {
                     scores[template.Name] = Math.Max(scores[template.Name], value);
                 }
-                else {
+                else
+                {
                     scores.Add(template.Name, value);
                 }
             }
             return scores;
         }
-
 
         /// <summary>
         /// Main function of the $P recognizer.
