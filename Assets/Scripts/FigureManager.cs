@@ -9,8 +9,9 @@ using UnityEngine.UI;
  */
 public class FigureManager : MonoBehaviour{
     public enum Detector { Faussaire, Automata, Dollar };
+    public static string[] DetectorName = { "Faussaire", "Automata", "$P"};
 
-    public Detector detector;
+    public static Detector detector = Detector.Automata;
     private IFigureDetection _figureDetection;
     //public Settings settings;
 
