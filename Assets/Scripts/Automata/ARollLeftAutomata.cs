@@ -1,13 +1,13 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
 using unity = UnityEngine;
 
 
-public class ARollAutomata : SimpleAutomata {
-
-
-    public ARollAutomata(){
+public class ARollLeftAutomata : SimpleAutomata
+{
+    public ARollLeftAutomata()
+    {
         int n = 5;
         CurrentState = 0;
         _finalState = n;
@@ -28,7 +28,8 @@ public class ARollAutomata : SimpleAutomata {
         return figure_id.BARREL;
     }
     //affiche le nom de la figure que l'automate gère (debug)
-    public override string getName() {
+    public override string getName()
+    {
         return "Aileron Roll";
     }
     //calcule le nouvel état de l'automate étant donné la position passée en paramètre
@@ -36,16 +37,18 @@ public class ARollAutomata : SimpleAutomata {
     //0 si le nouvel état est intermédiaire
     //-1 si l'automate recommence à l'état initial
     //si l'automate est déjà à l'état final, devrait renvoyer 1
-    public override int calculateState(IFlyingObject plane) {
+    public override int calculateState(IFlyingObject plane)
+    {
         init(plane);
         if (isValid()) return 1;
         checkTime(3);
         checkForward();
-        figure[0] = Q1ARoll();
-        figure[1] = Q2ARoll();
-        figure[2] = Q3ARoll();
-        figure[3] = Q4ARoll();
-        figure[4] = Q1ARoll();
+
+        figure[0] = Q4ARoll();
+        figure[1] = Q3ARoll();
+        figure[2] = Q2ARoll();
+        figure[3] = Q1ARoll();
+        figure[4] = Q4ARoll();
 
         process();
 
@@ -53,13 +56,12 @@ public class ARollAutomata : SimpleAutomata {
         //unity.Debug.Log(_finalState);
         //unity.Debug.Log("State : " + state);
         //unity.Debug.Log("_upScalar :" + _upScalar);
+        //unity.Debug.Log("_rightScalar :" + _rightScalar);
         //unity.Debug.Log("_forwardScalar :" + _forwardScalar);
         //unity.Debug.Log(plane.pos.Y);
         //unity.Debug.Log(altitude);
         if (isValid()) return 1;
         return 0;
     }
-
-
 
 }

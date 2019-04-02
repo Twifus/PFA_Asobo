@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using s = System.Numerics;
+using System.Globalization;
 
 public class PlaneTracker : MonoBehaviour {
 
@@ -80,18 +81,25 @@ public class PlaneTracker : MonoBehaviour {
                 recordImage.enabled = !recordImage.enabled;
                 blinkTime = Time.time;
             }
-            FileWriter.WriteLine(
-                string.Format(
-                    "{0};{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12};{13};{14};{15};{16};{17};{18};{19};{20};{21};{22};{23};{24};{25}",
-                    Time.time,
-                    Plane.pos.X, Plane.pos.Y, Plane.pos.Z,
-                    Plane.speed.X, Plane.speed.Y, Plane.speed.Z,
-                    Plane.roll, Plane.pitch, Plane.yaw,
-                    s.Vector3.Dot(Plane.right, s.Vector3.UnitX), s.Vector3.Dot(Plane.right, s.Vector3.UnitY), s.Vector3.Dot(Plane.right, s.Vector3.UnitZ),
-                    s.Vector3.Dot(Plane.up, s.Vector3.UnitX), s.Vector3.Dot(Plane.up, s.Vector3.UnitY), s.Vector3.Dot(Plane.up, s.Vector3.UnitZ),
-                    s.Vector3.Dot(Plane.forward, s.Vector3.UnitX), s.Vector3.Dot(Plane.forward, s.Vector3.UnitY), s.Vector3.Dot(Plane.forward, s.Vector3.UnitZ),
-                    Plane.rollScalar, Plane.pitchScalar, Plane.yawScalar,
-                    CustomInput.GetAxis("Accelerate"), CustomInput.GetAxis("Roll"), CustomInput.GetAxis("Pitch"), CustomInput.GetAxis("Yaw")));
+            // Convert data to invariable culture strings
+            float[] data = {
+                Time.time,
+                Plane.pos.X, Plane.pos.Y, Plane.pos.Z,
+                Plane.speed.X, Plane.speed.Y, Plane.speed.Z,
+                Plane.roll, Plane.pitch, Plane.yaw,
+                s.Vector3.Dot(Plane.right, s.Vector3.UnitX), s.Vector3.Dot(Plane.right, s.Vector3.UnitY), s.Vector3.Dot(Plane.right, s.Vector3.UnitZ),
+                s.Vector3.Dot(Plane.up, s.Vector3.UnitX), s.Vector3.Dot(Plane.up, s.Vector3.UnitY), s.Vector3.Dot(Plane.up, s.Vector3.UnitZ),
+                s.Vector3.Dot(Plane.forward, s.Vector3.UnitX), s.Vector3.Dot(Plane.forward, s.Vector3.UnitY), s.Vector3.Dot(Plane.forward, s.Vector3.UnitZ),
+                Plane.rollScalar, Plane.pitchScalar, Plane.yawScalar,
+                CustomInput.GetAxis("Accelerate"), CustomInput.GetAxis("Roll"), CustomInput.GetAxis("Pitch"), CustomInput.GetAxis("Yaw")
+            };
+            List<string> sdata = new List<string>();
+            foreach(float f in data)
+            {
+                sdata.Add(f.ToString(CultureInfo.InvariantCulture));
+            }
+            // Write in file
+            FileWriter.WriteLine(string.Join(";", sdata));
         }
     }
 

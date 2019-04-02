@@ -38,13 +38,17 @@ public class DollarDetector : IFigureDetection {
         _timePointsYaw = new List<Point>();
     }
 
+    // Add given coordinate to lists
     public void setPoint(Coordinate point) {
         if (_timePointsHeight.Count == MAX_SIZE)
         {
+            // Remove first element
             _timePointsHeight.RemoveAt(0);
             _timePointsRoll.RemoveAt(0);
             _timePointsPitch.RemoveAt(0);
             _timePointsYaw.RemoveAt(0);
+
+            // Update X coordinates
             int i;
             for (i = 0; i < MAX_SIZE - 1; i++)
             {
@@ -65,30 +69,38 @@ public class DollarDetector : IFigureDetection {
         _timePointsYaw.Add(new Point(time, point.yaw, 0));
     }
 
+    // Add current flying object coordinate to lists
     public void setPoint(IFlyingObject flyingObject) {
-        if (_timePointsHeight.Count == MAX_SIZE) {
+        if (_timePointsHeight.Count == MAX_SIZE)
+        {
+            // Remove first element
             _timePointsHeight.RemoveAt(0);
             _timePointsRoll.RemoveAt(0);
             _timePointsPitch.RemoveAt(0);
             _timePointsYaw.RemoveAt(0);
+
+            // Update X coordinates
             int i;
-            for (i = 0; i < MAX_SIZE - 1; i++) {
+            for (i = 0; i < MAX_SIZE - 1; i++)
+            {
                 _timePointsHeight[i].X--;
                 _timePointsRoll[i].X--;
                 _timePointsPitch[i].X--;
                 _timePointsYaw[i].X--;
             }
         }
-        else {
+        else
+        {
             time++;
         }
 
         _timePointsHeight.Add(new Point(time, flyingObject.pos.Y, 0));
-        _timePointsRoll.Add(new Point(time, flyingObject.rollScalar*100, 0));
-        _timePointsPitch.Add(new Point(time, flyingObject.pitchScalar*100, 0));
-        _timePointsYaw.Add(new Point(time, flyingObject.yawScalar*100, 0));
+        _timePointsRoll.Add(new Point(time, flyingObject.rollScalar, 0));
+        _timePointsPitch.Add(new Point(time, flyingObject.pitchScalar, 0));
+        _timePointsYaw.Add(new Point(time, flyingObject.yawScalar, 0));
     }
 
+    // Remove content of all lists
     protected void ClearLists()
     {
         //Debug.Log("Clear");
@@ -99,9 +111,10 @@ public class DollarDetector : IFigureDetection {
         time = 0;
     }
 
+    // DEBUG - Save current list in textfile
     public void WriteLists()
     {
-        string path = string.Format("../Figure-{0}", System.DateTime.Now.ToFileTime());
+        string path = string.Format("../DollarLog-{0}", System.DateTime.Now.ToFileTime());
         Writer = new StreamWriter(path + ".csv", true);
         for (int i = 0; i < _timePointsHeight.Count; i++)
         {
@@ -117,17 +130,6 @@ public class DollarDetector : IFigureDetection {
             && resultRoll.Name.Equals(roll) //&& resultRoll.Score > 0.8f
             && resultPitch.Name.Equals(pitch) //&& resultPitch.Score > 0.8f
             && resultYaw.Name.Equals(yaw)); //&& resultYaw.Score > 0.8f);
-    }
-
-    protected bool AnalyseResults(Dictionary<string, double> resultHeight, Dictionary<string, double> resultRoll, Dictionary<string, double> resultPitch, Dictionary<string, double> resultYaw, string height, string roll, string pitch, string yaw) {
-        double moy = 0;
-        moy += resultHeight.ContainsKey(height) ? resultHeight[height] : 0;
-        moy += resultRoll.ContainsKey(roll) ? resultRoll[roll] : 0;
-        moy += resultPitch.ContainsKey(pitch) ? resultPitch[pitch] : 0;
-        moy += resultYaw.ContainsKey(yaw) ? resultYaw[yaw] : 0;
-        moy /= 4;
-        //Console.WriteLine("Debug : " + moy);
-        return moy > 0.8;
     }
 
     private float FigureScore(Dictionary<string, double> resultHeight, Dictionary<string, double> resultRoll, Dictionary<string, double> resultPitch, Dictionary<string, double> resultYaw, string height, string roll, string pitch, string yaw) {
@@ -188,7 +190,7 @@ public class DollarDetector : IFigureDetection {
     }
 
     public List<Figure> detection() {
-        return DetectionBis();
+        //return DetectionBis();
         List<Figure> result = new List<Figure>();
 
         //Debug.Log(_timePointsHeight.Count);

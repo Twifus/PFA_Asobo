@@ -9,9 +9,10 @@ using UnityEngine.UI;
  */
 public class FigureManager : MonoBehaviour{
     public enum Detector { Faussaire, Automata, Dollar };
+    public static string[] DetectorName = { "Faussaire", "Automata", "$P"};
 
-    public Detector detector;
-    private DollarDetector _figureDetection;
+    public static Detector detector = Detector.Automata;
+    private IFigureDetection _figureDetection;
     //public Settings settings;
 
     public GameObject plane;
@@ -37,14 +38,13 @@ public class FigureManager : MonoBehaviour{
     private void Start()
     {
         // Init detector
-        /*if (detector == Detector.Faussaire)
+        if (detector == Detector.Faussaire)
             _figureDetection = new FigureFaussaire();
         else if (detector == Detector.Automata)
             _figureDetection = new AutomataDetector();
         else if (detector == Detector.Dollar)
             _figureDetection = new DollarDetector();
-        */
-        _figureDetection = new DollarDetector();
+        
         _score = 0;
         _plane = Plane.NewPlane(plane);
         _timeToDisplay = Time.time;
@@ -66,10 +66,11 @@ public class FigureManager : MonoBehaviour{
         {
             DisableText();
         }
-        if (Input.GetKeyDown("space"))
-        {
-            _figureDetection.WriteLists();
-        }
+
+        //if (Input.GetKeyDown("space"))
+        //{
+        //    _figureDetection.WriteLists();
+        //}
     }
 
 

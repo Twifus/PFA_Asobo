@@ -13,6 +13,7 @@ Assets/AssetStoreTools*
 ExportedObj/
 .consulo/
 *.csproj
+*.csproj.meta
 *.unityproj
 *.sln
 *.suo
@@ -39,6 +40,8 @@ Assets/Scripts/LessBasicPlaneController.cs
 Assets/Scripts/LessBasicPlaneController.cs.meta
 ProjectSettings/ProjectVersion.txt
 Assets/Scripts/Automata/bin/*
+Assets/Scripts/Automata/obj/*
 Assets/Scripts/Automata/bin.meta
+Assets/Scripts/Automata/obj.meta
 Assets/Scripts/netcoreapp2.2/*
 Assets/Scripts/netcoreapp2.2.meta

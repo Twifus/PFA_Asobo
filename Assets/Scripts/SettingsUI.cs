@@ -10,7 +10,7 @@ public class SettingsUI : MonoBehaviour
     public string[] AboutTextLines = new string[0];
 
     private string clicked = "", MessageDisplayOnAbout = "About \n ";
-    private Rect WindowRect = new Rect(3*Screen.width/7, Screen.height/3, 300, 500);
+    private Rect WindowRect = new Rect(3*Screen.width/7, Screen.height/3, 300, 700);
     private float volume = 1.0f;
     private float UserWingArea;
     private float UserLiftCoeff;
@@ -74,6 +74,27 @@ public class SettingsUI : MonoBehaviour
             }
             GUILayout.EndHorizontal();
         }
+        else if (clicked == "algorithm")
+        {
+            GUILayout.BeginVertical();
+            if (GUILayout.Button("Pattern Matching ($P)"))
+            {
+                FigureManager.detector = FigureManager.Detector.Dollar;
+                clicked = "options";
+            }
+            else if (GUILayout.Button("State Machines (Automata)"))
+            {
+                FigureManager.detector = FigureManager.Detector.Automata;
+                clicked = "options";
+            }
+            GUILayout.EndVertical();
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("Back"))
+            {
+                clicked = "options";
+            }
+            GUILayout.EndHorizontal();
+        }
     }
 
     private float Slider(string name, float f, float max)
@@ -88,6 +109,10 @@ public class SettingsUI : MonoBehaviour
         if (GUILayout.Button("Resolution"))
         {
             clicked = "resolution";
+        }
+        if (GUILayout.Button("Algorithme" + " (" + FigureManager.DetectorName[(int)FigureManager.detector] + ")"))
+        {
+            clicked = "algorithm";
         }
         volume = Slider("Volume", volume, 1.0f);
         UserWingArea = Slider("Wing Area", UserWingArea, 100.0f);
