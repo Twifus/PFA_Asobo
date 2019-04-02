@@ -51,7 +51,7 @@ public class PlaneController : MonoBehaviour
             _drag = -0.5f * PlaneSettings.DragCoeff * PlaneSettings.AirDensity * _body.velocity.sqrMagnitude * _body.velocity.normalized;
 
             /* Thrust */
-            _thrust = PlaneSettings.ThrustPower * PlaneSettings.ThrustCoeff * transform.forward;
+            _thrust = PlaneSettings.ThrustPower * PlaneSettings.ThrustMultiplier * transform.forward;
             _thrust = _thrust * CustomInput.GetAxis("Accelerate");
 
             _body.AddForceAtPosition(_thrust, Engine.position);
@@ -59,7 +59,7 @@ public class PlaneController : MonoBehaviour
             _body.AddForceAtPosition(_rlift, RightWing.position);
             _body.AddForce(_drag);
 
-            _body.AddForceAtPosition(-0.1f * baseLift.magnitude * CustomInput.GetAxis("Yaw") * transform.right, Tail.position); // Yaw
+            _body.AddForceAtPosition(- PlaneSettings.YawIntensity * baseLift.magnitude * CustomInput.GetAxis("Yaw") * transform.right, Tail.position); // Yaw
         }
     }
 

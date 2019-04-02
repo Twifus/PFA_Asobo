@@ -71,7 +71,6 @@ public class FigureLoaderP
         do
         {
             string textLine = file.ReadLine();
-            UnityEngine.Debug.Log(1.5f);
             float[] values = Array.ConvertAll<string, float>(textLine.Split(';'), new Converter<string, float>(StringToFloat));
             long time = (long)(values[0] * 1000); // values[0] est le temps en secondes
             height.Add(new Point(i, values[2], 0));
