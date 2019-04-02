@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using PDollarGestureRecognizer;
 using System.Globalization;
-//using UnityEngine;
+using UnityEngine;
 
 public class FigureLoaderP
 {
@@ -103,17 +103,17 @@ public class FigureLoaderP
         CSVParser(file, height, roll, pitch, yaw);
 
         // Créer les figures
-        gesturesHeight.Add(new Gesture(height.ToArray(), "BosseHaut"));
-        gesturesRoll.Add(new Gesture(roll.ToArray(), "BosseBas"));
-        gesturesPitch.Add(new Gesture(pitch.ToArray(), "ZigZag"));
-        gesturesYaw.Add(new Gesture(yaw.ToArray(), "BosseBas"));
+        gesturesHeight.Add(new Gesture(height.ToArray(), DollarFigure.loop[0]));
+        gesturesRoll.Add(new Gesture(roll.ToArray(), DollarFigure.loop[1]));
+        gesturesPitch.Add(new Gesture(pitch.ToArray(), DollarFigure.loop[2]));
+        gesturesYaw.Add(new Gesture(yaw.ToArray(), DollarFigure.loop[3]));
         file.Close();
     }
 
 
     private void Roll(List<Gesture> gesturesHeight, List<Gesture> gesturesRoll, List<Gesture> gesturesPitch, List<Gesture> gesturesYaw)
     {
-        StreamReader file = new StreamReader(filePath + "Perfect-Roll" + ".csv");
+        StreamReader file = new StreamReader(filePath + "Perfect-Barrel-L" + ".csv");
         List<Point> height = new List<Point>();
         List<Point> roll = new List<Point>();
         List<Point> pitch = new List<Point>();
@@ -123,10 +123,26 @@ public class FigureLoaderP
         CSVParser(file, height, roll, pitch, yaw);
 
         // Créer les figures
-        gesturesHeight.Add(new Gesture(height.ToArray(), "LigneDescendante"));
-        gesturesRoll.Add(new Gesture(roll.ToArray(), "BosseBas"));
-        gesturesPitch.Add(new Gesture(pitch.ToArray(), "LigneDroite"));
-        gesturesYaw.Add(new Gesture(yaw.ToArray(), "LigneDroite"));
+        gesturesHeight.Add(new Gesture(height.ToArray(), DollarFigure.barrelL[0]));
+        gesturesRoll.Add(new Gesture(roll.ToArray(), DollarFigure.barrelL[1]));
+        gesturesPitch.Add(new Gesture(pitch.ToArray(), DollarFigure.barrelL[2]));
+        gesturesYaw.Add(new Gesture(yaw.ToArray(), DollarFigure.barrelL[3]));
+        file.Close();
+
+        file = new StreamReader(filePath + "Perfect-Barrel-R" + ".csv");
+        height = new List<Point>();
+        roll = new List<Point>();
+        pitch = new List<Point>();
+        yaw = new List<Point>();
+
+        // Lire le fichier et le parser
+        CSVParser(file, height, roll, pitch, yaw);
+
+        // Créer les figures
+        gesturesHeight.Add(new Gesture(height.ToArray(), DollarFigure.barrelR[0]));
+        gesturesRoll.Add(new Gesture(roll.ToArray(), DollarFigure.barrelR[1]));
+        gesturesPitch.Add(new Gesture(pitch.ToArray(), DollarFigure.barrelR[2]));
+        gesturesYaw.Add(new Gesture(yaw.ToArray(), DollarFigure.barrelR[3]));
         file.Close();
     }
 
@@ -143,10 +159,10 @@ public class FigureLoaderP
         CSVParser(file, height, roll, pitch, yaw);
 
         // Créer les figures
-        gesturesHeight.Add(new Gesture(height.ToArray(), "DoubleBosse"));
-        gesturesRoll.Add(new Gesture(roll.ToArray(), "DoubleDemieLigneMontante"));
-        gesturesPitch.Add(new Gesture(pitch.ToArray(), "DoubleZigZag"));
-        gesturesYaw.Add(new Gesture(yaw.ToArray(), "LigneCoupee"));
+        gesturesHeight.Add(new Gesture(height.ToArray(), DollarFigure.cubanEight[0]));
+        gesturesRoll.Add(new Gesture(roll.ToArray(), DollarFigure.cubanEight[1]));
+        gesturesPitch.Add(new Gesture(pitch.ToArray(), DollarFigure.cubanEight[2]));
+        gesturesYaw.Add(new Gesture(yaw.ToArray(), DollarFigure.cubanEight[3]));
         file.Close();
     }
 
@@ -162,10 +178,10 @@ public class FigureLoaderP
         CSVParser(file, height, roll, pitch, yaw);
 
         // Créer les figures
-        gesturesHeight.Add(new Gesture(height.ToArray(), "LigneDroite"));
-        gesturesRoll.Add(new Gesture(roll.ToArray(), "LigneDroite"));
-        gesturesPitch.Add(new Gesture(pitch.ToArray(), "LigneDroite"));
-        gesturesYaw.Add(new Gesture(yaw.ToArray(), "LigneDroite"));
+        gesturesHeight.Add(new Gesture(height.ToArray(), DollarFigure.straightLine[0]));
+        gesturesRoll.Add(new Gesture(roll.ToArray(), DollarFigure.straightLine[1]));
+        gesturesPitch.Add(new Gesture(pitch.ToArray(), DollarFigure.straightLine[2]));
+        gesturesYaw.Add(new Gesture(yaw.ToArray(), DollarFigure.straightLine[3]));
         file.Close();
     }
 

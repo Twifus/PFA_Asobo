@@ -150,12 +150,12 @@ public class DollarDetector : IFigureDetection {
     }
 
     private Figure FigureDone(Dictionary<string, double> resultHeight, Dictionary<string, double> resultRoll, Dictionary<string, double> resultPitch, Dictionary<string, double> resultYaw) {
-        float straightLine = FigureScore(resultHeight, resultRoll, resultPitch, resultYaw, "LigneDroite", "LigneDroite", "LigneDroite", "LigneDroite");
-        float loop = FigureScore(resultHeight, resultRoll, resultPitch, resultYaw, "BosseHaut", "BosseBas", "ZigZag", "BosseBas");
-        float barrel = FigureScore(resultHeight, resultRoll, resultPitch, resultYaw, "LigneDescendante", "BosseBas", "LigneDroite", "LigneDroite");
-        float cubanEight = FigureScore(resultHeight, resultRoll, resultPitch, resultYaw, "DoubleBosse", "DoubleDemieLigneMontante", "DoubleZigZag", "LigneCoupee");
+        float straightLine = FigureScore(resultHeight, resultRoll, resultPitch, resultYaw, DollarFigure.straightLine[0], DollarFigure.straightLine[1], DollarFigure.straightLine[2], DollarFigure.straightLine[3]);
+        float loop = FigureScore(resultHeight, resultRoll, resultPitch, resultYaw, DollarFigure.loop[0], DollarFigure.loop[1], DollarFigure.loop[2], DollarFigure.loop[3]);
+        float barrel = FigureScore(resultHeight, resultRoll, resultPitch, resultYaw, DollarFigure.barrelL[0], DollarFigure.barrelL[1], DollarFigure.barrelL[2], DollarFigure.barrelL[3]);
+        float cubanEight = FigureScore(resultHeight, resultRoll, resultPitch, resultYaw, DollarFigure.cubanEight[0], DollarFigure.cubanEight[1], DollarFigure.cubanEight[2], DollarFigure.cubanEight[3]);
         float max = Math.Max(Math.Max(straightLine, loop), Math.Max(barrel, cubanEight));
-        U.Debug.Log("scores : loop = " + loop + "; barrel = " + barrel + "; line = " + straightLine);
+        //U.Debug.Log("scores : loop = " + loop + "; barrel = " + barrel + "; line = " + straightLine);
         if (max == loop && loop > 0.6) {
             ClearLists();
             return new Figure(figure_id.LOOP, 1);
@@ -198,7 +198,7 @@ public class DollarDetector : IFigureDetection {
     }
 
     public List<Figure> detection() {
-        return DetectionBis();
+        //return DetectionBis();
         List<Figure> result = new List<Figure>();
 
         //U.Debug.Log(_timePointsHeight.Count);
@@ -210,17 +210,17 @@ public class DollarDetector : IFigureDetection {
             BestGesture resultPitch = PointCloudRecognizer.Classify(new Gesture(_timePointsPitch.ToArray(), "test pitch"), gesturesPitch.ToArray());
             BestGesture resultYaw = PointCloudRecognizer.Classify(new Gesture(_timePointsYaw.ToArray(), "test yax"), gesturesYaw.ToArray());
 
-            //U.Debug.Log(resultHeight.Name + ", " + resultRoll.Name + ", " + resultPitch.Name + ", " + resultYaw.Name);
+            U.Debug.Log(resultHeight.Name + ", " + resultRoll.Name + ", " + resultPitch.Name + ", " + resultYaw.Name);
 
             // Straight Line
-            if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "LigneDroite", "LigneDroite", "LigneDroite", "LigneDroite")) {
+            if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, DollarFigure.straightLine[0], DollarFigure.straightLine[1], DollarFigure.straightLine[2], DollarFigure.straightLine[3])) {
                 //U.Debug.Log("StraightLine");
                 //U.Debug.Log(resultHeight.Score + ", " + resultRoll.Score + ", " + resultPitch.Score + ", " + resultYaw.Score);
                 ClearLists();
             }
 
             // Loop
-            if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "BosseHaut", "BosseBas", "ZigZag", "BosseBas"))
+            if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, DollarFigure.loop[0], DollarFigure.loop[1], DollarFigure.loop[2], DollarFigure.loop[3]))
             {
                 //U.Debug.Log("Loop");
                 //U.Debug.Log(resultHeight.Score + ", " + resultRoll.Score + ", " + resultPitch.Score + ", " + resultYaw.Score);
@@ -231,7 +231,8 @@ public class DollarDetector : IFigureDetection {
             }
 
             // Roll
-            if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "LigneDescendante", "BosseBas", "LigneDroite", "LigneDroite"))
+            if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, DollarFigure.barrelL[0], DollarFigure.barrelL[1], DollarFigure.barrelL[2], DollarFigure.barrelL[3]) 
+                || AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, DollarFigure.barrelR[0], DollarFigure.barrelR[1], DollarFigure.barrelR[2], DollarFigure.barrelR[3]))
             {
                 
                 //U.Debug.Log("Roll");
@@ -243,7 +244,7 @@ public class DollarDetector : IFigureDetection {
             }
 
             // Cuban Eight
-            if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, "DoubleBosse", "DoubleDemieLigneMontante", "DoubleZigZag", "LigneCoupee"))
+            if (AnalyseResults(resultHeight, resultRoll, resultPitch, resultYaw, DollarFigure.cubanEight[0], DollarFigure.cubanEight[1], DollarFigure.cubanEight[2], DollarFigure.cubanEight[3]))
             {
                 //U.Debug.Log("CubanEight");
                 result.Add(new Figure());
