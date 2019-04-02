@@ -4,28 +4,19 @@ using System.Collections.Generic;
 using System.IO;
 using PDollarGestureRecognizer;
 using System.Globalization;
-using UnityEngine;
 
 public class FigureLoaderP
 {
     #region Members
 
-    private readonly string filePath = "./Assets/Figures/";
-
-    private readonly List<Gesture> altitude;
-    private readonly List<Gesture> rightScalar;
-    private readonly List<Gesture> upScalar;
-    private readonly List<Gesture> forwardScalar;
+    private readonly List<Gesture>[] gestures;
 
     #endregion
 
     #region Constructor
 
-    public FigureLoaderP(List<Gesture> height, List<Gesture> roll, List<Gesture> pitch, List<Gesture> yaw) {
-        this.altitude = height;
-        this.rightScalar = roll;
-        this.upScalar = pitch;
-        this.forwardScalar = yaw;
+    public FigureLoaderP(List<Gesture>[] gestures) {
+        this.gestures = gestures;
     }
 
     #endregion
@@ -34,34 +25,32 @@ public class FigureLoaderP
 
     public void LoadFigures() {
         // Clear previous gestures
-        altitude.Clear();
-        rightScalar.Clear();
-        upScalar.Clear();
-        forwardScalar.Clear();
+        for (int i = 0; i < gestures.Length; i++) {
+            gestures[i].Clear();
+        }
 
         // Load new gestures
-        Load(filePath + "Perfect-Loop.csv", DollarFigure.loop);
-        Load(filePath + "Perfect-Barrel-R.csv", DollarFigure.barrelR);
-        Load(filePath + "Perfect-Barrel-L.csv", DollarFigure.barrelL);
-        //Load(filePath + "CubanEight-Traj.csv", DollarFigure.cubanEight); // file need to be update
-        Load(filePath + "Perfect-StraightLine.csv", DollarFigure.straightLine);
+        Load(DollarFigure.filePath + "Perfect-Loop.csv", DollarFigure.loop);
+        Load(DollarFigure.filePath + "Perfect-Barrel-R.csv", DollarFigure.barrelR);
+        Load(DollarFigure.filePath + "Perfect-Barrel-L.csv", DollarFigure.barrelL);
+        //Load(DollarFigure.filePath + "CubanEight-Traj.csv", DollarFigure.cubanEight); // file need to be update
+        Load(DollarFigure.filePath + "Perfect-StraightLine.csv", DollarFigure.straightLine);
     }
 
-    private void Load(string file, string[] curvesName) {
+    private void Load(string file, string[] curvesNames) {
         StreamReader streamReader = new StreamReader(file);
-        List<Point> height = new List<Point>();
-        List<Point> roll = new List<Point>();
-        List<Point> pitch = new List<Point>();
-        List<Point> yaw = new List<Point>();
+        List<Point>[] points = new List<Point>[gestures.Length];
+        for (int i = 0; i < points.Length; i++) {
+            points[i] = new List<Point>();
+        }
 
         // Read file and parse it
-        CSVParser(streamReader, height, roll, pitch, yaw);
+        CSVParser(streamReader, points);
 
         // Create gestures
-        altitude.Add(new Gesture(height.ToArray(), curvesName[0]));
-        rightScalar.Add(new Gesture(roll.ToArray(), curvesName[1]));
-        upScalar.Add(new Gesture(pitch.ToArray(), curvesName[2]));
-        forwardScalar.Add(new Gesture(yaw.ToArray(), curvesName[3]));
+        for (int i = 0; i < gestures.Length; i++) {
+            gestures[i].Add(new Gesture(points[i].ToArray(), curvesNames[i]));
+        }
 
         streamReader.Close();
     }
@@ -69,21 +58,17 @@ public class FigureLoaderP
     #endregion
 
     #region File Parsing
-
-    private void CSVParser(StreamReader file, List<Point> height, List<Point> roll, List<Point> pitch, List<Point> yaw)
-    {
+    
+    private void CSVParser(StreamReader file, List<Point>[] points) {
         // Read file and parse it
         file.ReadLine(); // first line is column's names
         int i = 0;
-        do
-        {
+        do {
             string textLine = file.ReadLine();
             float[] values = Array.ConvertAll<string, float>(textLine.Split(';'), new Converter<string, float>(StringToFloat));
-            long time = (long)(values[0] * 1000); // values[0] is time in second, and time must be in ms
-            height.Add(new Point(i, values[2], 0));
-            roll.Add(new Point(i, values[11], 0)); // plane.right
-            pitch.Add(new Point(i, values[14], 0)); // plane.up
-            yaw.Add(new Point(i, values[17], 0)); // plane.forward
+            for (int j = 0; j < points.Length; j++) {
+                points[j].Add(new Point(i, values[ DollarFigure.columnToPick[j] ], 0));
+            }
             i++;
         } while (file.Peek() != -1);
     }
