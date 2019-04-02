@@ -18,6 +18,7 @@ public class FigureManager : MonoBehaviour{
     public GameObject plane;
     public Text textScore;
     public Text textFigure;
+    public Text textAlgo;
 
     private IFlyingObject _plane;
     private int _score;
@@ -58,6 +59,10 @@ public class FigureManager : MonoBehaviour{
 
     private void FixedUpdate()
     {
+        if (Input.GetButtonDown("SwitchAlgorithm"))
+            SwitchAlgorithm();
+        DisplayAlgorithme();
+
         //Condition sur les frames pour enregistrement des coordonnées
         //GetCoordinates(_plane);
         _figureDetection.setPoint(_plane);
@@ -66,11 +71,6 @@ public class FigureManager : MonoBehaviour{
         {
             DisableText();
         }
-
-        //if (Input.GetKeyDown("space"))
-        //{
-        //    _figureDetection.WriteLists();
-        //}
     }
 
 
@@ -94,6 +94,25 @@ public class FigureManager : MonoBehaviour{
 
         //_figureDetection.setPoint(point);
 
+    }
+
+    private void SwitchAlgorithm()
+    {
+        if (detector == Detector.Automata)
+        {
+            detector = Detector.Dollar;
+            _figureDetection = new DollarDetector();
+        }
+        else
+        {
+            detector = Detector.Automata;
+            _figureDetection = new AutomataDetector();
+        }
+    }
+
+    private void DisplayAlgorithme()
+    {
+        textAlgo.text = DetectorName[(int)detector];
     }
 
     /** Affiche le score du joueur */
