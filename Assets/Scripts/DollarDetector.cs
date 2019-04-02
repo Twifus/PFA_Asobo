@@ -30,8 +30,8 @@ public class DollarDetector : IFigureDetection {
         gesturesRoll = new List<Gesture>();
         gesturesPitch = new List<Gesture>();
         gesturesYaw = new List<Gesture>();
-        FigureLoaderP loader = new FigureLoaderP();
-        loader.LoadFigures(gesturesHeight, gesturesRoll, gesturesPitch, gesturesYaw);
+        FigureLoaderP loader = new FigureLoaderP(gesturesHeight, gesturesRoll, gesturesPitch, gesturesYaw);
+        loader.LoadFigures();
 
         _timePointsHeight = new List<Point>();
         _timePointsRoll = new List<Point>();
