@@ -10,18 +10,20 @@ public class SettingsUI : MonoBehaviour
     public string[] AboutTextLines = new string[0];
 
     private string clicked = "", MessageDisplayOnAbout = "About \n ";
-    private Rect WindowRect = new Rect(3*Screen.width/7, Screen.height/3, 300, 700);
+    private Rect WindowRect;
+    private Vector2 scrollPosition;
+
     private float volume = 1.0f;
     private float UserWingArea;
     private float UserLiftCoeff;
     private float UserDragCoeff;
     private float UserThrustPower;
     private float UserRollIntensity;
-    private float UserPitchIntensity;
     private float UserYawIntensity;
 
     private void Start()
     {
+        UpdateMenuSize();
         for (int x = 0; x < AboutTextLines.Length; x++)
         {
             MessageDisplayOnAbout += AboutTextLines[x] + " \n ";
@@ -32,8 +34,12 @@ public class SettingsUI : MonoBehaviour
         UserDragCoeff = PlaneSettings.DragCoeff;
         UserThrustPower = PlaneSettings.ThrustPower;
         UserRollIntensity = PlaneSettings.RollIntensity;
-        UserPitchIntensity = PlaneSettings.PitchIntensity;
         UserYawIntensity = PlaneSettings.YawIntensity;
+    }
+
+    private void UpdateMenuSize()
+    {
+        WindowRect = new Rect(Screen.width / 8f, Screen.height / 6f, Screen.width / 4f, 2f * Screen.height / 3f);
     }
 
     private void OnGUI()
@@ -58,21 +64,20 @@ public class SettingsUI : MonoBehaviour
         }
         else if (clicked == "resolution")
         {
-            GUILayout.BeginVertical();
+            scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(Screen.width / 5f), GUILayout.Height(8f * Screen.height / 10f));
             for (int x = 0; x < Screen.resolutions.Length; x++)
             {
                 if (GUILayout.Button(Screen.resolutions[x].width + "X" + Screen.resolutions[x].height))
                 {
                     Screen.SetResolution(Screen.resolutions[x].width, Screen.resolutions[x].height, true);
+                    UpdateMenuSize();
                 }
             }
-            GUILayout.EndVertical();
-            GUILayout.BeginHorizontal();
+            GUILayout.EndScrollView();
             if (GUILayout.Button("Back"))
             {
                 clicked = "options";
             }
-            GUILayout.EndHorizontal();
         }
         else if (clicked == "algorithm")
         {
@@ -106,7 +111,7 @@ public class SettingsUI : MonoBehaviour
 
     private void optionsFunc(int id)
     {
-        if (GUILayout.Button("Resolution"))
+        if (GUILayout.Button("Resolution" + " (" + Screen.currentResolution.width + "x" + Screen.currentResolution.height + ")"))
         {
             clicked = "resolution";
         }
@@ -119,9 +124,8 @@ public class SettingsUI : MonoBehaviour
         UserLiftCoeff = Slider("Lift Coefficient", UserLiftCoeff, 100.0f);
         UserDragCoeff = Slider("Drag Coefficient", UserDragCoeff, 100.0f);
         UserThrustPower = Slider("Thrust Power", UserThrustPower, 100.0f);
-        UserRollIntensity = Slider("Roll Intensity", UserRollIntensity, 360.0f);
-        UserPitchIntensity = Slider("Pitch Intensity", UserPitchIntensity, 360.0f);
-        UserYawIntensity = Slider("Yaw Intensity", UserYawIntensity, 360.0f);
+        UserRollIntensity = Slider("Roll Intensity", UserRollIntensity, 2f);
+        UserYawIntensity = Slider("Yaw Intensity", UserYawIntensity, 2f);
 
         AudioListener.volume = volume;
         PlaneSettings.WingArea = UserWingArea;
@@ -129,7 +133,6 @@ public class SettingsUI : MonoBehaviour
         PlaneSettings.DragCoeff = UserDragCoeff;
         PlaneSettings.ThrustPower = UserThrustPower;
         PlaneSettings.RollIntensity = UserRollIntensity;
-        PlaneSettings.PitchIntensity = UserPitchIntensity;
         PlaneSettings.YawIntensity = UserYawIntensity;
 
         if (GUILayout.Button("Back"))
