@@ -105,17 +105,10 @@ namespace PDollarGestureRecognizer
 
             Point[] newPoints = new Point[points.Length];
 
-            // if y variation is small enough, don't rescale the axis
-            if (maxy - miny < 0.01) {
-                float scale = maxx - minx;
-                for (int i = 0; i < points.Length; i++)
-                    newPoints[i] = new Point((points[i].X - minx) / scale, (points[i].Y - miny), points[i].StrokeID);
-            }
-            else {
-                float scale = Math.Max(maxx - minx, maxy - miny);
-                for (int i = 0; i < points.Length; i++)
-                    newPoints[i] = new Point((points[i].X - minx) / scale, (points[i].Y - miny) / scale, points[i].StrokeID);
-            }
+            float scale = Math.Max(maxx - minx, maxy - miny);
+            for (int i = 0; i < points.Length; i++)
+                newPoints[i] = new Point((points[i].X - minx) / scale, (points[i].Y - miny) / scale, points[i].StrokeID);
+
             return newPoints;
         }
 

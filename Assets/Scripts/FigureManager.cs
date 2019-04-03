@@ -54,6 +54,7 @@ public class FigureManager : MonoBehaviour{
         _figurePoint = new int[] { 20, 10, 50 };
 
         DisplayScore();
+        DisplayAlgorithm();
         DisableText();
     }
 
@@ -61,39 +62,14 @@ public class FigureManager : MonoBehaviour{
     {
         if (Input.GetButtonDown("SwitchAlgorithm"))
             SwitchAlgorithm();
-        DisplayAlgorithme();
-
-        //Condition sur les frames pour enregistrement des coordonnées
-        //GetCoordinates(_plane);
+        DisplayAlgorithm();
+        
         _figureDetection.setPoint(_plane);
         AnalyzeTrajectory();
         if(Time.time > _timeToDisplay + 1.5f)
         {
             DisableText();
         }
-    }
-
-
-    /** Récupère les coordonnées et les rotations de l'avion dans un tableau (List<float> à voir) */
-    private void GetCoordinates(IFlyingObject _plane)
-    {
-        /*Coordinate point = new Coordinate();
-        point.xpos = _plane.Position.x;
-        point.ypos = _plane.Position.y;
-        point.zpos = _plane.Position.z;
-
-        point.xangle = _plane.pitch;
-        point.yangle = _plane.yaw;
-        point.zangle = _plane.roll;
-
-        point.roll = _plane.roll;
-        point.pitch = _plane.pitch;
-        point.yaw = _plane.yaw;
-
-        point.time = Time.time;*/
-
-        //_figureDetection.setPoint(point);
-
     }
 
     private void SwitchAlgorithm()
@@ -110,7 +86,7 @@ public class FigureManager : MonoBehaviour{
         }
     }
 
-    private void DisplayAlgorithme()
+    private void DisplayAlgorithm()
     {
         textAlgo.text = DetectorName[(int)detector];
     }
@@ -146,11 +122,6 @@ public class FigureManager : MonoBehaviour{
         UpdateScore(_figurePoint[(int)id]);
         textScore.text = "Score : " + _score;
         _timeToDisplay = Time.time;
-    }
-
-    private string GetNameFigure(figure_id id)
-    {
-        return _figureName[(int)id];
     }
 }
 

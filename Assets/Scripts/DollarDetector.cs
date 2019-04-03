@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
-//using U = UnityEngine;
 using System.IO;
 using PDollarGestureRecognizer;
 
@@ -11,7 +10,7 @@ public class DollarDetector : IFigureDetection {
     #region Members
 
     private readonly int MAX_SIZE = 280;
-    private readonly int MINPOINTSCOUNT = 10;
+    private readonly int MINPOINTSCOUNT = 30;
     private int time = 0;
 
     private StreamWriter Writer;
@@ -127,7 +126,7 @@ public class DollarDetector : IFigureDetection {
     /// </summary>
     /// <returns></returns>
     public List<Figure> detection() {
-        //return DetectionBis();
+
         List<Figure> figures = new List<Figure>();
 
         //U.Debug.Log(_timePoints[0].Count);
@@ -144,110 +143,36 @@ public class DollarDetector : IFigureDetection {
 
             // Straight Line
             if (AnalyseResults(results, DollarFigure.straightLine)) { // buffer cleaner
-                //U.Debug.Log("StraightLine");
-                //U.Debug.Log(resultHeight.Score + ", " + resultRoll.Score + ", " + resultPitch.Score + ", " + resultYaw.Score);
+                //UnityEngine.Debug.Log("StraightLine");
+                //UnityEngine.Debug.Log(resultHeight.Score + ", " + resultRoll.Score + ", " + resultPitch.Score + ", " + resultYaw.Score);
                 ClearLists();
             }
 
             // Loop
             if (AnalyseResults(results, DollarFigure.loop)) {
-                //U.Debug.Log("Loop");
-                //U.Debug.Log(resultHeight.Score + ", " + resultRoll.Score + ", " + resultPitch.Score + ", " + resultYaw.Score);
+                //UnityEngine.Debug.Log("Loop");
+                //UnityEngine.Debug.Log(resultHeight.Score + ", " + resultRoll.Score + ", " + resultPitch.Score + ", " + resultYaw.Score);
                 figures.Add(new Figure(figure_id.LOOP, 1f));
                 ClearLists();
             }
 
             // Roll
             if (AnalyseResults(results, DollarFigure.barrelL) || AnalyseResults(results, DollarFigure.barrelR)) {
-                //U.Debug.Log("Roll");
-                //U.Debug.Log(resultHeight.Score + ", " + resultRoll.Score + ", " + resultPitch.Score + ", " + resultYaw.Score);
+                //UnityEngine.Debug.Log("Roll");
+                //UnityEngine.Debug.Log(results[0].Score + ", " + results[1].Score + ", " + results[2].Score + ", " + results[3].Score);
                 figures.Add(new Figure(figure_id.BARREL, 1f));
                 ClearLists();
             }
 
             // Cuban Eight
             if (AnalyseResults(results, DollarFigure.cubanEight)) {
-                //U.Debug.Log("CubanEight");
+                //UnityEngine.Debug.Log("CubanEight");
                 figures.Add(new Figure(figure_id.CUBANEIGHT, 1f));
                 ClearLists();
             }
         }
         return figures;
 	}
-
-
-    /// <summary>
-    /// Calculte the average score of a figure based on the results and curves names
-    /// </summary>
-    /// <param name="results"></param>
-    /// <param name="curvesNames"></param>
-    /// <returns></returns>
-    private float FigureScore(Dictionary<string, double>[] results, string[] curvesNames) {
-        double moy = 0;
-        for (int i = 0; i < results.Length; i++) {
-            moy += results[i].ContainsKey(curvesNames[i]) ? results[i][curvesNames[i]] : 0; // add key score or 0 if key does not exist
-        }
-        return (float)moy / 4;
-    }
-
-    /// <summary>
-    /// Analyse results and return the figure best recognize based on the average score
-    /// </summary>
-    /// <param name="results"></param>
-    /// <returns></returns>
-    private Figure FigureDone(Dictionary<string, double>[] results) {
-        float straightLine = FigureScore(results, DollarFigure.straightLine);
-        float loop = FigureScore(results, DollarFigure.loop);
-        float barrel = FigureScore(results, DollarFigure.barrelL);
-        float cubanEight = FigureScore(results, DollarFigure.cubanEight);
-        float max = Math.Max(Math.Max(straightLine, loop), Math.Max(barrel, cubanEight));
-        //U.Debug.Log("scores : loop = " + loop + "; barrel = " + barrel + "; line = " + straightLine);
-        
-        // Return a figure depending on the max
-        if (max == loop && loop > 0.6) {
-            ClearLists();
-            return new Figure(figure_id.LOOP, 1);
-        }
-        else if (max == barrel && barrel > 0.85) {
-            ClearLists();
-            return new Figure(figure_id.BARREL, 1);
-        }
-        else if (max == cubanEight && cubanEight > 0.8) {
-            ClearLists();
-            return new Figure(figure_id.CUBANEIGHT, 1);
-        }
-        else if (straightLine > 0.9) {
-            ClearLists();
-            return null;
-        }
-        return null;
-    }
-
-    /// <summary>
-    /// Return a list of figures done, based on average score on each figure
-    /// </summary>
-    /// <returns></returns>
-    public List<Figure> DetectionBis() {
-        List<Figure> result = new List<Figure>();
-
-        //U.Debug.Log(_timePoints[0].Count);
-
-        if (_timePoints[0].Count > MINPOINTSCOUNT) {
-            // Get scores for each gesture for each curve
-            Dictionary<string, double>[] results = new Dictionary<string, double>[DollarFigure.curvesPerFigure];
-            for (int i = 0; i < results.Length; i++) {
-                results[i] = PointCloudRecognizer.Recognize(new Gesture(_timePoints[i].ToArray()), gestures[i].ToArray());
-            }
-
-            // Analyse results
-            Figure figure = FigureDone(results);
-            if (figure != null) {
-                //U.Debug.Log(figure.id);
-                result.Add(figure);
-            }
-        }
-        return result;
-    }
 
     #endregion
 
