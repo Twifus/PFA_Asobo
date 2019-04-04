@@ -47,7 +47,7 @@ public class CEAutomata : SimpleAutomata
         if (isValid()) return 1;
         checkAltitude(plane, 50, 2);
         //checkAltitude(plane, 50, 7);
-        checkTime(8);
+        checkTime(5);
 
         figure[0] = Q1Loop();
         figure[1] = Q2Loop();

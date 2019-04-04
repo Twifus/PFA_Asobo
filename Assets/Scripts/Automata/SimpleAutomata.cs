@@ -5,6 +5,11 @@ using System;
 using System.Globalization;
 using unity = UnityEngine;
 
+
+/*
+ * Classe des automates basiques :
+ * contient les méthodes principales de calcul de l'état de l'avion (vertical, horizontal etc)
+ */
 public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
 {
 
@@ -22,34 +27,65 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
     public int time;
     public bool[] figure = new bool[20];
 
-    //reinitialise l'automate de la figure 
-    //necessaire pour reset les automates terminés
-    //appelé par l'interface et/ou les automates parents
+
+    /// <summary>
+    /// Réinitialise l'automate de la figure
+    /// </summary>
+    /// <remarks>
+    /// necessaire pour reset les automates terminés ou qui ont échoués
+    /// </remarks>
+
     public void resetStates()
     {
         CurrentState = 0;
     }
-    //renvoie l'id de la figure représentée par FigureId
+    /// <summary>
+    /// Renvoie l'id de la figure représentée par FigureId
+    /// </summary>
     public abstract figure_id getFigureId();
-    //affiche le nom de la figure que l'automate gère (debug)
+
+    /// <summary>
+    /// affiche le nom de la figure que l'automate gère (debug)
+    /// </summary>
     public abstract string getName();
-    //renvoie si l'automate est sur un état final ou pas
+
+    /// <summary>
+    /// Renvoie si l'automate est sur un état final ou non
+    /// </summary>
     public bool isValid()
     {
         return (CurrentState == _finalState);
     }
-    //renvoie l'id de l'état actuel (debug)
+    /// <summary>
+    /// Renvoie l'id de l'état actuel (debug)
+    /// </summary>
+    /// <returns></returns>
     public int getCurrentState()
     {
         return CurrentState;
     }
-    //renvoie le nombre d'états de l'automate (debug)
+
+    /// <summary>
+    /// Renvoie le nombre d'états de l'automate 
+    /// </summary>
     public int getNumberOfState()
     {
         return _finalState + 1;
     }
 
+    /// <summary>
+    /// Coeur de l'algorithme : un appel calcule et effectue le changement d'état de l'automate.
+    /// </summary>
+    /// <remarks>
+    /// C'est dans calculateState que l'on crée l'automate et qu'on ajoute les fonctions
+    /// de vérifications.
+    /// </remarks>
     public abstract int calculateState(IFlyingObject plane);
+
+    /// <summary>
+    /// Détermine le changement d'état l'automate contenu dans la tableau SImpleautomata.figure[]
+    /// </summary>
+    /// <remarks> Appelé par calculateState </remarks>
 
     public void process()
     {
@@ -76,48 +112,75 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
         }
     }
 
-
-    public bool Q2ARoll()
-    {
-        return (_upScalar <= 0 && _rightScalar <= 0);
-    }
-
-    public bool Q3ARoll()
-    {
-        return (_upScalar <= 0 && _rightScalar >= 0);
-    }
-
-    public bool Q4ARoll()
-    {
-        return (_upScalar >= 0 && _rightScalar >= 0);
-    }
-
+    /// <summary>
+    /// Retourne un bouléen permettant de savoir si l'avion est dans le premier quart de l'Aileron Roll
+    /// </summary>
+    /// <returns></returns>
     public bool Q1ARoll()
     {
         return (_upScalar >= 0 && _rightScalar <= 0);
     }
 
-
-    public bool Q2Loop()
+    /// <summary>
+    /// Retourne un bouléen permettant de savoir si l'avion est dans le deuxième quart de l'Aileron Roll
+    /// </summary>
+    public bool Q2ARoll()
     {
-        return (_upScalar <= 0 && _forwardScalar >= 0 && (Math.Abs(_rightScalarStart - _rightScalar) < window));
+        return (_upScalar <= 0 && _rightScalar <= 0);
+    }
+    /// <summary>
+    /// Retourne un bouléen permettant de savoir si l'avion est dans le Troisième quart de l'Aileron Roll
+    /// </summary>
+    /// <returns></returns>
+    public bool Q3ARoll()
+    {
+        return (_upScalar <= 0 && _rightScalar >= 0);
     }
 
-    public bool Q3Loop()
+    /// <summary>
+    /// Retourne un bouléen permettant de savoir si l'avion est dans le quartrième quart de l'Aileron Roll
+    /// </summary>
+    /// <returns></returns>
+    public bool Q4ARoll()
     {
-        return ((_upScalar <= 0 && _forwardScalar < 0) && (Math.Abs(_rightScalarStart - _rightScalar) < window));
+        return (_upScalar >= 0 && _rightScalar >= 0);
     }
 
-    public bool Q4Loop()
-    {
-        return ((_upScalar > 0 && _forwardScalar < 0) && (Math.Abs(_rightScalarStart - _rightScalar) < window));
-    }
-
+    /// <summary>
+    /// Retourne un bouléen permettant de savoir si l'avion est dans le premier quart du Loop
+    /// </summary>
     public bool Q1Loop()
     {
         return ((_upScalar >= 0 && _forwardScalar >= 0) && (Math.Abs(_rightScalarStart - _rightScalar) < window));
     }
 
+    /// <summary>
+    /// Retourne un bouléen permettant de savoir si l'avion est dans le deuxième quart du Loop
+    /// </summary>
+    public bool Q2Loop()
+    {
+        return (_upScalar <= 0 && _forwardScalar >= 0 && (Math.Abs(_rightScalarStart - _rightScalar) < window));
+    }
+
+    /// <summary>
+    /// Retourne un bouléen permettant de savoir si l'avion est dans le troisième quart du Loop
+    /// </summary>
+    public bool Q3Loop()
+    {
+        return ((_upScalar <= 0 && _forwardScalar < 0) && (Math.Abs(_rightScalarStart - _rightScalar) < window));
+    }
+
+    /// <summary>
+    /// Retourne un bouléen permettant de savoir si l'avion est dans le quartrième quart du Loop
+    /// </summary>
+    public bool Q4Loop()
+    {
+        return ((_upScalar > 0 && _forwardScalar < 0) && (Math.Abs(_rightScalarStart - _rightScalar) < window));
+    }
+
+    /// <summary>
+    /// Vérifie si le forward de l'avion reste constant de l'état 1 jusqu'au restant de la figure, reset sinon.
+    /// </summary>
     public void checkForward()
     {
         if (state == 1)
@@ -131,6 +194,9 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
         }
     }
 
+    /// <summary>
+    /// Initialise toutes les variables necessaires au traitement de l'automate
+    /// </summary>
     public void init(IFlyingObject plane)
     {
         _forwardScalar = Vector3.Dot(plane.forward, System.Numerics.Vector3.UnitY);
@@ -143,7 +209,9 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
         }
     }
 
-    //Vérifie si l'écart d'altitude entre l'état 0 et l'état controlSttae est bien supérieur à minAltitude
+    /// <summary>
+    /// Vérifie si l'écart d'altitude entre l'état 1 et l'état controlSttae est bien supérieur à minAltitude, reset sinon
+    /// </summary>
     public void checkAltitude(IFlyingObject plane, int minAltitude, int controlState)
     {
         if (_forwardScalar <= 0.3 && state == 1)
@@ -160,6 +228,9 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
         }
     }
 
+    /// <summary>
+    /// Laisse  un temps maxTime secondes au joueur pour effectuer chaque étape de la figure, reset sinon
+    /// </summary>
     public void checkTime(int maxTime)
     {
         if (getCurrentState() > 1)

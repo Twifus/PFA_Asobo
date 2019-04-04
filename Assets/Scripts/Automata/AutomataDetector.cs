@@ -9,22 +9,23 @@ public class AutomataDetector : IFigureDetection {
     private List<IFigureAutomata> _myAutomatas;
 
     public AutomataDetector() {
+        //creation des auomates à reconnaitre
         _myAutomatas = new List<IFigureAutomata>();
         _myAutomatas.Add(new LoopingAutomata());
         _myAutomatas.Add(new ARollAutomata());
         _myAutomatas.Add(new CEAutomata());
         _myAutomatas.Add(new ARollLeftAutomata());
         _myAutomatas.Add(new CERAutomata());
-        //for (int i = 0; i < n; i++)
-        //    _myAutomatas.Add(new DummyAutomata());
     }
 
+    /*
+     *  Ancienne version, inutile
+     */
     public void setPoint(Coordinate coord) {
         ;
     }
-
+    
     public void setPoint(IFlyingObject plane) {
-        //unity.Debug.Log("Test");
         foreach (IFigureAutomata auto in _myAutomatas)
             auto.calculateState(plane);
     }
