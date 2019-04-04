@@ -67,7 +67,7 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
     public abstract figure_id getFigureId();
 
     /// <summary>
-    /// affiche le nom de la figure que l'automate gère (debug)
+    /// Affiche le nom de la figure que l'automate gère (debug)
     /// </summary>
     public abstract string getName();
 
