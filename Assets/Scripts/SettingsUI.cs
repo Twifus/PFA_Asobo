@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Menu de jeu
+/// Gère l'affichage du menu de jeu
 /// </summary>
 public class SettingsUI : MonoBehaviour
 {
