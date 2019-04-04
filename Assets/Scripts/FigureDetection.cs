@@ -5,7 +5,6 @@ using System.Collections.Generic;
 /// Interface définissant un détecteur de figures
 /// </summary>
 public interface IFigureDetection {
-
     /// <summary>
     /// Ajoute les coordonnées courantes d'un IFlyingObject à la trajectoire à traiter
     /// </summary>
