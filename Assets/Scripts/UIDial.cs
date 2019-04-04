@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+///Affiche et calcule l'altitude et la vitesse de l'avion à l'écran
+/// </summary>
 public class UIDial : MonoBehaviour {
 
     public GameObject plane;
@@ -23,14 +26,9 @@ public class UIDial : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        rollTransform.rotation = Quaternion.Euler(0, 0, _plane.Rotation.eulerAngles.z);
-
         var angle = _plane.pitch;
-        //if (Vector3.Dot(Vector3.up, _plane.Rigidbody.transform.up) < 0) {
-        //    angle -= 180;
-        //}
 
-        //Debug.Log(angle);
+        rollTransform.rotation = Quaternion.Euler(0, 0, _plane.Rotation.eulerAngles.z);
         pitchTransform.rotation = Quaternion.Euler(0, 0, angle);
         altitudeText.text = "Altitude : " + Mathf.RoundToInt(_plane.Position.y) + " m";
         vitesseText.text = "Vitesse : " + Mathf.RoundToInt(_plane.speed.Length() * 3.6f) + " km/h";
