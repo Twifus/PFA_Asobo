@@ -45,3 +45,7 @@ Assets/Scripts/Automata/bin.meta
 Assets/Scripts/Automata/obj.meta
 Assets/Scripts/netcoreapp2.2/*
 Assets/Scripts/netcoreapp2.2.meta
+
+# Documentation
+Documentation/html/
+Documentation/latex/

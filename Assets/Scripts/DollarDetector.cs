@@ -5,6 +5,12 @@ using System.Numerics;
 using System.IO;
 using PDollarGestureRecognizer;
 
+/// <summary>
+/// Detecteur de figures se reposant sur les algorithmes "Dollar"
+/// </summary>
+/// <remarks>
+/// 
+/// </remarks>
 public class DollarDetector : IFigureDetection {
 
     #region Members
@@ -21,7 +27,7 @@ public class DollarDetector : IFigureDetection {
     #endregion
 
     #region Constructor
-
+    
     public DollarDetector()
     {
         gestures = new List<Gesture>[DollarFigure.curvesPerFigure];
@@ -42,7 +48,10 @@ public class DollarDetector : IFigureDetection {
 
     #region Set Points
 
-    // Add given coordinate to lists
+    /// <summary>
+    /// Ajoute une nouvelle coordonnée à la trajectoire à traiter
+    /// </summary>
+    /// <param name="point"></param>
     public void setPoint(Coordinate point) {
         if (_timePoints[0].Count == MAX_SIZE)
         {
@@ -71,7 +80,10 @@ public class DollarDetector : IFigureDetection {
         _timePoints[3].Add(new Point(time, point.yaw, 0));
     }
 
-    // Add current flying object coordinate to lists
+    /// <summary>
+    /// Ajoute les coordonnées courantes d'un IFlyingObject à la trajectoire à traiter
+    /// </summary>
+    /// <param name="flyingObject"></param>
     public void setPoint(IFlyingObject flyingObject) {
         if (_timePoints[0].Count == MAX_SIZE)
         {
@@ -108,11 +120,16 @@ public class DollarDetector : IFigureDetection {
     #region Detection
 
     /// <summary>
-    /// Check if best results match the curves names given
+    /// Vérifie la correspondance entre les courbes détectées et des courbes de référence.
     /// </summary>
+    /// <remarks>
+    /// Cette fonction permet de vérifier si l'ensemble des courbes reconnues par l'algorithmes correspondent aux courbes de référence d'une figure donnée.
+    /// </remarks>
     /// <param name="results"></param>
     /// <param name="curvesNames"></param>
-    /// <returns></returns>
+    /// <returns>
+    /// Retourne true si les courbes de <paramref name="results"/> sont celles indiquées dans <paramref name="curvesNames"/>
+    /// </returns>
     protected bool AnalyseResults(BestGesture[] results, string[] curvesNames) {
         bool ret = true;
         for (int i = 0; i < results.Length; i++) {
@@ -124,7 +141,9 @@ public class DollarDetector : IFigureDetection {
     /// <summary>
     /// Return a list of figures done, based on the best results
     /// </summary>
-    /// <returns></returns>
+    /// <returns>
+    /// Retourne une liste des figures détectées par l'algorithme.
+    /// </returns>
     public List<Figure> detection() {
 
         List<Figure> figures = new List<Figure>();
@@ -178,7 +197,9 @@ public class DollarDetector : IFigureDetection {
 
     #region Utility Methods
 
-    // Remove content of all lists
+    /// <summary>
+    /// Vide les buffers contenant les trajectoires
+    /// </summary>
     protected void ClearLists() {
         //U.Debug.Log("Clear");
         for (int i = 0; i < _timePoints.Length; i++) {
@@ -187,7 +208,9 @@ public class DollarDetector : IFigureDetection {
         time = 0;
     }
 
-    // DEBUG - Save current list in textfile
+    /// <summary>
+    /// (DEBUG) Ecrit le contenu actuel des buffers des trajectoires dans un fichier
+    /// </summary>
     public void WriteLists() {
         string path = string.Format("../DollarLog-{0}", System.DateTime.Now.ToFileTime());
         Writer = new StreamWriter(path + ".csv", true);
