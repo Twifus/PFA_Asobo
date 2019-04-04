@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
-using unity = UnityEngine;
+//using unity = UnityEngine;
 
 /// <summary>
 /// Fichier de reconaissance d'un cuban eight avec l'avion incliné vers la gauche au début de la séquence
@@ -42,8 +42,8 @@ public class CEAutomata : SimpleAutomata
         init(plane);
         window = 1;
         if (isValid()) return 1;
+
         checkAltitude(plane, 50, 2);
-        //checkAltitude(plane, 50, 7);
         checkTime(5);
 
         figure[0] = Q1Loop();
