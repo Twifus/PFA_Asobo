@@ -5,6 +5,11 @@ using System;
 using System.Globalization;
 using unity = UnityEngine;
 
+
+/*
+ * Classe des automates basiques :
+ * contient les méthodes principales de calcul de l'état de l'avion (vertical, horizontal etc)
+ */
 public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
 {
 

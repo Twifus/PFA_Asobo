@@ -5,14 +5,20 @@ using System.Collections.Generic;
     Représente une série de figures à effectuer dans l'ordre
  */
 public abstract class AbstractSequentialFigureAutomata : IFigureAutomata {
+    //liste des figures à réaliser
     protected List<IFigureAutomata> _listFigures;
+    //représente l'id de la figure étudiée actuellement
     protected int _currentFigureIndex;
-    //reinitialise l'automate de la figure
+
+    //renvoie la figure actuellement calculée
     public IFigureAutomata getCurrentAuto() {
         return _listFigures[_currentFigureIndex];
     }
+
     public abstract figure_id getFigureId();
+
     public abstract string getName();
+
     public void resetStates() {
         foreach(IFigureAutomata auto in _listFigures)
             auto.resetStates();
@@ -20,7 +26,6 @@ public abstract class AbstractSequentialFigureAutomata : IFigureAutomata {
     }
     public bool isValid() {
         return (_currentFigureIndex == _listFigures.Count); 
-                //&& getCurrentAuto().isValid());;
     }
     //renvoie l'id de l'état actuel
     public int getCurrentState() {

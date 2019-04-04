@@ -5,6 +5,9 @@ using System.Collections.Generic;
     Représente une figure composée :
     -une figure principale qui doit représenter le début et la fin de l'automate
     -une liste de figures secondaires à effectuer dans n'importe quel ordre
+
+    La figure totale est considérée valide si :
+    La figure principale est validée ET toutes les figures secondaires ont été validées pendant l'éxécution de la figure principale
  */
 public abstract class AbstractComposedFigureAutomata : IFigureAutomata {
     protected IFigureAutomata _mainFigure;
@@ -15,8 +18,10 @@ public abstract class AbstractComposedFigureAutomata : IFigureAutomata {
         _subFigures.Add(auto);
         _subFiguresRealised.Add(false);
     }
+
     public abstract figure_id getFigureId();
     public abstract string getName();
+
     public void resetStates() {
         _mainFigure.resetStates();
         int i = 0;
@@ -42,6 +47,7 @@ public abstract class AbstractComposedFigureAutomata : IFigureAutomata {
         return 0;
     }
     public int getNumberOfState() {return 1;}
+
     public int calculateState(IFlyingObject plane) {
         int mainState = _mainFigure.calculateState(plane);
         if (mainState == -1)
@@ -54,10 +60,12 @@ public abstract class AbstractComposedFigureAutomata : IFigureAutomata {
                 i++;
             }
         }
-        if(mainState == 1 && !isValid()) { //cas où l'automate principal a terminé mais pas les autres
+        //cas où l'automate principal a terminé mais pas les autres : 
+        //on recommence car toutes les conditions n'ont pas été respectées
+        if (mainState == 1 && !isValid()) { 
             resetStates();
             return -1;
         }
-        return mainState; //renvoie
+        return mainState;
     }
 }
