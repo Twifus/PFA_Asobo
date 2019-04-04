@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 
-/*
- * Classe de test de AutomataDetector
- */
 
+/// <summary>
+/// Classe de test de AutomataDetector
+/// </summary>
 public class DummyAutomata : IFigureAutomata {
     public void resetStates() {}
     public figure_id getFigureId() {return figure_id.LOOP;}

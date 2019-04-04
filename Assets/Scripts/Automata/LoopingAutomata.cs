@@ -3,38 +3,34 @@ using System.Collections.Generic;
 using System.Numerics;
 using unity = UnityEngine;
 
+/// <summary>
+/// Fichier de reconaissance d'un Looping
+/// </summary>
 public class LoopingAutomata : SimpleAutomata {
 
-
+    /// <summary>
+    /// Constructeur qui initialise un automate à n états
+    /// </summary>
     public LoopingAutomata() {
-        int n = 5;
+        int n = 5;//NOMBRES D'ETATS
         CurrentState = 0;
         _finalState = n;
         DicoTransitions = new Dictionary<FSMDetection.StateTransition, int>();
         for (int i = 0; i < n; i++) {
             StateTransition t = new StateTransition(i, i + 1); //transition vers l'etat suivant
             DicoTransitions.Add(t, i + 1);
-            //t = new StateTransition(i, 0); //transition vers l'etat de depart
-            //DicoTransitions.Add(t, 0);
             t = new StateTransition(i, i); //transition vers l'etat courant (boucle)
             DicoTransitions.Add(t, i);
         }
     }
 
-    //renvoie l'id de la figure représentée par FigureId
     public override figure_id getFigureId() {
         return figure_id.LOOP;
     }
-    //affiche le nom de la figure que l'automate gère (debug)
+
     public override string getName() {
         return "Looping";
     }
-
-    //calcule le nouvel état de l'automate étant donné la position passée en paramètre
-    //renvoie 1 si le nouvel état est terminal (même résultat que isValid())
-    //0 si le nouvel état est intermédiaire
-    //-1 si l'automate recommence à l'état initial
-    //si l'automate est déjà à l'état final, devrait renvoyer 1
     
     public override int calculateState(IFlyingObject plane)
     {
