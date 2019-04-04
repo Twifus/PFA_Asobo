@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 
-/*
-    Représente une figure composée :
-    -une figure principale qui doit représenter le début et la fin de l'automate
-    -une liste de figures secondaires à effectuer dans n'importe quel ordre
-
-    La figure totale est considérée valide si :
-    La figure principale est validée ET toutes les figures secondaires ont été validées pendant l'éxécution de la figure principale
- */
+/// <summary>
+/// Représente une figure composée :
+///    -une figure principale qui doit représenter le début et la fin de l'automate
+///    -une liste de figures secondaires à effectuer dans n'importe quel ordre
+///
+/// La figure totale est considérée valide si :
+///   La figure principale est validée ET toutes les figures secondaires ont été validées pendant l'éxécution de la figure principale
+/// </summary>
+///<remarks> Nous n'utilisons pas ce fichier dans notre code, mais c'est une piste pour pouvoir créer des figures composées d'autres figures
+///Les fonctions ont le principe que pour les autres figures, mais prend en compte le fait qu'il y a plusieurs figures
+/// </remarks>
 public abstract class AbstractComposedFigureAutomata : IFigureAutomata {
     protected IFigureAutomata _mainFigure;
     protected List<IFigureAutomata> _subFigures;
     protected List<bool> _subFiguresRealised;
+
     //la fonction ajoute une figure à la sous-liste des figures (appelé dans un constructeur enfant)
     protected void addFigure(IFigureAutomata auto) {
         _subFigures.Add(auto);

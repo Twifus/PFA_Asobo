@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Numerics;
 using unity = UnityEngine;
 
-
+/// <summary>
+/// Fichier de reconaissance d'un Aileron Roll dans le sens horaire
+/// </summary>
 public class ARollAutomata : SimpleAutomata {
 
-
+    /// <summary>
+    /// Constructeur qui initialise un automate à n états
+    /// </summary>
     public ARollAutomata(){
-        int n = 5;
+        int n = 5;//NOMBRES D'ETATS
         CurrentState = 0;
         _finalState = n;
         DicoTransitions = new Dictionary<FSMDetection.StateTransition, int>();
@@ -27,15 +31,11 @@ public class ARollAutomata : SimpleAutomata {
     {
         return figure_id.BARREL;
     }
-    //affiche le nom de la figure que l'automate gère (debug)
+
     public override string getName() {
         return "Aileron Roll";
     }
-    //calcule le nouvel état de l'automate étant donné la position passée en paramètre
-    //renvoie 1 si le nouvel état est terminal (même résultat que isValid())
-    //0 si le nouvel état est intermédiaire
-    //-1 si l'automate recommence à l'état initial
-    //si l'automate est déjà à l'état final, devrait renvoyer 1
+
     public override int calculateState(IFlyingObject plane) {
         init(plane);
         if (isValid()) return 1;

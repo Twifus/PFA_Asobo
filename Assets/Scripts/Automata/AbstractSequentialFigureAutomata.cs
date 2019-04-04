@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 
-/*
-    Représente une série de figures à effectuer dans l'ordre
- */
+/// <summary>
+/// Permet d'implémenter une série de figures à effectuer dans l'ordre
+/// </summary>
+/// ///<remarks> Nous n'utilisons pas ce fichier dans notre code, mais c'est une piste pour pouvoir créer des figures à la suite d'autres
+///Les fonctions ont le principe que pour les autres figures, mais prend en compte le fait qu'il y a plusieurs figures
+/// </remarks>
 public abstract class AbstractSequentialFigureAutomata : IFigureAutomata {
     //liste des figures à réaliser
     protected List<IFigureAutomata> _listFigures;

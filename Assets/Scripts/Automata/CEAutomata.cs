@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using System.Numerics;
 using unity = UnityEngine;
 
+/// <summary>
+/// Fichier de reconaissance d'un cuban eight avec l'avion incliné vers la gauche au début de la séquence
+/// </summary>
 public class CEAutomata : SimpleAutomata
 {
-
+    /// <summary>
+    /// Constructeur qui initialise un automate à n états
+    /// </summary>
     public CEAutomata()
     {
         int n = 10; //NOMBRE D'ETATS
@@ -16,29 +21,21 @@ public class CEAutomata : SimpleAutomata
         {
             StateTransition t = new StateTransition(i, i + 1); //transition vers l'etat suivant
             DicoTransitions.Add(t, i + 1);
-            //t = new StateTransition(i, 0); //transition vers l'etat de depart
-            //DicoTransitions.Add(t, 0);
             t = new StateTransition(i, i); //transition vers l'etat courant (boucle)
             DicoTransitions.Add(t, i);
         }
     }
 
-    //renvoie l'id de la figure représentée par FigureId
+
     public override figure_id getFigureId()
     {
         return figure_id.CUBANEIGHT;
     }
-    //affiche le nom de la figure que l'automate gère (debug)
+
     public override string getName()
     {
         return "Cuban eight";
     }
-
-    //calcule le nouvel état de l'automate étant donné la position passée en paramètre
-    //renvoie 1 si le nouvel état est terminal (même résultat que isValid())
-    //0 si le nouvel état est intermédiaire
-    //-1 si l'automate recommence à l'état initial
-    //si l'automate est déjà à l'état final, devrait renvoyer 1
 
     public override int calculateState(IFlyingObject plane)
     {

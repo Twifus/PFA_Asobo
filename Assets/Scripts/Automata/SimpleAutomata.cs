@@ -6,25 +6,47 @@ using System.Globalization;
 using unity = UnityEngine;
 
 
-/*
- * Classe des automates basiques :
- * contient les méthodes principales de calcul de l'état de l'avion (vertical, horizontal etc)
- */
+/// <summary>
+/// Classe parente des classes représentant les figures. Contient les fonctions pour calculer et chnager les états de l'automate
+/// </summary>
 public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
 {
 
     public int _finalState;
-    public bool _yawState = true;
+    /// <summary>
+    /// Valeur du scalaire entre le vecteur Up du monde et Up de l'avion
+    /// </summary>
     public float _upScalar = 0;
+    /// <summary>
+    /// Valeur du scalaire entre le vecteur Up du monde et Forward de l'avion
+    /// </summary>
     public float _forwardScalar = 0;
-    public float _rightScalarStart = 0;
-    public float _forwardScalarStart = 0;
+    /// <summary>
+    /// Valeur du scalaire entre le vecteur Up du monde et Right de l'avion
+    /// </summary>
     public float _rightScalar = 0;
+    /// <summary>
+    /// Valeur de référence de _rightScalar au début de la figure
+    /// </summary>
+    public float _rightScalarStart = 0;
+    /// <summary>
+    /// Valeur de référence de _forwardScalar au début de la figure
+    /// </summary>
+    public float _forwardScalarStart = 0;
+    /// <summary>
+    /// Altitude de l'avion
+    /// </summary>
     public float altitude = 0;
+    /// <summary>
+    /// Fenêtre déterminant la possibilité du loop de dévier de sa trajectoire au niveau du vecteur Right
+    /// </summary>
     public float window = 0.2f;
     public int state;
     public int tmpState = 0;
     public int time;
+    /// <summary>
+    /// Tableau permettant de sotcker les différentes étapes d'une figure. sa taille doit être supérieure ou égal au nombre d'étapes
+    /// </summary>
     public bool[] figure = new bool[20];
 
 
@@ -45,7 +67,7 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
     public abstract figure_id getFigureId();
 
     /// <summary>
-    /// affiche le nom de la figure que l'automate gère (debug)
+    /// Affiche le nom de la figure que l'automate gère (debug)
     /// </summary>
     public abstract string getName();
 
@@ -59,7 +81,6 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
     /// <summary>
     /// Renvoie l'id de l'état actuel (debug)
     /// </summary>
-    /// <returns></returns>
     public int getCurrentState()
     {
         return CurrentState;
@@ -76,9 +97,16 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
     /// <summary>
     /// Coeur de l'algorithme : un appel calcule et effectue le changement d'état de l'automate.
     /// </summary>
+    /// <returns>
+    /// 0 si le nouvel état est intermédiaire
+    /// -1 si l'automate recommence à l'état initial
+    /// 1 si l'automate est dans un état final 
+    /// </returns>
     /// <remarks>
-    /// C'est dans calculateState que l'on crée l'automate et qu'on ajoute les fonctions
-    /// de vérifications.
+    /// Il faut faire appel à init pour tout initialise, puis faire un appel à isValid pour vérifier que nosu ne sommes pas dans un état final
+    /// Ensuite, il faut ajouter les différentes fonctions de vérifications si voulu.
+    /// C'est maintenant que l'on crée l'automate : on ajoute dans la tableau figure une séquence de quart de figures (Il faut modifier le nombre d'éats dans le constructeur, paramètre n)
+    /// L'appel à process permet de faire els changements eventuels d'états, et enfin il faut revérifier si l'on est dans un état final
     /// </remarks>
     public abstract int calculateState(IFlyingObject plane);
 
@@ -115,7 +143,6 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
     /// <summary>
     /// Retourne un bouléen permettant de savoir si l'avion est dans le premier quart de l'Aileron Roll
     /// </summary>
-    /// <returns></returns>
     public bool Q1ARoll()
     {
         return (_upScalar >= 0 && _rightScalar <= 0);
@@ -131,7 +158,6 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
     /// <summary>
     /// Retourne un bouléen permettant de savoir si l'avion est dans le Troisième quart de l'Aileron Roll
     /// </summary>
-    /// <returns></returns>
     public bool Q3ARoll()
     {
         return (_upScalar <= 0 && _rightScalar >= 0);
@@ -140,7 +166,6 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
     /// <summary>
     /// Retourne un bouléen permettant de savoir si l'avion est dans le quartrième quart de l'Aileron Roll
     /// </summary>
-    /// <returns></returns>
     public bool Q4ARoll()
     {
         return (_upScalar >= 0 && _rightScalar >= 0);

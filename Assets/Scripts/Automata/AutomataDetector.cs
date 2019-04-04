@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 
-/*
-    Représente le gestionaire des automates
-    à utiliser avec FigureManager
- */
+/// <summary>
+/// Représente le gestionaire des automates
+/// à utiliser avec FigureManager
+ /// </summary>
+ /// <remarks> C'est ici qu'il faut ajouter le fichier de la figure correspondate si on veut en ajouter une nouvelle</remarks>
 public class AutomataDetector : IFigureDetection {
     private List<IFigureAutomata> _myAutomatas;
 
+    /// <summary>
+    /// Constructeur où on ajoute la liste des figures que l'on veut reconnaitre
+    /// </summary>
     public AutomataDetector() {
         //creation des auomates à reconnaitre
         _myAutomatas = new List<IFigureAutomata>();
@@ -17,19 +21,18 @@ public class AutomataDetector : IFigureDetection {
         _myAutomatas.Add(new ARollLeftAutomata());
         _myAutomatas.Add(new CERAutomata());
     }
-
-    /*
-     *  Ancienne version, inutile
-     */
-    public void setPoint(Coordinate coord) {
-        ;
-    }
     
+    /// <summary>
+    /// Fonction qui fait appel à calculateState sur tous les automates que l'on a choisi, déclenchant ainsi tourner la reconaissance
+    /// </summary>
     public void setPoint(IFlyingObject plane) {
         foreach (IFigureAutomata auto in _myAutomatas)
             auto.calculateState(plane);
     }
 
+    /// <summary>
+    /// Fonction qui renvoie un tableau constitué de toutes les figures qui ont été reconnues
+    /// </summary>
     public List<Figure> detection() {
         List<Figure> list = new List<Figure>();
         foreach (IFigureAutomata auto in _myAutomatas) {
@@ -37,8 +40,6 @@ public class AutomataDetector : IFigureDetection {
                 list.Add(new Figure(auto.getFigureId(), 1f));
                 auto.resetStates();
             }
-            //else
-            //    list.Add(new Figure(auto.getFigureId(), 0));
         }
         return list;
     }

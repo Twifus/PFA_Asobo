@@ -7,12 +7,6 @@ using System.Collections.Generic;
 public interface IFigureDetection {
 
     /// <summary>
-    /// Ajoute une nouvelle coordonnée à la trajectoire à traiter
-    /// </summary>
-    /// <param name="point"></param>
-    void setPoint(Coordinate point);
-
-    /// <summary>
     /// Ajoute les coordonnées courantes d'un IFlyingObject à la trajectoire à traiter
     /// </summary>
     /// <param name="flyingObject"></param>
