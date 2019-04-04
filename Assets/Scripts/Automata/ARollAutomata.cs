@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Numerics;
-using unity = UnityEngine;
+//using unity = UnityEngine;
 
 /// <summary>
 /// Fichier de reconaissance d'un Aileron Roll dans le sens horaire

@@ -2,6 +2,9 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Menu de jeu
+/// </summary>
 public class SettingsUI : MonoBehaviour
 {
     public GUISkin guiSkin;

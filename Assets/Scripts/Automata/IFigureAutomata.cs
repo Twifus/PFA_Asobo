@@ -6,6 +6,8 @@
 /// chaque figure possède(ou non) un automate
 /// la classe s'occupe de convertir les positions en transitions
 /// </summary>
+/// <remarks> Ce fichier et les fichiers subséquents sont indépendant à unity.
+/// Les inclusions de l'UnityEngines sont présentes uniquement à titre de Debug </remarks>
 
 public interface IFigureAutomata {
     /// <summary>
