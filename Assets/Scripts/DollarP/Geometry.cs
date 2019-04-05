@@ -1,5 +1,5 @@
 /**
- * The $P Point-Cloud Recognizer (.NET Framework 4.0 C# version)
+ * The DollarP Point-Cloud Recognizer (.NET Framework 4.0 C# version)
  *
  * 	    Radu-Daniel Vatavu, Ph.D.
  *	    University Stefan cel Mare of Suceava
@@ -19,11 +19,11 @@
  *	    Seattle, WA 98195-2840
  *	    wobbrock@uw.edu
  *
- * The academic publication for the $P recognizer, and what should be 
+ * The academic publication for the DollarP recognizer, and what should be 
  * used to cite it, is:
  *
  *	Vatavu, R.-D., Anthony, L. and Wobbrock, J.O. (2012).  
- *	  Gestures as point clouds: A $P recognizer for user interface 
+ *	  Gestures as point clouds: A DollarP recognizer for user interface 
  *	  prototypes. Proceedings of the ACM Int'l Conference on  
  *	  Multimodal Interfaces (ICMI '12). Santa Monica, California  
  *	  (October 22-26, 2012). New York: ACM Press, pp. 273-280.

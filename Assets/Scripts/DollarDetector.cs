@@ -68,7 +68,6 @@ public class DollarDetector : IFigureDetection {
     /// <summary>
     /// Ajoute une nouvelle coordonnée à la trajectoire à traiter
     /// </summary>
-    /// <param name="point"></param>
     public void setPoint(Coordinate point) {
         if (_timePoints[0].Count == MAX_SIZE)
         {
@@ -100,7 +99,6 @@ public class DollarDetector : IFigureDetection {
     /// <summary>
     /// Ajoute les coordonnées courantes d'un IFlyingObject à la trajectoire à traiter
     /// </summary>
-    /// <param name="flyingObject"></param>
     public void setPoint(IFlyingObject flyingObject) {
         if (_timePoints[0].Count == MAX_SIZE)
         {
@@ -142,8 +140,6 @@ public class DollarDetector : IFigureDetection {
     /// <remarks>
     /// Cette fonction permet de vérifier si l'ensemble des courbes reconnues par l'algorithmes correspondent aux courbes de référence d'une figure donnée.
     /// </remarks>
-    /// <param name="results"></param>
-    /// <param name="curvesNames"></param>
     /// <returns>
     /// Retourne true si les courbes de <paramref name="results"/> sont celles indiquées dans <paramref name="curvesNames"/>
     /// </returns>

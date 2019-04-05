@@ -4,7 +4,7 @@ using System.Numerics;
 //using unity = UnityEngine;
 
 /// <summary>
-/// Fichier de reconaissance d'un Looping
+/// Automate de reconaissance d'un Looping
 /// </summary>
 public class LoopingAutomata : SimpleAutomata {
 

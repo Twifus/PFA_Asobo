@@ -9,8 +9,6 @@ namespace PDollarGestureRecognizer
         /// <summary>
         /// Reads a multistroke gesture from an XML file
         /// </summary>
-        /// <param name="fileName"></param>
-        /// <returns></returns>
         public static Gesture ReadGesture(string fileName)
         {
             List<Point> points = new List<Point>();

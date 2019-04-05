@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-///Affiche et calcule l'altitude et la vitesse de l'avion à l'écran
+///Affiche l'altitude et la vitesse de l'avion à l'écran
 /// </summary>
 public class UIDial : MonoBehaviour {
 

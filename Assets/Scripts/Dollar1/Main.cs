@@ -20,9 +20,9 @@ public class Main : MonoBehaviour
         int time = 1000;
         int i;
 
-        _rec.LoadGesture(".\\Assets\\Scripts\\$1\\line.xml");
-        _rec.LoadGesture(".\\Assets\\Scripts\\$1\\circle.xml");
-        _rec.LoadGesture(".\\Assets\\Scripts\\$1\\triangle.xml");
+        _rec.LoadGesture(".\\Assets\\Scripts\\Dollar1\\line.xml");
+        _rec.LoadGesture(".\\Assets\\Scripts\\Dollar1\\circle.xml");
+        _rec.LoadGesture(".\\Assets\\Scripts\\Dollar1\\triangle.xml");
 
         for (i = 0; i < 180; i++)
         {

@@ -32,7 +32,7 @@ public class CustomInput {
     /// <summary>
     /// Ajoute un nouvel axe au proxy
     /// </summary>
-    /// <param name="axis">Nom de l'axe à ajouter (doit correspondre à un axe renseigné dans Unity)</param>
+    // <param name="axis">Nom de l'axe à ajouter (doit correspondre à un axe renseigné dans Unity)</param>
     private static void AddAxis(string axis)
     {
         simulate.Add(axis, false);
@@ -42,7 +42,7 @@ public class CustomInput {
     /// <summary>
     /// (Dés)Active la simulation d'un axe
     /// </summary>
-    /// <param name="axis">Nom de l'axe dont le mode doit changer</param>
+    // <param name="axis">Nom de l'axe dont le mode doit changer</param>
     public static void ToggleDummyInput(string axis) {
         if (!simulate.ContainsKey(axis))
             AddAxis(axis);
@@ -53,7 +53,7 @@ public class CustomInput {
     /// <summary>
     /// Lit la valeur d'un axe
     /// </summary>
-    /// <param name="axis">Nom de l'axe dont la valeur doit être lue</param>
+    // <param name="axis">Nom de l'axe dont la valeur doit être lue</param>
     /// <returns>
     /// Valeur lue sur l'axe <paramref name="axis"/>
     /// </returns>
@@ -71,8 +71,8 @@ public class CustomInput {
     /// <summary>
     /// Ecrit une valeur sur un axe
     /// </summary>
-    /// <param name="axis">Nom de l'axe dont la valeur doit être modifié</param>
-    /// <param name="value">Nouvelle valeur pour cet axe</param>
+    // <param name="axis">Nom de l'axe dont la valeur doit être modifié</param>
+    // <param name="value">Nouvelle valeur pour cet axe</param>
     public static void SetAxis(string axis, float value)
     {
         if (!simulate.ContainsKey(axis))

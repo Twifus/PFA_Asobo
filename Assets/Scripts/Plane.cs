@@ -94,7 +94,7 @@ public class Plane : IFlyingObject {
     /// <summary>
     /// Donne une instance de Plane associé à un GameObject donné
     /// </summary>
-    /// <param name="plane">GameObject à associer au Plane</param>
+    // <param name="plane">GameObject à associer au Plane</param>
     /// <returns>
     /// Si aucune instance liée à GameObject n'existe, retourne une nouvelle instance de Plane.
     /// Sinon, retourne l'instance correspondante.
