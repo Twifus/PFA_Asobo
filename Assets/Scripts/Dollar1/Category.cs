@@ -1,32 +1,32 @@
-/**
- * The $1 Unistroke Recognizer (C# version)
+/*
+ * The Dollar 1 Unistroke Recognizer (Csharp version)
  *
  *		Jacob O. Wobbrock, Ph.D.
  * 		The Information School
  *		University of Washington
  *		Mary Gates Hall, Box 352840
  *		Seattle, WA 98195-2840
- *		wobbrock@u.washington.edu
+ *		wobbrock[at]u.washington.edu
  *
  *		Andrew D. Wilson, Ph.D.
  *		Microsoft Research
  *		One Microsoft Way
  *		Redmond, WA 98052
- *		awilson@microsoft.com
+ *		awilson[at]microsoft.com
  *
  *		Yang Li, Ph.D.
  *		Department of Computer Science and Engineering
  * 		University of Washington
  *		The Allen Center, Box 352350
  *		Seattle, WA 98195-2840
- * 		yangli@cs.washington.edu
+ * 		yangli[at]cs.washington.edu
  *
  * The Protractor enhancement was published by Yang Li and programmed here by 
  * Jacob O. Wobbrock.
  *
  *	Li, Y. (2010). Protractor: A fast and accurate gesture 
  *	  recognizer. Proceedings of the ACM Conference on Human 
- *	  Factors in Computing Systems (CHI '10). Atlanta, Georgia
+ *	  Factors in Computing Systems (CHI 10). Atlanta, Georgia
  *	  (April 10-15, 2010). New York: ACM Press, pp. 2169-2172.
  * 
  * This software is distributed under the "New BSD License" agreement:
@@ -56,7 +56,7 @@
  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
  * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-**/
+ */
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -113,8 +113,6 @@ namespace Recognizer1Dollar
         /// Indexer that returns the prototype at the given index within
         /// this gesture category, or null if the gesture does not exist.
         /// </summary>
-        /// <param name="i"></param>
-        /// <returns></returns>
         public Unistroke this[int i]
         {
             get
@@ -159,10 +157,8 @@ namespace Recognizer1Dollar
         }
 
         /// <summary>
-        /// Pulls the category name from the gesture name, e.g., "circle" from "circle03".
+        /// Pulls the category name from the gesture name, e.g., circle from circle03.
         /// </summary>
-        /// <param name="s"></param>
-        /// <returns></returns>
         public static string ParseName(string s)
         {
             string category = String.Empty;

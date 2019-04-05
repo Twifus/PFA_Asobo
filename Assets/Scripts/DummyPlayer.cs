@@ -63,7 +63,7 @@ public class DummyPlayer : MonoBehaviour {
     /// Lis une ligne du fichier en paramètre, extrait les inputs de cette ligne, et modifie les valeurs des axes via CustomInput.
     /// Si la fin du fichier est atteint, le fichier est fermé.
     /// </remarks>
-    /// <param name="path">Chemin du fichier contenant la figure de référence</param>
+    // <param name="path">Chemin du fichier contenant la figure de référence</param>
     private void replayFromFile(string path)
     {
         if (file == null)

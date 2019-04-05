@@ -71,7 +71,6 @@ public class RingRotation : MonoBehaviour
     /// <summary>
     /// Attribue des points lorsque le joueur passe dans l'anneau avec le bon angle
     /// </summary>
-    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         Vector3 reference = Vector3.ProjectOnPlane(other.transform.up, _indicator.transform.forward);

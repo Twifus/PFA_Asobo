@@ -1,32 +1,32 @@
-/**
- * The $1 Unistroke Recognizer (C# version)
+/*
+ * The Dollar 1 Unistroke Recognizer (Csharp version)
  *
  *		Jacob O. Wobbrock, Ph.D.
  * 		The Information School
  *		University of Washington
  *		Mary Gates Hall, Box 352840
  *		Seattle, WA 98195-2840
- *		wobbrock@u.washington.edu
+ *		wobbrock[at]u.washington.edu
  *
  *		Andrew D. Wilson, Ph.D.
  *		Microsoft Research
  *		One Microsoft Way
  *		Redmond, WA 98052
- *		awilson@microsoft.com
+ *		awilson[at]microsoft.com
  *
  *		Yang Li, Ph.D.
  *		Department of Computer Science and Engineering
  * 		University of Washington
  *		The Allen Center, Box 352350
  *		Seattle, WA 98195-2840
- * 		yangli@cs.washington.edu
+ * 		yangli[at]cs.washington.edu
  *
  * The Protractor enhancement was published by Yang Li and programmed here by 
  * Jacob O. Wobbrock.
  *
  *	Li, Y. (2010). Protractor: A fast and accurate gesture 
  *	  recognizer. Proceedings of the ACM Conference on Human 
- *	  Factors in Computing Systems (CHI '10). Atlanta, Georgia
+ *	  Factors in Computing Systems (CHI 10). Atlanta, Georgia
  *	  (April 10-15, 2010). New York: ACM Press, pp. 2169-2172.
  * 
  * This software is distributed under the "New BSD License" agreement:
@@ -56,7 +56,7 @@
  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
  * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-**/
+ */
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -76,8 +76,8 @@ namespace Recognizer1Dollar
         /// Constructor of a unistroke gesture. A unistroke is comprised of a set of points drawn
         /// out over time in a sequence.
         /// </summary>
-        /// <param name="name">The name of the unistroke gesture.</param>
-        /// <param name="timepoints">The array of points supplied for this unistroke.</param>
+        // <param name="name">The name of the unistroke gesture.</param>
+        // <param name="timepoints">The array of points supplied for this unistroke.</param>
         public Unistroke(string name, List<TimePointF> timepoints)
         {
             this.Name = name;
@@ -92,9 +92,9 @@ namespace Recognizer1Dollar
         }
 
         /// <summary>
-        /// Vectorize the unistroke according to the algorithm by Yang Li for use in the Protractor extension to $1.
+        /// Vectorize the unistroke according to the algorithm by Yang Li for use in the Protractor extension to Dollar1.
         /// </summary>
-        /// <param name="points">The resampled points in the gesture to vectorize.</param>
+        // <param name="points">The resampled points in the gesture to vectorize.</param>
         /// <returns>A vector of cosine distances.</returns>
         /// <seealso cref="http://yangl.org/protractor/"/>
         public static List<double> Vectorize(List<PointF> points)
@@ -126,8 +126,6 @@ namespace Recognizer1Dollar
         /// <summary>
         /// Sort comparator in descending order of score.
         /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
         public int CompareTo(object obj)
         {
             if (obj is Unistroke)
@@ -141,8 +139,6 @@ namespace Recognizer1Dollar
         /// <summary>
         /// Pulls the gesture name from the file name, e.g., "circle03" from "C:\gestures\circles\circle03.xml".
         /// </summary>
-        /// <param name="s"></param>
-        /// <returns></returns>
         public static string ParseName(string filename)
         {
             int start = filename.LastIndexOf('\\');

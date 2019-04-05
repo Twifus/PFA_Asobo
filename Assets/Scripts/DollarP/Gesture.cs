@@ -1,5 +1,5 @@
 /**
- * The $P Point-Cloud Recognizer (.NET Framework 4.0 C# version)
+ * The DollarP Point-Cloud Recognizer (.NET Framework 4.0 C# version)
  *
  * 	    Radu-Daniel Vatavu, Ph.D.
  *	    University Stefan cel Mare of Suceava
@@ -19,11 +19,11 @@
  *	    Seattle, WA 98195-2840
  *	    wobbrock@uw.edu
  *
- * The academic publication for the $P recognizer, and what should be 
+ * The academic publication for the DollarP recognizer, and what should be 
  * used to cite it, is:
  *
  *	Vatavu, R.-D., Anthony, L. and Wobbrock, J.O. (2012).  
- *	  Gestures as point clouds: A $P recognizer for user interface 
+ *	  Gestures as point clouds: A DollarP recognizer for user interface 
  *	  prototypes. Proceedings of the ACM Int'l Conference on  
  *	  Multimodal Interfaces (ICMI '12). Santa Monica, California  
  *	  (October 22-26, 2012). New York: ACM Press, pp. 273-280.
@@ -74,7 +74,6 @@ namespace PDollarGestureRecognizer
         /// <summary>
         /// Constructs a gesture from an array of points
         /// </summary>
-        /// <param name="points"></param>
         public Gesture(Point[] points, string gestureName = "")
         {
             this.Name = gestureName;
@@ -88,10 +87,8 @@ namespace PDollarGestureRecognizer
         #region gesture pre-processing steps: scale normalization, translation to origin, and resampling
 
         /// <summary>
-        /// Performs scale normalization with shape preservation into [0..1]x[0..1]
+        /// Performs scale normalization with shape preservation into 0..1 x 0..1
         /// </summary>
-        /// <param name="points"></param>
-        /// <returns></returns>
         private Point[] Scale(Point[] points)
         {
             float minx = float.MaxValue, miny = float.MaxValue, maxx = float.MinValue, maxy = float.MinValue;
@@ -115,9 +112,6 @@ namespace PDollarGestureRecognizer
         /// <summary>
         /// Translates the array of points by p
         /// </summary>
-        /// <param name="points"></param>
-        /// <param name="p"></param>
-        /// <returns></returns>
         private Point[] TranslateTo(Point[] points, Point p)
         {
             Point[] newPoints = new Point[points.Length];
@@ -129,8 +123,6 @@ namespace PDollarGestureRecognizer
         /// <summary>
         /// Computes the centroid for an array of points
         /// </summary>
-        /// <param name="points"></param>
-        /// <returns></returns>
         private Point Centroid(Point[] points)
         {
             float cx = 0, cy = 0;
@@ -145,9 +137,6 @@ namespace PDollarGestureRecognizer
         /// <summary>
         /// Resamples the array of points into n equally-distanced points
         /// </summary>
-        /// <param name="points"></param>
-        /// <param name="n"></param>
-        /// <returns></returns>
         public Point[] Resample(Point[] points, int n)
         {
             Point[] newPoints = new Point[n];
@@ -194,8 +183,6 @@ namespace PDollarGestureRecognizer
         /// <summary>
         /// Computes the path length for an array of points
         /// </summary>
-        /// <param name="points"></param>
-        /// <returns></returns>
         private float PathLength(Point[] points)
         {
             float length = 0;

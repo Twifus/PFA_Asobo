@@ -1,5 +1,5 @@
 ﻿/**
- * The $P Point-Cloud Recognizer (.NET Framework 4.0 C# version)
+ * The DollarP Point-Cloud Recognizer (.NET Framework 4.0 C# version)
  *
  * 	    Radu-Daniel Vatavu, Ph.D.
  *	    University Stefan cel Mare of Suceava
@@ -19,11 +19,11 @@
  *	    Seattle, WA 98195-2840
  *	    wobbrock@uw.edu
  *
- * The academic publication for the $P recognizer, and what should be 
+ * The academic publication for the DollarP recognizer, and what should be 
  * used to cite it, is:
  *
  *	Vatavu, R.-D., Anthony, L. and Wobbrock, J.O. (2012).  
- *	  Gestures as point clouds: A $P recognizer for user interface 
+ *	  Gestures as point clouds: A DollarP recognizer for user interface 
  *	  prototypes. Proceedings of the ACM Int'l Conference on  
  *	  Multimodal Interfaces (ICMI '12). Santa Monica, California  
  *	  (October 22-26, 2012). New York: ACM Press, pp. 273-280.
@@ -62,12 +62,12 @@ using System.Collections.Generic;
 //using UnityEngine;
 
 /// <summary>
-/// Algorithme de reconnaissance $P
+/// Algorithme de reconnaissance Dollar P
 /// </summary>
 namespace PDollarGestureRecognizer
 {
     /// <summary>
-    /// Implements the $P recognizer
+    /// Implements the Dollar P recognizer
     /// </summary>
     public class PointCloudRecognizer
     {
@@ -93,13 +93,10 @@ namespace PDollarGestureRecognizer
         }
 
         /// <summary>
-        /// Main function of the $P recognizer.
+        /// Main function of the Dollar P recognizer.
         /// Classifies a candidate gesture against a set of training samples.
         /// Returns the class of the closest neighbor in the training set.
         /// </summary>
-        /// <param name="candidate"></param>
-        /// <param name="trainingSet"></param>
-        /// <returns></returns>
         public static BestGesture Classify(Gesture candidate, Gesture[] trainingSet)
         {
             float minDistance = float.MaxValue;
@@ -119,9 +116,6 @@ namespace PDollarGestureRecognizer
         /// <summary>
         /// Implements greedy search for a minimum-distance matching between two point clouds
         /// </summary>
-        /// <param name="points1"></param>
-        /// <param name="points2"></param>
-        /// <returns></returns>
         private static float GreedyCloudMatch(Point[] points1, Point[] points2)
         {
             int n = points1.Length; // the two clouds should have the same number of points by now
@@ -141,10 +135,6 @@ namespace PDollarGestureRecognizer
         /// Computes the distance between two point clouds by performing a minimum-distance greedy matching
         /// starting with point startIndex
         /// </summary>
-        /// <param name="points1"></param>
-        /// <param name="points2"></param>
-        /// <param name="startIndex"></param>
-        /// <returns></returns>
         private static float CloudDistance(Point[] points1, Point[] points2, int startIndex)
         {
             int n = points1.Length;       // the two clouds should have the same number of points by now

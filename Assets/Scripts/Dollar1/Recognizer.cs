@@ -1,32 +1,32 @@
-/**
- * The $1 Unistroke Recognizer (C# version)
+/*
+ * The Dollar 1 Unistroke Recognizer (Csharp version)
  *
  *		Jacob O. Wobbrock, Ph.D.
  * 		The Information School
  *		University of Washington
  *		Mary Gates Hall, Box 352840
  *		Seattle, WA 98195-2840
- *		wobbrock@u.washington.edu
+ *		wobbrock[at]u.washington.edu
  *
  *		Andrew D. Wilson, Ph.D.
  *		Microsoft Research
  *		One Microsoft Way
  *		Redmond, WA 98052
- *		awilson@microsoft.com
+ *		awilson[at]microsoft.com
  *
  *		Yang Li, Ph.D.
  *		Department of Computer Science and Engineering
  * 		University of Washington
  *		The Allen Center, Box 352350
  *		Seattle, WA 98195-2840
- * 		yangli@cs.washington.edu
+ * 		yangli[at]cs.washington.edu
  *
  * The Protractor enhancement was published by Yang Li and programmed here by 
  * Jacob O. Wobbrock.
  *
  *	Li, Y. (2010). Protractor: A fast and accurate gesture 
  *	  recognizer. Proceedings of the ACM Conference on Human 
- *	  Factors in Computing Systems (CHI '10). Atlanta, Georgia
+ *	  Factors in Computing Systems (CHI 10). Atlanta, Georgia
  *	  (April 10-15, 2010). New York: ACM Press, pp. 2169-2172.
  * 
  * This software is distributed under the "New BSD License" agreement:
@@ -56,7 +56,7 @@
  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
  * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-**/
+ */
 using System;
 using System.IO;
 using System.Xml;
@@ -69,7 +69,7 @@ using WobbrockLib;
 using WobbrockLib.Extensions;
 
 /// <summary>
-/// Algorithme de reconnaissance $1
+/// Algorithme de reconnaissance Dollar1
 /// </summary>
 namespace Recognizer1Dollar
 {
@@ -104,13 +104,7 @@ namespace Recognizer1Dollar
         #endregion
 
         #region Recognition
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="timepoints"></param>
-        /// <param name="protractor"></param>
-        /// <returns></returns>
+        
         public NBestList Recognize(List<TimePointF> timepoints, bool protractor) // candidate points
         {
             double I = GeotrigEx.PathLength(timepoints) / (NumPoints - 1); // interval distance between points
@@ -130,7 +124,7 @@ namespace Recognizer1Dollar
                     double score = 1.0 / best[0];
                     nbest.AddResult(u.Name, score, best[0], best[1]); // name, score, distance, angle
                 }
-                else // original $1 angular invariance search -- Golden Section Search (GSS)
+                else // original Dollar1 angular invariance search -- Golden Section Search (GSS)
                 {
                     double[] best = GoldenSectionSearch(
                             points,                             // to rotate
@@ -188,9 +182,6 @@ namespace Recognizer1Dollar
         /// <summary>
         /// From Protractor by Yang Li, published at CHI 2010. See http://yangl.org/protractor/. 
         /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
         private double[] OptimalCosineDistance(List<double> v1, List<double> v2)
         {
             double a = 0.0;
@@ -205,12 +196,6 @@ namespace Recognizer1Dollar
             return new double[3] { distance, GeotrigEx.Radians2Degrees(angle), 0.0 }; // distance, angle, calls to pathdist
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path1"></param>
-        /// <param name="path2"></param>
-        /// <returns></returns>
         public static double PathDistance(List<PointF> path1, List<PointF> path2)
         {
             double distance = 0;
@@ -223,8 +208,8 @@ namespace Recognizer1Dollar
 
         // continues to rotate 'pts1' by 'step' degrees as long as points become ever-closer 
         // in path-distance to pts2. the initial distance is given by D. the best distance
-        // is returned in array[0], while the angle at which it was achieved is in array[1].
-        // array[3] contains the number of calls to PathDistance.
+        // is returned in array 0, while the angle at which it was achieved is in array 1.
+        // array 3 contains the number of calls to PathDistance.
         private double[] HillClimbSearch(List<PointF> pts1, List<PointF> pts2, double D, double step)
         {
             double i = 0.0;
@@ -242,13 +227,6 @@ namespace Recognizer1Dollar
             return new double[3] { D, theta - step, i }; // distance, angle, calls to pathdist
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pts1"></param>
-        /// <param name="pts2"></param>
-        /// <param name="writer"></param>
-        /// <returns></returns>
         private double[] FullSearch(List<PointF> pts1, List<PointF> pts2, StreamWriter writer)
         {
             double bestA = 0d;
@@ -430,8 +408,7 @@ namespace Recognizer1Dollar
         /// <summary>
         /// Assemble the gesture filenames into categories that contain potentially multiple examples of the same gesture.
         /// </summary>
-        /// <param name="filenames"></param>
-        /// <returns>A 1-D list of category instances that each contain the same number of examples, or <b>null</b> if an
+        /// <returns >A 1-D list of category instances that each contain the same number of examples, or <b>null</b> if an
         /// error occurs.</returns>
         /// <remarks>See the comments above MainForm.TestBatch_Click.</remarks>
         public List<Category> AssembleBatch(string[] filenames)
@@ -503,13 +480,13 @@ namespace Recognizer1Dollar
         /// <summary>
         /// Tests an entire batch of files. See comments atop MainForm.TestBatch_Click().
         /// </summary>
-        /// <param name="subject">Subject identification.</param>
-        /// <param name="speed">"fast", "medium", or "slow"</param>
-        /// <param name="categories">A list of gesture categories that each contain lists of prototypes (examples) within that gesture category.</param>
-        /// <param name="dir">The directory into which to write the output files.</param>
-        /// <param name="protractor">If true, uses Protractor instead of Golden Section Search.</param>
-        /// <returns>The two filenames of the output file if successful; null otherwise. The main results are in string[0],
-        /// while the detailed recognition results are in string[1].</returns>
+        // <param name="subject">Subject identification.</param>
+        // <param name="speed">"fast", "medium", or "slow"</param>
+        // <param name="categories">A list of gesture categories that each contain lists of prototypes (examples) within that gesture category.</param>
+        // <param name="dir">The directory into which to write the output files.</param>
+        // <param name="protractor">If true, uses Protractor instead of Golden Section Search.</param>
+        /// <returns>The two filenames of the output file if successful; null otherwise. The main results are in string 0,
+        /// while the detailed recognition results are in string 1 .</returns>
         public string[] TestBatch(string subject, string speed, List<Category> categories, string dir, bool protractor)
         {
             StreamWriter mw = null; // main results writer
@@ -519,15 +496,15 @@ namespace Recognizer1Dollar
             {
                 // set up a main results file and detailed results file
                 int start = Environment.TickCount;
-                filenames[0] = String.Format("{0}\\$1({1})_main_{2}.txt", dir, protractor ? "protractor" : "gss", start); // main results (small file)
-                filenames[1] = String.Format("{0}\\$1({1})_nbest_{2}.txt", dir, protractor ? "protractor" : "gss", start); // recognition details (large file)
+                filenames[0] = String.Format("{0}\\Dollar1({1})_main_{2}.txt", dir, protractor ? "protractor" : "gss", start); // main results (small file)
+                filenames[1] = String.Format("{0}\\Dollar1({1})_nbest_{2}.txt", dir, protractor ? "protractor" : "gss", start); // recognition details (large file)
 
                 mw = new StreamWriter(filenames[0], false, Encoding.UTF8);
-                mw.WriteLine("Subject = {0}, Recognizer = $1, Search = {1}, Speed = {2}, StartTime(ms) = {3}", subject, protractor ? "protractor" : "gss", speed, start);
+                mw.WriteLine("Subject = {0}, Recognizer = Dollar1, Search = {1}, Speed = {2}, StartTime(ms) = {3}", subject, protractor ? "protractor" : "gss", speed, start);
                 mw.WriteLine("Subject Recognizer Search Speed NumTraining GestureType RecognitionRate\n");
 
                 dw = new StreamWriter(filenames[1], false, Encoding.UTF8);
-                dw.WriteLine("Subject = {0}, Recognizer = $1, Search = {1}, Speed = {2}, StartTime(ms) = {3}", subject, protractor ? "protractor" : "gss", speed, start);
+                dw.WriteLine("Subject = {0}, Recognizer = Dollar1, Search = {1}, Speed = {2}, StartTime(ms) = {3}", subject, protractor ? "protractor" : "gss", speed, start);
                 dw.WriteLine("Correct? NumTrain Tested 1stCorrect Pts Ms Angle : (NBestNames) [NBestScores]\n");
 
                 // determine the number of gesture categories and the number of examples in each one
@@ -611,7 +588,7 @@ namespace Recognizer1Dollar
                         results[i] /= (double)NumRandomTests; // normalize by the number of tests at this N
                         Category c = (Category)categories[i];
                         // Subject Recognizer Search Speed NumTraining GestureType RecognitionRate
-                        mw.WriteLine("{0} $1 {1} {2} {3} {4} {5:F3}",
+                        mw.WriteLine("{0} Dollar1 {1} {2} {3} {4} {5:F3}",
                             subject,
                             protractor ? "protractor" : "gss",
                             speed,

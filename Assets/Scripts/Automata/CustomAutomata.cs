@@ -1,22 +1,24 @@
-using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 //using unity = UnityEngine;
 
-/// <summary>
-/// Automate de reconaissance d'un Looping
-/// </summary>
-public class LoopingAutomata : SimpleAutomata {
 
+/// <summary>
+/// Fichier de reconaissance d'une figure personalisable
+/// </summary>
+public class CustomAutomata : SimpleAutomata
+{
     /// <summary>
     /// Constructeur qui initialise un automate à n états
     /// </summary>
-    public LoopingAutomata() {
-        int n = 5;//NOMBRES D'ETATS
+    public CustomAutomata()
+    {
+        int n = 10;//NOMBRES D'ETATS
         CurrentState = 0;
         _finalState = n;
         DicoTransitions = new Dictionary<FSMDetection.StateTransition, int>();
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++)
+        {
             StateTransition t = new StateTransition(i, i + 1); //transition vers l'etat suivant
             DicoTransitions.Add(t, i + 1);
             t = new StateTransition(i, i); //transition vers l'etat courant (boucle)
@@ -24,27 +26,28 @@ public class LoopingAutomata : SimpleAutomata {
         }
     }
 
-    public override figure_id getFigureId() {
-        return figure_id.LOOP;
+    public override figure_id getFigureId()
+    {
+        return figure_id.CUSTOMFIGURE;
     }
 
-    public override string getName() {
-        return "Looping";
+    public override string getName()
+    {
+        return "Custom Figure";
     }
-    
+
     public override int calculateState(IFlyingObject plane)
     {
         init(plane);
         if (isValid()) return 1;
-        checkAltitude(plane, 45, 3);
-        checkTime(5);
+        /*
+         * METTRE ICI LES CHECKS
+         */
 
-        figure[0] = Q1Loop();
-        figure[1] = Q2Loop();
-        figure[2] = Q3Loop();
-        figure[3] = Q4Loop();
-        figure[4] = Q1Loop();
-
+        /*
+        * REMPLIR IC LE TABLEAU FIGURE AVEC LA SEQUENCE D'ETATS 
+        * NE PAS OUBLIER DE CHANGER LE NOMBRE D ETATS DANS LE CONSTRUCTEUR
+        */
 
         process();
 
@@ -60,4 +63,3 @@ public class LoopingAutomata : SimpleAutomata {
         return 0;
     }
 }
- 
