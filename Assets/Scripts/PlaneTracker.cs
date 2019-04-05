@@ -6,18 +6,59 @@ using System.IO;
 using s = System.Numerics;
 using System.Globalization;
 
+/// <summary>
+/// Permet l'écriture dans un fichier les coordonnées successives de l'avion au cours du temps
+/// </summary>
+/// <remarks>
+/// Pour démarrer un enregistrement, l'utilisateur doit maintenair le bouton correspondant pendant un court délai.
+/// </remarks>
 public class PlaneTracker : MonoBehaviour {
 
     private StreamWriter FileWriter;
+
+    /// <summary>
+    /// Instance de Plane associée à l'avion suivi
+    /// </summary>
     private Plane Plane;
+
+    /// <summary>
+    /// GameObject de l'avion suivi
+    /// </summary>
     public GameObject Player;
 
+    /// <summary>
+    /// Component RawImage indicateur d'enregistrement
+    /// </summary>
     public RawImage recordImage;
+
+    /// <summary>
+    /// Temps du dernier clignotement
+    /// </summary>
     private float blinkTime;
+
+    /// <summary>
+    /// Delai de clignotement
+    /// </summary>
     private float blinkDelay = 0.5f;
 
+    /// <summary>
+    /// Temps du premier appui sur le bouton d'enregistrement
+    /// </summary>
     private float ts;
+
+    /// <summary>
+    /// Delai d'appui pour démarrer l'enregistrement
+    /// </summary>
+    private float pressDelay = 0.3f;
+
+    /// <summary>
+    /// Etat de l'appui sur le bouton d'enregistrement
+    /// </summary>
     private bool buttonPress;
+
+    /// <summary>
+    /// Statut de l'enregistrement
+    /// </summary>
     private bool record;
 
     public void Start()
@@ -26,12 +67,18 @@ public class PlaneTracker : MonoBehaviour {
         recordImage.enabled = false;
     }
 
+    /// <summary>
+    /// Ferme le fichier courant lorsque la scène est quittée
+    /// </summary>
     private void OnApplicationQuit()
     {
         if (FileWriter != null)
             FileWriter.Close();
     }
 
+    /// <summary>
+    /// Vérifie si l'utilisateur démarre/arrête un enregistrement, et ouvre/ferme un fichier si nécessaire
+    /// </summary>
     private void Update()
     {
         if (Input.GetButtonDown("ToggleRecord"))
@@ -40,7 +87,7 @@ public class PlaneTracker : MonoBehaviour {
             buttonPress = true;
         }
 
-        if (buttonPress && Input.GetButton("ToggleRecord") && Time.time > ts + 0.3f)
+        if (buttonPress && Input.GetButton("ToggleRecord") && Time.time > ts + pressDelay)
         {
             if (!record)
             {
@@ -72,6 +119,9 @@ public class PlaneTracker : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Enregistre périodiquement les coordonnées de l'avion dans le fichier
+    /// </summary>
     private void FixedUpdate()
     {
         if (record)

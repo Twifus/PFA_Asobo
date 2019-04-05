@@ -3,30 +3,74 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Contrôleur de la physique d'un avion
+/// </summary>
 public class PlaneController : MonoBehaviour
 {
+    /// <summary>
+    /// RigidBody de l'avion
+    /// </summary>
     private Rigidbody _body;
 
+    /// <summary>
+    /// Emplacement du centre de masse
+    /// </summary>
     public Transform CenterOfMass;
+
+    /// <summary>
+    /// Point d'application des forces du moteur
+    /// </summary>
     public Transform Engine;
+
+    /// <summary>
+    /// Point d'application des forces de l'aile gauche
+    /// </summary>
     public Transform LeftWing;
+
+    /// <summary>
+    /// Point d'application des forces de l'ailre droite
+    /// </summary>
     public Transform RightWing;
+
+    /// <summary>
+    /// Point d'application des forces de la queue
+    /// </summary>
     public Transform Tail;
 
+    /// <summary>
+    /// Prefab d'explosion instancié lors d'un impact
+    /// </summary>
     public GameObject explosionPrefab;
 
-    public GameObject[] SmokeTrails;
-
+    /// <summary>
+    /// Force de pousée
+    /// </summary>
     private Vector3 _thrust;
+
+    /// <summary>
+    /// Force de portance de l'aile gauche
+    /// </summary>
     private Vector3 _llift;
+
+    /// <summary>
+    /// Force de portance de l'aile droite
+    /// </summary>
     private Vector3 _rlift;
+
+    /// <summary>
+    /// Force de trainée
+    /// </summary>
     private Vector3 _drag;
 
+    /// <summary>
+    /// Instance de Plane associée à l'avion
+    /// </summary>
     private Plane _plane;
+    
     private bool _crashed;
     private GameObject _explosion;
-
-    // Use this for initialization
+    
     void Start()
     {
         _plane = Plane.NewPlane(gameObject);
@@ -35,7 +79,9 @@ public class PlaneController : MonoBehaviour
             _body.centerOfMass = CenterOfMass.localPosition;
     }
 
-    // Update is called once per frame
+    /// <remarks>
+    /// Application périodique des forces en fonction des inputs
+    /// </remarks>
     void FixedUpdate()
     {
         if (!_crashed)
@@ -63,12 +109,18 @@ public class PlaneController : MonoBehaviour
         }
     }
 
+    /// <remarks>
+    /// Redémarrage de la scène en cas de crash
+    /// </remarks>
     private void Update()
     {
         if (_crashed && !_explosion)
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    /// <summary>
+    /// (DEBUG) Affichage des forces dans l'éditeur
+    /// </summary>
     private void OnDrawGizmos()
     {
         Vector3 bodyPos = transform.position;
@@ -82,6 +134,9 @@ public class PlaneController : MonoBehaviour
         Gizmos.DrawLine(bodyPos, bodyPos + _drag / 1000);
     }
 
+    /// <summary>
+    /// Detection de l'impact avec un obstacle
+    /// </summary>
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Obstacle" && Vector3.Dot(collision.contacts[0].normal, collision.relativeVelocity) > 15f)

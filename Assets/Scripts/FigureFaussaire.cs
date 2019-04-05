@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Detecteur de figures fictif
+/// </summary>
+/// <remarks>
+/// Ce détecteur fictif annonce un Loop toutes les 6s, un Barel toutes les 2s et un Cuban Eight toutes les 28s.
+/// </remarks>
 public class FigureFaussaire: IFigureDetection{
-
-	// Use this for initialization
+    
 	void Start () {
     }
-
+    
     public void analyzeLoop(List<Figure> _listFig)
     {
         if (Time.time % 7f < 0.5f)

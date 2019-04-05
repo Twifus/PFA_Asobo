@@ -1,16 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using s = System.Numerics;
 using UnityEngine;
 
+/// <summary>
+/// Accesseur standardisé à la trajectoire d'un avion
+/// </summary>
 public class Plane : IFlyingObject {
 
+    /// <summary>
+    /// Ensemble des instances de Plane existantes
+    /// </summary>
     private static Dictionary<GameObject, Plane> listInstances = new Dictionary<GameObject, Plane>();
+
+    /// <summary>
+    /// Lock utilisé pour sécuriser les accès concurrents à listInstances
+    /// </summary>
     private static readonly object padlock = new object();
 
     #region Variables
     
+    /// <summary>
+    /// GameObject associé à l'instance
+    /// </summary>
     private GameObject _plane;
+
+    /// <summary>
+    /// RigidBody associé à l'instance
+    /// </summary>
     private Rigidbody _rigidbody;
 
     #endregion
@@ -19,9 +35,9 @@ public class Plane : IFlyingObject {
 
     /* IFLYING OBJECT */
 
-    public s.Vector3 pos { get { return UnityVector3ToSystemVector3(_rigidbody.transform.position); } }
+    public System.Numerics.Vector3 pos { get { return UnityVector3ToSystemVector3(_rigidbody.transform.position); } }
 
-    public s.Quaternion rotation { get { return UnityQuaternionToSystemQuaternion(_rigidbody.transform.rotation); } }
+    public System.Numerics.Quaternion rotation { get { return UnityQuaternionToSystemQuaternion(_rigidbody.transform.rotation); } }
 
     public float roll { get { return _Roll(); } }
     public float pitch { get { return _Pitch(); } }
@@ -31,11 +47,11 @@ public class Plane : IFlyingObject {
     public float pitchScalar { get { return _PitchScalar(); } }
     public float yawScalar { get { return _YawScalar(); } }
 
-    public s.Vector3 up { get { return UnityVector3ToSystemVector3(_rigidbody.transform.up); } }
-    public s.Vector3 forward { get { return UnityVector3ToSystemVector3(_rigidbody.transform.forward); } }
-    public s.Vector3 right { get { return UnityVector3ToSystemVector3(_rigidbody.transform.right); } }
+    public System.Numerics.Vector3 up { get { return UnityVector3ToSystemVector3(_rigidbody.transform.up); } }
+    public System.Numerics.Vector3 forward { get { return UnityVector3ToSystemVector3(_rigidbody.transform.forward); } }
+    public System.Numerics.Vector3 right { get { return UnityVector3ToSystemVector3(_rigidbody.transform.right); } }
 
-    public s.Vector3 speed { get { return UnityVector3ToSystemVector3(_rigidbody.velocity); } }
+    public System.Numerics.Vector3 speed { get { return UnityVector3ToSystemVector3(_rigidbody.velocity); } }
 
     public float time { get { return Time.time; } }
     
@@ -75,10 +91,14 @@ public class Plane : IFlyingObject {
 
     #region Public Methods
 
-    public void AddForce(Vector3 force) {
-        _rigidbody.AddForce(force);
-    }
-
+    /// <summary>
+    /// Donne une instance de Plane associé à un GameObject donné
+    /// </summary>
+    /// <param name="plane">GameObject à associer au Plane</param>
+    /// <returns>
+    /// Si aucune instance liée à GameObject n'existe, retourne une nouvelle instance de Plane.
+    /// Sinon, retourne l'instance correspondante.
+    /// </returns>
     public static Plane NewPlane(GameObject plane) {
         lock (padlock) { // thread safety
             if (listInstances.ContainsKey(plane)) {
@@ -157,12 +177,12 @@ public class Plane : IFlyingObject {
         return scalar;
     }
 
-    private s.Vector3 UnityVector3ToSystemVector3(Vector3 vector) {
-        return new s.Vector3(vector.x, vector.y, vector.z);
+    private System.Numerics.Vector3 UnityVector3ToSystemVector3(Vector3 vector) {
+        return new System.Numerics.Vector3(vector.x, vector.y, vector.z);
     }
 
-    private s.Quaternion UnityQuaternionToSystemQuaternion(Quaternion quaternion) {
-        return new s.Quaternion(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
+    private System.Numerics.Quaternion UnityQuaternionToSystemQuaternion(Quaternion quaternion) {
+        return new System.Numerics.Quaternion(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
     }
 
     #endregion

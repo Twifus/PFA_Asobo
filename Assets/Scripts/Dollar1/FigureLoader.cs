@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using WobbrockLib;
+using Recognizer1Dollar;
 
 public class FigureLoader {
 

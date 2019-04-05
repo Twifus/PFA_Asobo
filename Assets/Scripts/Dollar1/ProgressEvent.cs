@@ -61,22 +61,26 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-public class ProgressEventArgs : System.EventArgs
+
+namespace Recognizer1Dollar
 {
-    private double _percent;
-
-    public ProgressEventArgs(double percent)
+    public class ProgressEventArgs : System.EventArgs
     {
-        _percent = percent;
-    }
+        private double _percent;
 
-    public double Percent
-    {
-        get
+        public ProgressEventArgs(double percent)
         {
-            return _percent;
+            _percent = percent;
+        }
+
+        public double Percent
+        {
+            get
+            {
+                return _percent;
+            }
         }
     }
+
+    public delegate void ProgressEventHandler(object source, ProgressEventArgs e);
 }
-    
-public delegate void ProgressEventHandler(object source, ProgressEventArgs e);
