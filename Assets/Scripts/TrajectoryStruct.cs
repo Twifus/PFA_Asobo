@@ -1,7 +1,7 @@
 ﻿/// <summary>
 /// Enumération des identifinats pour chaque figure pouvant être reconnu
 /// </summary>
-public enum figure_id {LOOP, BARREL, CUBANEIGHT};
+public enum figure_id {LOOP, BARREL, CUBANEIGHT, CUSTOMFIGURE};
 
 /// <summary>
 /// Structure de renvoie des algortithmes de détection : contient un identifiant de figure et une qualité lié à cette figure

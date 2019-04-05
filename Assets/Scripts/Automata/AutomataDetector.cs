@@ -20,6 +20,7 @@ public class AutomataDetector : IFigureDetection {
         _myAutomatas.Add(new CEAutomata());
         _myAutomatas.Add(new ARollLeftAutomata());
         _myAutomatas.Add(new CERAutomata());
+        _myAutomatas.Add(new CustomAutomata());
     }
     
     /// <summary>

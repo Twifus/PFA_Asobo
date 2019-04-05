@@ -50,8 +50,8 @@ public class FigureManager : MonoBehaviour{
         _plane = Plane.NewPlane(plane);
         _timeToDisplay = Time.time;
 
-        _figureName = new string[] { "LOOP", "BARREL", "CUBANEIGHT" };
-        _figurePoint = new int[] { 20, 10, 50 };
+        _figureName = new string[] { "LOOP", "BARREL", "CUBANEIGHT", "CUSTOM FIGURE" };
+        _figurePoint = new int[] { 20, 10, 50, 5};
 
         DisplayScore();
         DisplayAlgorithm();

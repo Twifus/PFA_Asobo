@@ -9,5 +9,7 @@ Ajout d'un figure : Automate
 		-Faire appel à process() pour faire les changements eventuels d'états
 		-Revérifier si l'on est dans un état final
 -Ajouter cette classe dans le constructeur d'AutomataDetector
--Ajouter l'ID de la figure dnas TrajectoryStruct
+-Ajouter l'ID de la figure dans TrajectoryStruct
 -Rajouter le nom de la figure et le nombre de points associés dans FigureManager (Dans _figureName[] et _figurePoint[])
+
+Le fichier CustomAutomata est présent pour essayer directement une figure personalisable.
