@@ -2,6 +2,9 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Gère l'affichage du menu de jeu
+/// </summary>
 public class SettingsUI : MonoBehaviour
 {
     public GUISkin guiSkin;
@@ -172,7 +175,7 @@ public class SettingsUI : MonoBehaviour
 
     private void Update()
     {
-        if (clicked == "about" && Input.GetKey(KeyCode.Escape))
+        if ((clicked == "about" || clicked == "options") && Input.GetKey(KeyCode.Escape))
             clicked = "";
     }
 }

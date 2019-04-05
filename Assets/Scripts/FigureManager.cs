@@ -3,38 +3,79 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-/* 
- * Utilisation de Time.frameCount permettra de savoir le nombre de frame passées 
- * afin d'enregistrer les données suivant la volonté de l'utilisateur 
- */
+/// <summary>
+/// Gestionnaire des détecteurs de figures et de score
+/// </summary>
+/// <remarks>
+/// Le FigureManager s'assure de l'éxecution d'un détecteur de figures à chaque frame.
+/// C'est également lui qui est responsable du calcul du score, et des divers affichages liés à celui-ci.
+/// </remarks>
 public class FigureManager : MonoBehaviour{
+
+    /// <summary>
+    /// Enumération des détecteurs disponibles
+    /// </summary>
     public enum Detector { Faussaire, Automata, Dollar };
+
+    /// <summary>
+    /// Nom des détectuers disponibles
+    /// </summary>
     public static string[] DetectorName = { "Faussaire", "Automata", "$P"};
 
-    public static Detector detector = Detector.Automata;
-    private IFigureDetection _figureDetection;
-    //public Settings settings;
+    /// <summary>
+    /// Nom des figures réalisables
+    /// </summary>
+    private string[] _figureName = { "LOOP", "BARREL", "CUBANEIGHT" };
 
+    /// <summary>
+    /// Points associés à chaque figure
+    /// </summary>
+    private int[] _figurePoint = { 20, 10, 50 };
+
+    /// <summary>
+    /// Détecteur à utiliser
+    /// </summary>
+    public static Detector detector = Detector.Automata;
+
+    /// <summary>
+    /// Instance du détecteur utilisé
+    /// </summary>
+    private IFigureDetection _figureDetection;
+
+    /// <summary>
+    /// GameObject du joueur
+    /// </summary>
     public GameObject plane;
+
+    /// <summary>
+    /// Component Text affichant le score
+    /// </summary>
     public Text textScore;
+
+    /// <summary>
+    /// Component Text affichant le nom de la figure réalisée
+    /// </summary>
     public Text textFigure;
+
+    /// <summary>
+    /// Component Text affichant le détecteur utilisé
+    /// </summary>
     public Text textAlgo;
 
+    /// <summary>
+    /// Instance de Plane associée au joueur
+    /// </summary>
     private IFlyingObject _plane;
+
+    /// <summary>
+    /// Score actuel du joueur
+    /// </summary>
     private int _score;
+
+    /// <summary>
+    /// Temps du début d'affichage de la figure réalisée
+    /// </summary>
     private float _timeToDisplay;
-    private string[] _figureName;
-
-    private int[] _figurePoint;
-    
-    /** Met à jour le score du joueur */
-    public void UpdateScore(int points)
-    {
-        _score += points;
-        Invoke("DisplayScore",0f);
-    }
-
-    #region Private Methods
 
     private void Start()
     {
@@ -50,19 +91,21 @@ public class FigureManager : MonoBehaviour{
         _plane = Plane.NewPlane(plane);
         _timeToDisplay = Time.time;
 
-        _figureName = new string[] { "LOOP", "BARREL", "CUBANEIGHT" };
-        _figurePoint = new int[] { 20, 10, 50 };
-
         DisplayScore();
         DisplayAlgorithm();
         DisableText();
     }
 
+    /// <remarks>
+    /// En premier lieu, change de détecteur si l'utilisateur a pressé le bouton correspondant.
+    /// Puis, transmet la coordonnée actuelle du joueur au détecteur.
+    /// Ensuite, lance la détection de trajectoire et traite le résultat.
+    /// Enfin, si un nom de figure a été affiché suffisament longtemps, le masque.
+    /// </remarks>
     private void FixedUpdate()
     {
         if (Input.GetButtonDown("SwitchAlgorithm"))
             SwitchAlgorithm();
-        DisplayAlgorithm();
         
         _figureDetection.setPoint(_plane);
         AnalyzeTrajectory();
@@ -72,6 +115,19 @@ public class FigureManager : MonoBehaviour{
         }
     }
 
+    /// <summary>
+    /// Incrémente le score et met à jour l'affichage
+    /// </summary>
+    /// <param name="points">Nombre de points à ajouter au score</param>
+    public void UpdateScore(int points)
+    {
+        _score += points;
+        Invoke("DisplayScore", 0f);
+    }
+
+    /// <summary>
+    /// Passe au detecteur suivant dans la liste des détecteurs disponibles
+    /// </summary>
     private void SwitchAlgorithm()
     {
         if (detector == Detector.Automata)
@@ -84,20 +140,28 @@ public class FigureManager : MonoBehaviour{
             detector = Detector.Automata;
             _figureDetection = new AutomataDetector();
         }
+        DisplayAlgorithm();
     }
-
+    
+    /// <summary>
+    /// Met à jour l'affichage du nom de l'algorithme
+    /// </summary>
     private void DisplayAlgorithm()
     {
         textAlgo.text = DetectorName[(int)detector];
     }
 
-    /** Affiche le score du joueur */
+    /// <summary>
+    /// Met à jour l'affichage du score
+    /// </summary>
     private void DisplayScore()
     {
         textScore.text = "Score : " + _score;
     }
 
-    /** Appelle la fonction qui analyse la trajectoire */
+    /// <summary>
+    /// Lance la détection de la trajectoire et affiche la figure réalisé si nécessaire
+    /// </summary>
     private void AnalyzeTrajectory()
     { 
         //Debug.Log(
@@ -111,11 +175,19 @@ public class FigureManager : MonoBehaviour{
         }
     }
 
+
+    /// <summary>
+    /// Masque l'indicateur de figure réalisé
+    /// </summary>
     private void DisableText()
     {
         textFigure.text = "";
     }
 
+    /// <summary>
+    /// Affiche le nom d'une figure
+    /// </summary>
+    /// <param name="id">Indice de la figure à afficher</param>
     private void Display(figure_id id)
     {
         textFigure.text = _figureName[(int)id];
@@ -124,5 +196,3 @@ public class FigureManager : MonoBehaviour{
         _timeToDisplay = Time.time;
     }
 }
-
-#endregion

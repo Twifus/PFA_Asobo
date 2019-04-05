@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 
-/*
-    Représente une série de figures à effectuer dans l'ordre
- */
+/// <summary>
+/// Permet d'implémenter une série de figures à effectuer dans l'ordre
+/// </summary>
+/// ///<remarks> Nous n'utilisons pas ce fichier dans notre code, mais c'est une piste pour pouvoir créer des figures à la suite d'autres
+///Les fonctions ont le principe que pour les autres figures, mais prend en compte le fait qu'il y a plusieurs figures
+/// </remarks>
 public abstract class AbstractSequentialFigureAutomata : IFigureAutomata {
+    //liste des figures à réaliser
     protected List<IFigureAutomata> _listFigures;
+    //représente l'id de la figure étudiée actuellement
     protected int _currentFigureIndex;
-    //reinitialise l'automate de la figure
+
+    //renvoie la figure actuellement calculée
     public IFigureAutomata getCurrentAuto() {
         return _listFigures[_currentFigureIndex];
     }
+
     public abstract figure_id getFigureId();
+
     public abstract string getName();
+
     public void resetStates() {
         foreach(IFigureAutomata auto in _listFigures)
             auto.resetStates();
@@ -20,7 +29,6 @@ public abstract class AbstractSequentialFigureAutomata : IFigureAutomata {
     }
     public bool isValid() {
         return (_currentFigureIndex == _listFigures.Count); 
-                //&& getCurrentAuto().isValid());;
     }
     //renvoie l'id de l'état actuel
     public int getCurrentState() {

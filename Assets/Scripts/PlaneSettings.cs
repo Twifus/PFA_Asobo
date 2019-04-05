@@ -1,9 +1,6 @@
-/*
-*
-*   Contient les constantes liées à l'avion et ses forces
-*   A initialiser avec un fichier JSON
-*
- */
+/// <summary>
+/// Conteneur définissant les constantes physiques de l'avion
+/// </summary>
 public class PlaneSettings
 {
     public static float WingArea = 5.0f;

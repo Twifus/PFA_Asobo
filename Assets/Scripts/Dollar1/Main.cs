@@ -5,6 +5,7 @@ using System;
 using UnityEngine;
 using WobbrockLib;
 using WobbrockLib.Extensions;
+using Recognizer1Dollar;
 
 public class Main : MonoBehaviour
 {
