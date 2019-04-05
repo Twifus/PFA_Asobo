@@ -4,8 +4,10 @@ using System.Collections.Generic;
 /// <summary>
 /// Représente le gestionaire des automates
 /// à utiliser avec FigureManager
- /// </summary>
- /// <remarks> C'est ici qu'il faut ajouter le fichier de la figure correspondate si on veut en ajouter une nouvelle</remarks>
+/// </summary>
+/// <remarks> 
+/// C'est ici qu'il faut ajouter le fichier de la figure correspondate si on veut en ajouter une nouvelle
+/// </remarks>
 public class AutomataDetector : IFigureDetection {
     private List<IFigureAutomata> _myAutomatas;
 

@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 
 /// <summary>
-/// Représente une figure composée :
+/// Définit un automate pour figure composée
+/// </summary>
+/// <remarks> 
+/// Une figure est dite "composée" si elle est l'assemblage de :
 ///    -une figure principale qui doit représenter le début et la fin de l'automate
 ///    -une liste de figures secondaires à effectuer dans n'importe quel ordre
 ///
 /// La figure totale est considérée valide si :
-///   La figure principale est validée ET toutes les figures secondaires ont été validées pendant l'éxécution de la figure principale
-/// </summary>
-///<remarks> Nous n'utilisons pas ce fichier dans notre code, mais c'est une piste pour pouvoir créer des figures composées d'autres figures
-///Les fonctions ont le principe que pour les autres figures, mais prend en compte le fait qu'il y a plusieurs figures
+/// La figure principale est validée ET toutes les figures secondaires ont été validées pendant l'éxécution de la figure principale
+/// Nous n'utilisons pas ce fichier dans notre code, mais c'est une piste pour pouvoir créer des figures composées d'autres figures
+/// Les fonctions ont le principe que pour les autres figures, mais prend en compte le fait qu'il y a plusieurs figures
 /// </remarks>
 public abstract class AbstractComposedFigureAutomata : IFigureAutomata {
     protected IFigureAutomata _mainFigure;

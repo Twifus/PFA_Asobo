@@ -4,7 +4,7 @@
 public enum figure_id {LOOP, BARREL, CUBANEIGHT};
 
 /// <summary>
-/// Structure de renvoie des algortithmes de détection : contient un identifiant de figure et une qualité lié à cette figure
+/// Structure de renvoie des algortithmes de détection (identifiant + qualité)
 /// </summary>
 public class Figure {
 

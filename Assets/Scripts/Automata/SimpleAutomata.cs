@@ -7,7 +7,7 @@ using System.Globalization;
 
 
 /// <summary>
-/// Classe parente des classes représentant les figures. Contient les fonctions pour calculer et chnager les états de l'automate
+/// Classe parente des classes représentant les figures. Contient les fonctions pour calculer et changer les états de l'automate
 /// </summary>
 public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
 {
@@ -26,11 +26,11 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
     /// </summary>
     public float _rightScalar = 0;
     /// <summary>
-    /// Valeur de référence de _rightScalar au début de la figure
+    /// Valeur de référence de rightScalar au début de la figure
     /// </summary>
     public float _rightScalarStart = 0;
     /// <summary>
-    /// Valeur de référence de _forwardScalar au début de la figure
+    /// Valeur de référence de forwardScalar au début de la figure
     /// </summary>
     public float _forwardScalarStart = 0;
     /// <summary>
@@ -54,7 +54,7 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
     /// Réinitialise l'automate de la figure
     /// </summary>
     /// <remarks>
-    /// necessaire pour reset les automates terminés ou qui ont échoués
+    /// Necessaire pour reset les automates terminés ou qui ont échoués
     /// </remarks>
 
     public void resetStates()
@@ -97,23 +97,25 @@ public abstract class SimpleAutomata : FSMDetection, IFigureAutomata
     /// <summary>
     /// Coeur de l'algorithme : un appel calcule et effectue le changement d'état de l'automate.
     /// </summary>
-    /// <returns>
-    /// 0 si le nouvel état est intermédiaire
-    /// -1 si l'automate recommence à l'état initial
-    /// 1 si l'automate est dans un état final 
-    /// </returns>
     /// <remarks>
     /// Il faut faire appel à init pour tout initialise, puis faire un appel à isValid pour vérifier que nosu ne sommes pas dans un état final
     /// Ensuite, il faut ajouter les différentes fonctions de vérifications si voulu.
     /// C'est maintenant que l'on crée l'automate : on ajoute dans la tableau figure une séquence de quart de figures (Il faut modifier le nombre d'éats dans le constructeur, paramètre n)
     /// L'appel à process permet de faire els changements eventuels d'états, et enfin il faut revérifier si l'on est dans un état final
     /// </remarks>
+    /// <returns>
+    /// 0 si le nouvel état est intermédiaire
+    /// -1 si l'automate recommence à l'état initial
+    /// 1 si l'automate est dans un état final 
+    /// </returns>
     public abstract int calculateState(IFlyingObject plane);
 
     /// <summary>
-    /// Détermine le changement d'état l'automate contenu dans la tableau SImpleautomata.figure[]
+    /// Détermine le changement d'état l'automate contenu dans la tableau SimpleAutomata.figure
     /// </summary>
-    /// <remarks> Appelé par calculateState </remarks>
+    /// <remarks>
+    /// Appelé par calculateState
+    /// </remarks>
 
     public void process()
     {

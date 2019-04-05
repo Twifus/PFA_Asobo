@@ -118,7 +118,7 @@ public class FigureManager : MonoBehaviour{
     /// <summary>
     /// Incrémente le score et met à jour l'affichage
     /// </summary>
-    /// <param name="points">Nombre de points à ajouter au score</param>
+    // <param name="points">Nombre de points à ajouter au score</param>
     public void UpdateScore(int points)
     {
         _score += points;
@@ -187,7 +187,7 @@ public class FigureManager : MonoBehaviour{
     /// <summary>
     /// Affiche le nom d'une figure
     /// </summary>
-    /// <param name="id">Indice de la figure à afficher</param>
+    // <param name="id">Indice de la figure à afficher</param>
     private void Display(figure_id id)
     {
         textFigure.text = _figureName[(int)id];
