@@ -61,6 +61,9 @@ using System;
 using System.Collections.Generic;
 //using UnityEngine;
 
+/// <summary>
+/// Algorithme de reconnaissance $P
+/// </summary>
 namespace PDollarGestureRecognizer
 {
     /// <summary>

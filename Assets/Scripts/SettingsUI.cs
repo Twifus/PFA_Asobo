@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Menu de jeu
+/// Gère l'affichage du menu de jeu
 /// </summary>
 public class SettingsUI : MonoBehaviour
 {
@@ -12,7 +12,8 @@ public class SettingsUI : MonoBehaviour
     public bool DragWindow = true;
     public string[] AboutTextLines = new string[0];
 
-    private string clicked = "", MessageDisplayOnAbout = "About \n ";
+    private string clicked = "", MessageDisplayOnAbout = "Développé dans le cadre du PFA à l'ENSEIRB-MATMECA en collaboration avec Asobo Studio, par :\n- Louis CESARO\n- Timothée CORSINI\n- Jean FARINES\n- Adrien LAVANCIER\n- Anatole MARTIN\n- Félix PIERRE\n\n" +
+        "Commandes par défaut :\nZ/S     Modifier le Pitch\nQ/D     Modifier le Roll\nGauche/Droite     Modifier le Yaw\nHaut     Accélérer\nR     Réinitialiser le niveau\nP     Modifier la méthode de détection\nNumpad -     Sélectionner une figure du DummyPlayer\nNumpad Entrée     Lancer la figure\nNumpad +    Enregistrer une figure\n\n";
     private Rect WindowRect;
     private Vector2 scrollPosition;
 
@@ -29,9 +30,9 @@ public class SettingsUI : MonoBehaviour
         UpdateMenuSize();
         for (int x = 0; x < AboutTextLines.Length; x++)
         {
-            MessageDisplayOnAbout += AboutTextLines[x] + " \n ";
+            MessageDisplayOnAbout += AboutTextLines[x] + "\n ";
         }
-        MessageDisplayOnAbout += "Press Esc To Go Back";
+        MessageDisplayOnAbout += "Appuyez sur Échap pour revenir";
         UserWingArea = PlaneSettings.WingArea;
         UserLiftCoeff = PlaneSettings.LiftCoeff;
         UserDragCoeff = PlaneSettings.DragCoeff;
@@ -122,7 +123,9 @@ public class SettingsUI : MonoBehaviour
         {
             clicked = "algorithm";
         }
-        volume = Slider("Volume", volume, 1.0f);
+        GUILayout.Box("Volume");
+        GUILayout.HorizontalSlider(volume, 0.0f, 1.0f);
+
         UserWingArea = Slider("Wing Area", UserWingArea, 100.0f);
         UserLiftCoeff = Slider("Lift Coefficient", UserLiftCoeff, 100.0f);
         UserDragCoeff = Slider("Drag Coefficient", UserDragCoeff, 100.0f);
