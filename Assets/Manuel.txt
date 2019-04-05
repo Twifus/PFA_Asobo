@@ -1,0 +1,13 @@
+Ajout d'un figure : Automate
+
+-Créer une classe héritant de SimpleAutomata
+-Implémenter le constructeur, getFigureI(), getName() et calculateState() de la même manière que dans LoopingAutomata(par exemple).
+-Details sur CalculateState :
+		-Faire appel à init pour tout initialiser, puis faire un appel à isValid() pour vérifier que nous ne sommes pas dans un état final
+		-Ajouter les différentes fonctions de vérifications si voulu(checkTime, checkForward, checkAltitude).
+		-Créer l'automate : ajouter dans la tableau figure[] une séquence de quart de figures (Il faut modifier le nombre d'états dans le constructeur, paramètre n)
+		-Faire appel à process() pour faire les changements eventuels d'états
+		-Revérifier si l'on est dans un état final
+-Ajouter cette classe dans le constructeur d'AutomataDetector
+-Ajouter l'ID de la figure dnas TrajectoryStruct
+-Rajouter le nom de la figure et le nombre de points associés dans FigureManager (Dans _figureName[] et _figurePoint[])
