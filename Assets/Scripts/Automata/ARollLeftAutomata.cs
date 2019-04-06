@@ -28,7 +28,7 @@ public class ARollLeftAutomata : SimpleAutomata
 
     public override figure_id getFigureId()
     {
-        return figure_id.BARREL;
+        return figure_id.ROLL;
     }
 
     public override string getName()

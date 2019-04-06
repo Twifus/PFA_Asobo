@@ -31,8 +31,8 @@ public class FigureLoaderP
 
         // Load new gestures
         Load(DollarFigure.filePath + "Perfect-Loop.csv", DollarFigure.loop);
-        Load(DollarFigure.filePath + "Perfect-Barrel-R.csv", DollarFigure.barrelR);
-        Load(DollarFigure.filePath + "Perfect-Barrel-L.csv", DollarFigure.barrelL);
+        Load(DollarFigure.filePath + "Perfect-Roll-R.csv", DollarFigure.barrelR);
+        Load(DollarFigure.filePath + "Perfect-Roll-L.csv", DollarFigure.barrelL);
         Load(DollarFigure.filePath + "Perfect-CubanEight.csv", DollarFigure.cubanEight);
         Load(DollarFigure.filePath + "Perfect-StraightLine.csv", DollarFigure.straightLine);
     }

@@ -192,7 +192,7 @@ public class DollarDetector : IFigureDetection {
             if (AnalyseResults(results, DollarFigure.barrelL) || AnalyseResults(results, DollarFigure.barrelR)) {
                 //UnityEngine.Debug.Log("Roll");
                 //UnityEngine.Debug.Log(results[0].Score + ", " + results[1].Score + ", " + results[2].Score + ", " + results[3].Score);
-                figures.Add(new Figure(figure_id.BARREL, 1f));
+                figures.Add(new Figure(figure_id.ROLL, 1f));
                 ClearLists();
             }
 

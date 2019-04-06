@@ -25,7 +25,7 @@ public class FigureManager : MonoBehaviour{
     /// <summary>
     /// Nom des figures réalisables
     /// </summary>
-    private string[] _figureName = { "LOOP", "BARREL", "CUBANEIGHT" };
+    private string[] _figureName = { "LOOP", "ROLL", "CUBANEIGHT" };
 
     /// <summary>
     /// Points associés à chaque figure
@@ -91,7 +91,7 @@ public class FigureManager : MonoBehaviour{
         _plane = Plane.NewPlane(plane);
         _timeToDisplay = Time.time;
 
-        _figureName = new string[] { "LOOP", "BARREL", "CUBANEIGHT", "CUSTOM FIGURE" };
+        _figureName = new string[] { "LOOP", "ROLL", "CUBANEIGHT", "CUSTOM FIGURE" };
         _figurePoint = new int[] { 20, 10, 50, 5};
 
         DisplayScore();

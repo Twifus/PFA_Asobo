@@ -56,7 +56,7 @@ public class FigureFaussaire: IFigureDetection{
         _listFig.Add(new Figure());
         _listFig[0].id = figure_id.LOOP;
         _listFig.Add(new Figure());
-        _listFig[1].id = figure_id.BARREL;
+        _listFig[1].id = figure_id.ROLL;
         _listFig.Add(new Figure());
         _listFig[2].id = figure_id.CUBANEIGHT;
 
