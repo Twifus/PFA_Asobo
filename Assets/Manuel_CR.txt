@@ -1,0 +1,47 @@
+1.Ajout d'un figure : Automate
+
+-Créer une classe héritant de SimpleAutomata
+-Implémenter le constructeur, getFigureI(), getName() et calculateState() de la même manière que dans LoopingAutomata(par exemple).
+-Details sur CalculateState :
+		-Faire appel à init pour tout initialiser, puis faire un appel à isValid() pour vérifier que nous ne sommes pas dans un état final
+		-Ajouter les différentes fonctions de vérifications si voulu(checkTime, checkForward, checkAltitude).
+		-Créer l'automate : ajouter dans la tableau figure[] une séquence de quart de figures (Il faut modifier le nombre d'états dans le constructeur, paramètre n)
+		-Faire appel à process() pour faire les changements eventuels d'états
+		-Revérifier si l'on est dans un état final
+-Ajouter cette classe dans le constructeur d'AutomataDetector
+-Ajouter l'ID de la figure dans TrajectoryStruct
+-Rajouter le nom de la figure et le nombre de points associés dans FigureManager (Dans _figureName[] et _figurePoint[])
+
+Le fichier CustomAutomata est présent pour essayer directement une figure personalisable.
+Pour créer un nouvel état à detecter (état Q1Chandelle par exemple), il faut le faire dans la classe abstraite SimpleAutomata.
+
+
+2.La liste des contrôles est disponible dans le menu
+
+
+3.Comparaison des algorithmes de detection
+3.1 Qualité de détection
+L’automate reconnaît les figures simples de manière quasi-systématique. Le Cuban eight est parfois reconnu sans que le joueur ne le veuille,
+cela est dû au fait qu’elle est composée de rotations simples de l’avion, et donc un joueur voulant faire deux looping en s’inclinant peut déclencher la 
+reconnaissance du Cuban eight.$P reconnaît le Loop et le Roll mais cette détection se fait souvent trop tôt, au milieu de la figure. 
+On peut donc faire une moitié de Roll qui est reconnue comme un Roll complet. Un autre problème est que le Cuban eight n’est pas reconnu, 
+car cette figure nécessite un grand nombrede points (> 1000) qui ne rentre pas dans les tableaux de points que nous donnons en entrée à l’algorithme.
+Plus généralement, le problème majeur des automates est qu’il n’y a que deux issues possibles : si le joueur passe exactement par tous les états de la figure,
+il la réussit, sinon elle est ratée. Cela amène à des situations où, par exemple, le Loop n’est pas détecté car le joueur ne s’est pas suffisamment repositionné à la verticale.
+Les algorithmes $ n’ont pas ce problème : comme on cherche à identifier la figure dans sa globalité, une anomalie locale aura peu d’impact sur la détection finale.
+
+3.2 Compexité des algorithmes
+La complexité des algorithmes est un point crucial dans notre cas, car la détection est censé se faire en temps réel : un algorithme 
+trop coûteux entraînera une chute du nombre d'images par seconde, rendant le jeu difficilement jouable.
+La détection par automate est ici très efficace : sachant que la vérification d'une transition se fait en temps constant, 
+la détection par automate dans sa complexité est de complexité linéaire en le nombre de figures détectables.
+Les algorithmes $ sont, quant à eux, beaucoup moins performants. La complexité d'au pire O(n^2m), 
+avec n le nombre de points d'échantillonnage et $m$ le nombre de figures, de \$P en fait ainsi un algorithme extrêmement lourd en terme d'utilisation processeur.
+
+3.3 Facilité d'utilisation
+Le gros avantage de la méthode automate est sa facilité d'évolution. Comme vu précédemment, grâce à l'interface designer, 
+il est très simple de rajouter et créer un nouvel automate pour une nouvelle figure. 
+Pour $P, la démarche est un peu plus complexe, mais reste aisée. Si l'on met de côté le problème de taille de fenêtre,
+ajouter une figure est très simple puisqu'il suffit de l'enregistrer en jeu, ce qui crée un fichier CSV que pourra utiliser l'algorithme
+en tant que figure de référence, et cela ne dépend pas de la complexité de la figure. Il faudra tout de même penser à ajouter, 
+nommer chaque courbe composant la figure, pour que celles-ci puissent être identifiées.
