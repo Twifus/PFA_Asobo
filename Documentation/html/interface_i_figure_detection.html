@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.15"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PFA Asobo: Référence de l&#39;interface IFigureDetection</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">PFA Asobo
+   </div>
+   <div id="projectbrief">Trajectory detection for game scoring</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.15 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Fonctions membres publiques</a> &#124;
+<a href="interface_i_figure_detection-members.html">Liste de tous les membres</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence de l'interface IFigureDetection</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Interface définissant un détecteur de figures  
+ <a href="interface_i_figure_detection.html#details">Plus de détails...</a></p>
+<div class="dynheader">
+Graphe d'héritage de IFigureDetection:</div>
+<div class="dyncontent">
+<div class="center"><img src="interface_i_figure_detection__inherit__graph.png" border="0" usemap="#_i_figure_detection_inherit__map" alt="Inheritance graph"/></div>
+<map name="_i_figure_detection_inherit__map" id="_i_figure_detection_inherit__map">
+<area shape="rect"  title="Interface dÃ©finissant un dÃ©tecteur de figures" alt="" coords="151,5,267,32"/>
+<area shape="rect"  href="class_automata_detector.html" title="ReprÃ©sente le gestionaire des automates Ã  utiliser avec FigureManager" alt="" coords="5,80,132,107"/>
+<area shape="rect"  href="class_dollar_detector.html" title="Detecteur de figures se reposant sur les algorithmes &quot;Dollar&quot;" alt="" coords="157,80,261,107"/>
+<area shape="rect"  href="class_figure_faussaire.html" title="Detecteur de figures fictif" alt="" coords="285,80,399,107"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">légende</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Fonctions membres publiques</h2></td></tr>
+<tr class="memitem:a64db040a4776daabd3b29d503c26ecc0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_figure_detection.html#a64db040a4776daabd3b29d503c26ecc0">setPoint</a> (<a class="el" href="interface_i_flying_object.html">IFlyingObject</a> flyingObject)</td></tr>
+<tr class="memdesc:a64db040a4776daabd3b29d503c26ecc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ajoute les coordonnées courantes d'un <a class="el" href="interface_i_flying_object.html" title="Interface décrivant un objet dont la trajectoire peut être soumise à un détecteur de figures">IFlyingObject</a> à la trajectoire à traiter  <a href="#a64db040a4776daabd3b29d503c26ecc0">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a64db040a4776daabd3b29d503c26ecc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe229de219163810747e8db445ea8dcf"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_figure.html">Figure</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_figure_detection.html#afe229de219163810747e8db445ea8dcf">detection</a> ()</td></tr>
+<tr class="memdesc:afe229de219163810747e8db445ea8dcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lance l'algorithme de détection sur la trajectoire actuelle  <a href="#afe229de219163810747e8db445ea8dcf">Plus de détails...</a><br /></td></tr>
+<tr class="separator:afe229de219163810747e8db445ea8dcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Interface définissant un détecteur de figures </p>
+</div><h2 class="groupheader">Documentation des fonctions membres</h2>
+<a id="afe229de219163810747e8db445ea8dcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe229de219163810747e8db445ea8dcf">&#9670;&nbsp;</a></span>detection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt;<a class="el" href="class_figure.html">Figure</a>&gt; IFigureDetection.detection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Lance l'algorithme de détection sur la trajectoire actuelle </p>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne une liste des figures détectées par l'algorithme. </dd></dl>
+
+<p>Implémenté dans <a class="el" href="class_dollar_detector.html#aec88d518383e9d688a669a651c363f1f">DollarDetector</a>, <a class="el" href="class_figure_faussaire.html#ad0956e6e09e52700986ef9d632be3b8d">FigureFaussaire</a>, et <a class="el" href="class_automata_detector.html#acda67ee2a5c0726515a606b1e581e391">AutomataDetector</a>.</p>
+
+</div>
+</div>
+<a id="a64db040a4776daabd3b29d503c26ecc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64db040a4776daabd3b29d503c26ecc0">&#9670;&nbsp;</a></span>setPoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IFigureDetection.setPoint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="interface_i_flying_object.html">IFlyingObject</a>&#160;</td>
+          <td class="paramname"><em>flyingObject</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ajoute les coordonnées courantes d'un <a class="el" href="interface_i_flying_object.html" title="Interface décrivant un objet dont la trajectoire peut être soumise à un détecteur de figures">IFlyingObject</a> à la trajectoire à traiter </p>
+
+<p>Implémenté dans <a class="el" href="class_dollar_detector.html#a853dc26fd857cf07af2722d9894c477c">DollarDetector</a>, <a class="el" href="class_figure_faussaire.html#ab53a6e472e1f6db43381e6e986048d28">FigureFaussaire</a>, et <a class="el" href="class_automata_detector.html#af6cdea543dde8586d39d9f77165074ea">AutomataDetector</a>.</p>
+
+</div>
+</div>
+<hr/>La documentation de cette interface a été générée à partir du fichier suivant :<ul>
+<li>Assets/Scripts/FigureDetection.cs</li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.15
+</small></address>
+</body>
+</html>

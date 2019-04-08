@@ -1,0 +1,7 @@
+<map id="FigureManager" name="FigureManager">
+<area shape="rect" id="node1" title="Gestionnaire des détecteurs de figures et de score" alt="" coords="184,124,292,151"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,116,32"/>
+<area shape="rect" id="node3" href="$interface_i_flying_object.html" title="Interface décrivant un objet dont la trajectoire peut être soumise à un détecteur de figures" alt="" coords="141,5,239,32"/>
+<area shape="rect" id="node4" title=" " alt="" coords="264,5,311,32"/>
+<area shape="rect" id="node5" href="$interface_i_figure_detection.html" title="Interface définissant un détecteur de figures" alt="" coords="335,5,451,32"/>
+</map>

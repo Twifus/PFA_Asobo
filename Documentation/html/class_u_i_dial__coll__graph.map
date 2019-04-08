@@ -1,0 +1,7 @@
+<map id="UIDial" name="UIDial">
+<area shape="rect" id="node1" title="Affiche l&#39;altitude et la vitesse de l&#39;avion à l&#39;écran" alt="" coords="135,185,191,212"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,81,116,108"/>
+<area shape="rect" id="node3" title=" " alt="" coords="140,81,187,108"/>
+<area shape="rect" id="node4" href="$class_plane.html" title="Accesseur standardisé à la trajectoire d&#39;un avion" alt="" coords="236,81,291,108"/>
+<area shape="rect" id="node5" href="$interface_i_flying_object.html" title="Interface décrivant un objet dont la trajectoire peut être soumise à un détecteur de figures" alt="" coords="214,5,313,32"/>
+</map>

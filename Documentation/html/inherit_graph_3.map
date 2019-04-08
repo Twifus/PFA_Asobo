@@ -1,0 +1,18 @@
+<map id="Graphe hiérarchique des classes" name="Graphe hiérarchique des classes">
+<area shape="rect" id="node1" title=" " alt="" coords="5,360,116,387"/>
+<area shape="rect" id="node2" href="$class_dummy_player.html" title="Contrôleur de jeu fictif rejouant des séquences enregistrées" alt="" coords="209,5,313,32"/>
+<area shape="rect" id="node3" href="$class_figure_manager.html" title="Gestionnaire des détecteurs de figures et de score" alt="" coords="207,56,315,83"/>
+<area shape="rect" id="node4" href="$class_level_controller.html" title="Gère l&#39;accès au menu et le respawn depuis un niveau de jeu" alt="" coords="207,107,314,133"/>
+<area shape="rect" id="node5" href="$class_main.html" title=" " alt="" coords="235,157,286,184"/>
+<area shape="rect" id="node6" href="$class_main_p.html" title=" " alt="" coords="231,208,290,235"/>
+<area shape="rect" id="node7" href="$class_plane_camera_controller.html" title="Controleur de caméra suivant une cible avec un retard" alt="" coords="183,259,338,285"/>
+<area shape="rect" id="node8" href="$class_plane_controller.html" title="Contrôleur de la physique d&#39;un avion" alt="" coords="205,309,316,336"/>
+<area shape="rect" id="node9" href="$class_plane_tracker.html" title="Permet l&#39;écriture dans un fichier les coordonnées successives de l&#39;avion au cours du temps" alt="" coords="211,360,310,387"/>
+<area shape="rect" id="node10" href="$class_ring_rotation.html" title="Controle l&#39;orientation d&#39;un anneau flottant" alt="" coords="213,411,309,437"/>
+<area shape="rect" id="node11" href="$class_settings_u_i.html" title="Gère l&#39;affichage du menu de jeu" alt="" coords="219,461,302,488"/>
+<area shape="rect" id="node12" href="$class_test_file_loader.html" title=" " alt="" coords="207,512,314,539"/>
+<area shape="rect" id="node13" href="$class_u_i_dial.html" title="Affiche l&#39;altitude et la vitesse de l&#39;avion à l&#39;écran" alt="" coords="233,563,289,589"/>
+<area shape="rect" id="node14" href="$class_unity_standard_assets_1_1_effects_1_1_explosion_physics_force.html" title=" " alt="" coords="164,614,357,655"/>
+<area shape="rect" id="node15" href="$class_unity_standard_assets_1_1_effects_1_1_particle_system_multiplier.html" title=" " alt="" coords="164,679,357,721"/>
+<area shape="rect" id="node16" href="$class_unity_standard_assets_1_1_utility_1_1_particle_system_destroyer.html" title=" " alt="" coords="167,745,354,786"/>
+</map>

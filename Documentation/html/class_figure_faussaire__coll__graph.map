@@ -1,0 +1,4 @@
+<map id="FigureFaussaire" name="FigureFaussaire">
+<area shape="rect" id="node1" title="Detecteur de figures fictif" alt="" coords="6,80,121,107"/>
+<area shape="rect" id="node2" href="$interface_i_figure_detection.html" title="Interface définissant un détecteur de figures" alt="" coords="5,5,121,32"/>
+</map>

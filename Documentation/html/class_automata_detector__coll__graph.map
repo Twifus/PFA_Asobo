@@ -1,0 +1,4 @@
+<map id="AutomataDetector" name="AutomataDetector">
+<area shape="rect" id="node1" title="Représente le gestionaire des automates à utiliser avec FigureManager" alt="" coords="5,80,132,107"/>
+<area shape="rect" id="node2" href="$interface_i_figure_detection.html" title="Interface définissant un détecteur de figures" alt="" coords="11,5,127,32"/>
+</map>

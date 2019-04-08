@@ -1,0 +1,4 @@
+<map id="LevelController" name="LevelController">
+<area shape="rect" id="node1" title="Gère l&#39;accès au menu et le respawn depuis un niveau de jeu" alt="" coords="7,80,114,107"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,116,32"/>
+</map>

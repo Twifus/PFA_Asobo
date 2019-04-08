@@ -1,0 +1,4 @@
+<map id="IFlyingObject" name="IFlyingObject">
+<area shape="rect" id="node1" title="Interface décrivant un objet dont la trajectoire peut être soumise à un détecteur de figures" alt="" coords="5,5,104,32"/>
+<area shape="rect" id="node2" href="$class_plane.html" title="Accesseur standardisé à la trajectoire d&#39;un avion" alt="" coords="27,80,82,107"/>
+</map>

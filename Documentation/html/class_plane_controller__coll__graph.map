@@ -1,0 +1,6 @@
+<map id="PlaneController" name="PlaneController">
+<area shape="rect" id="node1" title="Contrôleur de la physique d&#39;un avion" alt="" coords="43,171,153,197"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,81,116,108"/>
+<area shape="rect" id="node3" href="$class_plane.html" title="Accesseur standardisé à la trajectoire d&#39;un avion" alt="" coords="140,81,195,108"/>
+<area shape="rect" id="node4" href="$interface_i_flying_object.html" title="Interface décrivant un objet dont la trajectoire peut être soumise à un détecteur de figures" alt="" coords="118,5,217,32"/>
+</map>

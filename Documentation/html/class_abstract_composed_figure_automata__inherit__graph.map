@@ -1,0 +1,4 @@
+<map id="AbstractComposedFigureAutomata" name="AbstractComposedFigureAutomata">
+<area shape="rect" id="node1" title="Définit un automate pour figure composée" alt="" coords="5,80,231,107"/>
+<area shape="rect" id="node2" href="$interface_i_figure_automata.html" title="Interface d&#39;automate" alt="" coords="59,5,177,32"/>
+</map>

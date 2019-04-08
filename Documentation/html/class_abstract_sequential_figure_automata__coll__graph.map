@@ -1,0 +1,4 @@
+<map id="AbstractSequentialFigureAutomata" name="AbstractSequentialFigureAutomata">
+<area shape="rect" id="node1" title="Permet d&#39;implémenter une série de figures à effectuer dans l&#39;ordre" alt="" coords="5,80,173,121"/>
+<area shape="rect" id="node2" href="$interface_i_figure_automata.html" title="Interface d&#39;automate" alt="" coords="31,5,148,32"/>
+</map>

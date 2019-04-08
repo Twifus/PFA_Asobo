@@ -1,0 +1,5 @@
+<map id="RingRotation" name="RingRotation">
+<area shape="rect" id="node1" title="Controle l&#39;orientation d&#39;un anneau flottant" alt="" coords="83,95,179,121"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,116,32"/>
+<area shape="rect" id="node3" href="$struct_ring_rotation_1_1_z_rot.html" title="Intervalle de rotation d&#39;un anneau" alt="" coords="140,5,267,32"/>
+</map>

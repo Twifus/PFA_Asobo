@@ -1,0 +1,4 @@
+<map id="PDollarGestureRecognizer.Gesture" name="PDollarGestureRecognizer.Gesture">
+<area shape="rect" id="node1" title="Implements a gesture as a cloud of points (i.e., an unordered set of points). Gestures are normalized..." alt="" coords="5,109,184,151"/>
+<area shape="rect" id="node2" href="$class_p_dollar_gesture_recognizer_1_1_point.html" title="Implements a 2D Point that exposes X, Y, and StrokeID properties. StrokeID is the stroke index the po..." alt="" coords="5,5,184,47"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="SimpleAutomata" name="SimpleAutomata">
+<area shape="rect" id="node1" title="Classe parente des classes représentant les figures. Contient les fonctions pour calculer et changer ..." alt="" coords="345,80,463,107"/>
+<area shape="rect" id="node4" href="$class_a_roll_automata.html" title="Fichier de reconaissance d&#39;un Aileron Roll dans le sens horaire" alt="" coords="5,155,115,181"/>
+<area shape="rect" id="node5" href="$class_a_roll_left_automata.html" title="Fichier de reconaissance d&#39;un Aileron Roll dans le sens anti&#45;horaire" alt="" coords="139,155,269,181"/>
+<area shape="rect" id="node6" href="$class_c_e_automata.html" title="Fichier de reconaissance d&#39;un cuban eight avec l&#39;avion incliné vers la gauche au début de la séquence" alt="" coords="293,155,389,181"/>
+<area shape="rect" id="node7" href="$class_c_e_r_automata.html" title="Fichier de reconaissance d&#39;un cuban eight avec l&#39;avion incliné vers la droite au début de la séquence" alt="" coords="414,155,519,181"/>
+<area shape="rect" id="node8" href="$class_custom_automata.html" title="Fichier de reconaissance d&#39;une figure personalisable" alt="" coords="544,155,667,181"/>
+<area shape="rect" id="node9" href="$class_looping_automata.html" title="Automate de reconaissance d&#39;un Looping" alt="" coords="691,155,813,181"/>
+<area shape="rect" id="node2" href="$class_f_s_m_detection.html" title=" " alt="" coords="283,5,389,32"/>
+<area shape="rect" id="node3" href="$interface_i_figure_automata.html" title="Interface d&#39;automate" alt="" coords="413,5,531,32"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="IFigureAutomata" name="IFigureAutomata">
+<area shape="rect" id="node1" title="Interface d&#39;automate" alt="" coords="281,5,398,32"/>
+<area shape="rect" id="node2" href="$class_abstract_composed_figure_automata.html" title="Définit un automate pour figure composée" alt="" coords="5,87,231,114"/>
+<area shape="rect" id="node3" href="$class_abstract_sequential_figure_automata.html" title="Permet d&#39;implémenter une série de figures à effectuer dans l&#39;ordre" alt="" coords="255,80,423,121"/>
+<area shape="rect" id="node4" href="$class_simple_automata.html" title="Classe parente des classes représentant les figures. Contient les fonctions pour calculer et changer ..." alt="" coords="448,87,567,114"/>
+<area shape="rect" id="node5" href="$class_a_roll_automata.html" title="Fichier de reconaissance d&#39;un Aileron Roll dans le sens horaire" alt="" coords="109,169,218,196"/>
+<area shape="rect" id="node6" href="$class_a_roll_left_automata.html" title="Fichier de reconaissance d&#39;un Aileron Roll dans le sens anti&#45;horaire" alt="" coords="242,169,373,196"/>
+<area shape="rect" id="node7" href="$class_c_e_automata.html" title="Fichier de reconaissance d&#39;un cuban eight avec l&#39;avion incliné vers la gauche au début de la séquence" alt="" coords="397,169,493,196"/>
+<area shape="rect" id="node8" href="$class_c_e_r_automata.html" title="Fichier de reconaissance d&#39;un cuban eight avec l&#39;avion incliné vers la droite au début de la séquence" alt="" coords="517,169,623,196"/>
+<area shape="rect" id="node9" href="$class_custom_automata.html" title="Fichier de reconaissance d&#39;une figure personalisable" alt="" coords="647,169,770,196"/>
+<area shape="rect" id="node10" href="$class_looping_automata.html" title="Automate de reconaissance d&#39;un Looping" alt="" coords="794,169,917,196"/>
+</map>

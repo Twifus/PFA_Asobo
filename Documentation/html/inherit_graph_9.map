@@ -1,0 +1,6 @@
+<map id="Graphe hiérarchique des classes" name="Graphe hiérarchique des classes">
+<area shape="rect" id="node1" href="$interface_i_figure_detection.html" title="Interface définissant un détecteur de figures" alt="" coords="5,56,121,83"/>
+<area shape="rect" id="node2" href="$class_automata_detector.html" title="Représente le gestionaire des automates à utiliser avec FigureManager" alt="" coords="169,5,296,32"/>
+<area shape="rect" id="node3" href="$class_dollar_detector.html" title="Detecteur de figures se reposant sur les algorithmes &quot;Dollar&quot;" alt="" coords="181,56,285,83"/>
+<area shape="rect" id="node4" href="$class_figure_faussaire.html" title="Detecteur de figures fictif" alt="" coords="175,107,290,133"/>
+</map>

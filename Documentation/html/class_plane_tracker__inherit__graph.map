@@ -1,0 +1,4 @@
+<map id="PlaneTracker" name="PlaneTracker">
+<area shape="rect" id="node1" title="Permet l&#39;écriture dans un fichier les coordonnées successives de l&#39;avion au cours du temps" alt="" coords="11,80,110,107"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,116,32"/>
+</map>

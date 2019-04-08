@@ -1,0 +1,4 @@
+<map id="PlaneController" name="PlaneController">
+<area shape="rect" id="node1" title="Contrôleur de la physique d&#39;un avion" alt="" coords="5,80,116,107"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,116,32"/>
+</map>

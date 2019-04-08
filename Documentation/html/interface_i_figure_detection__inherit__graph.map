@@ -1,0 +1,6 @@
+<map id="IFigureDetection" name="IFigureDetection">
+<area shape="rect" id="node1" title="Interface définissant un détecteur de figures" alt="" coords="151,5,267,32"/>
+<area shape="rect" id="node2" href="$class_automata_detector.html" title="Représente le gestionaire des automates à utiliser avec FigureManager" alt="" coords="5,80,132,107"/>
+<area shape="rect" id="node3" href="$class_dollar_detector.html" title="Detecteur de figures se reposant sur les algorithmes &quot;Dollar&quot;" alt="" coords="157,80,261,107"/>
+<area shape="rect" id="node4" href="$class_figure_faussaire.html" title="Detecteur de figures fictif" alt="" coords="285,80,399,107"/>
+</map>

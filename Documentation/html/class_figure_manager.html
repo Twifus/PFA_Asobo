@@ -1,0 +1,694 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.15"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PFA Asobo: Référence de la classe FigureManager</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">PFA Asobo
+   </div>
+   <div id="projectbrief">Trajectory detection for game scoring</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.15 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Types publics</a> &#124;
+<a href="#pub-methods">Fonctions membres publiques</a> &#124;
+<a href="#pub-attribs">Attributs publics</a> &#124;
+<a href="#pub-static-attribs">Attributs publics statiques</a> &#124;
+<a href="#pri-methods">Fonctions membres privées</a> &#124;
+<a href="#pri-attribs">Attributs privés</a> &#124;
+<a href="class_figure_manager-members.html">Liste de tous les membres</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence de la classe FigureManager</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Gestionnaire des détecteurs de figures et de score  
+ <a href="class_figure_manager.html#details">Plus de détails...</a></p>
+<div class="dynheader">
+Graphe d'héritage de FigureManager:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_figure_manager__inherit__graph.png" border="0" usemap="#_figure_manager_inherit__map" alt="Inheritance graph"/></div>
+<map name="_figure_manager_inherit__map" id="_figure_manager_inherit__map">
+<area shape="rect"  title="Gestionnaire des dÃ©tecteurs de figures et de score" alt="" coords="7,80,115,107"/>
+<area shape="rect"  title=" " alt="" coords="5,5,116,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">légende</a>]</span></center></div>
+<div class="dynheader">
+Graphe de collaboration de FigureManager:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_figure_manager__coll__graph.png" border="0" usemap="#_figure_manager_coll__map" alt="Collaboration graph"/></div>
+<map name="_figure_manager_coll__map" id="_figure_manager_coll__map">
+<area shape="rect"  title="Gestionnaire des dÃ©tecteurs de figures et de score" alt="" coords="184,124,292,151"/>
+<area shape="rect"  title=" " alt="" coords="5,5,116,32"/>
+<area shape="rect"  href="interface_i_flying_object.html" title="Interface dÃ©crivant un objet dont la trajectoire peut Ãªtre soumise Ã  un dÃ©tecteur de figures" alt="" coords="141,5,239,32"/>
+<area shape="rect"  title=" " alt="" coords="264,5,311,32"/>
+<area shape="rect"  href="interface_i_figure_detection.html" title="Interface dÃ©finissant un dÃ©tecteur de figures" alt="" coords="335,5,451,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">légende</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Types publics</h2></td></tr>
+<tr class="memitem:a41e43d6c7a081d95f666a61cabcd282c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_figure_manager.html#a41e43d6c7a081d95f666a61cabcd282c">Detector</a> { <b>Faussaire</b>, 
+<b>Automata</b>, 
+<b>Dollar</b>
+ }</td></tr>
+<tr class="memdesc:a41e43d6c7a081d95f666a61cabcd282c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumération des détecteurs disponibles  <a href="class_figure_manager.html#a41e43d6c7a081d95f666a61cabcd282c">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a41e43d6c7a081d95f666a61cabcd282c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Fonctions membres publiques</h2></td></tr>
+<tr class="memitem:a8139aab87339c39ef72899b6a4248eae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_figure_manager.html#a8139aab87339c39ef72899b6a4248eae">UpdateScore</a> (int points)</td></tr>
+<tr class="memdesc:a8139aab87339c39ef72899b6a4248eae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Incrémente le score et met à jour l'affichage  <a href="#a8139aab87339c39ef72899b6a4248eae">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a8139aab87339c39ef72899b6a4248eae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Attributs publics</h2></td></tr>
+<tr class="memitem:ac33b70c94233f49ae26f8f56e3391b9e"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_figure_manager.html#ac33b70c94233f49ae26f8f56e3391b9e">plane</a></td></tr>
+<tr class="memdesc:ac33b70c94233f49ae26f8f56e3391b9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">GameObject du joueur  <a href="#ac33b70c94233f49ae26f8f56e3391b9e">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ac33b70c94233f49ae26f8f56e3391b9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d45175ad382e49fa98eb6dc1468b8de"><td class="memItemLeft" align="right" valign="top">Text&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_figure_manager.html#a4d45175ad382e49fa98eb6dc1468b8de">textScore</a></td></tr>
+<tr class="memdesc:a4d45175ad382e49fa98eb6dc1468b8de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component Text affichant le score  <a href="#a4d45175ad382e49fa98eb6dc1468b8de">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a4d45175ad382e49fa98eb6dc1468b8de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a414adf33665755e89e6ded2d36bf9a2c"><td class="memItemLeft" align="right" valign="top">Text&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_figure_manager.html#a414adf33665755e89e6ded2d36bf9a2c">textFigure</a></td></tr>
+<tr class="memdesc:a414adf33665755e89e6ded2d36bf9a2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component Text affichant le nom de la figure réalisée  <a href="#a414adf33665755e89e6ded2d36bf9a2c">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a414adf33665755e89e6ded2d36bf9a2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23b5d37098357f9e57f5f088ad02f430"><td class="memItemLeft" align="right" valign="top">Text&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_figure_manager.html#a23b5d37098357f9e57f5f088ad02f430">textAlgo</a></td></tr>
+<tr class="memdesc:a23b5d37098357f9e57f5f088ad02f430"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component Text affichant le détecteur utilisé  <a href="#a23b5d37098357f9e57f5f088ad02f430">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a23b5d37098357f9e57f5f088ad02f430"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Attributs publics statiques</h2></td></tr>
+<tr class="memitem:a9b24a96d867dc7eace4b21f27b344cb1"><td class="memItemLeft" align="right" valign="top">static string []&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_figure_manager.html#a9b24a96d867dc7eace4b21f27b344cb1">DetectorName</a> = { &quot;Faussaire&quot;, &quot;Automata&quot;, &quot;$P&quot;}</td></tr>
+<tr class="memdesc:a9b24a96d867dc7eace4b21f27b344cb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nom des détectuers disponibles  <a href="#a9b24a96d867dc7eace4b21f27b344cb1">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a9b24a96d867dc7eace4b21f27b344cb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe5c8199bbd6ec4b6c1c8125269715d4"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_figure_manager.html#a41e43d6c7a081d95f666a61cabcd282c">Detector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_figure_manager.html#afe5c8199bbd6ec4b6c1c8125269715d4">detector</a> = Detector.Automata</td></tr>
+<tr class="memdesc:afe5c8199bbd6ec4b6c1c8125269715d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Détecteur à utiliser  <a href="#afe5c8199bbd6ec4b6c1c8125269715d4">Plus de détails...</a><br /></td></tr>
+<tr class="separator:afe5c8199bbd6ec4b6c1c8125269715d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Fonctions membres privées</h2></td></tr>
+<tr class="memitem:a20b6e3d2088c0a6ba513d1c3421bd15b"><td class="memItemLeft" align="right" valign="top"><a id="a20b6e3d2088c0a6ba513d1c3421bd15b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Start</b> ()</td></tr>
+<tr class="separator:a20b6e3d2088c0a6ba513d1c3421bd15b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e7e5c90466bd455b8867a7f8aa4c3bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_figure_manager.html#a6e7e5c90466bd455b8867a7f8aa4c3bd">FixedUpdate</a> ()</td></tr>
+<tr class="separator:a6e7e5c90466bd455b8867a7f8aa4c3bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad833647d86fa47b10276465a89c368ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_figure_manager.html#ad833647d86fa47b10276465a89c368ce">SwitchAlgorithm</a> ()</td></tr>
+<tr class="memdesc:ad833647d86fa47b10276465a89c368ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Passe au detecteur suivant dans la liste des détecteurs disponibles  <a href="#ad833647d86fa47b10276465a89c368ce">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ad833647d86fa47b10276465a89c368ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a776f3893f7beeb82c60f863877f86e3c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_figure_manager.html#a776f3893f7beeb82c60f863877f86e3c">DisplayAlgorithm</a> ()</td></tr>
+<tr class="memdesc:a776f3893f7beeb82c60f863877f86e3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Met à jour l'affichage du nom de l'algorithme  <a href="#a776f3893f7beeb82c60f863877f86e3c">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a776f3893f7beeb82c60f863877f86e3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9817bb144d70f05c7e1ed8c8ac5939b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_figure_manager.html#a9817bb144d70f05c7e1ed8c8ac5939b4">DisplayScore</a> ()</td></tr>
+<tr class="memdesc:a9817bb144d70f05c7e1ed8c8ac5939b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Met à jour l'affichage du score  <a href="#a9817bb144d70f05c7e1ed8c8ac5939b4">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a9817bb144d70f05c7e1ed8c8ac5939b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abeaa8311bdf3d1d68bf7005d6b4ac164"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_figure_manager.html#abeaa8311bdf3d1d68bf7005d6b4ac164">AnalyzeTrajectory</a> ()</td></tr>
+<tr class="memdesc:abeaa8311bdf3d1d68bf7005d6b4ac164"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lance la détection de la trajectoire et affiche la figure réalisé si nécessaire  <a href="#abeaa8311bdf3d1d68bf7005d6b4ac164">Plus de détails...</a><br /></td></tr>
+<tr class="separator:abeaa8311bdf3d1d68bf7005d6b4ac164"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b930272372bb0b547fb9c02a431554c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_figure_manager.html#a8b930272372bb0b547fb9c02a431554c">DisableText</a> ()</td></tr>
+<tr class="memdesc:a8b930272372bb0b547fb9c02a431554c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Masque l'indicateur de figure réalisé  <a href="#a8b930272372bb0b547fb9c02a431554c">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a8b930272372bb0b547fb9c02a431554c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad50a3040ff7c4dbc61df9484931483e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_figure_manager.html#ad50a3040ff7c4dbc61df9484931483e6">Display</a> (figure_id id)</td></tr>
+<tr class="memdesc:ad50a3040ff7c4dbc61df9484931483e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche le nom d'une figure  <a href="#ad50a3040ff7c4dbc61df9484931483e6">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ad50a3040ff7c4dbc61df9484931483e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Attributs privés</h2></td></tr>
+<tr class="memitem:adb8af195f910163dda7673ff0b06813c"><td class="memItemLeft" align="right" valign="top">string []&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_figure_manager.html#adb8af195f910163dda7673ff0b06813c">_figureName</a> = { &quot;LOOP&quot;, &quot;ROLL&quot;, &quot;CUBANEIGHT&quot; }</td></tr>
+<tr class="memdesc:adb8af195f910163dda7673ff0b06813c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nom des figures réalisables  <a href="#adb8af195f910163dda7673ff0b06813c">Plus de détails...</a><br /></td></tr>
+<tr class="separator:adb8af195f910163dda7673ff0b06813c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b7a071253db6eea3f50296817942ba6"><td class="memItemLeft" align="right" valign="top">int []&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_figure_manager.html#a9b7a071253db6eea3f50296817942ba6">_figurePoint</a> = { 20, 10, 50 }</td></tr>
+<tr class="memdesc:a9b7a071253db6eea3f50296817942ba6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Points associés à chaque figure  <a href="#a9b7a071253db6eea3f50296817942ba6">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a9b7a071253db6eea3f50296817942ba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae52d2eb49df615e3dc9c148055942c3e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interface_i_figure_detection.html">IFigureDetection</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_figure_manager.html#ae52d2eb49df615e3dc9c148055942c3e">_figureDetection</a></td></tr>
+<tr class="memdesc:ae52d2eb49df615e3dc9c148055942c3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instance du détecteur utilisé  <a href="#ae52d2eb49df615e3dc9c148055942c3e">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ae52d2eb49df615e3dc9c148055942c3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c93f0cd72dcbe1c359560f38fececd1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interface_i_flying_object.html">IFlyingObject</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_figure_manager.html#a8c93f0cd72dcbe1c359560f38fececd1">_plane</a></td></tr>
+<tr class="memdesc:a8c93f0cd72dcbe1c359560f38fececd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instance de <a class="el" href="class_plane.html" title="Accesseur standardisé à la trajectoire d&#39;un avion">Plane</a> associée au joueur  <a href="#a8c93f0cd72dcbe1c359560f38fececd1">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a8c93f0cd72dcbe1c359560f38fececd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a703b82f866a412fa11060e6b082cc3ba"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_figure_manager.html#a703b82f866a412fa11060e6b082cc3ba">_score</a></td></tr>
+<tr class="memdesc:a703b82f866a412fa11060e6b082cc3ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Score actuel du joueur  <a href="#a703b82f866a412fa11060e6b082cc3ba">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a703b82f866a412fa11060e6b082cc3ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cedec7f22889d550a36419aae2a6ea5"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_figure_manager.html#a1cedec7f22889d550a36419aae2a6ea5">_timeToDisplay</a></td></tr>
+<tr class="memdesc:a1cedec7f22889d550a36419aae2a6ea5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Temps du début d'affichage de la figure réalisée  <a href="#a1cedec7f22889d550a36419aae2a6ea5">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a1cedec7f22889d550a36419aae2a6ea5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Gestionnaire des détecteurs de figures et de score </p>
+<p>Le <a class="el" href="class_figure_manager.html" title="Gestionnaire des détecteurs de figures et de score">FigureManager</a> s'assure de l'éxecution d'un détecteur de figures à chaque frame. C'est également lui qui est responsable du calcul du score, et des divers affichages liés à celui-ci. </p>
+</div><h2 class="groupheader">Documentation des énumérations membres</h2>
+<a id="a41e43d6c7a081d95f666a61cabcd282c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41e43d6c7a081d95f666a61cabcd282c">&#9670;&nbsp;</a></span>Detector</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_figure_manager.html#a41e43d6c7a081d95f666a61cabcd282c">FigureManager.Detector</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enumération des détecteurs disponibles </p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentation des fonctions membres</h2>
+<a id="abeaa8311bdf3d1d68bf7005d6b4ac164"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abeaa8311bdf3d1d68bf7005d6b4ac164">&#9670;&nbsp;</a></span>AnalyzeTrajectory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FigureManager.AnalyzeTrajectory </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lance la détection de la trajectoire et affiche la figure réalisé si nécessaire </p>
+
+</div>
+</div>
+<a id="a8b930272372bb0b547fb9c02a431554c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b930272372bb0b547fb9c02a431554c">&#9670;&nbsp;</a></span>DisableText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FigureManager.DisableText </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Masque l'indicateur de figure réalisé </p>
+
+</div>
+</div>
+<a id="ad50a3040ff7c4dbc61df9484931483e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad50a3040ff7c4dbc61df9484931483e6">&#9670;&nbsp;</a></span>Display()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FigureManager.Display </td>
+          <td>(</td>
+          <td class="paramtype">figure_id&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Affiche le nom d'une figure </p>
+
+</div>
+</div>
+<a id="a776f3893f7beeb82c60f863877f86e3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a776f3893f7beeb82c60f863877f86e3c">&#9670;&nbsp;</a></span>DisplayAlgorithm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FigureManager.DisplayAlgorithm </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Met à jour l'affichage du nom de l'algorithme </p>
+
+</div>
+</div>
+<a id="a9817bb144d70f05c7e1ed8c8ac5939b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9817bb144d70f05c7e1ed8c8ac5939b4">&#9670;&nbsp;</a></span>DisplayScore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FigureManager.DisplayScore </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Met à jour l'affichage du score </p>
+
+</div>
+</div>
+<a id="a6e7e5c90466bd455b8867a7f8aa4c3bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e7e5c90466bd455b8867a7f8aa4c3bd">&#9670;&nbsp;</a></span>FixedUpdate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FigureManager.FixedUpdate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>En premier lieu, change de détecteur si l'utilisateur a pressé le bouton correspondant. Puis, transmet la coordonnée actuelle du joueur au détecteur. Ensuite, lance la détection de trajectoire et traite le résultat. Enfin, si un nom de figure a été affiché suffisament longtemps, le masque. </p>
+
+</div>
+</div>
+<a id="ad833647d86fa47b10276465a89c368ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad833647d86fa47b10276465a89c368ce">&#9670;&nbsp;</a></span>SwitchAlgorithm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FigureManager.SwitchAlgorithm </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Passe au detecteur suivant dans la liste des détecteurs disponibles </p>
+
+</div>
+</div>
+<a id="a8139aab87339c39ef72899b6a4248eae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8139aab87339c39ef72899b6a4248eae">&#9670;&nbsp;</a></span>UpdateScore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FigureManager.UpdateScore </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>points</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Incrémente le score et met à jour l'affichage </p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentation des données membres</h2>
+<a id="ae52d2eb49df615e3dc9c148055942c3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae52d2eb49df615e3dc9c148055942c3e">&#9670;&nbsp;</a></span>_figureDetection</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="interface_i_figure_detection.html">IFigureDetection</a> FigureManager._figureDetection</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Instance du détecteur utilisé </p>
+
+</div>
+</div>
+<a id="adb8af195f910163dda7673ff0b06813c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb8af195f910163dda7673ff0b06813c">&#9670;&nbsp;</a></span>_figureName</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string [] FigureManager._figureName = { &quot;LOOP&quot;, &quot;ROLL&quot;, &quot;CUBANEIGHT&quot; }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Nom des figures réalisables </p>
+
+</div>
+</div>
+<a id="a9b7a071253db6eea3f50296817942ba6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b7a071253db6eea3f50296817942ba6">&#9670;&nbsp;</a></span>_figurePoint</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int [] FigureManager._figurePoint = { 20, 10, 50 }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Points associés à chaque figure </p>
+
+</div>
+</div>
+<a id="a8c93f0cd72dcbe1c359560f38fececd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c93f0cd72dcbe1c359560f38fececd1">&#9670;&nbsp;</a></span>_plane</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="interface_i_flying_object.html">IFlyingObject</a> FigureManager._plane</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Instance de <a class="el" href="class_plane.html" title="Accesseur standardisé à la trajectoire d&#39;un avion">Plane</a> associée au joueur </p>
+
+</div>
+</div>
+<a id="a703b82f866a412fa11060e6b082cc3ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a703b82f866a412fa11060e6b082cc3ba">&#9670;&nbsp;</a></span>_score</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int FigureManager._score</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Score actuel du joueur </p>
+
+</div>
+</div>
+<a id="a1cedec7f22889d550a36419aae2a6ea5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cedec7f22889d550a36419aae2a6ea5">&#9670;&nbsp;</a></span>_timeToDisplay</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float FigureManager._timeToDisplay</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Temps du début d'affichage de la figure réalisée </p>
+
+</div>
+</div>
+<a id="afe5c8199bbd6ec4b6c1c8125269715d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe5c8199bbd6ec4b6c1c8125269715d4">&#9670;&nbsp;</a></span>detector</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_figure_manager.html#a41e43d6c7a081d95f666a61cabcd282c">Detector</a> FigureManager.detector = Detector.Automata</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Détecteur à utiliser </p>
+
+</div>
+</div>
+<a id="a9b24a96d867dc7eace4b21f27b344cb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b24a96d867dc7eace4b21f27b344cb1">&#9670;&nbsp;</a></span>DetectorName</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string [] FigureManager.DetectorName = { &quot;Faussaire&quot;, &quot;Automata&quot;, &quot;$P&quot;}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Nom des détectuers disponibles </p>
+
+</div>
+</div>
+<a id="ac33b70c94233f49ae26f8f56e3391b9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac33b70c94233f49ae26f8f56e3391b9e">&#9670;&nbsp;</a></span>plane</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GameObject FigureManager.plane</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>GameObject du joueur </p>
+
+</div>
+</div>
+<a id="a23b5d37098357f9e57f5f088ad02f430"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23b5d37098357f9e57f5f088ad02f430">&#9670;&nbsp;</a></span>textAlgo</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Text FigureManager.textAlgo</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Component Text affichant le détecteur utilisé </p>
+
+</div>
+</div>
+<a id="a414adf33665755e89e6ded2d36bf9a2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a414adf33665755e89e6ded2d36bf9a2c">&#9670;&nbsp;</a></span>textFigure</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Text FigureManager.textFigure</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Component Text affichant le nom de la figure réalisée </p>
+
+</div>
+</div>
+<a id="a4d45175ad382e49fa98eb6dc1468b8de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d45175ad382e49fa98eb6dc1468b8de">&#9670;&nbsp;</a></span>textScore</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Text FigureManager.textScore</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Component Text affichant le score </p>
+
+</div>
+</div>
+<hr/>La documentation de cette classe a été générée à partir du fichier suivant :<ul>
+<li>Assets/Scripts/FigureManager.cs</li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.15
+</small></address>
+</body>
+</html>
