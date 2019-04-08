@@ -122,13 +122,13 @@ public class DummyPlayer : MonoBehaviour {
         switch (mode)
         {
             case 1:
-                replayFromFile("Assets/Figures/Loop-Input.csv");
+                replayFromFile("Assets/Figures/Input-Loop.csv");
                 break;
             case 2:
-                replayFromFile("Assets/Figures/Roll-Input.csv");
+                replayFromFile("Assets/Figures/Input-Roll.csv");
                 break;
             case 3:
-                replayFromFile("Assets/Figures/CubanEight-Input.csv");
+                replayFromFile("Assets/Figures/Input-CubanEight.csv");
                 break;
             default:
                 break;
